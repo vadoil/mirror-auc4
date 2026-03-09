@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Check } from "lucide-react";
+import { Check, Star } from "lucide-react";
 
 const tickets = [
   {
@@ -48,67 +48,79 @@ const TicketsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="tickets" className="py-24 md:py-32 section-padding bg-charcoal text-cream">
-      <div ref={ref} className="max-w-7xl mx-auto">
+    <section id="tickets" className="relative py-24 md:py-32 section-padding overflow-hidden">
+      {/* Dramatic dark bg */}
+      <div className="absolute inset-0 bg-charcoal" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
+
+      <div ref={ref} className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-16 md:mb-20"
         >
-          <p className="text-xs uppercase tracking-[0.3em] text-cream/50 mb-6 font-body">
-            Присоединяйтесь
-          </p>
-          <h2 className="editorial-heading text-cream">
+          <div className="flex items-center gap-3 justify-center mb-6">
+            <div className="w-8 h-px bg-primary" />
+            <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">
+              Присоединяйтесь
+            </p>
+            <div className="w-8 h-px bg-primary" />
+          </div>
+          <h2 className="font-display text-5xl md:text-7xl font-light tracking-tight text-cream leading-[0.9]">
             Билеты
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-3 gap-5 md:gap-6">
           {tickets.map((ticket, i) => (
             <motion.div
               key={ticket.name}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.15 * i }}
-              className={`relative p-8 md:p-10 border transition-all duration-500 ${
+              className={`group relative overflow-hidden transition-all duration-500 ${
                 ticket.highlight
-                  ? "border-primary bg-primary/10 scale-[1.02]"
-                  : "border-cream/10 hover:border-cream/30"
+                  ? "bg-primary/15 border-2 border-primary md:scale-[1.03]"
+                  : "bg-cream/5 border border-cream/10 hover:border-cream/25"
               }`}
             >
               {ticket.highlight && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] px-4 py-1.5 font-body">
-                  Популярный
+                <div className="absolute top-0 left-0 right-0 bg-primary py-2 flex items-center justify-center gap-2">
+                  <Star className="w-3 h-3 text-primary-foreground" />
+                  <span className="text-primary-foreground text-[10px] uppercase tracking-[0.3em] font-body font-medium">
+                    Популярный выбор
+                  </span>
+                  <Star className="w-3 h-3 text-primary-foreground" />
                 </div>
               )}
 
-              <h3 className="font-display text-2xl md:text-3xl font-light text-cream mb-2">
-                {ticket.name}
-              </h3>
-              <p className="font-display text-4xl md:text-5xl font-light text-cream mb-8">
-                {ticket.price}
-              </p>
+              <div className={`p-8 md:p-10 ${ticket.highlight ? "pt-14 md:pt-16" : ""}`}>
+                <p className="text-cream/40 text-[10px] uppercase tracking-[0.3em] font-body mb-2">{ticket.name}</p>
+                <p className="font-display text-4xl md:text-5xl font-light text-cream mb-8 leading-none">
+                  {ticket.price}
+                </p>
 
-              <ul className="space-y-3 mb-10">
-                {ticket.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="font-body text-sm font-light text-cream/70">{f}</span>
-                  </li>
-                ))}
-              </ul>
+                <ul className="space-y-3 mb-10">
+                  {ticket.features.map((f) => (
+                    <li key={f} className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span className="font-body text-sm font-light text-cream/60">{f}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              <a
-                href="#"
-                className={`block text-center text-sm uppercase tracking-[0.2em] font-body py-4 transition-all duration-500 ${
-                  ticket.highlight
-                    ? "bg-primary text-primary-foreground hover:opacity-90"
-                    : "border border-cream/30 text-cream hover:bg-cream hover:text-charcoal"
-                }`}
-              >
-                Купить билет
-              </a>
+                <a
+                  href="#"
+                  className={`block text-center text-xs uppercase tracking-[0.2em] font-body py-4 transition-all duration-500 ${
+                    ticket.highlight
+                      ? "bg-primary text-primary-foreground hover:opacity-90"
+                      : "border border-cream/20 text-cream hover:bg-cream hover:text-charcoal"
+                  }`}
+                >
+                  Купить билет
+                </a>
+              </div>
             </motion.div>
           ))}
         </div>
