@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { Send, Phone } from "lucide-react";
 
 const contacts = [
   { role: "Спонсоры и СМИ", name: "Анна", phone: "8 (917) 152-76-77", tg: "@mi_ella23" },
@@ -12,37 +13,47 @@ const ContactsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contacts" className="py-24 md:py-32 section-padding bg-background">
-      <div ref={ref} className="max-w-5xl mx-auto">
+    <section id="contacts" className="py-24 md:py-32 section-padding bg-background relative">
+      <div ref={ref} className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6 font-body">
-            Свяжитесь с нами
-          </p>
-          <h2 className="editorial-heading text-foreground">
+          <div className="flex items-center gap-3 justify-center mb-6">
+            <div className="w-8 h-px bg-primary" />
+            <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
+              Свяжитесь с нами
+            </p>
+            <div className="w-8 h-px bg-primary" />
+          </div>
+          <h2 className="font-display text-5xl md:text-6xl font-light tracking-tight text-foreground leading-[0.9]">
             Контакты
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-3 gap-5 mb-16">
           {contacts.map((c, i) => (
             <motion.div
               key={c.tg}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 * i }}
-              className="text-center p-8 border border-border"
+              className="group relative text-center p-8 md:p-10 bg-card border border-border hover:border-primary/20 transition-all duration-500"
             >
-              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-body mb-4">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-5">
                 {c.role}
               </p>
-              <p className="font-display text-xl font-medium text-foreground mb-2">{c.name}</p>
-              <p className="font-body text-sm text-muted-foreground mb-1">{c.phone}</p>
-              <p className="font-body text-sm text-primary">{c.tg}</p>
+              <p className="font-display text-2xl font-light text-foreground mb-4">{c.name}</p>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Phone className="w-3 h-3 text-muted-foreground" />
+                <p className="font-body text-sm text-muted-foreground">{c.phone}</p>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <Send className="w-3 h-3 text-primary" />
+                <p className="font-body text-sm text-primary font-medium">{c.tg}</p>
+              </div>
             </motion.div>
           ))}
         </div>

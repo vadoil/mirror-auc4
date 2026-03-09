@@ -30,8 +30,13 @@ const Header = () => {
       }`}
     >
       <div className="section-padding flex items-center justify-between">
-        <a href="#" className="font-display text-xl md:text-2xl font-light tracking-[0.15em] text-cream uppercase">
-          Отражение
+        <a href="#" className="flex items-center gap-3">
+          <div className="w-8 h-8 border border-primary flex items-center justify-center">
+            <span className="font-display text-primary text-sm font-light">О</span>
+          </div>
+          <span className="font-display text-lg md:text-xl font-light tracking-[0.15em] text-cream uppercase">
+            Отражение
+          </span>
         </a>
 
         {/* Desktop nav */}
@@ -40,14 +45,14 @@ const Header = () => {
             <a
               key={item.href}
               href={item.href}
-              className="text-cream/70 text-xs uppercase tracking-[0.2em] font-body font-light hover:text-cream transition-colors duration-300"
+              className="text-cream/60 text-[11px] uppercase tracking-[0.2em] font-body font-light hover:text-cream transition-colors duration-300"
             >
               {item.label}
             </a>
           ))}
           <a
             href="#tickets"
-            className="ml-4 border border-cream/30 text-cream text-xs uppercase tracking-[0.2em] px-6 py-2.5 hover:bg-cream hover:text-warm-black transition-all duration-500"
+            className="ml-4 bg-primary text-primary-foreground text-[11px] uppercase tracking-[0.2em] px-6 py-2.5 hover:opacity-90 transition-all duration-500 font-body"
           >
             Купить билет
           </a>
@@ -85,7 +90,7 @@ const Header = () => {
               <a
                 href="#tickets"
                 onClick={() => setMenuOpen(false)}
-                className="mt-4 border border-cream/30 text-cream text-sm uppercase tracking-[0.2em] px-8 py-3"
+                className="mt-4 bg-primary text-primary-foreground text-sm uppercase tracking-[0.2em] px-8 py-3 font-body"
               >
                 Купить билет
               </a>
