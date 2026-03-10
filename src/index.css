@@ -100,7 +100,7 @@
 
   .editorial-subheading {
     font-family: var(--font-display);
-    @apply text-2xl md:text-3xl lg:text-4xl font-light tracking-tight;
+    @apply text-2xl md:text-3xl lg:text-4xl font-normal uppercase tracking-tight;
   }
 
   .editorial-body {
