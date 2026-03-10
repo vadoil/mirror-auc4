@@ -34,7 +34,7 @@ const Header = () => {
           <div className="w-8 h-8 border border-primary flex items-center justify-center">
             <span className="font-display text-primary text-sm font-light">О</span>
           </div>
-          <span className="font-display text-lg md:text-xl font-light tracking-[0.15em] text-cream uppercase">
+          <span className="font-display text-lg md:text-xl font-normal tracking-[0.15em] text-cream uppercase">
             Отражение
           </span>
         </a>
