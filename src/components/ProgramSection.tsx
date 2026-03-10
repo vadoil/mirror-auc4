@@ -54,7 +54,7 @@ const ProgramSection = () => {
                 {/* Dot */}
                 <div className="relative z-10 flex-shrink-0 w-20 md:w-[120px] flex items-start pt-8">
                   <div className="w-full text-right pr-5 md:pr-7">
-                    <span className="font-display text-lg md:text-2xl font-light text-primary">
+                    <span className="font-numbers text-lg md:text-2xl font-light text-primary">
                       {item.time}
                     </span>
                   </div>

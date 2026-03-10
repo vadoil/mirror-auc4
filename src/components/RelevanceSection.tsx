@@ -64,7 +64,7 @@ const RelevanceSection = () => {
               className="group py-10 border-t border-cream/10 hover:border-primary/40 transition-colors duration-500"
             >
               <div className="flex items-start gap-6">
-                <span className="font-display text-5xl md:text-6xl font-light text-cream/10 group-hover:text-primary/30 transition-colors duration-500 leading-none">
+                <span className="font-numbers text-5xl md:text-6xl font-light text-cream/10 group-hover:text-primary/30 transition-colors duration-500 leading-none">
                   {item.num}
                 </span>
                 <div>

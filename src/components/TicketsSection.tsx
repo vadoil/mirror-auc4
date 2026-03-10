@@ -97,7 +97,7 @@ const TicketsSection = () => {
 
               <div className={`p-8 md:p-10 ${ticket.highlight ? "pt-14 md:pt-16" : ""}`}>
                 <p className="text-cream/40 text-[10px] uppercase tracking-[0.3em] font-body mb-2">{ticket.name}</p>
-                <p className="font-display text-4xl md:text-5xl font-light text-cream mb-8 leading-none">
+                <p className="font-numbers text-4xl md:text-5xl font-light text-cream mb-8 leading-none">
                   {ticket.price}
                 </p>
 

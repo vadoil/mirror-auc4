@@ -69,7 +69,7 @@ const AboutSection = () => {
                 </div>
                 {/* Stats overlay */}
                 <div className="absolute top-6 right-6 bg-primary text-primary-foreground px-6 py-5">
-                  <p className="font-display text-4xl font-light leading-none">500+</p>
+                  <p className="font-numbers text-4xl font-light leading-none">500+</p>
                   <p className="text-[10px] uppercase tracking-[0.2em] font-body mt-1.5">участниц</p>
                 </div>
               </motion.div>
