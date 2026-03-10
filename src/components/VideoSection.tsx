@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import heroMirror from "@/assets/hero-mirror.jpg";
+import videoBg from "@/assets/video-bg.jpg";
 
 const VideoSection = () => {
   const ref = useRef(null);
