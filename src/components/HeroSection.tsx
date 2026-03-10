@@ -107,7 +107,7 @@ const HeroSection = () => {
                 <CountdownUnit value={timeLeft.days} label="дней" />
                 <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
                 <CountdownUnit value={timeLeft.hours} label="часов" />
-                <span className="font-display text-4xl md:text-5xl text-cream/20 self-start">:</span>
+                <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
                 <CountdownUnit value={timeLeft.minutes} label="минут" />
                 <span className="font-display text-4xl md:text-5xl text-cream/20 self-start hidden sm:block">:</span>
                 <div className="hidden sm:block">
