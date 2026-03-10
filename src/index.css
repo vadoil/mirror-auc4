@@ -95,7 +95,7 @@
 
   .editorial-heading {
     font-family: var(--font-display);
-    @apply text-4xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95];
+    @apply text-4xl md:text-6xl lg:text-7xl font-normal uppercase tracking-tight leading-[0.95];
   }
 
   .editorial-subheading {
