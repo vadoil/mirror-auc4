@@ -22,6 +22,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <AboutSection />
+      <QuizSection />
       <StatsSection />
       <RelevanceSection />
       <TopicsSection />
@@ -29,7 +30,6 @@ const Index = () => {
       <ProgramSection />
       <VideoSection />
       <FormatSection />
-      <QuizSection />
       <TestimonialsSection />
       <OrganizersSection />
       <PartnersSection />
