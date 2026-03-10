@@ -89,7 +89,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.0 }}
-                className="font-display text-cream/70 text-xl md:text-2xl lg:text-3xl font-light italic mt-6"
+                className="font-body text-cream/70 text-xl md:text-2xl lg:text-3xl font-light italic mt-6"
               >
                 Начало твоей прайм-эры
               </motion.p>
