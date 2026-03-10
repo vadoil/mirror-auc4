@@ -59,6 +59,10 @@ export default {
         "red-light": "hsl(var(--red-light))",
         "beige-warm": "hsl(var(--beige-warm))",
         "beige-light": "hsl(var(--beige-light))",
+        teal: "hsl(var(--teal))",
+        "teal-light": "hsl(var(--teal-light))",
+        sky: "hsl(var(--sky))",
+        silver: "hsl(var(--silver))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
