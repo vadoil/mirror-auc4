@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Angst', 'Georgia', 'serif'],
+        display: ['Ysabeau SC', 'Georgia', 'serif'],
+        numbers: ['Urbanist', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
