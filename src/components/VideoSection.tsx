@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import heroMirror from "@/assets/hero-mirror.jpg";
+import videoBg from "@/assets/video-bg.jpg";
 
 const VideoSection = () => {
   const ref = useRef(null);
@@ -11,7 +11,7 @@ const VideoSection = () => {
       <div ref={ref} className="relative w-full aspect-[16/7] md:aspect-[21/9] min-h-[400px] max-h-[700px]">
         {/* Background image as placeholder for video — autoplay video can replace this */}
         <img
-          src={heroMirror}
+          src={videoBg}
           alt="Атмосфера форума"
           className="absolute inset-0 w-full h-full object-cover"
         />
