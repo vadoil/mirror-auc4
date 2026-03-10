@@ -69,7 +69,7 @@ const ProgramSection = () => {
                 <div className={`flex-1 py-6 md:py-8 pl-4 md:pl-6 border-b border-border group-hover:bg-card/50 transition-colors duration-300 ${
                   item.highlight ? "bg-primary/5" : ""
                 }`}>
-                  <h3 className="font-display text-lg md:text-2xl font-medium text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="font-body text-lg md:text-2xl font-medium text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
                     {item.title}
                   </h3>
                   <p className="font-body text-sm font-light text-muted-foreground">
