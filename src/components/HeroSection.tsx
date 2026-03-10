@@ -135,7 +135,7 @@ const HeroSection = () => {
             className="mt-12 md:mt-16 pt-6 border-t border-cream/10 flex flex-wrap gap-8 md:gap-16"
           >
             <div>
-              <p className="font-display text-3xl md:text-4xl font-light text-cream">500+</p>
+              <p className="font-display text-3xl md:text-4xl font-normal text-cream uppercase">500+</p>
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">участниц</p>
             </div>
             <div>
