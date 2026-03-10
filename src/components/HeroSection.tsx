@@ -4,7 +4,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 
 const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
   <div className="text-center">
-    <div className="font-display text-4xl sm:text-5xl md:text-6xl font-light text-cream leading-none">
+    <div className="font-display text-4xl sm:text-5xl md:text-6xl font-normal text-cream leading-none uppercase">
       {String(value).padStart(2, "0")}
     </div>
     <div className="text-cream/40 text-[10px] uppercase tracking-[0.3em] font-body mt-2">{label}</div>
