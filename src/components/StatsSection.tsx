@@ -53,7 +53,7 @@ const StatsSection = () => {
               transition={{ duration: 0.6, delay: 0.15 * i }}
               className="text-center"
             >
-              <p className="font-display text-5xl md:text-7xl font-light text-primary-foreground leading-none mb-3">
+              <p className="font-numbers text-5xl md:text-7xl font-light text-primary-foreground leading-none mb-3">
                 <AnimatedCounter target={stat.value} suffix={stat.suffix} isInView={isInView} />
               </p>
               <p className="font-body text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary-foreground/60">

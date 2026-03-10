@@ -84,7 +84,7 @@ const TopicsSection = () => {
               }`}
             >
               {/* Large number background */}
-              <span className={`absolute top-4 right-6 font-display text-7xl md:text-8xl font-light leading-none transition-opacity duration-500 ${
+              <span className={`absolute top-4 right-6 font-numbers text-7xl md:text-8xl font-light leading-none transition-opacity duration-500 ${
                 topic.accent ? "text-primary-foreground/10" : "text-foreground/5"
               }`}>
                 {topic.num}

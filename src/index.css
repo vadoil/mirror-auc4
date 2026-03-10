@@ -1,4 +1,5 @@
-@import url('https://fonts.cdnfonts.com/css/angst');
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+SC:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
@@ -7,51 +8,52 @@
 
 @layer base {
   :root {
-    --background: 40 20% 95%;
-    --foreground: 180 8% 20%;
+    --background: 180 5% 97%;
+    --foreground: 0 0% 15%;
 
-    --card: 40 15% 93%;
-    --card-foreground: 180 8% 20%;
+    --card: 39 28% 93%;
+    --card-foreground: 0 0% 15%;
 
-    --popover: 40 20% 95%;
-    --popover-foreground: 180 8% 20%;
+    --popover: 180 5% 97%;
+    --popover-foreground: 0 0% 15%;
 
-    --primary: 0 80% 50%;
+    --primary: 6 100% 47%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 18% 88%;
-    --secondary-foreground: 180 8% 20%;
+    --secondary: 39 28% 88%;
+    --secondary-foreground: 0 0% 15%;
 
-    --muted: 40 12% 90%;
-    --muted-foreground: 180 5% 40%;
+    --muted: 220 12% 92%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 200 40% 68%;
+    --accent: 351 75% 47%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 12% 82%;
-    --input: 40 12% 82%;
-    --ring: 0 80% 50%;
+    --border: 220 12% 85%;
+    --input: 220 12% 85%;
+    --ring: 6 100% 47%;
 
     --radius: 0.25rem;
 
     /* Custom tokens */
-    --cream: 40 25% 94%;
-    --charcoal: 180 8% 20%;
-    --warm-black: 180 10% 12%;
+    --cream: 180 5% 97%;
+    --charcoal: 0 0% 15%;
+    --warm-black: 0 0% 12%;
     --gold: 38 60% 55%;
-    --red-deep: 0 80% 42%;
-    --red-light: 0 80% 55%;
-    --beige-warm: 40 25% 88%;
-    --beige-light: 40 30% 95%;
+    --red-deep: 351 75% 47%;
+    --red-light: 6 100% 52%;
+    --beige-warm: 39 28% 83%;
+    --beige-light: 39 30% 95%;
     --teal: 175 25% 38%;
     --teal-light: 175 20% 48%;
     --sky: 200 50% 68%;
-    --silver: 210 5% 75%;
+    --silver: 220 12% 88%;
 
-    --font-display: 'Angst', Georgia, serif;
+    --font-display: 'Ysabeau SC', Georgia, serif;
+    --font-numbers: 'Urbanist', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, sans-serif;
 
     --shadow-editorial: 0 20px 60px -15px hsl(180 10% 10% / 0.15);

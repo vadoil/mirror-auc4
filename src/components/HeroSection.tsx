@@ -4,7 +4,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 
 const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
   <div className="text-center">
-    <div className="font-display text-4xl sm:text-5xl md:text-6xl font-normal text-cream leading-none uppercase">
+    <div className="font-numbers text-4xl sm:text-5xl md:text-6xl font-normal text-cream leading-none uppercase">
       {String(value).padStart(2, "0")}
     </div>
     <div className="text-cream/40 text-[10px] uppercase tracking-[0.3em] font-body mt-2">{label}</div>
@@ -105,11 +105,11 @@ const HeroSection = () => {
               {/* Countdown */}
               <div className="flex gap-6 md:gap-8">
                 <CountdownUnit value={timeLeft.days} label="дней" />
-                <span className="font-display text-4xl md:text-5xl text-cream/20 self-start">:</span>
+                <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
                 <CountdownUnit value={timeLeft.hours} label="часов" />
-                <span className="font-display text-4xl md:text-5xl text-cream/20 self-start">:</span>
+                <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
                 <CountdownUnit value={timeLeft.minutes} label="минут" />
-                <span className="font-display text-4xl md:text-5xl text-cream/20 self-start hidden sm:block">:</span>
+                <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start hidden sm:block">:</span>
                 <div className="hidden sm:block">
                   <CountdownUnit value={timeLeft.seconds} label="секунд" />
                 </div>
@@ -135,19 +135,19 @@ const HeroSection = () => {
             className="mt-12 md:mt-16 pt-6 border-t border-cream/10 flex flex-wrap gap-8 md:gap-16"
           >
             <div>
-              <p className="font-display text-3xl md:text-4xl font-normal text-cream uppercase">500+</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">500+</p>
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">участниц</p>
             </div>
             <div>
-              <p className="font-display text-3xl md:text-4xl font-normal text-cream uppercase">40+</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">40+</p>
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">спикеров</p>
             </div>
             <div>
-              <p className="font-display text-3xl md:text-4xl font-normal text-cream uppercase">20</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">20</p>
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">СМИ</p>
             </div>
             <div>
-              <p className="font-display text-3xl md:text-4xl font-normal text-cream uppercase">1</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">1</p>
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">день для себя</p>
             </div>
           </motion.div>
