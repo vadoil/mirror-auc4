@@ -78,7 +78,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
-                className="font-display text-cream text-7xl sm:text-8xl md:text-[10rem] lg:text-[12rem] font-light tracking-[-0.02em] leading-[0.85]"
+                className="font-display text-cream text-7xl sm:text-8xl md:text-[10rem] lg:text-[12rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]"
               >
                 ОТРА
                 <br />
