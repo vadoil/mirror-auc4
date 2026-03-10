@@ -147,7 +147,7 @@ const HeroSection = () => {
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">СМИ</p>
             </div>
             <div>
-              <p className="font-display text-3xl md:text-4xl font-light text-cream">1</p>
+              <p className="font-display text-3xl md:text-4xl font-normal text-cream uppercase">1</p>
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">день для себя</p>
             </div>
           </motion.div>
