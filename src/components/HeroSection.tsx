@@ -4,7 +4,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 
 const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
   <div className="text-center">
-    <div className="font-display text-4xl sm:text-5xl md:text-6xl font-light text-cream leading-none">
+    <div className="font-display text-4xl sm:text-5xl md:text-6xl font-normal text-cream leading-none uppercase">
       {String(value).padStart(2, "0")}
     </div>
     <div className="text-cream/40 text-[10px] uppercase tracking-[0.3em] font-body mt-2">{label}</div>
@@ -78,7 +78,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
-                className="font-display text-cream text-7xl sm:text-8xl md:text-[10rem] lg:text-[12rem] font-light tracking-[-0.02em] leading-[0.85]"
+                className="font-display text-cream text-7xl sm:text-8xl md:text-[10rem] lg:text-[12rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]"
               >
                 ОТРА
                 <br />
@@ -89,7 +89,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.0 }}
-                className="font-display text-cream/70 text-xl md:text-2xl lg:text-3xl font-light italic mt-6"
+                className="font-body text-cream/70 text-xl md:text-2xl lg:text-3xl font-light italic mt-6"
               >
                 Начало твоей прайм-эры
               </motion.p>
@@ -135,19 +135,19 @@ const HeroSection = () => {
             className="mt-12 md:mt-16 pt-6 border-t border-cream/10 flex flex-wrap gap-8 md:gap-16"
           >
             <div>
-              <p className="font-display text-3xl md:text-4xl font-light text-cream">500+</p>
+              <p className="font-display text-3xl md:text-4xl font-normal text-cream uppercase">500+</p>
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">участниц</p>
             </div>
             <div>
-              <p className="font-display text-3xl md:text-4xl font-light text-cream">40+</p>
+              <p className="font-display text-3xl md:text-4xl font-normal text-cream uppercase">40+</p>
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">спикеров</p>
             </div>
             <div>
-              <p className="font-display text-3xl md:text-4xl font-light text-cream">20</p>
+              <p className="font-display text-3xl md:text-4xl font-normal text-cream uppercase">20</p>
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">СМИ</p>
             </div>
             <div>
-              <p className="font-display text-3xl md:text-4xl font-light text-cream">1</p>
+              <p className="font-display text-3xl md:text-4xl font-normal text-cream uppercase">1</p>
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">день для себя</p>
             </div>
           </motion.div>
