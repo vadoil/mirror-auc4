@@ -4,33 +4,32 @@ import { useRef } from "react";
 const items = [
   {
     num: "01",
-    title: "Кризис идентичности",
-    text: "Социальные сети создали иллюзию, что все вокруг успешны. Женщина смотрит в зеркало — и видит разрыв между «как надо» и «как есть».",
+    title: "Эксклюзивные лоты",
+    text: "Уникальные предметы искусства и впечатления, которые невозможно найти в открытой продаже.",
   },
   {
     num: "02",
-    title: "Ловушка «сильной женщины»",
-    text: "Культура продвигает образ, который может всё: строить карьеру, воспитывать детей, выглядеть идеально. Но никто не говорит — какой ценой.",
+    title: "Благотворительная миссия",
+    text: "100% средств сверх стартовой цены направляются на поддержку социальных и культурных проектов.",
   },
   {
     num: "03",
-    title: "Дефицит глубины",
-    text: "Контента — море, курсов — тысячи. Но где искать истину и смыслы — не ясно. Мы предлагаем посвятить один день себе.",
+    title: "Нетворкинг высокого уровня",
+    text: "Возможность познакомиться с коллекционерами, экспертами и лидерами мнений в неформальной обстановке.",
   },
   {
     num: "04",
-    title: "Потребность в заботе",
-    text: "Мы бережём время современных женщин и собираем лучшие рекомендации: здоровье, красота, эмоциональное состояние.",
+    title: "Прозрачность и доверие",
+    text: "Каждый лот проходит экспертную оценку. Система ставок — открытая и в реальном времени.",
   },
 ];
 
-const RelevanceSection = () => {
+const WhySection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section className="relative py-28 md:py-40 overflow-hidden">
-      {/* Dark dramatic background */}
       <div className="absolute inset-0 bg-charcoal" />
       <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent" />
 
@@ -44,13 +43,13 @@ const RelevanceSection = () => {
           <div className="flex items-center gap-3 mb-8">
             <div className="w-8 h-px bg-primary" />
             <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">
-              Актуальность
+              Преимущества
             </p>
           </div>
           <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream tracking-tight leading-[0.9]">
             Почему
             <br />
-            <span className="italic text-primary">именно сейчас?</span>
+            <span className="italic text-primary">стоит участвовать?</span>
           </h2>
         </motion.div>
 
@@ -84,4 +83,4 @@ const RelevanceSection = () => {
   );
 };
 
-export default RelevanceSection;
+export default WhySection;

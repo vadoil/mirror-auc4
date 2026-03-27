@@ -3,9 +3,9 @@ import { useRef } from "react";
 import { Send, Phone } from "lucide-react";
 
 const contacts = [
-  { role: "Спонсоры и СМИ", name: "Анна", phone: "8 (917) 152-76-77", tg: "@mi_ella23" },
-  { role: "Партнёры", name: "Жизель", phone: "8 (985) 809-53-70", tg: "@jiselle_tolts" },
-  { role: "Спикеры", name: "Александра", phone: "8 (962) 364-66-46", tg: "@alexa_ah_alexa" },
+  { role: "Организация", name: "Александра", phone: "8 (962) 364-66-46", tg: "@alexa_auction" },
+  { role: "Партнёры и спонсоры", name: "Гизела", phone: "8 (985) 809-53-70", tg: "@gisela_events" },
+  { role: "Пресса и СМИ", name: "Мария", phone: "8 (917) 152-76-77", tg: "@maria_press" },
 ];
 
 const ContactsSection = () => {

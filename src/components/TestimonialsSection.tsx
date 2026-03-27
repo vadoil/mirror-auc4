@@ -4,24 +4,24 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    text: "Это был день, когда я впервые за долгое время по-настоящему остановилась и посмотрела на себя без фильтров. Невероятный опыт.",
+    text: "Потрясающая организация! Каждый лот — произведение искусства. Горжусь, что мои средства пошли на благотворительность.",
     name: "Екатерина М.",
-    role: "Предпринимательница",
+    role: "Коллекционер",
   },
   {
-    text: "Форум дал мне не мотивацию — а глубину. Я уехала с ощущением, что наконец-то нашла своё отражение.",
-    name: "Анна К.",
-    role: "Топ-менеджер",
+    text: "Атмосфера вечера была невероятной. Аукционист держал зал в напряжении до последней ставки.",
+    name: "Андрей К.",
+    role: "Предприниматель",
   },
   {
-    text: "Каждый спикер — это не выступление, а разговор. Женские круги — это то, что я буду вспоминать годами.",
+    text: "Приобрела великолепное украшение и познакомилась с удивительными людьми. Обязательно вернусь в следующем году.",
     name: "Мария В.",
-    role: "Мама троих детей",
+    role: "Меценат",
   },
   {
-    text: "Я пришла из любопытства, а ушла с планом действий и ощущением мощной поддержки. Это больше, чем форум.",
-    name: "Ольга Д.",
-    role: "Врач",
+    text: "Прозрачная система торгов, профессиональные эксперты и настоящий азарт. Лучший аукцион, на котором я был.",
+    name: "Дмитрий Л.",
+    role: "Инвестор",
   },
 ];
 
@@ -54,16 +54,15 @@ const TestimonialsSection = () => {
           <div className="flex items-center gap-3 justify-center mb-6">
             <div className="w-8 h-px bg-primary" />
             <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-              Голоса участниц
+              Отзывы участников
             </p>
             <div className="w-8 h-px bg-primary" />
           </div>
           <h2 className="font-display text-5xl md:text-6xl font-light tracking-tight text-foreground leading-[0.9]">
-            Они уже <span className="italic text-primary">прошли</span> этот путь
+            Они уже <span className="italic text-primary">участвовали</span>
           </h2>
         </motion.div>
 
-        {/* Quote carousel */}
         <div className="relative min-h-[280px] md:min-h-[220px] flex items-center">
           <AnimatePresence mode="wait">
             <motion.div
@@ -88,15 +87,10 @@ const TestimonialsSection = () => {
           </AnimatePresence>
         </div>
 
-        {/* Navigation */}
         <div className="flex items-center justify-center gap-6 mt-8">
-          <button
-            onClick={prev}
-            className="w-10 h-10 border border-border hover:border-primary flex items-center justify-center transition-colors duration-300"
-          >
+          <button onClick={prev} className="w-10 h-10 border border-border hover:border-primary flex items-center justify-center transition-colors duration-300">
             <ChevronLeft className="w-4 h-4 text-foreground" />
           </button>
-
           <div className="flex gap-2">
             {testimonials.map((_, i) => (
               <button
@@ -108,11 +102,7 @@ const TestimonialsSection = () => {
               />
             ))}
           </div>
-
-          <button
-            onClick={next}
-            className="w-10 h-10 border border-border hover:border-primary flex items-center justify-center transition-colors duration-300"
-          >
+          <button onClick={next} className="w-10 h-10 border border-border hover:border-primary flex items-center justify-center transition-colors duration-300">
             <ChevronRight className="w-4 h-4 text-foreground" />
           </button>
         </div>

@@ -2,15 +2,15 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const program = [
-  { time: "12:00", title: "Сбор гостей", desc: "Экспо-зона, kids club, зона комфортной стоматологии", highlight: false },
-  { time: "12:30", title: "Женский круг", desc: "Открывающий женский круг для настройки и погружения", highlight: false },
-  { time: "13:00", title: "Здоровье. Красота. Метаболизм", desc: "Блок выступлений экспертов и панельная дискуссия", highlight: true },
-  { time: "14:20", title: "Тело в процессе уверенности", desc: "Запись практик и интерактивы с аудиторией", highlight: false },
-  { time: "15:00", title: "Культура заботы о себе", desc: "Современные возможности биохакинга и технологий красоты", highlight: true },
-  { time: "15:40", title: "Как полюбить своё отражение?", desc: "Выступление известного спикера, Q&A сессия", highlight: false },
-  { time: "16:10", title: "Карьера и материнство", desc: "Панельная дискуссия: реальные истории женщин", highlight: true },
-  { time: "17:10", title: "Блок «Без фильтров»", desc: "Открытые разговоры о том, о чём не говорят вслух", highlight: false },
-  { time: "18:10", title: "Networking", desc: "Завершение форума, нетворкинг и обмен контактами", highlight: false },
+  { time: "17:00", title: "Сбор гостей", desc: "Регистрация, welcome-drink, предварительный просмотр лотов", highlight: false },
+  { time: "17:30", title: "Выставка лотов", desc: "Свободный осмотр, консультации экспертов, каталоги", highlight: false },
+  { time: "18:00", title: "Открытие аукциона", desc: "Приветственное слово, представление аукциониста и миссии вечера", highlight: true },
+  { time: "18:30", title: "Первая сессия торгов", desc: "Категории: современное искусство и фотография", highlight: true },
+  { time: "19:30", title: "Перерыв и нетворкинг", desc: "Фуршет, живая музыка, общение с экспертами", highlight: false },
+  { time: "20:00", title: "Вторая сессия торгов", desc: "Категории: ювелирное искусство и коллекционные вина", highlight: true },
+  { time: "21:00", title: "Финальные торги", desc: "Топ-лоты вечера и эксклюзивные впечатления", highlight: true },
+  { time: "21:30", title: "Церемония закрытия", desc: "Подведение итогов, вручение лотов, благодарности", highlight: false },
+  { time: "22:00", title: "After-party", desc: "Неформальное общение, DJ-сет, бар", highlight: false },
 ];
 
 const ProgramSection = () => {
@@ -29,19 +29,16 @@ const ProgramSection = () => {
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-primary" />
             <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-              26 апреля · расписание
+              15 июня · расписание
             </p>
           </div>
           <h2 className="font-display text-5xl md:text-7xl font-light tracking-tight text-foreground leading-[0.9]">
-            Программа <span className="italic text-primary">дня</span>
+            Программа <span className="italic text-primary">вечера</span>
           </h2>
         </motion.div>
 
-        {/* Timeline */}
         <div className="relative">
-          {/* Vertical line */}
           <div className="absolute left-[39px] md:left-[59px] top-0 bottom-0 w-px bg-border" />
-
           <div className="space-y-0">
             {program.map((item, i) => (
               <motion.div
@@ -51,7 +48,6 @@ const ProgramSection = () => {
                 transition={{ duration: 0.5, delay: 0.08 * i }}
                 className="group relative flex gap-6 md:gap-10"
               >
-                {/* Dot */}
                 <div className="relative z-10 flex-shrink-0 w-20 md:w-[120px] flex items-start pt-8">
                   <div className="w-full text-right pr-5 md:pr-7">
                     <span className="font-numbers text-lg md:text-2xl font-light text-primary">
@@ -64,8 +60,6 @@ const ProgramSection = () => {
                       : "bg-background border-primary/40 group-hover:border-primary"
                   }`} />
                 </div>
-
-                {/* Content */}
                 <div className={`flex-1 py-6 md:py-8 pl-4 md:pl-6 border-b border-border group-hover:bg-card/50 transition-colors duration-300 ${
                   item.highlight ? "bg-primary/5" : ""
                 }`}>

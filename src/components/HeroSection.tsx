@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
+import { Gavel } from "lucide-react";
 
 const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
   <div className="text-center">
@@ -15,7 +15,7 @@ const HeroSection = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const target = new Date("2026-04-26T10:00:00").getTime();
+    const target = new Date("2026-06-15T18:00:00").getTime();
     const tick = () => {
       const now = Date.now();
       const diff = Math.max(0, target - now);
@@ -33,18 +33,10 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-      {/* Background with parallax feel */}
-      <div className="absolute inset-0">
-        <motion.img
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          src={heroBg}
-          alt="Форум Отражение"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/60 to-warm-black/10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-warm-black/70 via-transparent to-warm-black/30" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-charcoal">
+        <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/60 to-warm-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-warm-black/80 via-transparent to-warm-black/40" />
       </div>
 
       {/* Decorative vertical lines */}
@@ -67,23 +59,25 @@ const HeroSection = () => {
           >
             <div className="w-8 h-px bg-primary" />
             <p className="text-cream/50 text-[10px] md:text-xs uppercase tracking-[0.4em] font-body">
-              Оффлайн форум для женщин · 26 апреля 2026
+              Благотворительный аукцион · 15 июня 2026
             </p>
           </motion.div>
 
           {/* Main title */}
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-20">
             <div>
-              <motion.h1
+              <motion.div
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
-                className="font-display text-cream text-7xl sm:text-8xl md:text-[10rem] lg:text-[12rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]"
               >
-                ОТРА
-                <br />
-                <span className="text-primary">ЖЕ</span>НИЕ
-              </motion.h1>
+                <Gavel className="w-12 h-12 md:w-16 md:h-16 text-primary mb-6" />
+                <h1 className="font-display text-cream text-6xl sm:text-7xl md:text-[9rem] lg:text-[11rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]">
+                  АУК
+                  <br />
+                  <span className="text-primary">ЦИ</span>ОН
+                </h1>
+              </motion.div>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -91,7 +85,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.8, delay: 1.0 }}
                 className="font-body text-cream/70 text-xl md:text-2xl lg:text-3xl font-light italic mt-6"
               >
-                Начало твоей прайм-эры
+                Искусство менять мир
               </motion.p>
             </div>
 
@@ -118,10 +112,10 @@ const HeroSection = () => {
               {/* Buttons */}
               <div className="flex gap-4">
                 <a href="#tickets" className="btn-primary text-center">
-                  Купить билет
+                  Участвовать
                 </a>
-                <a href="#contacts" className="btn-outline-light text-center">
-                  Стать партнёром
+                <a href="#lots-preview" className="btn-outline-light text-center">
+                  Смотреть лоты
                 </a>
               </div>
             </motion.div>
@@ -135,20 +129,20 @@ const HeroSection = () => {
             className="mt-12 md:mt-16 pt-6 border-t border-cream/10 flex flex-wrap gap-8 md:gap-16"
           >
             <div>
-              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">500+</p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">участниц</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">50+</p>
+              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">лотов</p>
             </div>
             <div>
-              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">40+</p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">спикеров</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">300+</p>
+              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">гостей</p>
             </div>
             <div>
-              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">20</p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">СМИ</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">₽5М+</p>
+              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">собрано ранее</p>
             </div>
             <div>
               <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">1</p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">день для себя</p>
+              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">вечер</p>
             </div>
           </motion.div>
         </div>

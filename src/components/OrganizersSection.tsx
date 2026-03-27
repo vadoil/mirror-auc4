@@ -1,20 +1,16 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import organizer1 from "@/assets/organizer-1.jpg";
-import organizer2 from "@/assets/organizer-2.jpg";
 
 const organizers = [
   {
     name: "Александра Павлова",
     role: "Организатор",
-    desc: "Продюсер, основатель проекта «Не напрасно». Идейный вдохновитель и организатор форума «Отражение».",
-    photo: organizer1,
+    desc: "Продюсер благотворительных мероприятий. Идейный вдохновитель и основатель аукциона.",
   },
   {
     name: "Гизела Тольц",
     role: "Организатор",
-    desc: "Продюсер мероприятий, эксперт в области event-менеджмента. Отвечает за бесшовный опыт каждой участницы.",
-    photo: organizer2,
+    desc: "Эксперт в области event-менеджмента. Отвечает за безупречный опыт каждого гостя.",
   },
 ];
 
@@ -54,12 +50,10 @@ const OrganizersSection = () => {
               className="group"
             >
               <div className="grid grid-cols-[1fr_1.2fr] gap-6 items-start">
-                <div className="relative aspect-[3/4] overflow-hidden">
-                  <img
-                    src={person.photo}
-                    alt={person.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                <div className="relative aspect-[3/4] overflow-hidden bg-charcoal">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="font-display text-5xl text-cream/10">{person.name.charAt(0)}</span>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-warm-black/40 to-transparent" />
                 </div>
                 <div className="py-4">

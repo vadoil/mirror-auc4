@@ -1,51 +1,51 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Heart, Brain, Sparkles, Atom, Scale } from "lucide-react";
+import { Palette, Gem, Wine, Plane, Camera } from "lucide-react";
 
-const topics = [
+const themes = [
   {
-    icon: Heart,
+    icon: Palette,
     num: "01",
-    title: "Женское здоровье как главный ресурс",
-    desc: "Прямая связь между ментальным и физическим состоянием. Базовые знания о своём теле — ключ к гармонии.",
+    title: "Современное искусство",
+    desc: "Работы признанных художников и молодых талантов. Живопись, графика, скульптура.",
     accent: true,
   },
   {
-    icon: Brain,
+    icon: Gem,
     num: "02",
-    title: "Психоэмоциональная устойчивость",
-    desc: "Инструменты для управления стрессом, эмоциональной перезагрузки и внутренней стабильности.",
+    title: "Ювелирное искусство",
+    desc: "Авторские украшения от ведущих ювелирных домов и независимых мастеров.",
     accent: false,
   },
   {
-    icon: Sparkles,
+    icon: Wine,
     num: "03",
-    title: "Культура заботы о себе",
-    desc: "Не эгоизм, а необходимость. Как выстроить систему поддержки и заботы о себе каждый день.",
+    title: "Коллекционные вина",
+    desc: "Редкие и выдержанные вина из частных коллекций и лучших виноделен мира.",
     accent: false,
   },
   {
-    icon: Atom,
+    icon: Plane,
     num: "04",
-    title: "Инновации продления молодости",
-    desc: "Современные возможности науки и медицины в сфере биохакинга, красоты и здоровья.",
+    title: "Эксклюзивные впечатления",
+    desc: "Уникальные путешествия, частные ужины с шеф-поварами, закрытые мероприятия.",
     accent: false,
   },
   {
-    icon: Scale,
+    icon: Camera,
     num: "05",
-    title: "Баланс карьеры и материнства",
-    desc: "Реальные истории женщин, которые нашли свой баланс без выбора «или-или».",
+    title: "Фотография и медиа-арт",
+    desc: "Авторские фотографии, цифровое искусство и лимитированные принты.",
     accent: false,
   },
 ];
 
-const TopicsSection = () => {
+const ThemesSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="topics" className="py-24 md:py-32 section-padding bg-background">
+    <section id="themes" className="py-24 md:py-32 section-padding bg-background">
       <div ref={ref} className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -57,52 +57,50 @@ const TopicsSection = () => {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-px bg-primary" />
               <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-                Направления
+                Категории
               </p>
             </div>
             <h2 className="font-display text-5xl md:text-7xl font-light tracking-tight text-foreground leading-[0.9]">
-              Темы <span className="italic text-primary">форума</span>
+              Темы <span className="italic text-primary">аукциона</span>
             </h2>
           </div>
           <p className="font-body text-sm text-muted-foreground max-w-sm font-light">
-            Пять ключевых направлений, которые затронут самое важное в жизни современной женщины
+            Пять категорий лотов — от живописи до уникальных впечатлений
           </p>
         </motion.div>
 
-        {/* Bento-style grid */}
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
-          {topics.map((topic, i) => (
+          {themes.map((theme, i) => (
             <motion.div
-              key={topic.num}
+              key={theme.num}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.12 * i }}
               className={`group relative p-8 md:p-10 border transition-all duration-500 overflow-hidden cursor-pointer ${
-                topic.accent
+                theme.accent
                   ? "md:row-span-2 bg-primary text-primary-foreground border-primary hover:shadow-[var(--shadow-editorial)]"
                   : "bg-card border-border hover:border-primary/30 hover:shadow-[var(--shadow-hover)]"
               }`}
             >
-              {/* Large number background */}
               <span className={`absolute top-4 right-6 font-numbers text-7xl md:text-8xl font-light leading-none transition-opacity duration-500 ${
-                topic.accent ? "text-primary-foreground/10" : "text-foreground/5"
+                theme.accent ? "text-primary-foreground/10" : "text-foreground/5"
               }`}>
-                {topic.num}
+                {theme.num}
               </span>
 
               <div className="relative z-10">
-                <topic.icon className={`w-7 h-7 mb-6 transition-transform duration-500 group-hover:scale-110 ${
-                  topic.accent ? "text-primary-foreground/80" : "text-primary"
+                <theme.icon className={`w-7 h-7 mb-6 transition-transform duration-500 group-hover:scale-110 ${
+                  theme.accent ? "text-primary-foreground/80" : "text-primary"
                 }`} />
                 <h3 className={`font-display text-xl md:text-2xl font-medium mb-4 ${
-                  topic.accent ? "text-primary-foreground" : "text-foreground"
+                  theme.accent ? "text-primary-foreground" : "text-foreground"
                 }`}>
-                  {topic.title}
+                  {theme.title}
                 </h3>
                 <p className={`font-body text-sm font-light leading-relaxed ${
-                  topic.accent ? "text-primary-foreground/70" : "text-muted-foreground"
+                  theme.accent ? "text-primary-foreground/70" : "text-muted-foreground"
                 }`}>
-                  {topic.desc}
+                  {theme.desc}
                 </p>
               </div>
             </motion.div>
@@ -113,4 +111,4 @@ const TopicsSection = () => {
   );
 };
 
-export default TopicsSection;
+export default ThemesSection;

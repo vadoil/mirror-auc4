@@ -1,6 +1,5 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import videoBg from "@/assets/video-bg.jpg";
 
 const VideoSection = () => {
   const ref = useRef(null);
@@ -9,15 +8,9 @@ const VideoSection = () => {
   return (
     <section className="relative py-0 overflow-hidden">
       <div ref={ref} className="relative w-full aspect-[16/7] md:aspect-[21/9] min-h-[400px] max-h-[700px]">
-        {/* Background image as placeholder for video — autoplay video can replace this */}
-        <img
-          src={videoBg}
-          alt="Атмосфера форума"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        <div className="absolute inset-0 bg-charcoal" />
         <div className="absolute inset-0 bg-warm-black/50" />
 
-        {/* Play button overlay */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -35,15 +28,13 @@ const VideoSection = () => {
             </svg>
           </button>
           <p className="font-body text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/60">
-            Смотреть промо-ролик
+            Смотреть промо-ролик аукциона
           </p>
         </motion.div>
 
-        {/* Cinematic bars */}
         <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-warm-black to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-warm-black to-transparent" />
 
-        {/* Side text */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
@@ -51,7 +42,7 @@ const VideoSection = () => {
           className="absolute bottom-8 left-8 md:left-16 z-10 hidden md:block"
         >
           <p className="font-display text-xl md:text-2xl italic text-cream/70">
-            «Один день, чтобы начать жить иначе»
+            «Каждая ставка — это вклад в будущее»
           </p>
         </motion.div>
       </div>
