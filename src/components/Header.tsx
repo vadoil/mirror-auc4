@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Gavel } from "lucide-react";
 
 const navItems = [
-  { label: "О форуме", href: "#about" },
-  { label: "Темы", href: "#topics" },
-  { label: "Спикеры", href: "#speakers" },
+  { label: "О проекте", href: "#about" },
+  { label: "Лоты", href: "#lots-preview" },
   { label: "Программа", href: "#program" },
   { label: "Билеты", href: "#tickets" },
+  { label: "FAQ", href: "#faq" },
   { label: "Контакты", href: "#contacts" },
 ];
 
@@ -32,14 +32,13 @@ const Header = () => {
       <div className="section-padding flex items-center justify-between">
         <a href="#" className="flex items-center gap-3">
           <div className="w-8 h-8 border border-primary flex items-center justify-center">
-            <span className="font-display text-primary text-sm font-light">О</span>
+            <Gavel className="w-4 h-4 text-primary" />
           </div>
           <span className="font-display text-lg md:text-xl font-normal tracking-[0.15em] text-cream uppercase">
-            Отражение
+            Аукцион
           </span>
         </a>
 
-        {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => (
             <a
@@ -51,14 +50,19 @@ const Header = () => {
             </a>
           ))}
           <a
+            href="/lots"
+            className="text-cream/60 text-[11px] uppercase tracking-[0.2em] font-body font-light hover:text-cream transition-colors duration-300"
+          >
+            Каталог
+          </a>
+          <a
             href="#tickets"
             className="ml-4 bg-primary text-primary-foreground text-[11px] uppercase tracking-[0.2em] px-6 py-2.5 hover:opacity-90 transition-all duration-500 font-body"
           >
-            Купить билет
+            Участвовать
           </a>
         </nav>
 
-        {/* Mobile burger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="lg:hidden text-cream"
@@ -67,7 +71,6 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -88,11 +91,18 @@ const Header = () => {
                 </a>
               ))}
               <a
+                href="/lots"
+                onClick={() => setMenuOpen(false)}
+                className="text-cream/80 text-sm uppercase tracking-[0.2em] font-body font-light"
+              >
+                Каталог
+              </a>
+              <a
                 href="#tickets"
                 onClick={() => setMenuOpen(false)}
                 className="mt-4 bg-primary text-primary-foreground text-sm uppercase tracking-[0.2em] px-8 py-3 font-body"
               >
-                Купить билет
+                Участвовать
               </a>
             </nav>
           </motion.div>

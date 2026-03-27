@@ -7,37 +7,37 @@ const tickets = [
     name: "Standard",
     price: "15 000 ₽",
     features: [
-      "Участие в главном зале",
-      "Доступ к экспо-зоне",
-      "Кофе-брейк",
-      "Раздаточные материалы",
+      "Доступ на аукцион",
+      "Каталог лотов",
+      "Welcome-drink",
+      "Онлайн-ставки",
       "Сертификат участника",
     ],
     highlight: false,
   },
   {
     name: "VIP",
-    price: "35 000 ₽",
+    price: "50 000 ₽",
     features: [
       "Всё из Standard",
-      "VIP-зона с рассадкой",
-      "Бизнес-ланч",
-      "Женский круг",
-      "Зона релакс-практик",
-      "Подарочный набор",
+      "VIP-превью лотов",
+      "Ранний доступ к каталогу",
+      "Приоритетное размещение",
+      "Фуршет и бар",
+      "VIP-подарок",
     ],
     highlight: true,
   },
   {
     name: "Premium",
-    price: "75 000 ₽",
+    price: "150 000 ₽",
     features: [
       "Всё из VIP",
-      "Закрытый ужин со спикерами",
-      "Персональный networking",
-      "Индивидуальная консультация",
+      "Закрытый ужин с экспертами",
+      "Персональный консультант",
+      "Приватный просмотр коллекции",
       "Трансфер бизнес-класса",
-      "Премиум-подарки",
+      "Премиум-каталог с сертификатами",
     ],
     highlight: false,
   },
@@ -49,7 +49,6 @@ const TicketsSection = () => {
 
   return (
     <section id="tickets" className="relative py-24 md:py-32 section-padding overflow-hidden">
-      {/* Dramatic dark bg */}
       <div className="absolute inset-0 bg-charcoal" />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
 
@@ -89,7 +88,7 @@ const TicketsSection = () => {
                 <div className="absolute top-0 left-0 right-0 bg-primary py-2 flex items-center justify-center gap-2">
                   <Star className="w-3 h-3 text-primary-foreground" />
                   <span className="text-primary-foreground text-[10px] uppercase tracking-[0.3em] font-body font-medium">
-                    Популярный выбор
+                    Рекомендуем
                   </span>
                   <Star className="w-3 h-3 text-primary-foreground" />
                 </div>

@@ -4,23 +4,23 @@ import { Sparkles, ArrowRight, RotateCcw } from "lucide-react";
 
 const questions = [
   {
-    q: "Что для тебя сейчас важнее всего?",
-    options: ["Здоровье и энергия", "Карьера и рост", "Баланс и гармония", "Саморазвитие"],
+    q: "Что вас привлекает больше всего?",
+    options: ["Живопись и графика", "Ювелирные украшения", "Редкие вина", "Уникальные впечатления"],
   },
   {
-    q: "Как часто ты выделяешь время только для себя?",
-    options: ["Каждый день", "Раз в неделю", "Редко", "Почти никогда"],
+    q: "Какой стиль вам ближе?",
+    options: ["Классика и антиквариат", "Современное искусство", "Минимализм", "Авангард"],
   },
   {
-    q: "Что тебе сейчас не хватает?",
-    options: ["Поддержки окружения", "Ясности в целях", "Энергии и мотивации", "Времени на себя"],
+    q: "Какова ваша цель на аукционе?",
+    options: ["Пополнить коллекцию", "Сделать подарок", "Поддержать благотворительность", "Просто получить опыт"],
   },
 ];
 
 const results: Record<string, { title: string; desc: string; color: string }> = {
   default: {
-    title: "Прайм-эра Пробуждения",
-    desc: "Ты на пороге больших перемен. Форум «Отражение» — твоя точка старта. Приходи, чтобы найти опору и вдохновение.",
+    title: "Истинный Коллекционер",
+    desc: "У вас прекрасный вкус и чутьё на уникальные вещи. Наш аукцион — идеальное место для вашего следующего приобретения.",
     color: "text-primary",
   },
 };
@@ -70,7 +70,7 @@ const QuizSection = () => {
             <Sparkles className="w-4 h-4 text-primary" />
           </div>
           <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-cream leading-[0.9]">
-            Узнай свою <span className="italic text-primary">прайм-эру</span>
+            Какой вы <span className="italic text-primary">коллекционер?</span>
           </h2>
         </motion.div>
 
@@ -80,7 +80,6 @@ const QuizSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="bg-cream/5 border border-cream/10 p-8 md:p-12"
         >
-          {/* Progress */}
           {!done && (
             <div className="flex gap-2 mb-8">
               {questions.map((_, i) => (
@@ -132,7 +131,7 @@ const QuizSection = () => {
               >
                 <Sparkles className="w-8 h-8 text-primary mx-auto mb-6" />
                 <p className="font-body text-xs text-cream/40 uppercase tracking-[0.3em] mb-3">
-                  Твой результат
+                  Ваш результат
                 </p>
                 <h3 className={`font-display text-3xl md:text-4xl font-light mb-4 ${result.color}`}>
                   {result.title}
@@ -142,7 +141,7 @@ const QuizSection = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <a href="#tickets" className="btn-primary">
-                    Купить билет
+                    Участвовать в аукционе
                   </a>
                   <button
                     onClick={reset}

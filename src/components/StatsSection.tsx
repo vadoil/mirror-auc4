@@ -2,10 +2,10 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 const stats = [
-  { value: 500, suffix: "+", label: "участниц" },
-  { value: 40, suffix: "+", label: "спикеров" },
-  { value: 20, suffix: "", label: "СМИ-партнёров" },
-  { value: 10, suffix: "М+", label: "охват аудитории" },
+  { value: 50, suffix: "+", label: "лотов" },
+  { value: 300, suffix: "+", label: "гостей" },
+  { value: 5, suffix: "М₽+", label: "собрано" },
+  { value: 10, suffix: "+", label: "партнёров" },
 ];
 
 const AnimatedCounter = ({ target, suffix, isInView }: { target: number; suffix: string; isInView: boolean }) => {
@@ -27,11 +27,7 @@ const AnimatedCounter = ({ target, suffix, isInView }: { target: number; suffix:
     return () => cancelAnimationFrame(frame);
   }, [isInView, target]);
 
-  return (
-    <span>
-      {count}{suffix}
-    </span>
-  );
+  return <span>{count}{suffix}</span>;
 };
 
 const StatsSection = () => {

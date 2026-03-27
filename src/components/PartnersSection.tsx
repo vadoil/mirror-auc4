@@ -2,13 +2,13 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const partners = [
-  "Собака.ru",
-  "TenChat",
-  "SOROKA",
-  "Не напрасно",
-  "Гатчинская клиническая больница",
-  "Клиника Фомина",
-  "Первая Линия Healthcare Resort",
+  "Sotheby's Russia",
+  "Галерея Триумф",
+  "Фонд «Подари жизнь»",
+  "Ювелирный дом PETROV",
+  "Винотека Grand Cru",
+  "Art Basel Moscow",
+  "Forbes Club",
 ];
 
 const PartnersSection = () => {
@@ -17,7 +17,6 @@ const PartnersSection = () => {
 
   return (
     <section className="py-24 md:py-32 section-padding bg-beige-warm relative overflow-hidden">
-      {/* Subtle decorative */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
 
       <div ref={ref} className="max-w-7xl mx-auto relative z-10">
@@ -35,11 +34,10 @@ const PartnersSection = () => {
             <div className="w-8 h-px bg-primary" />
           </div>
           <h2 className="font-display text-5xl md:text-6xl font-light tracking-tight text-foreground leading-[0.9]">
-            СМИ и <span className="italic text-primary">партнёры</span>
+            Партнёры и <span className="italic text-primary">спонсоры</span>
           </h2>
         </motion.div>
 
-        {/* Marquee-style scrolling logos */}
         <div className="overflow-hidden py-8">
           <motion.div
             animate={{ x: [0, -800] }}
