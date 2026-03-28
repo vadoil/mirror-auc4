@@ -98,11 +98,11 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="#lots-preview"
+                href="#venue"
                 onClick={() => setMenuOpen(false)}
                 className="text-cream/80 text-sm uppercase tracking-[0.2em] font-body font-light"
               >
-                Каталог
+                Место
               </a>
               <a
                 href="#tickets"
