@@ -31,12 +31,22 @@ const Header = () => {
     >
       <div className="section-padding flex items-center justify-between">
         <a href="#" className="flex items-center gap-3">
-          <div className="w-8 h-8 border border-primary flex items-center justify-center">
-            <Gavel className="w-4 h-4 text-primary" />
+          <div className="flex flex-col items-center">
+            <span className="text-cream/40 text-[7px] md:text-[8px] uppercase tracking-[0.35em] font-body leading-none mb-1">
+              Инвестируй в себя
+            </span>
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 border border-primary flex items-center justify-center">
+                <Gavel className="w-3.5 h-3.5 text-primary" />
+              </div>
+              <span className="font-display text-lg md:text-xl font-normal tracking-[0.15em] text-cream uppercase">
+                Отражение
+              </span>
+            </div>
+            <span className="text-cream/30 text-[6px] md:text-[7px] uppercase tracking-[0.4em] font-body leading-none mt-1">
+              Биохакинг · Wellness
+            </span>
           </div>
-          <span className="font-display text-lg md:text-xl font-normal tracking-[0.15em] text-cream uppercase">
-            Аукцион
-          </span>
         </a>
 
         <nav className="hidden lg:flex items-center gap-8">
