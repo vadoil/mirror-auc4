@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Mic, PenTool } from "lucide-react";
+import { Mic } from "lucide-react";
+import tsipkinPhoto from "@/assets/tsipkin.png";
 
 const AuctioneerSection = () => {
   const ref = useRef(null);
@@ -16,10 +17,7 @@ const AuctioneerSection = () => {
           className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center"
         >
           <div className="relative aspect-[3/4] bg-charcoal overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-accent/5" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <PenTool className="w-24 h-24 text-cream/8" />
-            </div>
+            <img src={tsipkinPhoto} alt="Александр Цыпкин" className="absolute inset-0 w-full h-full object-cover object-top" />
             <div className="absolute inset-0 bg-gradient-to-t from-warm-black/90 via-warm-black/20 to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
               <div className="flex items-center gap-2 mb-2">

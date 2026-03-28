@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 
+const HERO_VIDEO_URL = "/__l5e/assets-v1/bbea364f-09e2-4f9f-84fa-32e5d7e08eae/hero-bg.mp4";
+
 const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
   <div className="text-center">
     <div className="font-numbers text-4xl sm:text-5xl md:text-6xl font-normal text-cream leading-none uppercase">
@@ -35,19 +37,16 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
       {/* Ambient gradient background */}
       <div className="absolute inset-0 bg-warm-black">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          src={HERO_VIDEO_URL}
+        />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-accent/5" />
-        <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/40 to-transparent" />
-        {/* Soft glow orbs */}
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.06, 0.12, 0.06] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px]"
-        />
-        <motion.div
-          animate={{ scale: [1.1, 1, 1.1], opacity: [0.04, 0.08, 0.04] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-1/3 left-1/6 w-[400px] h-[400px] rounded-full bg-accent/8 blur-[100px]"
-        />
+        <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/60 to-warm-black/30" />
       </div>
 
       {/* Subtle grid overlay */}
