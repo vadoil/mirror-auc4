@@ -51,14 +51,15 @@ const AboutSection = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="relative"
               >
-                <div className="aspect-[4/5] overflow-hidden bg-charcoal flex items-center justify-center relative">
-                  {/* Ambient glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/5" />
-                  <div className="text-center p-8 relative z-10">
-                    <p className="font-body text-cream/30 text-xs uppercase tracking-[0.3em] mb-4">Инвестируйте в</p>
+                <div className="aspect-[4/5] overflow-hidden relative">
+                  <img src={aboutInvest} alt="Инвестируйте в себя" loading="lazy" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1280} />
+                  <div className="absolute inset-0 bg-warm-black/50" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-warm-black/70 via-transparent to-warm-black/30" />
+                  <div className="text-center p-8 relative z-10 flex flex-col items-center justify-center h-full">
+                    <p className="font-body text-cream/50 text-xs uppercase tracking-[0.3em] mb-4">Инвестируйте в</p>
                     <p className="font-display text-6xl md:text-7xl font-light text-cream italic leading-none mb-4">Себя</p>
                     <div className="w-12 h-px bg-primary mx-auto mb-4" />
-                    <p className="font-body text-cream/40 text-sm max-w-xs mx-auto">
+                    <p className="font-body text-cream/60 text-sm max-w-xs mx-auto">
                       Биохакинг · Longevity · Wellness · Mindfulness
                     </p>
                   </div>
