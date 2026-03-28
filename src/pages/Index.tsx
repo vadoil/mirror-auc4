@@ -42,6 +42,7 @@ const Index = () => {
       <AuctioneerSection />
       <VideoSection />
       <GallerySection />
+      <VenueSection />
       <TicketsSection />
       <VipGiftSection />
       <TestimonialsSection />
