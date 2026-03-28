@@ -33,7 +33,7 @@ const Index = () => {
       <WhySection />
       <StatsSection />
       <ProgramSection />
-      <SpeakersSection />
+      
       <FormatSection />
       <HowItWorksSection />
       <LotsPreviewSection />

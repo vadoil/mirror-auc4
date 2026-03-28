@@ -9,7 +9,8 @@ const VideoSection = () => {
     <section className="relative py-0 overflow-hidden">
       <div ref={ref} className="relative w-full aspect-[16/7] md:aspect-[21/9] min-h-[400px] max-h-[700px]">
         <div className="absolute inset-0 bg-charcoal" />
-        <div className="absolute inset-0 bg-warm-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-accent/5" />
+        <div className="absolute inset-0 bg-warm-black/40" />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -28,7 +29,7 @@ const VideoSection = () => {
             </svg>
           </button>
           <p className="font-body text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/60">
-            Смотреть промо-ролик аукциона
+            Смотреть промо-ролик
           </p>
         </motion.div>
 
@@ -42,7 +43,7 @@ const VideoSection = () => {
           className="absolute bottom-8 left-8 md:left-16 z-10 hidden md:block"
         >
           <p className="font-display text-xl md:text-2xl italic text-cream/70">
-            «Каждая ставка — это вклад в будущее»
+            «Инвестиция в себя — самая выгодная сделка»
           </p>
         </motion.div>
       </div>

@@ -1,41 +1,41 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Palette, Gem, Wine, Plane, Camera } from "lucide-react";
+import { Brain, Dna, Leaf, Zap, Heart } from "lucide-react";
 
 const themes = [
   {
-    icon: Palette,
+    icon: Brain,
     num: "01",
-    title: "Современное искусство",
-    desc: "Работы признанных художников и молодых талантов. Живопись, графика, скульптура.",
+    title: "Нейротехнологии",
+    desc: "Нейрофидбек, brain-стимуляция, программы когнитивного апгрейда от ведущих клиник мира.",
     accent: true,
   },
   {
-    icon: Gem,
+    icon: Dna,
     num: "02",
-    title: "Ювелирное искусство",
-    desc: "Авторские украшения от ведущих ювелирных домов и независимых мастеров.",
+    title: "Биохакинг & Longevity",
+    desc: "Генетические тесты, anti-age программы, персональные протоколы долголетия.",
     accent: false,
   },
   {
-    icon: Wine,
+    icon: Leaf,
     num: "03",
-    title: "Коллекционные вина",
-    desc: "Редкие и выдержанные вина из частных коллекций и лучших виноделен мира.",
+    title: "Ретриты & Детокс",
+    desc: "Авторские ретриты на Бали, в Швейцарии, Индии. Цифровой и физический детокс.",
     accent: false,
   },
   {
-    icon: Plane,
+    icon: Zap,
     num: "04",
-    title: "Эксклюзивные впечатления",
-    desc: "Уникальные путешествия, частные ужины с шеф-поварами, закрытые мероприятия.",
+    title: "Криотерапия & Recovery",
+    desc: "Криокамеры, гипербарическая оксигенация, инфракрасные сауны, IV-терапия.",
     accent: false,
   },
   {
-    icon: Camera,
+    icon: Heart,
     num: "05",
-    title: "Фотография и медиа-арт",
-    desc: "Авторские фотографии, цифровое искусство и лимитированные принты.",
+    title: "Mindfulness & Практики",
+    desc: "Индивидуальные сессии с мастерами медитации, холотропное дыхание, sound healing.",
     accent: false,
   },
 ];
@@ -61,11 +61,11 @@ const ThemesSection = () => {
               </p>
             </div>
             <h2 className="font-display text-5xl md:text-7xl font-light tracking-tight text-foreground leading-[0.9]">
-              Темы <span className="italic text-primary">аукциона</span>
+              Что на <span className="italic text-primary">торгах</span>
             </h2>
           </div>
           <p className="font-body text-sm text-muted-foreground max-w-sm font-light">
-            Пять категорий лотов — от живописи до уникальных впечатлений
+            Пять направлений, которые изменят ваш подход к здоровью и энергии
           </p>
         </motion.div>
 

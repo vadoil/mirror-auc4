@@ -3,12 +3,12 @@ import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 
 const previewLots = [
-  { id: 1, title: "«Рассвет над Невой»", artist: "Алексей Иванов", startPrice: "150 000 ₽", category: "Живопись" },
-  { id: 2, title: "Колье «Северное сияние»", artist: "Дом PETROV", startPrice: "280 000 ₽", category: "Ювелирное искусство" },
-  { id: 3, title: "Château Margaux 1995", artist: "Частная коллекция", startPrice: "95 000 ₽", category: "Коллекционные вина" },
-  { id: 4, title: "Ужин с шеф-поваром", artist: "Ресторан White Rabbit", startPrice: "120 000 ₽", category: "Впечатления" },
-  { id: 5, title: "«Метаморфозы»", artist: "Мария Серова", startPrice: "200 000 ₽", category: "Фотография" },
-  { id: 6, title: "Браслет «Вечность»", artist: "Atelier Gemme", startPrice: "350 000 ₽", category: "Ювелирное искусство" },
+  { id: 1, title: "Longevity-программа в Швейцарии", artist: "Clinique La Prairie", startPrice: "850 000 ₽", category: "Longevity" },
+  { id: 2, title: "30 дней биохакинг-протокола", artist: "Dr. Андрей Беловешкин", startPrice: "180 000 ₽", category: "Биохакинг" },
+  { id: 3, title: "Silent retreat на Бали", artist: "COMO Shambhala", startPrice: "320 000 ₽", category: "Ретриты" },
+  { id: 4, title: "Криокамера + IV-терапия (годовой абонемент)", artist: "Biohacking Lab Moscow", startPrice: "240 000 ₽", category: "Recovery" },
+  { id: 5, title: "Нейрофидбек курс (20 сессий)", artist: "BrainUp Clinic", startPrice: "150 000 ₽", category: "Нейро" },
+  { id: 6, title: "Персональный детокс-ретрит", artist: "SHA Wellness Clinic", startPrice: "500 000 ₽", category: "Детокс" },
 ];
 
 const LotsPreviewSection = () => {
@@ -53,6 +53,7 @@ const LotsPreviewSection = () => {
               className="group bg-cream/5 border border-cream/10 hover:border-primary/30 transition-all duration-500 overflow-hidden cursor-pointer"
             >
               <div className="aspect-[4/3] bg-charcoal relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/3" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="font-display text-4xl text-cream/10 uppercase">Лот {lot.id}</span>
                 </div>

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Gavel } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
   <div className="text-center">
@@ -33,19 +33,27 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-charcoal">
-        <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/60 to-warm-black/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-warm-black/80 via-transparent to-warm-black/40" />
+      {/* Ambient gradient background */}
+      <div className="absolute inset-0 bg-warm-black">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-accent/5" />
+        <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/40 to-transparent" />
+        {/* Soft glow orbs */}
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.06, 0.12, 0.06] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px]"
+        />
+        <motion.div
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.04, 0.08, 0.04] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-1/3 left-1/6 w-[400px] h-[400px] rounded-full bg-accent/8 blur-[100px]"
+        />
       </div>
 
-      {/* Decorative vertical lines */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 bottom-0 left-[20%] w-px bg-cream/5" />
-        <div className="absolute top-0 bottom-0 left-[40%] w-px bg-cream/5" />
-        <div className="absolute top-0 bottom-0 left-[60%] w-px bg-cream/5" />
-        <div className="absolute top-0 bottom-0 left-[80%] w-px bg-cream/5" />
-      </div>
+      {/* Subtle grid overlay */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }}
+      />
 
       {/* Content */}
       <div className="relative z-10 section-padding pb-12 md:pb-20 w-full">
@@ -57,9 +65,9 @@ const HeroSection = () => {
             transition={{ duration: 1, delay: 0.3 }}
             className="flex items-center gap-3 mb-8"
           >
-            <div className="w-8 h-px bg-primary" />
+            <Sparkles className="w-4 h-4 text-primary" />
             <p className="text-cream/50 text-[10px] md:text-xs uppercase tracking-[0.4em] font-body">
-              Благотворительный аукцион · 15 июня 2026
+              Wellness-аукцион · 15 июня 2026
             </p>
           </motion.div>
 
@@ -71,11 +79,10 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
               >
-                <Gavel className="w-12 h-12 md:w-16 md:h-16 text-primary mb-6" />
                 <h1 className="font-display text-cream text-6xl sm:text-7xl md:text-[9rem] lg:text-[11rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]">
-                  АУК
+                  Bio
                   <br />
-                  <span className="text-primary">ЦИ</span>ОН
+                  <span className="text-primary">Auc</span>tion
                 </h1>
               </motion.div>
 
@@ -83,9 +90,9 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.0 }}
-                className="font-body text-cream/70 text-xl md:text-2xl lg:text-3xl font-light italic mt-6"
+                className="font-body text-cream/60 text-lg md:text-xl lg:text-2xl font-light mt-6 max-w-md"
               >
-                Искусство менять мир
+                Аукцион лучших wellness-решений, биохакинг-технологий и эксклюзивных оздоровительных практик
               </motion.p>
             </div>
 
@@ -137,8 +144,8 @@ const HeroSection = () => {
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">гостей</p>
             </div>
             <div>
-              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">₽5М+</p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">собрано ранее</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">∞</p>
+              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">энергии</p>
             </div>
             <div>
               <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">1</p>
