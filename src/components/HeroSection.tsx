@@ -64,7 +64,7 @@ const HeroSection = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 section-padding pb-12 md:pb-20 w-full">
+      <div className="relative z-10 section-padding pt-32 md:pt-40 pb-12 md:pb-20 w-full">
         <div className="max-w-7xl mx-auto">
           {/* Top label */}
 
