@@ -4,23 +4,23 @@ import { useRef } from "react";
 const items = [
   {
     num: "01",
-    title: "Эксклюзивные лоты",
-    text: "Уникальные предметы искусства и впечатления, которые невозможно найти в открытой продаже.",
+    title: "Эксклюзивный доступ",
+    text: "Лоты, которые не купить в открытой продаже: VIP-ретриты, персональные программы от топ-экспертов, лимитированные wellness-технологии.",
   },
   {
     num: "02",
-    title: "Благотворительная миссия",
-    text: "100% средств сверх стартовой цены направляются на поддержку социальных и культурных проектов.",
+    title: "Биохакинг-комьюнити",
+    text: "Вечер с единомышленниками — предпринимателями, врачами, атлетами. Люди, которые уже живут на максимуме.",
   },
   {
     num: "03",
-    title: "Нетворкинг высокого уровня",
-    text: "Возможность познакомиться с коллекционерами, экспертами и лидерами мнений в неформальной обстановке.",
+    title: "Наука + Осознанность",
+    text: "Каждый лот — это проверенная технология или практика. Без эзотерики, только доказательная медицина и передовой опыт.",
   },
   {
     num: "04",
-    title: "Прозрачность и доверие",
-    text: "Каждый лот проходит экспертную оценку. Система ставок — открытая и в реальном времени.",
+    title: "Благотворительность",
+    text: "Часть средств направляется на программы ментального здоровья и поддержку медицинских стартапов.",
   },
 ];
 
@@ -31,7 +31,9 @@ const WhySection = () => {
   return (
     <section className="relative py-28 md:py-40 overflow-hidden">
       <div className="absolute inset-0 bg-charcoal" />
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/5" />
+      {/* Subtle ambient orb */}
+      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-primary/5 blur-[100px]" />
 
       <div ref={ref} className="relative z-10 section-padding max-w-7xl mx-auto">
         <motion.div
@@ -49,7 +51,7 @@ const WhySection = () => {
           <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream tracking-tight leading-[0.9]">
             Почему
             <br />
-            <span className="italic text-primary">стоит участвовать?</span>
+            <span className="italic text-primary">это must-visit?</span>
           </h2>
         </motion.div>
 

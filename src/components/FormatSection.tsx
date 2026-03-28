@@ -1,14 +1,14 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Gavel, Eye, HandCoins, Sparkles, Wine, Users } from "lucide-react";
+import { Eye, Zap, Wifi, Sparkles, GlassWater, Users } from "lucide-react";
 
 const formats = [
-  { icon: Eye, title: "Предпросмотр лотов", desc: "Осмотрите все лоты до начала торгов" },
-  { icon: Gavel, title: "Живые торги", desc: "Классический формат с аукционистом" },
-  { icon: HandCoins, title: "Онлайн-ставки", desc: "Участвуйте удалённо в реальном времени" },
-  { icon: Sparkles, title: "VIP-превью", desc: "Ранний доступ для VIP-гостей" },
-  { icon: Wine, title: "Фуршет и бар", desc: "Изысканные напитки и закуски" },
-  { icon: Users, title: "Нетворкинг", desc: "Знакомства с коллекционерами и экспертами" },
+  { icon: Eye, title: "Превью лотов", desc: "Попробуйте технологии до торгов" },
+  { icon: Zap, title: "Живые торги", desc: "Энергичный формат с Александром Цыпкиным" },
+  { icon: Wifi, title: "Онлайн-ставки", desc: "Участвуйте удалённо в реальном времени" },
+  { icon: Sparkles, title: "Wellness-зона", desc: "Криокамера, массаж, нейрофидбек на месте" },
+  { icon: GlassWater, title: "Detox-бар", desc: "Суперфуд-коктейли, адаптогены, комбуча" },
+  { icon: Users, title: "Нетворкинг", desc: "Знакомства с лидерами wellness-индустрии" },
 ];
 
 const FormatSection = () => {
@@ -33,7 +33,7 @@ const FormatSection = () => {
             </p>
           </div>
           <h2 className="font-display text-5xl md:text-6xl font-light tracking-tight text-foreground leading-[0.9]">
-            Формат <span className="italic text-primary">аукциона</span>
+            Формат <span className="italic text-primary">вечера</span>
           </h2>
         </motion.div>
 

@@ -29,16 +29,18 @@ const AboutSection = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[0.9] text-foreground mb-8">
-                  Искусство
+                  Wellness
                   <br />
-                  <span className="italic text-primary">во благо</span>
+                  <span className="italic text-primary">нового уровня</span>
                 </h2>
                 <div className="w-24 h-px bg-primary mb-8" />
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
-                  Благотворительный аукцион — это уникальная возможность приобрести эксклюзивные лоты и одновременно поддержать важные социальные проекты.
+                  Первый в России wellness-аукцион, где лоты — это не вещи, а трансформация. Биохакинг-программы, 
+                  ретриты, передовые оздоровительные технологии и эксклюзивный доступ к лучшим практикам мира.
                 </p>
                 <p className="editorial-body text-muted-foreground max-w-lg">
-                  Каждый лот — это история, каждая ставка — шаг к переменам. Мы объединяем коллекционеров, меценатов и экспертов ради общей цели.
+                  Мы собираем тех, кто инвестирует в себя осознанно. Каждый лот — 
+                  это путь к лучшей версии себя, а часть средств идёт на благотворительность.
                 </p>
               </motion.div>
 
@@ -48,10 +50,16 @@ const AboutSection = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="relative"
               >
-                <div className="aspect-[4/5] overflow-hidden bg-charcoal flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <p className="font-numbers text-7xl md:text-8xl font-light text-primary mb-4">₽5М+</p>
-                    <p className="font-body text-cream/60 text-sm uppercase tracking-[0.2em]">собрано на благотворительность</p>
+                <div className="aspect-[4/5] overflow-hidden bg-charcoal flex items-center justify-center relative">
+                  {/* Ambient glow */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/5" />
+                  <div className="text-center p-8 relative z-10">
+                    <p className="font-body text-cream/30 text-xs uppercase tracking-[0.3em] mb-4">Инвестируйте в</p>
+                    <p className="font-display text-6xl md:text-7xl font-light text-cream italic leading-none mb-4">Себя</p>
+                    <div className="w-12 h-px bg-primary mx-auto mb-4" />
+                    <p className="font-body text-cream/40 text-sm max-w-xs mx-auto">
+                      Биохакинг · Longevity · Wellness · Mindfulness
+                    </p>
                   </div>
                 </div>
                 <div className="absolute top-6 right-6 bg-primary text-primary-foreground px-6 py-5">
@@ -72,7 +80,7 @@ const AboutSection = () => {
           >
             {Array.from({ length: 10 }).map((_, i) => (
               <span key={i} className="font-display text-lg md:text-xl text-primary-foreground/80 font-light italic tracking-wide">
-                Живопись · Ювелирное искусство · Антиквариат · Эксклюзивные впечатления · Коллекционные вина ·
+                Биохакинг · Longevity · Ретриты · Детокс · Криотерапия · Нейротехнологии · Суперфуды · Медитация ·
               </span>
             ))}
           </motion.div>
