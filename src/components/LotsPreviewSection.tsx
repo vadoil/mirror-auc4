@@ -1,14 +1,20 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import lotLongevity from "@/assets/lot-longevity.jpg";
+import lotBiohacking from "@/assets/lot-biohacking.jpg";
+import lotRetreat from "@/assets/lot-retreat.jpg";
+import lotCryo from "@/assets/lot-cryo.jpg";
+import lotNeuro from "@/assets/lot-neuro.jpg";
+import lotDetox from "@/assets/lot-detox.jpg";
 
 const previewLots = [
-  { id: 1, title: "Longevity-программа в Швейцарии", artist: "Clinique La Prairie", startPrice: "850 000 ₽", category: "Longevity" },
-  { id: 2, title: "30 дней биохакинг-протокола", artist: "Dr. Андрей Беловешкин", startPrice: "180 000 ₽", category: "Биохакинг" },
-  { id: 3, title: "Silent retreat на Бали", artist: "COMO Shambhala", startPrice: "320 000 ₽", category: "Ретриты" },
-  { id: 4, title: "Криокамера + IV-терапия (годовой абонемент)", artist: "Biohacking Lab Moscow", startPrice: "240 000 ₽", category: "Recovery" },
-  { id: 5, title: "Нейрофидбек курс (20 сессий)", artist: "BrainUp Clinic", startPrice: "150 000 ₽", category: "Нейро" },
-  { id: 6, title: "Персональный детокс-ретрит", artist: "SHA Wellness Clinic", startPrice: "500 000 ₽", category: "Детокс" },
+  { id: 1, title: "Longevity-программа в Швейцарии", artist: "Clinique La Prairie", startPrice: "850 000 ₽", category: "Longevity", image: lotLongevity },
+  { id: 2, title: "30 дней биохакинг-протокола", artist: "Dr. Андрей Беловешкин", startPrice: "180 000 ₽", category: "Биохакинг", image: lotBiohacking },
+  { id: 3, title: "Silent retreat на Бали", artist: "COMO Shambhala", startPrice: "320 000 ₽", category: "Ретриты", image: lotRetreat },
+  { id: 4, title: "Криокамера + IV-терапия (годовой абонемент)", artist: "Biohacking Lab Moscow", startPrice: "240 000 ₽", category: "Recovery", image: lotCryo },
+  { id: 5, title: "Нейрофидбек курс (20 сессий)", artist: "BrainUp Clinic", startPrice: "150 000 ₽", category: "Нейро", image: lotNeuro },
+  { id: 6, title: "Персональный детокс-ретрит", artist: "SHA Wellness Clinic", startPrice: "500 000 ₽", category: "Детокс", image: lotDetox },
 ];
 
 const LotsPreviewSection = () => {
@@ -52,11 +58,16 @@ const LotsPreviewSection = () => {
               transition={{ duration: 0.6, delay: 0.1 * i }}
               className="group bg-cream/5 border border-cream/10 hover:border-primary/30 transition-all duration-500 overflow-hidden cursor-pointer"
             >
-              <div className="aspect-[4/3] bg-charcoal relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/3" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display text-4xl text-cream/10 uppercase">Лот {lot.id}</span>
-                </div>
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <img
+                  src={lot.image}
+                  alt={lot.title}
+                  loading="lazy"
+                  width={800}
+                  height={600}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-warm-black/60 via-transparent to-transparent" />
                 <div className="absolute top-3 left-3 bg-primary/90 px-3 py-1">
                   <span className="text-primary-foreground text-[10px] uppercase tracking-[0.2em] font-body">{lot.category}</span>
                 </div>

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Sparkles } from "lucide-react";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const HERO_VIDEO_URL = "/__l5e/assets-v1/bbea364f-09e2-4f9f-84fa-32e5d7e08eae/hero-bg.mp4";
 
@@ -35,14 +35,23 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-      {/* Ambient gradient background */}
+      {/* Background layers */}
       <div className="absolute inset-0 bg-warm-black">
+        {/* Static image fallback */}
+        <img
+          src={heroBg}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
+          width={1920}
+          height={1080}
+        />
+        {/* Video overlay */}
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-screen"
           src={HERO_VIDEO_URL}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-accent/5" />
@@ -64,9 +73,9 @@ const HeroSection = () => {
             transition={{ duration: 1, delay: 0.3 }}
             className="flex items-center gap-3 mb-8"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
+            <div className="w-8 h-px bg-primary" />
             <p className="text-cream/50 text-[10px] md:text-xs uppercase tracking-[0.4em] font-body">
-              Wellness-аукцион · 15 июня 2026
+              Биохакинг · Longevity · Wellness · Mindfulness
             </p>
           </motion.div>
 
@@ -78,12 +87,15 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
               >
+                <p className="font-body text-cream/40 text-sm md:text-base uppercase tracking-[0.3em] mb-4">
+                  Wellness нового уровня
+                </p>
                 <h1 className="font-display text-cream text-6xl sm:text-7xl md:text-[9rem] lg:text-[11rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]">
-                  Отра
+                  Инвес
                   <br />
-                  <span className="text-primary">жени</span>е
+                  <span className="text-primary">тируй</span>
                   <br />
-                  добра
+                  в себя
                 </h1>
               </motion.div>
 
@@ -93,7 +105,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.8, delay: 1.0 }}
                 className="font-body text-cream/60 text-lg md:text-xl lg:text-2xl font-light mt-6 max-w-md"
               >
-                Один вечер. Энергия. Осознанность. Добро.
+                Аукцион лучших wellness-решений, биохакинг-технологий и эксклюзивных оздоровительных практик
               </motion.p>
             </div>
 

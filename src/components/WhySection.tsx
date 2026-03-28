@@ -51,7 +51,7 @@ const WhySection = () => {
           <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream tracking-tight leading-[0.9]">
             Почему
             <br />
-            <span className="italic text-primary">это must-visit?</span>
+            <span className="italic text-primary">нельзя пропустить?</span>
           </h2>
         </motion.div>
 
