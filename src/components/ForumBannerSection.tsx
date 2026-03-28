@@ -21,7 +21,7 @@ const ForumBannerSection = () => {
         >
           <Sparkles className="w-8 h-8 text-primary mx-auto mb-6" />
           <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-light text-cream tracking-tight leading-[0.9] mb-8">
-            Upgrade yourself
+            Прокачай себя
             <br />
             <span className="italic text-primary">этим летом</span>
           </h2>
