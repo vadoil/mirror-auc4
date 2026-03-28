@@ -76,9 +76,6 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
               >
-                <p className="font-body text-cream/40 text-sm md:text-base uppercase tracking-[0.3em] mb-4">
-                  Инвестируй в себя
-                </p>
                 <h1 className="font-display text-cream text-6xl sm:text-7xl md:text-[9rem] lg:text-[11rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]">
                   Отра
                   <br />
