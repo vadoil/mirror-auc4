@@ -67,17 +67,6 @@ const HeroSection = () => {
       <div className="relative z-10 section-padding pb-12 md:pb-20 w-full">
         <div className="max-w-7xl mx-auto">
           {/* Top label */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="flex items-center gap-3 mb-8"
-          >
-            <div className="w-8 h-px bg-primary" />
-            <p className="text-cream/50 text-[10px] md:text-xs uppercase tracking-[0.4em] font-body">
-              Биохакинг · Longevity · Wellness · Mindfulness
-            </p>
-          </motion.div>
 
           {/* Main title */}
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-20">

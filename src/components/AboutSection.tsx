@@ -72,6 +72,21 @@ const AboutSection = () => {
             </div>
           </div>
         </div>
+
+        {/* Marquee */}
+        <div className="bg-primary py-4 overflow-hidden">
+          <motion.div
+            animate={{ x: [0, -1000] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="flex gap-12 whitespace-nowrap"
+          >
+            {Array.from({ length: 10 }).map((_, i) => (
+              <span key={i} className="font-display text-lg md:text-xl text-primary-foreground/80 font-light italic tracking-wide">
+                Биохакинг · Longevity · Ретриты · Детокс · Криотерапия · Нейротехнологии · Суперфуды · Медитация ·
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
