@@ -29,7 +29,7 @@ const ProgramSection = () => {
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-primary" />
             <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-              15 июня · расписание
+              28 апреля · расписание
             </p>
           </div>
           <h2 className="font-display text-5xl md:text-7xl font-light tracking-tight text-foreground leading-[0.9]">

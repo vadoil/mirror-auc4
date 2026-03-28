@@ -29,7 +29,7 @@ const ForumBannerSection = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-primary" />
-              <span className="font-body text-cream/70 text-sm">15 июня 2026</span>
+              <span className="font-body text-cream/70 text-sm">28 апреля 2026</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-primary" />
