@@ -32,7 +32,7 @@ const ContactsSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-5 mb-16">
+        <div className="grid md:grid-cols-2 gap-5 max-w-3xl mx-auto mb-16">
           {contacts.map((c, i) => (
             <motion.div
               key={c.tg}
