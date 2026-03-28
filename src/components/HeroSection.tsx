@@ -116,7 +116,7 @@ const HeroSection = () => {
               </div>
 
               {/* Buttons */}
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <a href="#tickets" className="btn-primary text-center">
                   Участвовать
                 </a>
