@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Gift, Sparkles } from "lucide-react";
+import vipGiftImg from "@/assets/vip-gift.jpg";
 
 const VipGiftSection = () => {
   const ref = useRef(null);
