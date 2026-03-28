@@ -30,6 +30,7 @@ const Index = () => {
     <div className="min-h-screen w-full relative">
       <Header />
       <HeroSection />
+      <div className="relative z-10">
       <AboutSection />
       <ThemesSection />
       <WhySection />
@@ -53,6 +54,7 @@ const Index = () => {
       <ForumBannerFooter />
       <QuizSection />
       <Footer />
+      </div>
     </div>
   );
 };
