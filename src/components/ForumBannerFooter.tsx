@@ -4,39 +4,28 @@ import { Link } from "react-router-dom";
 const ForumBannerFooter = () => {
   return (
     <section className="py-0">
-      {/* Main banner */}
-      <div className="grid grid-cols-1 md:grid-cols-2 overflow-hidden">
-        {/* Left - Photo side */}
-        <div className="relative min-h-[340px] bg-charcoal flex items-end p-8 md:p-10">
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent z-10" />
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800')] bg-cover bg-center" />
-          <div className="relative z-20">
-            <span className="font-body text-xs tracking-[0.2em] uppercase text-primary mb-3 block">
-              Осень 2026
-            </span>
-            <h3 className="font-display text-3xl md:text-4xl font-bold text-cream leading-tight mb-3">
-              ФОРУМ
-              <br />
-              «ОТРАЖЕНИЕ»
-            </h3>
-            <p className="font-body text-sm text-cream/60">
-              Осознанность · Энергия · Благотворительность
-            </p>
+      {/* Single centered banner */}
+      <div className="bg-sand flex justify-center py-12 md:py-16">
+        <div className="w-[90%] md:w-[70%] relative overflow-hidden rounded-sm">
+          <div className="relative min-h-[400px] md:min-h-[480px] bg-charcoal flex flex-col items-center justify-center text-center p-8 md:p-12">
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200')] bg-cover bg-center" />
+            <div className="absolute inset-0 bg-charcoal/70" />
+            <div className="relative z-10">
+              <span className="font-body text-xs tracking-[0.2em] uppercase text-primary mb-4 block">
+                Осень 2026
+              </span>
+              <h3 className="font-display text-4xl md:text-6xl font-bold text-cream leading-tight mb-1">
+                ФОРУМ
+              </h3>
+              <h3 className="font-display text-4xl md:text-6xl font-bold text-primary italic leading-tight mb-5">
+                «ОТРАЖЕНИЕ»
+              </h3>
+              <div className="w-12 h-0.5 bg-primary mx-auto mb-5" />
+              <p className="font-body text-xs tracking-[0.2em] uppercase text-cream/60">
+                Осознанность · Энергия · Благотворительность
+              </p>
+            </div>
           </div>
-        </div>
-
-        {/* Right - Typography side */}
-        <div className="bg-sand flex flex-col items-center justify-center p-8 md:p-10 text-center">
-          <h3 className="font-display text-4xl md:text-5xl font-bold text-charcoal leading-tight mb-1">
-            ФОРУМ
-          </h3>
-          <h3 className="font-display text-4xl md:text-5xl font-bold text-primary italic leading-tight mb-4">
-            ОТРАЖЕНИЕ
-          </h3>
-          <div className="w-10 h-0.5 bg-primary mb-4" />
-          <p className="font-body text-xs tracking-[0.2em] uppercase text-charcoal/60">
-            Осознанность · Энергия · Добро
-          </p>
         </div>
       </div>
 
