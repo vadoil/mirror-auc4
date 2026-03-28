@@ -65,7 +65,7 @@ const AboutSection = () => {
                   </div>
                 </div>
                 <div className="absolute top-6 right-6 bg-primary text-primary-foreground px-6 py-5">
-                  <p className="font-numbers text-4xl font-light leading-none">50+</p>
+                  <p className="font-numbers text-4xl font-light leading-none">10+</p>
                   <p className="text-[10px] uppercase tracking-[0.2em] font-body mt-1.5">лотов</p>
                 </div>
               </motion.div>
