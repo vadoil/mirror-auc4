@@ -57,7 +57,7 @@ const Header = () => {
             </a>
           ))}
           <a
-            href="/lots"
+            href="#lots-preview"
             className="text-cream/60 text-[11px] uppercase tracking-[0.2em] font-body font-light hover:text-cream transition-colors duration-300"
           >
             Каталог
