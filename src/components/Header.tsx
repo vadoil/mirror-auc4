@@ -43,9 +43,6 @@ const Header = () => {
                 Отражение
               </span>
             </div>
-            <span className="text-cream/30 text-[6px] md:text-[7px] uppercase tracking-[0.4em] font-body leading-none mt-1">
-              Биохакинг · Wellness
-            </span>
           </div>
         </a>
 
