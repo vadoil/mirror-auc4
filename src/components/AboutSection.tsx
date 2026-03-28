@@ -29,7 +29,7 @@ const AboutSection = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[0.9] text-foreground mb-8">
-                  Wellness
+                  Аукцион
                   <br />
                   <span className="italic text-primary">нового уровня</span>
                 </h2>
