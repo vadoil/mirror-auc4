@@ -27,7 +27,7 @@ import Footer from "@/components/Footer";
 // Force refresh
 const Index = () => {
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full relative">
       <Header />
       <HeroSection />
       <AboutSection />
