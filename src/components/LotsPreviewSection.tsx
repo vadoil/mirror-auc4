@@ -52,8 +52,8 @@ const LotsPreviewSection = () => {
   if (lots.length === 0) return null;
 
   return (
-    <section id="lots-preview" className="relative z-20 py-24 md:py-32 section-padding bg-warm-black">
-      <div className="max-w-7xl mx-auto">
+    <section id="lots-preview" className="relative z-20 py-24 md:py-32 bg-warm-black">
+      <div className="section-padding">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -73,15 +73,17 @@ const LotsPreviewSection = () => {
             </h2>
           </div>
         </motion.div>
+      </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="px-4 md:px-6 lg:px-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {lots.map((lot, i) => (
             <motion.div
               key={lot.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.1 * i }}
+              transition={{ duration: 0.6, delay: 0.08 * i }}
               className="group bg-cream/5 border border-cream/10 hover:border-primary/30 transition-all duration-500 overflow-hidden cursor-pointer"
             >
               <div className="aspect-[4/3] relative overflow-hidden">
@@ -102,13 +104,13 @@ const LotsPreviewSection = () => {
                   </div>
                 )}
               </div>
-              <div className="p-6">
-                <h3 className="font-display text-lg text-cream mb-1 group-hover:text-primary transition-colors duration-300">{lot.title}</h3>
-                {lot.description && <p className="font-body text-xs text-cream/40 mb-4">{lot.description}</p>}
+              <div className="p-5">
+                <h3 className="font-display text-base text-cream mb-1 group-hover:text-primary transition-colors duration-300">{lot.title}</h3>
+                {lot.description && <p className="font-body text-xs text-cream/40 mb-4 line-clamp-2">{lot.description}</p>}
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.2em] text-cream/30 font-body">Старт</p>
-                    <p className="font-numbers text-xl text-cream font-light">{lot.starting_price.toLocaleString()} ₽</p>
+                    <p className="font-numbers text-lg text-cream font-light">{lot.starting_price.toLocaleString()} ₽</p>
                   </div>
                   <ArrowRight className="w-4 h-4 text-cream/20 group-hover:text-primary transition-colors duration-300" />
                 </div>
