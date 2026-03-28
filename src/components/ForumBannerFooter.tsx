@@ -5,7 +5,7 @@ const ForumBannerFooter = () => {
   return (
     <section className="py-0">
       {/* Single centered banner with buttons inside */}
-      <div className="bg-charcoal flex justify-center py-12 md:py-16">
+      <div className="bg-charcoal flex justify-center py-12 md:py-16 pb-0 md:pb-0">
         <div className="w-[90%] md:w-[70%] overflow-hidden">
           {/* Banner image */}
           <div className="relative min-h-[400px] md:min-h-[480px] flex flex-col items-center justify-center text-center p-8 md:p-12">
