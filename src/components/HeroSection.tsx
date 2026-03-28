@@ -34,7 +34,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+    <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
       {/* Background layers */}
       <div className="absolute inset-0 bg-warm-black">
         {/* Static image fallback */}
