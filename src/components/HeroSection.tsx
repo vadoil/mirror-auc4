@@ -34,7 +34,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+    <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
       {/* Background layers */}
       <div className="absolute inset-0 bg-warm-black">
         {/* Static image fallback */}
@@ -64,7 +64,7 @@ const HeroSection = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 section-padding pt-32 md:pt-40 pb-12 md:pb-20 w-full">
+      <div className="relative z-10 section-padding pt-24 md:pt-40 pb-6 md:pb-20 w-full">
         <div className="max-w-7xl mx-auto">
           {/* Top label */}
 
@@ -116,7 +116,7 @@ const HeroSection = () => {
               </div>
 
               {/* Buttons */}
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <a href="#tickets" className="btn-primary text-center">
                   Участвовать
                 </a>
