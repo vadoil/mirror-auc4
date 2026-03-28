@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
+import heroBgAsset from "/hero-bg.mp4.asset.json";
 
 const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
   <div className="text-center">
