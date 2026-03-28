@@ -1,5 +1,5 @@
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import lotLongevity from "@/assets/lot-longevity.jpg";
@@ -9,7 +9,6 @@ import lotCryo from "@/assets/lot-cryo.jpg";
 import lotNeuro from "@/assets/lot-neuro.jpg";
 import lotDetox from "@/assets/lot-detox.jpg";
 
-// Fallback image mapping for lots that use local assets
 const localImages: Record<string, string> = {
   "/assets/lot-longevity.jpg": lotLongevity,
   "/assets/lot-biohacking.jpg": lotBiohacking,
@@ -36,8 +35,6 @@ const getImageSrc = (url: string | null): string => {
 };
 
 const LotsPreviewSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [lots, setLots] = useState<Lot[]>([]);
 
   useEffect(() => {
@@ -55,11 +52,12 @@ const LotsPreviewSection = () => {
   if (lots.length === 0) return null;
 
   return (
-    <section id="lots-preview" className="relative z-10 py-24 md:py-32 section-padding bg-warm-black">
-      <div ref={ref} className="max-w-7xl mx-auto">
+    <section id="lots-preview" className="relative z-20 py-24 md:py-32 section-padding bg-warm-black">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8 }}
           className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
         >
@@ -81,7 +79,8 @@ const LotsPreviewSection = () => {
             <motion.div
               key={lot.id}
               initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: 0.1 * i }}
               className="group bg-cream/5 border border-cream/10 hover:border-primary/30 transition-all duration-500 overflow-hidden cursor-pointer"
             >
