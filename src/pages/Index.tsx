@@ -12,6 +12,7 @@ import LotsPreviewSection from "@/components/LotsPreviewSection";
 import AuctioneerSection from "@/components/AuctioneerSection";
 import VideoSection from "@/components/VideoSection";
 import GallerySection from "@/components/GallerySection";
+import VenueSection from "@/components/VenueSection";
 import TicketsSection from "@/components/TicketsSection";
 import VipGiftSection from "@/components/VipGiftSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -41,6 +42,7 @@ const Index = () => {
       <AuctioneerSection />
       <VideoSection />
       <GallerySection />
+      <VenueSection />
       <TicketsSection />
       <VipGiftSection />
       <TestimonialsSection />

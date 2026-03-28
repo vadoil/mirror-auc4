@@ -57,10 +57,10 @@ const Header = () => {
             </a>
           ))}
           <a
-            href="#lots-preview"
+            href="#venue"
             className="text-cream/60 text-[11px] uppercase tracking-[0.2em] font-body font-light hover:text-cream transition-colors duration-300"
           >
-            Каталог
+            Место
           </a>
           <a
             href="#tickets"
@@ -98,11 +98,11 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="#lots-preview"
+                href="#venue"
                 onClick={() => setMenuOpen(false)}
                 className="text-cream/80 text-sm uppercase tracking-[0.2em] font-body font-light"
               >
-                Каталог
+                Место
               </a>
               <a
                 href="#tickets"
