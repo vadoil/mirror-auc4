@@ -24,6 +24,7 @@ import ForumBannerFooter from "@/components/ForumBannerFooter";
 import QuizSection from "@/components/QuizSection";
 import Footer from "@/components/Footer";
 
+// Force refresh
 const Index = () => {
   return (
     <div className="min-h-screen w-full">
