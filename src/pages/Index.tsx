@@ -5,7 +5,7 @@ import ThemesSection from "@/components/ThemesSection";
 import WhySection from "@/components/WhySection";
 import StatsSection from "@/components/StatsSection";
 import ProgramSection from "@/components/ProgramSection";
-import SpeakersSection from "@/components/SpeakersSection";
+
 import FormatSection from "@/components/FormatSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import LotsPreviewSection from "@/components/LotsPreviewSection";
