@@ -23,7 +23,7 @@ const ForumBannerSection = () => {
           <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-light text-cream tracking-tight leading-[0.9] mb-8">
             Прокачай себя
             <br />
-            <span className="italic text-primary">этим летом</span>
+            <span className="italic text-primary">этой весной</span>
           </h2>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
