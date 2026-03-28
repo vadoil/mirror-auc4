@@ -12,7 +12,7 @@ const ForumBannerFooter = () => {
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800')] bg-cover bg-center" />
           <div className="relative z-20">
             <span className="font-body text-xs tracking-[0.2em] uppercase text-primary mb-3 block">
-              Весна 2026
+              Осень 2026
             </span>
             <h3 className="font-display text-3xl md:text-4xl font-bold text-cream leading-tight mb-3">
               ФОРУМ

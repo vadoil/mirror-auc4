@@ -57,7 +57,7 @@ const Header = () => {
             </a>
           ))}
           <a
-            href="/lots"
+            href="#lots-preview"
             className="text-cream/60 text-[11px] uppercase tracking-[0.2em] font-body font-light hover:text-cream transition-colors duration-300"
           >
             Каталог
@@ -98,7 +98,7 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="/lots"
+                href="#lots-preview"
                 onClick={() => setMenuOpen(false)}
                 className="text-cream/80 text-sm uppercase tracking-[0.2em] font-body font-light"
               >

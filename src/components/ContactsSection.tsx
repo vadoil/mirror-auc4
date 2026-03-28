@@ -5,7 +5,6 @@ import { Send, Phone } from "lucide-react";
 const contacts = [
   { role: "Организация", name: "Александра", phone: "8 (962) 364-66-46", tg: "@alexa_auction" },
   { role: "Партнёры и спонсоры", name: "Гизела", phone: "8 (985) 809-53-70", tg: "@gisela_events" },
-  { role: "Пресса и СМИ", name: "Мария", phone: "8 (917) 152-76-77", tg: "@maria_press" },
 ];
 
 const ContactsSection = () => {
@@ -33,7 +32,7 @@ const ContactsSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-5 mb-16">
+        <div className="grid md:grid-cols-2 gap-5 max-w-3xl mx-auto mb-16">
           {contacts.map((c, i) => (
             <motion.div
               key={c.tg}

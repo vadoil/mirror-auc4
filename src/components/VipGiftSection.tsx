@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Gift, Sparkles } from "lucide-react";
+import vipGiftImg from "@/assets/vip-gift.jpg";
 
 const VipGiftSection = () => {
   const ref = useRef(null);
@@ -18,14 +19,16 @@ const VipGiftSection = () => {
           transition={{ duration: 0.8 }}
           className="grid md:grid-cols-2 gap-12 items-center"
         >
-          <div className="relative aspect-square bg-charcoal overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Gift className="w-20 h-20 text-cream/10" />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-warm-black/60 to-transparent" />
-            <div className="absolute bottom-6 left-6">
-              <Sparkles className="w-5 h-5 text-primary" />
-            </div>
+          <div className="relative aspect-square overflow-hidden">
+            <img
+              src={vipGiftImg}
+              alt="VIP подарочный набор"
+              loading="lazy"
+              width={800}
+              height={800}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-warm-black/40 to-transparent" />
           </div>
 
           <div>
