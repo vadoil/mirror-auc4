@@ -80,9 +80,11 @@ const HeroSection = () => {
                 transition={{ duration: 1.2, delay: 0.5 }}
               >
                 <h1 className="font-display text-cream text-6xl sm:text-7xl md:text-[9rem] lg:text-[11rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]">
-                  Bio
+                  Отра
                   <br />
-                  <span className="text-primary">Auc</span>tion
+                  <span className="text-primary">жени</span>е
+                  <br />
+                  добра
                 </h1>
               </motion.div>
 
@@ -92,7 +94,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.8, delay: 1.0 }}
                 className="font-body text-cream/60 text-lg md:text-xl lg:text-2xl font-light mt-6 max-w-md"
               >
-                Аукцион лучших wellness-решений, биохакинг-технологий и эксклюзивных оздоровительных практик
+                Один вечер. Энергия. Осознанность. Добро.
               </motion.p>
             </div>
 
