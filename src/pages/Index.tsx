@@ -54,6 +54,7 @@ const Index = () => {
       <ForumBannerFooter />
       <QuizSection />
       <Footer />
+      </div>
     </div>
   );
 };
