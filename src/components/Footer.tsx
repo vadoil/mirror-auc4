@@ -20,9 +20,8 @@ const Footer = () => {
       <div className="section-padding py-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <Gavel className="w-4 h-4 text-cream/50" />
             <p className="font-display text-lg text-cream/50 tracking-[0.15em] uppercase">
-              Аукцион
+              Отражение
             </p>
           </div>
           <p className="font-body text-xs text-cream/30">
