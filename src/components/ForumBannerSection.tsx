@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Calendar, MapPin, Download } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 
 const ForumBannerSection = () => {
   const ref = useRef(null);
@@ -62,39 +62,6 @@ const ForumBannerSection = () => {
           </a>
           <a href="#contacts" className="btn-outline text-center">
             Узнать о форуме
-          </a>
-        </motion.div>
-
-        {/* PDF Downloads */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="grid sm:grid-cols-2 gap-0 border border-border/30 bg-warm-black"
-        >
-          <a
-            href="/docs/presentation-speakers.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-4 px-6 py-5 hover:bg-cream/5 transition-colors duration-300 border-b sm:border-b-0 sm:border-r border-border/30"
-          >
-            <Download className="w-5 h-5 text-primary flex-shrink-0" />
-            <div>
-              <p className="font-display text-sm text-cream uppercase tracking-wide">Скачать презентацию форума</p>
-              <p className="font-body text-xs text-cream/40">PDF, для спикеров</p>
-            </div>
-          </a>
-          <a
-            href="/docs/presentation-sponsors.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-4 px-6 py-5 hover:bg-cream/5 transition-colors duration-300"
-          >
-            <Download className="w-5 h-5 text-primary flex-shrink-0" />
-            <div>
-              <p className="font-display text-sm text-cream uppercase tracking-wide">Скачать презентацию для спонсоров</p>
-              <p className="font-body text-xs text-cream/40">PDF, партнёрское предложение</p>
-            </div>
           </a>
         </motion.div>
       </div>
