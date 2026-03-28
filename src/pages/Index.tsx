@@ -20,6 +20,7 @@ import OrganizersSection from "@/components/OrganizersSection";
 import FAQSection from "@/components/FAQSection";
 import ContactsSection from "@/components/ContactsSection";
 import ForumBannerSection from "@/components/ForumBannerSection";
+import ForumBannerFooter from "@/components/ForumBannerFooter";
 import QuizSection from "@/components/QuizSection";
 import Footer from "@/components/Footer";
 
@@ -48,6 +49,7 @@ const Index = () => {
       <FAQSection />
       <ContactsSection />
       <ForumBannerSection />
+      <ForumBannerFooter />
       <QuizSection />
       <Footer />
     </div>
