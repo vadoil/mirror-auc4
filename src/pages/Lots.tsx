@@ -6,6 +6,16 @@ import { ArrowRight, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+import lotDinner from "@/assets/lot-dinner-sitnikov.jpg";
+import lotBiohacking from "@/assets/lot-biohacking-one.jpg";
+import lotReels from "@/assets/lot-reels-sobolev.jpg";
+import lotWatch from "@/assets/lot-watch-ballet.jpg";
+import lotHockey from "@/assets/lot-hockey-belov.jpg";
+import lotBallet from "@/assets/lot-ballet-lopatkina.jpg";
+import lotEmelianenko from "@/assets/lot-emelianenko.jpg";
+
+const fallbackImages = [lotDinner, lotBiohacking, lotReels, lotWatch, lotHockey, lotBallet, lotEmelianenko];
+
 type Lot = {
   id: string;
   title: string;
