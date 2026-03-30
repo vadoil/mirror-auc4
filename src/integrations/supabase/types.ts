@@ -23,6 +23,7 @@ export type Database = {
           created_at: string
           id: string
           lot_id: string
+          user_id: string | null
         }
         Insert: {
           amount: number
@@ -32,6 +33,7 @@ export type Database = {
           created_at?: string
           id?: string
           lot_id: string
+          user_id?: string | null
         }
         Update: {
           amount?: number
@@ -41,6 +43,7 @@ export type Database = {
           created_at?: string
           id?: string
           lot_id?: string
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -54,45 +57,101 @@ export type Database = {
       }
       lots: {
         Row: {
+          bid_step: number
           category: string | null
           created_at: string
           current_price: number
+          delivery_terms: string | null
           description: string | null
+          end_at: string | null
           id: string
           image_url: string | null
           is_active: boolean
+          restrictions: string | null
           sort_order: number
+          start_at: string | null
           starting_price: number
+          status: Database["public"]["Enums"]["lot_status"]
           title: string
           updated_at: string
         }
         Insert: {
+          bid_step?: number
           category?: string | null
           created_at?: string
           current_price?: number
+          delivery_terms?: string | null
           description?: string | null
+          end_at?: string | null
           id?: string
           image_url?: string | null
           is_active?: boolean
+          restrictions?: string | null
           sort_order?: number
+          start_at?: string | null
           starting_price?: number
+          status?: Database["public"]["Enums"]["lot_status"]
           title: string
           updated_at?: string
         }
         Update: {
+          bid_step?: number
           category?: string | null
           created_at?: string
           current_price?: number
+          delivery_terms?: string | null
           description?: string | null
+          end_at?: string | null
           id?: string
           image_url?: string | null
           is_active?: boolean
+          restrictions?: string | null
           sort_order?: number
+          start_at?: string | null
           starting_price?: number
+          status?: Database["public"]["Enums"]["lot_status"]
           title?: string
           updated_at?: string
         }
         Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          lot_id: string
+          provider: string | null
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          lot_id: string
+          provider?: string | null
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          lot_id?: string
+          provider?: string | null
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_lot_id_fkey"
+            columns: ["lot_id"]
+            isOneToOne: false
+            referencedRelation: "lots"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       ticket_requests: {
         Row: {
@@ -160,6 +219,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      lot_status: "draft" | "active" | "ended" | "paid" | "archived"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -288,6 +348,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      lot_status: ["draft", "active", "ended", "paid", "archived"],
     },
   },
 } as const

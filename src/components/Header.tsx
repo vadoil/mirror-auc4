@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Gavel } from "lucide-react";
+import { Menu, X, Gavel, User } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const navItems = [
-  { label: "О проекте", href: "#about" },
-  { label: "Лоты", href: "#lots-preview" },
-  { label: "Программа", href: "#program" },
-  { label: "Билеты", href: "#tickets" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Контакты", href: "#contacts" },
+  { label: "Лоты", href: "/lots" },
+  { label: "Как участвовать", href: "/how-it-works" },
+  { label: "Место", href: "/venue" },
 ];
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, isAdmin } = useAuth();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -30,10 +32,10 @@ const Header = () => {
       }`}
     >
       <div className="section-padding flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <div className="flex flex-col items-center">
             <span className="text-cream/40 text-[7px] md:text-[8px] uppercase tracking-[0.35em] font-body leading-none mb-1">
-              Инвестируй в себя
+              Благотворительный аукцион
             </span>
             <div className="flex items-center gap-2.5">
               <div className="w-7 h-7 border border-primary flex items-center justify-center">
@@ -44,30 +46,49 @@ const Header = () => {
               </span>
             </div>
           </div>
-        </a>
+        </Link>
 
         <nav className="hidden lg:flex items-center gap-8">
-          {navItems.map((item) => (
+          {isHome && (
             <a
+              href="#about"
+              className="text-cream/60 text-[11px] uppercase tracking-[0.2em] font-body font-light hover:text-cream transition-colors duration-300"
+            >
+              О проекте
+            </a>
+          )}
+          {navItems.map((item) => (
+            <Link
               key={item.href}
-              href={item.href}
+              to={item.href}
               className="text-cream/60 text-[11px] uppercase tracking-[0.2em] font-body font-light hover:text-cream transition-colors duration-300"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#venue"
-            className="text-cream/60 text-[11px] uppercase tracking-[0.2em] font-body font-light hover:text-cream transition-colors duration-300"
-          >
-            Место
-          </a>
-          <a
-            href="#tickets"
-            className="ml-4 bg-primary text-primary-foreground text-[11px] uppercase tracking-[0.2em] px-6 py-2.5 hover:opacity-90 transition-all duration-500 font-body"
-          >
-            Участвовать
-          </a>
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className="text-cream/60 text-[11px] uppercase tracking-[0.2em] font-body font-light hover:text-cream transition-colors duration-300"
+            >
+              Админ
+            </Link>
+          )}
+          {user ? (
+            <Link
+              to="/lots"
+              className="ml-4 bg-primary text-primary-foreground text-[11px] uppercase tracking-[0.2em] px-6 py-2.5 hover:opacity-90 transition-all duration-500 font-body"
+            >
+              Смотреть лоты
+            </Link>
+          ) : (
+            <Link
+              to="/auth"
+              className="ml-4 flex items-center gap-2 bg-primary text-primary-foreground text-[11px] uppercase tracking-[0.2em] px-6 py-2.5 hover:opacity-90 transition-all duration-500 font-body"
+            >
+              <User className="w-3.5 h-3.5" /> Войти
+            </Link>
+          )}
         </nav>
 
         <button
@@ -87,30 +108,47 @@ const Header = () => {
             className="lg:hidden bg-warm-black/98 backdrop-blur-xl"
           >
             <nav className="flex flex-col items-center py-8 gap-6">
-              {navItems.map((item) => (
+              {isHome && (
                 <a
+                  href="#about"
+                  onClick={() => setMenuOpen(false)}
+                  className="text-cream/80 text-sm uppercase tracking-[0.2em] font-body font-light"
+                >
+                  О проекте
+                </a>
+              )}
+              {navItems.map((item) => (
+                <Link
                   key={item.href}
-                  href={item.href}
+                  to={item.href}
                   onClick={() => setMenuOpen(false)}
                   className="text-cream/80 text-sm uppercase tracking-[0.2em] font-body font-light"
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
-              <a
-                href="#venue"
-                onClick={() => setMenuOpen(false)}
-                className="text-cream/80 text-sm uppercase tracking-[0.2em] font-body font-light"
-              >
-                Место
-              </a>
-              <a
-                href="#tickets"
-                onClick={() => setMenuOpen(false)}
-                className="mt-4 bg-primary text-primary-foreground text-sm uppercase tracking-[0.2em] px-8 py-3 font-body"
-              >
-                Участвовать
-              </a>
+              {isAdmin && (
+                <Link to="/admin" onClick={() => setMenuOpen(false)} className="text-cream/80 text-sm uppercase tracking-[0.2em] font-body font-light">
+                  Админ
+                </Link>
+              )}
+              {user ? (
+                <Link
+                  to="/lots"
+                  onClick={() => setMenuOpen(false)}
+                  className="mt-4 bg-primary text-primary-foreground text-sm uppercase tracking-[0.2em] px-8 py-3 font-body"
+                >
+                  Смотреть лоты
+                </Link>
+              ) : (
+                <Link
+                  to="/auth"
+                  onClick={() => setMenuOpen(false)}
+                  className="mt-4 bg-primary text-primary-foreground text-sm uppercase tracking-[0.2em] px-8 py-3 font-body"
+                >
+                  Войти
+                </Link>
+              )}
             </nav>
           </motion.div>
         )}

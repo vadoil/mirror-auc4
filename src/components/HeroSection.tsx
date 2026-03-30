@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HERO_VIDEO_URL = "/__l5e/assets-v1/bbea364f-09e2-4f9f-84fa-32e5d7e08eae/hero-bg.mp4";
@@ -35,40 +36,19 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
-      {/* Background layers */}
       <div className="absolute inset-0 bg-warm-black">
-        {/* Static image fallback */}
-        <img
-          src={heroBg}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover opacity-60"
-          width={1920}
-          height={1080}
-        />
-        {/* Video overlay */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen"
-          src={HERO_VIDEO_URL}
-        />
+        <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-60" width={1920} height={1080} />
+        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen" src={HERO_VIDEO_URL} />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-gold/3" />
         <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/50 to-warm-black/20" />
       </div>
 
-      {/* Subtle grid overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }}
       />
 
-      {/* Content */}
       <div className="relative z-10 section-padding pt-24 md:pt-40 pb-6 md:pb-20 w-full">
         <div className="max-w-7xl mx-auto">
-          {/* Top label */}
-
-          {/* Main title */}
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-20">
             <div>
               <motion.div
@@ -76,6 +56,9 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
               >
+                <p className="font-body text-cream/40 text-xs md:text-sm uppercase tracking-[0.3em] mb-4">
+                  Благотворительный аукцион
+                </p>
                 <h1 className="font-display text-cream text-5xl sm:text-6xl md:text-[7rem] lg:text-[9rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]">
                   Отра
                   <br />
@@ -89,20 +72,18 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.0 }}
-                className="font-body text-cream/60 text-lg md:text-xl lg:text-2xl font-light mt-6 max-w-md"
+                className="font-body text-cream/60 text-lg md:text-xl lg:text-2xl font-light mt-6 max-w-lg"
               >
-                Один вечер. Баланс. Осознанность. Добро.
+                Один вечер. Уникальные лоты. Все средства — на добрые дела.
               </motion.p>
             </div>
 
-            {/* Right column: countdown + CTA */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.3 }}
               className="flex flex-col gap-8 lg:items-end"
             >
-              {/* Countdown */}
               <div className="flex gap-6 md:gap-8">
                 <CountdownUnit value={timeLeft.days} label="дней" />
                 <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
@@ -115,19 +96,17 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <a href="#tickets" className="btn-primary text-center">
-                  Участвовать
-                </a>
-                <a href="#lots-preview" className="btn-outline-light text-center">
+                <Link to="/lots" className="btn-primary text-center">
                   Смотреть лоты
-                </a>
+                </Link>
+                <Link to="/how-it-works" className="btn-outline-light text-center">
+                  Как участвовать
+                </Link>
               </div>
             </motion.div>
           </div>
 
-          {/* Bottom info strip */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -135,26 +114,21 @@ const HeroSection = () => {
             className="mt-12 md:mt-16 pt-6 border-t border-cream/10 flex flex-wrap gap-8 md:gap-16"
           >
             <div>
-              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase"><p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">10+</p></p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">лотов</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">100%</p>
+              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">на благотворительность</p>
             </div>
             <div>
-              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">300+</p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">гостей</p>
-            </div>
-            <div>
-              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">∞</p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">энергии</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">10+</p>
+              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">уникальных лотов</p>
             </div>
             <div>
               <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">1</p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">вечер</p>
+              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">незабываемый вечер</p>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

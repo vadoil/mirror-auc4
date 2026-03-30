@@ -1,0 +1,82 @@
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { MapPin, Calendar, Clock } from "lucide-react";
+import venueImage from "@/assets/venue.jpg";
+
+const VenuePreviewSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section className="py-24 md:py-32 section-padding bg-warm-black">
+      <div ref={ref} className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-px bg-primary" />
+            <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">Площадка</p>
+          </div>
+          <h2 className="font-display text-5xl md:text-7xl font-normal uppercase tracking-tight text-cream leading-[0.9]">
+            Место <span className="text-primary italic">проведения</span>
+          </h2>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-0 border border-cream/10 overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative aspect-[4/3] lg:aspect-auto min-h-[350px] overflow-hidden"
+          >
+            <img src={venueImage} alt="Место быть — баланс-холл" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-warm-black/30 lg:bg-none" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="p-8 md:p-12 flex flex-col justify-center bg-cream/5"
+          >
+            <h3 className="font-display text-2xl md:text-3xl text-cream uppercase tracking-wide mb-2">
+              «Место быть»
+            </h3>
+            <p className="font-body text-xs text-primary uppercase tracking-[0.2em] mb-6">
+              Первый в России баланс-холл
+            </p>
+            <p className="font-body text-sm text-cream/60 leading-relaxed mb-8 max-w-md">
+              Пространство нового формата в центре Москвы — wellbeing-культура, осознанность и эстетика.
+              Идеальная атмосфера для благотворительного вечера.
+            </p>
+
+            <div className="space-y-4 mb-8">
+              <div className="flex items-center gap-4">
+                <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+                <p className="font-body text-sm text-cream">Москва, ул. Мясницкая 24/7, стр. 1</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <Calendar className="w-4 h-4 text-primary flex-shrink-0" />
+                <p className="font-body text-sm text-cream">28 апреля 2026</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <Clock className="w-4 h-4 text-primary flex-shrink-0" />
+                <p className="font-body text-sm text-cream">19:00 — 23:00</p>
+              </div>
+            </div>
+
+            <Link to="/venue" className="btn-outline-light self-start">
+              Подробнее
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default VenuePreviewSection;
