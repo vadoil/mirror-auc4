@@ -5,6 +5,8 @@ import BeneficiariesSection from "@/components/BeneficiariesSection";
 import LotsPreviewSection from "@/components/LotsPreviewSection";
 import VenuePreviewSection from "@/components/VenuePreviewSection";
 import TransparencySection from "@/components/TransparencySection";
+import ForumBannerSection from "@/components/ForumBannerSection";
+import ForumBannerFooter from "@/components/ForumBannerFooter";
 import ContactsSection from "@/components/ContactsSection";
 import Footer from "@/components/Footer";
 
@@ -19,7 +21,9 @@ const Index = () => {
         <LotsPreviewSection />
         <VenuePreviewSection />
         <TransparencySection />
+        <ForumBannerSection />
         <ContactsSection />
+        <ForumBannerFooter />
         <Footer />
       </div>
     </div>
