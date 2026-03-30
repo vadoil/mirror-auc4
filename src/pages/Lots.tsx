@@ -119,7 +119,7 @@ const Lots = () => {
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {lots.map((lot, i) => {
-                const imgUrl = getImageUrl(lot.image_url);
+                const imgUrl = getImageUrl(lot.image_url) || fallbackImages[i];
                 const currentPrice = getCurrentPrice(lot);
                 const remaining = timeLeft(lot.end_at);
 
