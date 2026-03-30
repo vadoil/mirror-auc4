@@ -41,7 +41,7 @@ const HeroSection = () => {
         <img
           src={heroBg}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover opacity-50"
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
           width={1920}
           height={1080}
         />
