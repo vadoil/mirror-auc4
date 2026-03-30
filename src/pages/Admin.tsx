@@ -116,7 +116,7 @@ const Admin = () => {
       current_price: editingLot.current_price || 0,
       bid_step: editingLot.bid_step || 1000,
       category: editingLot.category || null,
-      status: editingLot.status || "draft",
+      status: (editingLot.status || "draft") as "draft" | "active" | "ended" | "paid" | "archived",
       start_at: editingLot.start_at || null,
       end_at: editingLot.end_at || null,
       delivery_terms: editingLot.delivery_terms || null,
