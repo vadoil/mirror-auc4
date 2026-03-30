@@ -35,10 +35,10 @@ const BeneficiariesSection = () => {
         >
           <div className="flex items-center gap-3 justify-center mb-6">
             <div className="w-8 h-px bg-primary" />
-            <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">Миссия</p>
+            <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">Миссия</p>
             <div className="w-8 h-px bg-primary" />
           </div>
-          <h2 className="font-display text-5xl md:text-7xl font-light tracking-tight text-cream leading-[0.9]">
+          <h2 className="font-display text-5xl md:text-7xl font-light tracking-tight text-foreground leading-[0.9]">
             Кому <span className="italic text-primary">помогаем</span>
           </h2>
         </motion.div>
@@ -50,13 +50,13 @@ const BeneficiariesSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.15 * i }}
-              className="bg-cream/5 border border-cream/10 p-8 md:p-10 group hover:border-primary/20 transition-all duration-500"
+              className="bg-muted/50 border border-border p-8 md:p-10 group hover:border-primary/30 transition-all duration-500"
             >
               <div className="w-12 h-12 border border-primary/30 flex items-center justify-center mb-6 group-hover:border-primary/60 transition-colors">
                 <cause.icon className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="font-display text-xl text-cream uppercase mb-3">{cause.title}</h3>
-              <p className="font-body text-sm text-cream/50 leading-relaxed">{cause.desc}</p>
+              <h3 className="font-display text-xl text-foreground uppercase mb-3">{cause.title}</h3>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed">{cause.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -65,7 +65,7 @@ const BeneficiariesSection = () => {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center font-body text-sm text-cream/40 mt-12 max-w-2xl mx-auto"
+          className="text-center font-body text-sm text-muted-foreground mt-12 max-w-2xl mx-auto"
         >
           Полный список фондов-партнёров и детали распределения средств будут опубликованы перед аукционом.
           Мы гарантируем прозрачную отчётность по каждому лоту.
