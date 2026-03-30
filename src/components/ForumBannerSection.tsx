@@ -1,31 +1,35 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, Download } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ForumBannerSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 section-padding bg-background relative">
-      <div ref={ref} className="max-w-5xl mx-auto">
+    <section className="py-24 md:py-32 section-padding bg-charcoal relative overflow-hidden">
+      <div ref={ref} className="max-w-5xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <div className="flex items-center gap-3 justify-center mb-6">
             <div className="w-8 h-px bg-primary" />
-            <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
+            <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">
               Следующий шаг
             </p>
             <div className="w-8 h-px bg-primary" />
           </div>
-          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-foreground leading-[0.9] mb-6">
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-cream leading-[0.9] mb-6">
             Форум{" "}
-            <span className="italic text-primary">осень 2026</span>
+            <span className="italic text-primary">«Отражение»</span>
           </h2>
+          <p className="font-body text-xs text-primary uppercase tracking-[0.2em] mb-8">
+            Осень 2026 · Москва
+          </p>
           <div className="w-16 h-px bg-primary mx-auto mb-8" />
         </motion.div>
 
@@ -35,32 +39,66 @@ const ForumBannerSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="max-w-2xl mx-auto text-center mb-12"
         >
-          <p className="editorial-body text-muted-foreground mb-8">
-            После аукциона «Отражение Добра» нас ждёт масштабный форум, посвящённый велнесу, осознанности и инвестициям в себя. Следите за анонсами — скоро откроем регистрацию.
+          <p className="font-body text-sm md:text-base text-cream/60 leading-relaxed mb-8">
+            После аукциона «Отражение Добра» нас ждёт масштабный форум, посвящённый велнесу, 
+            осознанности и инвестициям в себя. Следите за анонсами — скоро откроем регистрацию.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-primary" />
-              <span className="font-body text-muted-foreground text-sm">Осень 2026</span>
+              <span className="font-body text-cream/60 text-sm">Осень 2026</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-primary" />
-              <span className="font-body text-muted-foreground text-sm">Москва</span>
+              <span className="font-body text-cream/60 text-sm">Москва</span>
             </div>
           </div>
+        </motion.div>
+
+        {/* PDF downloads */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12"
+        >
+          <a
+            href="/docs/presentation-speakers.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 bg-cream/5 border border-cream/10 hover:border-primary/30 transition-all p-5"
+          >
+            <Download className="w-5 h-5 text-primary shrink-0" />
+            <div>
+              <p className="font-body text-sm font-medium text-cream">Презентация форума</p>
+              <p className="font-body text-xs text-cream/40">PDF, для спикеров</p>
+            </div>
+          </a>
+          <a
+            href="/docs/presentation-sponsors.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 bg-cream/5 border border-cream/10 hover:border-primary/30 transition-all p-5"
+          >
+            <Download className="w-5 h-5 text-primary shrink-0" />
+            <div>
+              <p className="font-body text-sm font-medium text-cream">Для спонсоров</p>
+              <p className="font-body text-xs text-cream/40">PDF, партнёрское предложение</p>
+            </div>
+          </a>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <a href="#tickets" className="btn-primary text-center">
-            Купить билет на аукцион
-          </a>
-          <a href="#contacts" className="btn-outline text-center">
+          <Link to="/lots" className="btn-primary text-center">
+            Смотреть лоты аукциона
+          </Link>
+          <a href="#contacts" className="btn-outline-light text-center">
             Узнать о форуме
           </a>
         </motion.div>
