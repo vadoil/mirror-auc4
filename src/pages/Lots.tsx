@@ -6,6 +6,16 @@ import { ArrowRight, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+import lotDinner from "@/assets/lot-dinner-sitnikov.jpg";
+import lotBiohacking from "@/assets/lot-biohacking-one.jpg";
+import lotReels from "@/assets/lot-reels-sobolev.jpg";
+import lotWatch from "@/assets/lot-watch-ballet.jpg";
+import lotHockey from "@/assets/lot-hockey-belov.jpg";
+import lotBallet from "@/assets/lot-ballet-lopatkina.jpg";
+import lotEmelianenko from "@/assets/lot-emelianenko.jpg";
+
+const fallbackImages = [lotDinner, lotBiohacking, lotReels, lotWatch, lotHockey, lotBallet, lotEmelianenko];
+
 type Lot = {
   id: string;
   title: string;
@@ -109,7 +119,7 @@ const Lots = () => {
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {lots.map((lot, i) => {
-                const imgUrl = getImageUrl(lot.image_url);
+                const imgUrl = getImageUrl(lot.image_url) || fallbackImages[i];
                 const currentPrice = getCurrentPrice(lot);
                 const remaining = timeLeft(lot.end_at);
 

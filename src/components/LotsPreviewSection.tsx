@@ -66,6 +66,9 @@ const LotsPreviewSection = () => {
     : dbLots;
   const staticImages = Object.fromEntries(staticLots.map(l => [l.id, l.image]));
 
+  // Fallback images for DB lots by sort order
+  const fallbackImages = [lotDinner, lotBiohacking, lotReels, lotWatch, lotHockey, lotBallet, lotEmelianenko];
+
   if (!loaded) return null;
 
   return (
@@ -100,7 +103,7 @@ const LotsPreviewSection = () => {
           {displayLots.map((lot, i) => {
             const imgUrl = useStatic
               ? staticImages[lot.id]
-              : getImageUrl((lot as Lot).image_url);
+              : (getImageUrl((lot as Lot).image_url) || fallbackImages[i]);
 
             return (
               <motion.div
