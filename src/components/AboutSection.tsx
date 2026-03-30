@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import aboutInvest from "@/assets/about-invest.jpg";
 
 const AboutSection = () => {
@@ -30,19 +31,24 @@ const AboutSection = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[0.9] text-foreground mb-8">
-                  Аукцион
+                  Благо
                   <br />
-                  <span className="italic text-primary">нового уровня</span>
+                  <span className="italic text-primary">творительный</span>
+                  <br />
+                  аукцион
                 </h2>
                 <div className="w-24 h-px bg-primary mb-8" />
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
-                  Первый в России wellness-аукцион, где лоты — это не вещи, а трансформация. Биохакинг-программы, 
-                  ретриты, передовые оздоровительные технологии и эксклюзивный доступ к лучшим практикам мира.
+                  «Отражение добра» — это вечер, где каждый лот несёт смысл. Уникальные wellness-программы,
+                  ретриты, эксклюзивный опыт — и все вырученные средства направляются на помощь тем, кто в ней нуждается.
                 </p>
-                <p className="editorial-body text-muted-foreground max-w-lg">
-                  Мы собираем тех, кто инвестирует в себя осознанно. Каждый лот — 
-                  это путь к лучшей версии себя, а часть средств идёт на благотворительность.
+                <p className="editorial-body text-muted-foreground mb-8 max-w-lg">
+                  Мы верим, что забота о себе и забота о других — не противоположности, а отражение друг друга.
+                  Инвестируя в своё здоровье и развитие, вы одновременно делаете добро.
                 </p>
+                <Link to="/how-it-works" className="btn-outline inline-block">
+                  Как это работает
+                </Link>
               </motion.div>
 
               <motion.div
@@ -52,21 +58,21 @@ const AboutSection = () => {
                 className="relative"
               >
                 <div className="aspect-[4/5] overflow-hidden relative">
-                  <img src={aboutInvest} alt="Инвестируйте в себя" loading="lazy" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1280} />
+                  <img src={aboutInvest} alt="Благотворительный аукцион" loading="lazy" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1280} />
                   <div className="absolute inset-0 bg-warm-black/50" />
                   <div className="absolute inset-0 bg-gradient-to-t from-warm-black/70 via-transparent to-warm-black/30" />
                   <div className="text-center p-8 relative z-10 flex flex-col items-center justify-center h-full">
-                    <p className="font-body text-cream/50 text-xs uppercase tracking-[0.3em] mb-4">Инвестируйте в</p>
-                    <p className="font-display text-6xl md:text-7xl font-light text-cream italic leading-none mb-4">Себя</p>
+                    <p className="font-body text-cream/50 text-xs uppercase tracking-[0.3em] mb-4">Каждый лот —</p>
+                    <p className="font-display text-6xl md:text-7xl font-light text-cream italic leading-none mb-4">Добро</p>
                     <div className="w-12 h-px bg-primary mx-auto mb-4" />
                     <p className="font-body text-cream/60 text-sm max-w-xs mx-auto">
-                      Биохакинг · Longevity · Wellness · Mindfulness
+                      Wellbeing · Осознанность · Помощь · Баланс
                     </p>
                   </div>
                 </div>
                 <div className="absolute top-6 right-6 bg-primary text-primary-foreground px-6 py-5">
-                  <p className="font-numbers text-4xl font-light leading-none">10+</p>
-                  <p className="text-[10px] uppercase tracking-[0.2em] font-body mt-1.5">лотов</p>
+                  <p className="font-numbers text-4xl font-light leading-none">100%</p>
+                  <p className="text-[10px] uppercase tracking-[0.2em] font-body mt-1.5">на благо</p>
                 </div>
               </motion.div>
             </div>
@@ -82,7 +88,7 @@ const AboutSection = () => {
           >
             {Array.from({ length: 10 }).map((_, i) => (
               <span key={i} className="font-display text-lg md:text-xl text-primary-foreground/80 font-light italic tracking-wide">
-                Биохакинг · Longevity · Ретриты · Детокс · Криотерапия · Нейротехнологии · Суперфуды · Медитация ·
+                Благотворительность · Wellbeing · Осознанность · Ретриты · Здоровье · Баланс · Добро ·
               </span>
             ))}
           </motion.div>
