@@ -54,8 +54,8 @@ const HeroSection = () => {
           className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-screen"
           src={HERO_VIDEO_URL}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-accent/5" />
-        <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/60 to-warm-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-gold/3" />
+        <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/50 to-warm-black/20" />
       </div>
 
       {/* Subtle grid overlay */}
