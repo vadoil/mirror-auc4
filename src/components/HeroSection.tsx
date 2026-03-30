@@ -51,7 +51,7 @@ const HeroSection = () => {
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-screen"
+          className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen"
           src={HERO_VIDEO_URL}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-gold/3" />
