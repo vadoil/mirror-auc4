@@ -25,7 +25,7 @@ const BeneficiariesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 section-padding bg-charcoal">
+    <section className="py-24 md:py-32 section-padding bg-background">
       <div ref={ref} className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
