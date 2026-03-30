@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -32,7 +32,7 @@ const LotsPreviewSection = () => {
         .select("id, title, description, image_url, starting_price, category, status, end_at")
         .eq("status", "active")
         .order("sort_order")
-        .limit(6);
+        .limit(8);
       if (data) setLots(data as Lot[]);
     };
     fetchLots();
@@ -67,8 +67,8 @@ const LotsPreviewSection = () => {
         </motion.div>
       </div>
 
-      <div className="px-4 md:px-6 lg:px-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="section-padding">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">
           {lots.map((lot, i) => {
             const imgUrl = getImageUrl(lot.image_url);
             return (
@@ -77,37 +77,40 @@ const LotsPreviewSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: 0.08 * i }}
+                transition={{ duration: 0.6, delay: 0.06 * i }}
               >
                 <Link
                   to={`/lots/${lot.id}`}
                   className="group block bg-cream/5 border border-cream/10 hover:border-primary/30 transition-all duration-500 overflow-hidden"
                 >
                   <div className="aspect-[4/3] relative overflow-hidden">
-                    {imgUrl && (
+                    {imgUrl ? (
                       <img
                         src={imgUrl}
                         alt={lot.title}
                         loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
+                    ) : (
+                      <div className="absolute inset-0 bg-cream/5 flex items-center justify-center">
+                        <span className="text-cream/20 font-display text-2xl">Лот</span>
+                      </div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-warm-black/60 via-transparent to-transparent" />
                     {lot.category && (
-                      <div className="absolute top-3 left-3 bg-primary/90 px-3 py-1">
-                        <span className="text-primary-foreground text-[10px] uppercase tracking-[0.2em] font-body">{lot.category}</span>
+                      <div className="absolute top-2 left-2 bg-primary/90 px-2 py-0.5">
+                        <span className="text-primary-foreground text-[9px] uppercase tracking-[0.15em] font-body">{lot.category}</span>
                       </div>
                     )}
                   </div>
-                  <div className="p-5">
-                    <h3 className="font-display text-base text-cream mb-1 group-hover:text-primary transition-colors duration-300">{lot.title}</h3>
-                    {lot.description && <p className="font-body text-xs text-cream/40 mb-4 line-clamp-2">{lot.description}</p>}
-                    <div className="flex items-center justify-between">
+                  <div className="p-4">
+                    <h3 className="font-display text-sm text-cream mb-1 group-hover:text-primary transition-colors duration-300 line-clamp-1">{lot.title}</h3>
+                    <div className="flex items-center justify-between mt-2">
                       <div>
-                        <p className="text-[10px] uppercase tracking-[0.2em] text-cream/30 font-body">Старт</p>
-                        <p className="font-numbers text-lg text-cream font-light">{lot.starting_price.toLocaleString("ru-RU")} ₽</p>
+                        <p className="text-[9px] uppercase tracking-[0.15em] text-cream/30 font-body">Старт</p>
+                        <p className="font-numbers text-base text-cream font-light">{lot.starting_price.toLocaleString("ru-RU")} ₽</p>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-cream/20 group-hover:text-primary transition-colors duration-300" />
+                      <ArrowRight className="w-3.5 h-3.5 text-cream/20 group-hover:text-primary transition-colors duration-300" />
                     </div>
                   </div>
                 </Link>
