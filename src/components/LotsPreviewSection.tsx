@@ -103,7 +103,7 @@ const LotsPreviewSection = () => {
           {displayLots.map((lot, i) => {
             const imgUrl = useStatic
               ? staticImages[lot.id]
-              : getImageUrl((lot as Lot).image_url);
+              : (getImageUrl((lot as Lot).image_url) || fallbackImages[i]);
 
             return (
               <motion.div
