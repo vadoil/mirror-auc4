@@ -40,11 +40,11 @@ const AboutSection = () => {
                 </h2>
                 <div className="w-24 h-px bg-primary mb-8" />
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
-                  «Отражение добра» — это вечер, где каждый лот несёт смысл. Уникальные wellness-программы,
-                  ретриты, эксклюзивный опыт — и все вырученные средства направляются на помощь тем, кто в ней нуждается.
+                  «Отражение добра» – это вечер, где каждый лот несёт смысл. Уникальные wellness-программы,
+                  ретриты, эксклюзивный опыт – и все вырученные средства направляются на помощь тем, кто в ней нуждается.
                 </p>
                 <p className="editorial-body text-muted-foreground mb-8 max-w-lg">
-                  Мы верим, что забота о себе и забота о других — не противоположности, а отражение друг друга.
+                  Мы верим, что забота о себе и забота о других – не противоположности, а отражение друг друга.
                   Инвестируя в своё здоровье и развитие, вы одновременно делаете добро.
                 </p>
                 <Link to="/how-it-works" className="btn-outline inline-block">
@@ -59,7 +59,7 @@ const AboutSection = () => {
                 className="relative"
               >
                 <div className="aspect-[4/5] overflow-hidden relative">
-                  <img src={aboutVenue} alt="Баланс-холл «Место быть» — площадка благотворительного аукциона" loading="lazy" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1280} />
+                  <img src={aboutVenue} alt="Баланс-холл «Место быть» – площадка благотворительного аукциона" loading="lazy" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1280} />
                   <div className="absolute inset-0 bg-warm-black/40" />
                   <div className="absolute inset-0 bg-gradient-to-t from-warm-black/70 via-transparent to-warm-black/20" />
                   <div className="text-center p-8 relative z-10 flex flex-col items-center justify-center h-full">

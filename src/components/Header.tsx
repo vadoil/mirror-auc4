@@ -65,7 +65,7 @@ const Header = () => {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
-            {/* Home icon — always visible */}
+            {/* Home icon – always visible */}
             <Link
               to="/"
               className={`${textColor} ${textHover} transition-colors duration-300`}

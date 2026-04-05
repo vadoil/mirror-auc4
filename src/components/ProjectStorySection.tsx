@@ -28,7 +28,7 @@ const ProjectStorySection = () => {
       name: spbForm.name,
       email: spbForm.email,
       phone: spbForm.phone || null,
-      ticket_type: "СПб — ноябрь 2026",
+      ticket_type: "СПб – ноябрь 2026",
       message: "Запрос на детали мероприятия в Санкт-Петербурге",
     });
     setSending(false);
@@ -71,7 +71,7 @@ const ProjectStorySection = () => {
         >
           <div className="bg-muted/40 border border-border rounded-lg p-8 md:p-12">
             <p className="font-body text-base md:text-lg text-foreground leading-relaxed mb-6">
-              Привет! Мы — <strong>Гиза</strong> и <strong>Саша</strong>, занимаемся проектами, бизнесом и благотворительностью в двух городах — Москве и Петербурге. Поэтому наш проект «ОТРАЖЕНИЕ ДОБРА», как инь и янь, будет объединять разные по вайбу, но объединённые одной целью события в наших городах.
+              Привет! Мы – <strong>Гиза</strong> и <strong>Саша</strong>, занимаемся проектами, бизнесом и благотворительностью в двух городах – Москве и Петербурге. Поэтому наш проект «ОТРАЖЕНИЕ ДОБРА», как инь и янь, будет объединять разные по вайбу, но объединённые одной целью события в наших городах.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -96,7 +96,7 @@ const ProjectStorySection = () => {
                 <ul className="font-body text-sm text-muted-foreground space-y-1 text-left">
                   <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />Организатор медицинских, коммерческих, корпоративных и частных мероприятий</li>
                   <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />10 лет работы с лучшими врачами и экспертами России и Европы</li>
-                  <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />Автор проекта «Поговори с Гизой» — подкасты и поддержка женщин</li>
+                  <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />Автор проекта «Поговори с Гизой» – подкасты и поддержка женщин</li>
                 </ul>
               </div>
             </div>
@@ -116,7 +116,7 @@ const ProjectStorySection = () => {
             <div className="flex items-center justify-center gap-2 pt-4 border-t border-border">
               <Sparkles className="w-4 h-4 text-primary" />
               <p className="font-body text-sm text-muted-foreground">
-                Одна цель — сбор средств в поддержку фонда{" "}
+                Одна цель – сбор средств в поддержку фонда{" "}
                 <a
                   href="https://nenaprasno.ru/"
                   target="_blank"
@@ -198,15 +198,15 @@ const ProjectStorySection = () => {
                 </div>
 
                 <p className="font-body text-sm md:text-base text-foreground leading-relaxed mb-4">
-                  В столице мы сфокусируемся на wellness-повестке, поговорим о долголетии и нейрогастрономии, проведём вкусную дегустацию безалкогольных коктейлей и проведём вечер в компании остроумного Александра Цыпкина — ведущего нашего аукциона.
+                  В столице мы сфокусируемся на wellness-повестке, поговорим о долголетии и нейрогастрономии, проведём вкусную дегустацию безалкогольных коктейлей и проведём вечер в компании остроумного Александра Цыпкина – ведущего нашего аукциона.
                 </p>
 
                 <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-4">
-                  Мы верим, что забота о себе и забота о других — не противоположности, а отражение друг друга. Поэтому перед началом аукциона мы организуем для вас public talk о современных возможностях поддержать свой организм и баланс внутри.
+                  Мы верим, что забота о себе и забота о других – не противоположности, а отражение друг друга. Поэтому перед началом аукциона мы организуем для вас public talk о современных возможностях поддержать свой организм и баланс внутри.
                 </p>
 
                 <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
-                  «Отражение добра» — это аукцион, где каждый лот несёт смысл. Уникальные wellness-программы, ретриты, эксклюзивный опыт, а все вырученные средства направляются на системную помощь в борьбе с онкологией.
+                  «Отражение добра» – это аукцион, где каждый лот несёт смысл. Уникальные wellness-программы, ретриты, эксклюзивный опыт, а все вырученные средства направляются на системную помощь в борьбе с онкологией.
                 </p>
 
                 <a
@@ -233,7 +233,7 @@ const ProjectStorySection = () => {
                 </div>
 
                 <p className="font-body text-sm md:text-base text-foreground leading-relaxed mb-6">
-                  В Питере — пить, носить black tie и кружиться на балах в особняках XVIII века. Наши гости и участники благотворительного аукциона получат возможность прикоснуться к культуре балов и светских парадов. В Петербурге мы представим к аукциону предметы искусства.
+                  В Питере – пить, носить black tie и кружиться на балах в особняках XVIII века. Наши гости и участники благотворительного аукциона получат возможность прикоснуться к культуре балов и светских парадов. В Петербурге мы представим к аукциону предметы искусства.
                 </p>
 
                 {/* Contact form for SPb */}

@@ -106,7 +106,7 @@ const Lots = () => {
               Каталог <span className="text-primary italic">лотов</span>
             </h1>
             <p className="font-body text-muted-foreground text-lg max-w-xl">
-              Каждый лот — это уникальная возможность. Все средства направляются на благотворительность.
+              Каждый лот – это уникальная возможность. Все средства направляются на благотворительность.
             </p>
           </motion.div>
 
