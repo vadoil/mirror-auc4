@@ -7,6 +7,7 @@ import LotsPreviewSection from "@/components/LotsPreviewSection";
 import AuctioneerSection from "@/components/AuctioneerSection";
 import VenuePreviewSection from "@/components/VenuePreviewSection";
 import TransparencySection from "@/components/TransparencySection";
+import TicketsSection from "@/components/TicketsSection";
 import ForumBannerSection from "@/components/ForumBannerSection";
 
 import ForumBannerFooter from "@/components/ForumBannerFooter";
@@ -26,6 +27,7 @@ const Index = () => {
         <AuctioneerSection />
         <VenuePreviewSection />
         <TransparencySection />
+        <TicketsSection />
         <ForumBannerSection />
         
         <ContactsSection />
