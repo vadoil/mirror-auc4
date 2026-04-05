@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Mic } from "lucide-react";
+import { ArrowLeft, Mic, User } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -16,16 +16,109 @@ const program = [
   { time: "21:00", title: "After-party", desc: "Неформальное общение, DJ-сет, бар", highlight: false },
 ];
 
-const moderators = [
-  { name: "Родион Ступин", role: "Генеральный директор сети клиник «Будь здоров»" },
-  { name: "Ростислав Павлов", role: "Главный врач Гатчинской клиники (ЛО ГБУЗ ГКМБ), победитель рейтинга Forbes «30 до 30»" },
+const moderatorsData = [
+  {
+    name: "Родион Ступин",
+    role: "Генеральный директор сети клиник «Будь здоров»",
+    bio: "Один из ключевых управленцев в сфере частной медицины России. Выступал на ПМЭФ-2025 и «ЗдравФоруме СКОЛКОВО».",
+    highlights: [
+      "Руководитель сети клиник «Будь здоров»",
+      "Спикер ПМЭФ, СКОЛКОВО, Mediametrics",
+      "Эксперт в превентивной медицине и управлении здоровьем",
+    ],
+    image: null,
+  },
+  {
+    name: "Ростислав Павлов",
+    role: "И.о. главного врача ГБУЗ ЛО «Гатчинская КМБ»",
+    bio: "Хирург-онколог, кандидат медицинских наук. Номинант рейтинга Forbes «30 до 30». О нём снят документальный фильм.",
+    highlights: [
+      "Хирург-онколог, кандидат медицинских наук",
+      "Рейтинг Forbes «30 самых перспективных россиян до 30»",
+      "Выпускник Высшей школы онкологии фонда «Не напрасно»",
+    ],
+    image: null,
+  },
 ];
 
-const publicTalkSpeakers = [
-  { name: "Артём Спиро", role: "Импакт-предприниматель, ресторатор, эксперт в области здорового питания" },
-  { name: "Наталья Гундерина", role: "Продюсер проекта Karmalogic, основатель и CEO проекта Karmatravel" },
-  { name: "Анна Евнич", role: "" },
+const speakersData = [
+  {
+    name: "Артём Спиро",
+    role: "Импакт-предприниматель, ресторатор",
+    bio: "Основатель венчурной студии Spiro Ventures и нейробистро Inspiro. Эксперт в здоровом питании и устойчивом развитии.",
+    highlights: [
+      "Основатель Spiro Ventures — венчурная студия «стартапов будущего»",
+      "Создатель нейробистро Inspiro в Москве",
+      "Эксперт в области здорового питания и sustainability",
+    ],
+    image: null,
+  },
+  {
+    name: "Наталия Гундерина",
+    role: "Продюсер проекта Karmalogic®, CEO Karmatravel",
+    bio: "Операционный директор проектов Алексея Ситникова. MBA ВШЭ, Британская высшая школа дизайна.",
+    highlights: [
+      "Продюсер и операционный директор проектов Алексея Ситникова",
+      "Основатель и CEO проекта Karmatravel",
+      "MBA ГУ ВШЭ «Политические и бизнес-коммуникации»",
+    ],
+    image: null,
+  },
+  {
+    name: "Анна Евнич",
+    role: "Будет объявлено",
+    bio: null,
+    highlights: [],
+    image: null,
+  },
 ];
+
+type PersonCardProps = {
+  person: typeof moderatorsData[0];
+  index: number;
+  isInView: boolean;
+};
+
+const PersonCard = ({ person, index, isInView }: PersonCardProps) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={isInView ? { opacity: 1, y: 0 } : {}}
+    transition={{ duration: 0.6, delay: 0.12 * index }}
+    className="group flex flex-col sm:flex-row gap-6 bg-card border border-border rounded-lg p-6 hover:border-primary/30 transition-all duration-500"
+  >
+    {/* Photo placeholder */}
+    <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 bg-muted/50 rounded-lg overflow-hidden flex items-center justify-center">
+      {person.image ? (
+        <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
+      ) : (
+        <User className="w-10 h-10 text-muted-foreground/30" />
+      )}
+    </div>
+
+    {/* Info */}
+    <div className="flex-1 min-w-0">
+      <h3 className="font-display text-xl md:text-2xl text-foreground mb-1 group-hover:text-primary transition-colors">
+        {person.name}
+      </h3>
+      <p className="font-body text-xs text-primary uppercase tracking-[0.15em] mb-3">{person.role}</p>
+      
+      {person.bio && (
+        <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">{person.bio}</p>
+      )}
+
+      {person.highlights.length > 0 && (
+        <ul className="space-y-1.5">
+          {person.highlights.map((h, i) => (
+            <li key={i} className="flex items-start gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+              <span className="font-body text-xs text-muted-foreground">{h}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </motion.div>
+);
 
 const Program = () => {
   const ref = useRef(null);
@@ -93,44 +186,51 @@ const Program = () => {
                     <p className="font-body text-sm font-light text-muted-foreground">
                       {item.desc}
                     </p>
-
-                    {item.speakers && (
-                      <div className="mt-6 space-y-6">
-                        <div>
-                          <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Модераторы</p>
-                          <div className="space-y-3">
-                            {moderators.map(m => (
-                              <div key={m.name} className="flex items-start gap-3">
-                                <Mic className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                                <div>
-                                  <p className="font-body text-sm font-medium text-foreground">{m.name}</p>
-                                  <p className="font-body text-xs text-muted-foreground">{m.role}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                        <div>
-                          <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Спикеры</p>
-                          <div className="space-y-3">
-                            {publicTalkSpeakers.map(s => (
-                              <div key={s.name} className="flex items-start gap-3">
-                                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                                <div>
-                                  <p className="font-body text-sm font-medium text-foreground">{s.name}</p>
-                                  {s.role && <p className="font-body text-xs text-muted-foreground">{s.role}</p>}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
+
+          {/* Moderators */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mb-16"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-8 h-px bg-primary" />
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
+                Public Talk · Модераторы
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {moderatorsData.map((person, i) => (
+                <PersonCard key={person.name} person={person} index={i} isInView={isInView} />
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Speakers */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mb-24"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-8 h-px bg-primary" />
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
+                Public Talk · Спикеры
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {speakersData.map((person, i) => (
+                <PersonCard key={person.name} person={person} index={i} isInView={isInView} />
+              ))}
+            </div>
+          </motion.div>
 
           {/* CTA */}
           <motion.div
