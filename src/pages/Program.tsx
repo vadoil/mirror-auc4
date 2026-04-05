@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import stupinPhoto from "@/assets/speaker-stupin.png";
 import pavlovPhoto from "@/assets/speaker-pavlov.png";
 import spiroPhoto from "@/assets/speaker-spiro.png";
+import gunderinaPhoto from "@/assets/speaker-gunderina.png";
 
 const program = [
   { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
@@ -65,7 +66,7 @@ const speakersData = [
       "Основатель и CEO проекта Karmatravel",
       "MBA ГУ ВШЭ «Политические и бизнес-коммуникации»",
     ],
-    image: null,
+    image: gunderinaPhoto,
   },
   {
     name: "Анна Евнич",
