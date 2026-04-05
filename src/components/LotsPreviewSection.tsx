@@ -148,16 +148,16 @@ const LotsPreviewSection = () => {
                     )}
                   </div>
                   <div className="p-4">
-                    <h3 className="font-display text-sm text-cream mb-1 group-hover:text-primary transition-colors duration-300 line-clamp-1">{lot.title}</h3>
+                    <h3 className="font-display text-sm text-foreground mb-1 group-hover:text-primary transition-colors duration-300 line-clamp-1">{lot.title}</h3>
                     {lot.description && (
-                      <p className="font-body text-[11px] text-cream/40 mb-3 line-clamp-2 leading-relaxed">{lot.description}</p>
+                      <p className="font-body text-[11px] text-muted-foreground mb-3 line-clamp-2 leading-relaxed">{lot.description}</p>
                     )}
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-[9px] uppercase tracking-[0.15em] text-cream/30 font-body">Старт</p>
-                        <p className="font-numbers text-base text-cream font-light">{lot.starting_price.toLocaleString("ru-RU")} ₽</p>
+                        <p className="text-[9px] uppercase tracking-[0.15em] text-muted-foreground/60 font-body">Старт</p>
+                        <p className="font-numbers text-base text-foreground font-light">{lot.starting_price.toLocaleString("ru-RU")} ₽</p>
                       </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-cream/20 group-hover:text-primary transition-colors duration-300" />
+                      <ArrowRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors duration-300" />
                     </div>
                   </div>
                 </Link>

@@ -27,16 +27,16 @@ const HowItWorks = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-warm-black">
+    <div className="min-h-screen bg-background">
       <Header />
       <div className="pt-28 pb-20 section-padding">
         <div className="max-w-4xl mx-auto">
           {/* How it works */}
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="mb-20">
-            <h1 className="font-display text-5xl md:text-7xl text-cream uppercase tracking-tight leading-[0.9] mb-4">
+            <h1 className="font-display text-5xl md:text-7xl text-foreground uppercase tracking-tight leading-[0.9] mb-4">
               Как <span className="text-primary italic">участвовать</span>
             </h1>
-            <p className="font-body text-cream/50 text-lg">
+            <p className="font-body text-muted-foreground text-lg">
               Пять простых шагов от регистрации до доброго дела.
             </p>
           </motion.div>
@@ -48,17 +48,17 @@ const HowItWorks = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 * i }}
-                className="flex items-start gap-6 p-6 bg-cream/5 border border-cream/10"
+                className="flex items-start gap-6 p-6 bg-muted/50 border border-border rounded-lg"
               >
-                <div className="w-12 h-12 border border-primary/30 flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 border border-primary/30 flex items-center justify-center flex-shrink-0 rounded">
                   <step.icon className="w-5 h-5 text-primary" />
                 </div>
                 <div>
                   <div className="flex items-center gap-3 mb-1">
                     <span className="font-numbers text-2xl text-primary/40">{String(i + 1).padStart(2, "0")}</span>
-                    <h3 className="font-display text-lg text-cream uppercase">{step.title}</h3>
+                    <h3 className="font-display text-lg text-foreground uppercase">{step.title}</h3>
                   </div>
-                  <p className="font-body text-sm text-cream/60">{step.desc}</p>
+                  <p className="font-body text-sm text-muted-foreground">{step.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -66,29 +66,29 @@ const HowItWorks = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 mb-24">
             <Link to="/lots" className="btn-primary text-center">Смотреть лоты</Link>
-            <Link to="/auth" className="btn-outline-light text-center">Зарегистрироваться</Link>
+            <Link to="/auth" className="btn-outline text-center">Зарегистрироваться</Link>
           </div>
 
           {/* FAQ */}
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-            <h2 className="font-display text-4xl md:text-5xl text-cream uppercase tracking-tight leading-[0.9] mb-12">
+            <h2 className="font-display text-4xl md:text-5xl text-foreground uppercase tracking-tight leading-[0.9] mb-12">
               Частые <span className="text-primary italic">вопросы</span>
             </h2>
 
             <div className="space-y-0">
               {faqs.map((faq, i) => (
-                <div key={i} className="border-b border-cream/10">
+                <div key={i} className="border-b border-border">
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     className="w-full flex items-center justify-between py-5 text-left group"
                   >
-                    <h3 className="font-display text-base md:text-lg font-light text-cream group-hover:text-primary transition-colors pr-4">
+                    <h3 className="font-display text-base md:text-lg font-light text-foreground group-hover:text-primary transition-colors pr-4">
                       {faq.q}
                     </h3>
-                    <ChevronDown className={`w-4 h-4 text-cream/40 flex-shrink-0 transition-transform duration-300 ${openFaq === i ? "rotate-180 text-primary" : ""}`} />
+                    <ChevronDown className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${openFaq === i ? "rotate-180 text-primary" : ""}`} />
                   </button>
                   <div className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-40 pb-5" : "max-h-0"}`}>
-                    <p className="font-body text-sm text-cream/50 leading-relaxed">{faq.a}</p>
+                    <p className="font-body text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
                   </div>
                 </div>
               ))}
