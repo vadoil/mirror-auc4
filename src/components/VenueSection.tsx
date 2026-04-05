@@ -96,7 +96,7 @@ const VenueSection = () => {
                   </div>
                   <div>
                     <p className="font-body text-xs text-cream/40 uppercase tracking-[0.2em]">Дата</p>
-                    <p className="font-body text-sm text-cream">28 апреля 2026</p>
+                    <p className="font-body text-sm text-cream"><p className="font-body text-sm text-cream">26 апреля 2026</p></p>
                   </div>
                 </div>
 
