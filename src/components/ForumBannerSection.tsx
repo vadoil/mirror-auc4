@@ -96,9 +96,9 @@ const ForumBannerSection = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Link to="/lots" className="btn-primary text-center">
-            Смотреть лоты аукциона
-          </Link>
+          <a href="#contacts" className="btn-primary-light text-center inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 text-xs uppercase tracking-[0.2em] font-body hover:opacity-90 transition-all">
+            Оставить заявку на участие
+          </a>
           <a href="#contacts" className="btn-outline-light text-center">
             Узнать о форуме
           </a>
