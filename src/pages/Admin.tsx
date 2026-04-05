@@ -179,6 +179,7 @@ const Admin = () => {
   const tabs = [
     { key: "lots" as const, label: "Лоты" },
     { key: "bids" as const, label: "Ставки" },
+    { key: "requests" as const, label: "Заявки" },
   ];
 
   return (
