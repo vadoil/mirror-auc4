@@ -54,7 +54,7 @@ const speakersData = [
       "Создатель нейробистро Inspiro в Москве",
       "Эксперт в области здорового питания и sustainability",
     ],
-    image: null,
+    image: spiroPhoto,
   },
   {
     name: "Наталия Гундерина",
