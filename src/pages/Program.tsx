@@ -5,8 +5,6 @@ import { ArrowLeft, Mic, User } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import stupinPhoto from "@/assets/speaker-stupin.png";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 const program = [
   { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
