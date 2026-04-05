@@ -132,19 +132,18 @@ const LotDetail = () => {
       return;
     }
     setBookingSending(true);
-    const { error } = await supabase.from("ticket_requests").insert({
+    const { error } = await supabase.from("lot_reservations" as any).insert({
+      lot_id: id,
       name: bookingForm.name.trim(),
       email: bookingForm.email.trim(),
       phone: bookingForm.phone.trim() || null,
-      ticket_type: `Бронь лота: ${lot?.title || id}`,
-      message: `Бронирование лота "${lot?.title}" (${formatPrice(currentPrice)})`,
     });
     setBookingSending(false);
     if (error) {
       toast.error("Ошибка. Попробуйте позже.");
       return;
     }
-    toast.success("Лот забронирован! Мы свяжемся с вами для подтверждения.");
+    toast.success("Бронь оформлена! Менеджер свяжется для подтверждения.");
     setBookingForm({ name: "", email: "", phone: "" });
     setShowBooking(false);
   };
