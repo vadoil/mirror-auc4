@@ -43,7 +43,7 @@ const ProjectStorySection = () => {
 
   return (
     <section className="py-24 md:py-32 section-padding bg-background">
-      <div ref={ref} className="max-w-5xl mx-auto">
+      <div ref={ref} className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
