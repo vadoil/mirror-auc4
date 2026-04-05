@@ -52,6 +52,15 @@ const Header = () => {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
+            {!isHome && (
+              <Link
+                to="/"
+                className="text-cream/60 hover:text-cream transition-colors duration-300"
+                title="Главная"
+              >
+                <Home className="w-4 h-4" />
+              </Link>
+            )}
             {isHome && (
               <a
                 href="#about"
