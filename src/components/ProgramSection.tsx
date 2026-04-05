@@ -4,12 +4,12 @@ import { useRef } from "react";
 const program = [
   { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
   { time: "16:00", title: "Public Talk", desc: "Тема будет объявлена", highlight: true, speakers: true },
-  { time: "17:30", title: "Открытие аукциона", desc: "Приветственное слово, представление аукциониста и миссии вечера", highlight: true },
-  { time: "18:00", title: "Торги", desc: "Аукцион лотов – wellness-программы, ретриты, эксклюзивный опыт", highlight: true },
-  { time: "19:30", title: "Перерыв и нетворкинг", desc: "Фуршет, живая музыка, общение с экспертами", highlight: false },
-  { time: "20:00", title: "Вторая сессия торгов", desc: "Финальные лоты и эксклюзивные впечатления", highlight: true },
-  { time: "21:00", title: "Церемония закрытия", desc: "Подведение итогов, вручение лотов, благодарности", highlight: false },
-  { time: "21:30", title: "After-party", desc: "Неформальное общение, DJ-сет, бар", highlight: false },
+  { time: "16:45", title: "Кофе-брейк", desc: "Перерыв, общение, подготовка к аукциону", highlight: false },
+  { time: "17:00", title: "Аукцион", desc: "Торги – wellness-программы, ретриты, эксклюзивный опыт", highlight: true },
+  { time: "19:00", title: "Перерыв и нетворкинг", desc: "Фуршет, живая музыка, общение с экспертами", highlight: false },
+  { time: "19:30", title: "Вторая сессия торгов", desc: "Финальные лоты и эксклюзивные впечатления", highlight: true },
+  { time: "20:30", title: "Церемония закрытия", desc: "Подведение итогов, вручение лотов, благодарности", highlight: false },
+  { time: "21:00", title: "After-party", desc: "Неформальное общение, DJ-сет, бар", highlight: false },
 ];
 
 const moderators = [
