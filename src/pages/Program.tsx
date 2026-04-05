@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Mic, User } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import stupinPhoto from "@/assets/speaker-stupin.png";
 
 const program = [
   { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
@@ -26,7 +27,7 @@ const moderatorsData = [
       "Спикер ПМЭФ, СКОЛКОВО, Mediametrics",
       "Эксперт в превентивной медицине и управлении здоровьем",
     ],
-    image: null,
+    image: stupinPhoto,
   },
   {
     name: "Ростислав Павлов",
