@@ -84,11 +84,11 @@ const LotsPreviewSection = () => {
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-px bg-primary" />
-              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
                 Каталог
               </p>
             </div>
-            <h2 className="font-display text-5xl md:text-7xl font-normal uppercase tracking-tight text-cream leading-[0.9]">
+            <h2 className="font-display text-5xl md:text-7xl font-normal uppercase tracking-tight text-foreground leading-[0.9]">
               Лоты <span className="text-primary italic">аукциона</span>
             </h2>
           </div>
