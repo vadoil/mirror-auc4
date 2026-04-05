@@ -133,6 +133,7 @@ const ForumBannerSection = () => {
         showTrainingCheckbox={false}
       />
     </section>
+  );
 };
 
 export default ForumBannerSection;
