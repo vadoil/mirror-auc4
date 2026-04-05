@@ -8,7 +8,7 @@ import AuctioneerSection from "@/components/AuctioneerSection";
 import VenuePreviewSection from "@/components/VenuePreviewSection";
 import TransparencySection from "@/components/TransparencySection";
 import ForumBannerSection from "@/components/ForumBannerSection";
-import OrganizersSection from "@/components/OrganizersSection";
+
 import ForumBannerFooter from "@/components/ForumBannerFooter";
 import ContactsSection from "@/components/ContactsSection";
 import Footer from "@/components/Footer";
