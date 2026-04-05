@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Mic, User } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import stupinPhoto from "@/assets/speaker-stupin.png";
+import stupinPhoto from "@/assets/speaker-stupin.jpg";
 import pavlovPhoto from "@/assets/speaker-pavlov.png";
 import spiroPhoto from "@/assets/speaker-spiro.png";
 import gunderinaPhoto from "@/assets/speaker-gunderina.png";
