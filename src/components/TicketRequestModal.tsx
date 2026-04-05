@@ -69,7 +69,8 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="font-display text-2xl text-cream uppercase tracking-tight">Заявка</h3>
-                <p className="text-cream/40 text-xs font-body mt-1">{ticketType} · {ticketPrice}</p>
+                {ticketPrice && <p className="text-cream/40 text-xs font-body mt-1">{ticketType} · {ticketPrice}</p>}
+                {!ticketPrice && <p className="text-cream/40 text-xs font-body mt-1">{ticketType}</p>}
               </div>
               <button onClick={onClose} className="text-cream/40 hover:text-cream transition-colors">
                 <X size={20} />
