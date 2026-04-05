@@ -2,15 +2,25 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const program = [
-  { time: "17:00", title: "Сбор гостей", desc: "Регистрация, welcome-drink, предварительный просмотр лотов", highlight: false },
-  { time: "17:30", title: "Выставка лотов", desc: "Свободный осмотр, консультации экспертов, каталоги", highlight: false },
-  { time: "18:00", title: "Открытие аукциона", desc: "Приветственное слово, представление аукциониста и миссии вечера", highlight: true },
-  { time: "18:30", title: "Первая сессия торгов", desc: "Категории: современное искусство и фотография", highlight: true },
+  { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
+  { time: "16:00", title: "Public Talk", desc: "Тема будет объявлена", highlight: true, speakers: true },
+  { time: "17:30", title: "Открытие аукциона", desc: "Приветственное слово, представление аукциониста и миссии вечера", highlight: true },
+  { time: "18:00", title: "Торги", desc: "Аукцион лотов — wellness-программы, ретриты, эксклюзивный опыт", highlight: true },
   { time: "19:30", title: "Перерыв и нетворкинг", desc: "Фуршет, живая музыка, общение с экспертами", highlight: false },
-  { time: "20:00", title: "Вторая сессия торгов", desc: "Категории: ювелирное искусство и коллекционные вина", highlight: true },
-  { time: "21:00", title: "Финальные торги", desc: "Топ-лоты вечера и эксклюзивные впечатления", highlight: true },
-  { time: "21:30", title: "Церемония закрытия", desc: "Подведение итогов, вручение лотов, благодарности", highlight: false },
-  { time: "22:00", title: "After-party", desc: "Неформальное общение, DJ-сет, бар", highlight: false },
+  { time: "20:00", title: "Вторая сессия торгов", desc: "Финальные лоты и эксклюзивные впечатления", highlight: true },
+  { time: "21:00", title: "Церемония закрытия", desc: "Подведение итогов, вручение лотов, благодарности", highlight: false },
+  { time: "21:30", title: "After-party", desc: "Неформальное общение, DJ-сет, бар", highlight: false },
+];
+
+const moderators = [
+  { name: "Родион Ступин", role: "Генеральный директор сети клиник «Будь здоров»" },
+  { name: "Ростислав Павлов", role: "Главный врач Гатчинской клиники (ЛО ГБУЗ ГКМБ), победитель рейтинга Forbes «30 до 30»" },
+];
+
+const publicTalkSpeakers = [
+  { name: "Артём Спиро", role: "Импакт-предприниматель, ресторатор, эксперт в области здорового питания" },
+  { name: "Наталья Гундерина", role: "Продюсер проекта Karmalogic, основатель и CEO проекта Karmatravel" },
+  { name: "Анна Евнич", role: "" },
 ];
 
 const ProgramSection = () => {
@@ -29,7 +39,7 @@ const ProgramSection = () => {
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-primary" />
             <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-              28 апреля · расписание
+              26 апреля 2026 · расписание
             </p>
           </div>
           <h2 className="font-display text-5xl md:text-7xl font-light tracking-tight text-foreground leading-[0.9]">
@@ -69,6 +79,34 @@ const ProgramSection = () => {
                   <p className="font-body text-sm font-light text-muted-foreground">
                     {item.desc}
                   </p>
+
+                  {/* Public Talk details */}
+                  {item.speakers && (
+                    <div className="mt-6 space-y-4">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Модераторы</p>
+                        <div className="space-y-2">
+                          {moderators.map(m => (
+                            <div key={m.name}>
+                              <p className="font-body text-sm font-medium text-foreground">{m.name}</p>
+                              <p className="font-body text-xs text-muted-foreground">{m.role}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Спикеры</p>
+                        <div className="space-y-2">
+                          {publicTalkSpeakers.map(s => (
+                            <div key={s.name}>
+                              <p className="font-body text-sm font-medium text-foreground">{s.name}</p>
+                              {s.role && <p className="font-body text-xs text-muted-foreground">{s.role}</p>}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             ))}
