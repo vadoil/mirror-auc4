@@ -1,7 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calendar, MapPin, Download } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const ForumBannerSection = () => {
   const ref = useRef(null);
