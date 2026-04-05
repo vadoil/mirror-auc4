@@ -85,12 +85,19 @@ const LotsPreviewSection = () => {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-px bg-primary" />
               <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-                Каталог
+                Варианты лотов
               </p>
             </div>
-            <h2 className="font-display text-5xl md:text-7xl font-normal uppercase tracking-tight text-foreground leading-[0.9]">
+            <h2 className="font-display text-5xl md:text-7xl font-normal uppercase tracking-tight text-foreground leading-[0.9] mb-6">
               Лоты <span className="text-primary italic">аукциона</span>
             </h2>
+            <p className="font-body text-sm text-muted-foreground max-w-2xl leading-relaxed">
+              Мы предлагаем лоты в направлениях:{" "}
+              <Link to="/lots?cat=Нейрогастрономия" className="text-primary hover:underline">нейрогастрономия</Link>,{" "}
+              <Link to="/lots?cat=Биохакинг" className="text-primary hover:underline">биохакинг и велнес</Link>,{" "}
+              <Link to="/lots?cat=Ретрит" className="text-primary hover:underline">ретрит и восстановление</Link>,{" "}
+              <Link to="/lots?cat=Встреча" className="text-primary hover:underline">развитие и вдохновение</Link>.
+            </p>
           </div>
           <Link to="/lots" className="btn-outline inline-flex items-center gap-2 self-start md:self-auto">
             Все лоты <ArrowRight className="w-4 h-4" />
