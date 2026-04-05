@@ -359,8 +359,11 @@ const LotDetail = () => {
                 </button>
               </div>
 
-              <p className="text-muted-foreground text-sm font-body mb-6">
-                Оставьте контактные данные, и мы свяжемся с вами для подтверждения брони. Покупка лота – в день аукциона.
+              <p className="text-muted-foreground text-sm font-body mb-4">
+                Это предварительная бронь — она не обязывает к покупке. Мы свяжемся с вами для подтверждения. Покупка лота происходит в день аукциона 26 апреля.
+              </p>
+              <p className="text-muted-foreground/60 text-xs font-body mb-6">
+                Для онлайн-ставок необходим билет «Участник + Депозит».
               </p>
 
               <form onSubmit={handleBooking} className="space-y-4">
