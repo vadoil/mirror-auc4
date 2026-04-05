@@ -74,7 +74,34 @@ const ProjectStorySection = () => {
               Привет! Мы — <strong>Гиза</strong> и <strong>Саша</strong>, занимаемся проектами, бизнесом и благотворительностью в двух городах — Москве и Петербурге. Поэтому наш проект «ОТРАЖЕНИЕ ДОБРА», как инь и янь, будет объединять разные по вайбу, но объединённые одной целью события в наших городах.
             </p>
 
-            <div className="grid grid-cols-3 gap-6 md:gap-10 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              {/* Sasha */}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-4 border-2 border-primary/20">
+                  <img src={sashaPhoto} alt="Александра Павлова" className="w-full h-full object-cover" />
+                </div>
+                <h4 className="font-display text-xl md:text-2xl font-light text-foreground mb-2">Александра Павлова</h4>
+                <ul className="font-body text-sm text-muted-foreground space-y-1 text-left">
+                  <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />Автор книги по поддержке женщин с раком щитовидной железы</li>
+                  <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />Продюсер медицинских конференций</li>
+                  <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />Предприниматель и попечитель фонда «Не напрасно»</li>
+                </ul>
+              </div>
+              {/* Giza */}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-4 border-2 border-primary/20">
+                  <img src={gizaPhoto} alt="Гизела Тольц" className="w-full h-full object-cover" />
+                </div>
+                <h4 className="font-display text-xl md:text-2xl font-light text-foreground mb-2">Гизела Тольц</h4>
+                <ul className="font-body text-sm text-muted-foreground space-y-1 text-left">
+                  <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />Организатор медицинских, коммерческих, корпоративных и частных мероприятий</li>
+                  <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />10 лет работы с лучшими врачами и экспертами России и Европы</li>
+                  <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />Автор проекта «Поговори с Гизой» — подкасты и поддержка женщин</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-6 md:gap-10 mb-8 pt-6 border-t border-border">
               <div className="text-center">
                 <p className="font-display text-lg md:text-xl text-foreground italic">две подруги</p>
               </div>
