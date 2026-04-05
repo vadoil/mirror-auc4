@@ -85,39 +85,50 @@ const PersonCard = ({ person, index, isInView }: PersonCardProps) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     animate={isInView ? { opacity: 1, y: 0 } : {}}
-    transition={{ duration: 0.6, delay: 0.12 * index }}
-    className="group flex flex-col sm:flex-row gap-6 bg-card border border-border rounded-lg p-6 hover:border-primary/30 transition-all duration-500"
+    transition={{ duration: 0.6, delay: 0.2 * index }}
+    className="group"
   >
-    {/* Photo placeholder */}
-    <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 bg-muted/50 rounded-lg overflow-hidden flex items-center justify-center">
-      {person.image ? (
-        <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
-      ) : (
-        <User className="w-10 h-10 text-muted-foreground/30" />
-      )}
-    </div>
+    <div className="grid grid-cols-[1fr_1.2fr] gap-6 items-start">
+      {/* Photo — tall card like organizers */}
+      <div className="relative aspect-[3/4] overflow-hidden bg-muted/30 rounded-lg">
+        {person.image ? (
+          <img
+            src={person.image}
+            alt={person.name}
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <User className="w-12 h-12 text-muted-foreground/20" />
+          </div>
+        )}
+      </div>
 
-    {/* Info */}
-    <div className="flex-1 min-w-0">
-      <h3 className="font-display text-xl md:text-2xl text-foreground mb-1 group-hover:text-primary transition-colors">
-        {person.name}
-      </h3>
-      <p className="font-body text-xs text-primary uppercase tracking-[0.15em] mb-3">{person.role}</p>
-      
-      {person.bio && (
-        <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">{person.bio}</p>
-      )}
+      {/* Info */}
+      <div className="py-4">
+        <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">
+          {person.role}
+        </p>
+        <h3 className="font-display text-2xl md:text-3xl font-light text-foreground mb-4 leading-tight">
+          {person.name}
+        </h3>
+        <div className="w-10 h-px bg-primary mb-4" />
 
-      {person.highlights.length > 0 && (
-        <ul className="space-y-1.5">
-          {person.highlights.map((h, i) => (
-            <li key={i} className="flex items-start gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-              <span className="font-body text-xs text-muted-foreground">{h}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+        {person.bio && (
+          <p className="font-body text-sm font-light text-muted-foreground leading-relaxed mb-4">{person.bio}</p>
+        )}
+
+        {person.highlights.length > 0 && (
+          <ul className="space-y-2">
+            {person.highlights.map((h, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />
+                <span className="font-body text-sm font-light leading-relaxed text-muted-foreground">{h}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   </motion.div>
 );
