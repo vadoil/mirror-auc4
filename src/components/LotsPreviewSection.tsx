@@ -136,8 +136,8 @@ const LotsPreviewSection = () => {
                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-cream/5 flex items-center justify-center">
-                        <span className="text-cream/20 font-display text-2xl">Лот</span>
+                      <div className="absolute inset-0 bg-muted flex items-center justify-center">
+                        <span className="text-muted-foreground/30 font-display text-2xl">Лот</span>
                       </div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-warm-black/70 via-transparent to-transparent" />
