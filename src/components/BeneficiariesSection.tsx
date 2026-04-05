@@ -41,13 +41,13 @@ const BeneficiariesSection = () => {
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-muted/50 border border-border rounded-lg p-8 group hover:border-primary/30 transition-all duration-500"
+            className="bg-muted/50 border border-border rounded-lg p-8 group hover:border-primary/30 hover:shadow-[0_12px_40px_-8px_hsl(var(--primary)/0.12)] hover:-translate-y-1 transition-all duration-500"
           >
-            <div className="w-12 h-12 border border-primary/30 rounded-full flex items-center justify-center mb-6 group-hover:border-primary/60 transition-colors">
-              <Heart className="w-5 h-5 text-primary" />
+            <div className="w-12 h-12 border border-primary/30 rounded-full flex items-center justify-center mb-6 group-hover:border-primary/60 group-hover:bg-primary/5 transition-all duration-500">
+              <Heart className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-500" />
             </div>
             <p className="font-numbers text-3xl text-primary font-light mb-2">15 лет</p>
             <p className="font-body text-sm text-muted-foreground leading-relaxed">
@@ -56,10 +56,10 @@ const BeneficiariesSection = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-muted/50 border border-border rounded-lg p-8 group hover:border-primary/30 transition-all duration-500"
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.45 }}
+            className="bg-muted/50 border border-border rounded-lg p-8 group hover:border-primary/30 hover:shadow-[0_12px_40px_-8px_hsl(var(--primary)/0.12)] hover:-translate-y-1 transition-all duration-500"
           >
             <div className="w-12 h-12 border border-primary/30 rounded-full flex items-center justify-center mb-6 group-hover:border-primary/60 transition-colors">
               <Globe className="w-5 h-5 text-primary" />
