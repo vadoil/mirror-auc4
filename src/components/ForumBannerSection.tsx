@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calendar, MapPin, Download } from "lucide-react";
+import forumBanner from "@/assets/forum-women-banner.png";
 
 const ForumBannerSection = () => {
   const ref = useRef(null);
