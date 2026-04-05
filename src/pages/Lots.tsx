@@ -50,10 +50,18 @@ const timeLeft = (endAt: string | null) => {
   return `${h} ч. ${m} мин.`;
 };
 
+const categories = [
+  { label: "Нейрогастрономия", filter: "нейрогастрономия" },
+  { label: "Биохакинг и велнесс", filter: "биохакинг" },
+  { label: "Ретрит и восстановление", filter: "ретрит" },
+  { label: "Развитие и вдохновение", filter: "развитие" },
+];
+
 const Lots = () => {
   const [lots, setLots] = useState<Lot[]>([]);
   const [maxBids, setMaxBids] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,6 +99,10 @@ const Lots = () => {
 
   const getCurrentPrice = (lot: Lot) => maxBids[lot.id] || lot.starting_price;
 
+  const filteredLots = activeFilter
+    ? lots.filter((l) => l.category?.toLowerCase().includes(activeFilter))
+    : lots;
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -103,20 +115,48 @@ const Lots = () => {
             className="mb-12"
           >
             <h1 className="font-display text-5xl md:text-7xl text-foreground uppercase tracking-tight leading-[0.9] mb-4">
-              Каталог <span className="text-primary italic">лотов</span>
+              Варианты <span className="text-primary italic">лотов</span>
             </h1>
-            <p className="font-body text-muted-foreground text-lg max-w-xl">
-              Каждый лот – это уникальная возможность. Все средства направляются на благотворительность.
+            <p className="font-body text-muted-foreground text-base max-w-2xl mb-6">
+              Мы предлагаем лоты в направлениях:
+            </p>
+            <div className="flex flex-wrap gap-2 mb-2">
+              <button
+                onClick={() => setActiveFilter(null)}
+                className={`px-4 py-2 text-xs uppercase tracking-[0.15em] font-body transition-all duration-300 border ${
+                  activeFilter === null
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-transparent text-muted-foreground border-border hover:border-primary/40 hover:text-foreground"
+                }`}
+              >
+                Все
+              </button>
+              {categories.map((cat) => (
+                <button
+                  key={cat.filter}
+                  onClick={() => setActiveFilter(activeFilter === cat.filter ? null : cat.filter)}
+                  className={`px-4 py-2 text-xs uppercase tracking-[0.15em] font-body transition-all duration-300 border ${
+                    activeFilter === cat.filter
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-transparent text-muted-foreground border-border hover:border-primary/40 hover:text-foreground"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+            <p className="font-body text-muted-foreground/60 text-sm">
+              Каждый лот – уникальная возможность. Все средства направляются на благотворительность.
             </p>
           </motion.div>
 
           {loading ? (
             <div className="text-muted-foreground font-body text-center py-20">Загрузка лотов...</div>
-          ) : lots.length === 0 ? (
-            <div className="text-muted-foreground font-body text-center py-20">Активных лотов пока нет</div>
+          ) : filteredLots.length === 0 ? (
+            <div className="text-muted-foreground font-body text-center py-20">Лотов в этой категории пока нет</div>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {lots.map((lot, i) => {
+              {filteredLots.map((lot, i) => {
                 const imgUrl = getImageUrl(lot.image_url) || fallbackImages[i];
                 const currentPrice = getCurrentPrice(lot);
                 const remaining = timeLeft(lot.end_at);
