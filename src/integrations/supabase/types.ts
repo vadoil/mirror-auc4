@@ -55,6 +55,57 @@ export type Database = {
           },
         ]
       }
+      lot_reservations: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          lot_id: string
+          message: string | null
+          name: string
+          phone: string | null
+          status: string
+          ticket_request_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          lot_id: string
+          message?: string | null
+          name: string
+          phone?: string | null
+          status?: string
+          ticket_request_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          lot_id?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+          status?: string
+          ticket_request_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lot_reservations_lot_id_fkey"
+            columns: ["lot_id"]
+            isOneToOne: false
+            referencedRelation: "lots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lot_reservations_ticket_request_id_fkey"
+            columns: ["ticket_request_id"]
+            isOneToOne: false
+            referencedRelation: "ticket_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lots: {
         Row: {
           bid_step: number
