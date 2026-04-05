@@ -162,7 +162,7 @@ const Header = () => {
                   onClick={() => { setMenuOpen(false); setTicketModal(true); }}
                   className="mt-4 bg-primary text-primary-foreground text-sm uppercase tracking-[0.2em] px-8 py-3 font-body"
                 >
-                  Записаться на аукцион
+                  Задать вопрос
                 </button>
                 {user ? (
                   <button onClick={() => { setMenuOpen(false); signOut(); }} className="text-muted-foreground text-sm uppercase tracking-[0.2em] font-body">
