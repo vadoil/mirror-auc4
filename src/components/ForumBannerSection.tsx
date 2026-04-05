@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calendar, MapPin, Download } from "lucide-react";
+import forumBanner from "@/assets/forum-women-banner.png";
 
 const ForumBannerSection = () => {
   const ref = useRef(null);
@@ -30,7 +31,17 @@ const ForumBannerSection = () => {
             Осень 2026 · Москва
           </p>
           <div className="w-16 h-px bg-primary mx-auto mb-8" />
+
+          {/* Banner image */}
+          <div className="max-w-3xl mx-auto mb-12">
+            <img
+              src={forumBanner}
+              alt="Форум для женщин «Отражение» — осень '26"
+              className="w-full h-auto rounded-sm"
+            />
+          </div>
         </motion.div>
+
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
