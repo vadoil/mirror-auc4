@@ -72,7 +72,7 @@ const LotsPreviewSection = () => {
   if (!loaded) return null;
 
   return (
-    <section id="lots-preview" className="relative z-20 py-24 md:py-32 bg-warm-black">
+    <section id="lots-preview" className="relative z-20 py-24 md:py-32 bg-background">
       <div className="section-padding">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -84,15 +84,15 @@ const LotsPreviewSection = () => {
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-px bg-primary" />
-              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
                 Каталог
               </p>
             </div>
-            <h2 className="font-display text-5xl md:text-7xl font-normal uppercase tracking-tight text-cream leading-[0.9]">
+            <h2 className="font-display text-5xl md:text-7xl font-normal uppercase tracking-tight text-foreground leading-[0.9]">
               Лоты <span className="text-primary italic">аукциона</span>
             </h2>
           </div>
-          <Link to="/lots" className="btn-outline-light inline-flex items-center gap-2 self-start md:self-auto">
+          <Link to="/lots" className="btn-outline inline-flex items-center gap-2 self-start md:self-auto">
             Все лоты <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
@@ -115,7 +115,7 @@ const LotsPreviewSection = () => {
               >
                 <Link
                   to={useStatic ? "/lots" : `/lots/${lot.id}`}
-                  className="group block bg-cream/5 border border-cream/10 hover:border-primary/30 transition-all duration-500 overflow-hidden relative"
+                  className="group block bg-card border border-border hover:border-primary/30 transition-all duration-500 overflow-hidden relative rounded-lg"
                 >
                   {/* Hot badge on first lot */}
                   {i === 0 && (
@@ -136,8 +136,8 @@ const LotsPreviewSection = () => {
                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-cream/5 flex items-center justify-center">
-                        <span className="text-cream/20 font-display text-2xl">Лот</span>
+                      <div className="absolute inset-0 bg-muted flex items-center justify-center">
+                        <span className="text-muted-foreground/30 font-display text-2xl">Лот</span>
                       </div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-warm-black/70 via-transparent to-transparent" />
@@ -148,16 +148,16 @@ const LotsPreviewSection = () => {
                     )}
                   </div>
                   <div className="p-4">
-                    <h3 className="font-display text-sm text-cream mb-1 group-hover:text-primary transition-colors duration-300 line-clamp-1">{lot.title}</h3>
+                    <h3 className="font-display text-sm text-foreground mb-1 group-hover:text-primary transition-colors duration-300 line-clamp-1">{lot.title}</h3>
                     {lot.description && (
-                      <p className="font-body text-[11px] text-cream/40 mb-3 line-clamp-2 leading-relaxed">{lot.description}</p>
+                      <p className="font-body text-[11px] text-muted-foreground mb-3 line-clamp-2 leading-relaxed">{lot.description}</p>
                     )}
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-[9px] uppercase tracking-[0.15em] text-cream/30 font-body">Старт</p>
-                        <p className="font-numbers text-base text-cream font-light">{lot.starting_price.toLocaleString("ru-RU")} ₽</p>
+                        <p className="text-[9px] uppercase tracking-[0.15em] text-muted-foreground/60 font-body">Старт</p>
+                        <p className="font-numbers text-base text-foreground font-light">{lot.starting_price.toLocaleString("ru-RU")} ₽</p>
                       </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-cream/20 group-hover:text-primary transition-colors duration-300" />
+                      <ArrowRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors duration-300" />
                     </div>
                   </div>
                 </Link>

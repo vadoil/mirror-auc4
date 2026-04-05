@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Gavel, User, LogIn } from "lucide-react";
+import { Menu, X, Gavel, User, LogIn, Home } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import TicketRequestModal from "./TicketRequestModal";
 
@@ -52,6 +52,15 @@ const Header = () => {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
+            {!isHome && (
+              <Link
+                to="/"
+                className="text-cream/60 hover:text-cream transition-colors duration-300"
+                title="Главная"
+              >
+                <Home className="w-4 h-4" />
+              </Link>
+            )}
             {isHome && (
               <a
                 href="#about"
@@ -119,6 +128,11 @@ const Header = () => {
               className="lg:hidden bg-warm-black/98 backdrop-blur-xl"
             >
               <nav className="flex flex-col items-center py-8 gap-6">
+                {!isHome && (
+                  <Link to="/" onClick={() => setMenuOpen(false)} className="text-cream/80 text-sm uppercase tracking-[0.2em] font-body font-light flex items-center gap-2">
+                    <Home className="w-4 h-4" /> Главная
+                  </Link>
+                )}
                 {isHome && (
                   <a href="#about" onClick={() => setMenuOpen(false)} className="text-cream/80 text-sm uppercase tracking-[0.2em] font-body font-light">
                     О проекте

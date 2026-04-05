@@ -35,7 +35,6 @@ const formatPrice = (n: number) => n.toLocaleString("ru-RU") + " ₽";
 const getImageUrl = (url: string | null) => {
   if (!url) return null;
   if (url.startsWith("http")) return url;
-  // Storage URL
   const { data } = supabase.storage.from("lot-images").getPublicUrl(url);
   return data.publicUrl;
 };
@@ -66,7 +65,6 @@ const Lots = () => {
 
       if (lotsData) {
         setLots(lotsData as Lot[]);
-        // Fetch max bids per lot
         const ids = lotsData.map((l: any) => l.id);
         if (ids.length > 0) {
           const { data: bidsData } = await supabase
@@ -94,7 +92,7 @@ const Lots = () => {
   const getCurrentPrice = (lot: Lot) => maxBids[lot.id] || lot.starting_price;
 
   return (
-    <div className="min-h-screen bg-warm-black">
+    <div className="min-h-screen bg-background">
       <Header />
       <div className="pt-28 pb-20 section-padding">
         <div className="max-w-7xl mx-auto">
@@ -104,18 +102,18 @@ const Lots = () => {
             transition={{ duration: 0.8 }}
             className="mb-12"
           >
-            <h1 className="font-display text-5xl md:text-7xl text-cream uppercase tracking-tight leading-[0.9] mb-4">
+            <h1 className="font-display text-5xl md:text-7xl text-foreground uppercase tracking-tight leading-[0.9] mb-4">
               Каталог <span className="text-primary italic">лотов</span>
             </h1>
-            <p className="font-body text-cream/50 text-lg max-w-xl">
+            <p className="font-body text-muted-foreground text-lg max-w-xl">
               Каждый лот — это уникальная возможность. Все средства направляются на благотворительность.
             </p>
           </motion.div>
 
           {loading ? (
-            <div className="text-cream/40 font-body text-center py-20">Загрузка лотов...</div>
+            <div className="text-muted-foreground font-body text-center py-20">Загрузка лотов...</div>
           ) : lots.length === 0 ? (
-            <div className="text-cream/40 font-body text-center py-20">Активных лотов пока нет</div>
+            <div className="text-muted-foreground font-body text-center py-20">Активных лотов пока нет</div>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {lots.map((lot, i) => {
@@ -132,9 +130,9 @@ const Lots = () => {
                   >
                     <Link
                       to={`/lots/${lot.id}`}
-                      className="group block bg-cream/5 border border-cream/10 hover:border-primary/30 transition-all duration-500 overflow-hidden"
+                      className="group block bg-card border border-border hover:border-primary/30 transition-all duration-500 overflow-hidden rounded-lg"
                     >
-                      <div className="aspect-[4/3] relative overflow-hidden bg-cream/5">
+                      <div className="aspect-[4/3] relative overflow-hidden">
                         {imgUrl && (
                           <img
                             src={imgUrl}
@@ -143,7 +141,7 @@ const Lots = () => {
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                           />
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-warm-black/60 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                         {lot.category && (
                           <div className="absolute top-3 left-3 bg-primary/90 px-3 py-1">
                             <span className="text-primary-foreground text-[10px] uppercase tracking-[0.2em] font-body">
@@ -152,33 +150,33 @@ const Lots = () => {
                           </div>
                         )}
                         {remaining && (
-                          <div className="absolute top-3 right-3 bg-warm-black/80 backdrop-blur-sm px-3 py-1 flex items-center gap-1.5">
-                            <Clock className="w-3 h-3 text-cream/60" />
-                            <span className="text-cream/80 text-[10px] uppercase tracking-wider font-body">
+                          <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-3 py-1 flex items-center gap-1.5">
+                            <Clock className="w-3 h-3 text-white/60" />
+                            <span className="text-white/80 text-[10px] uppercase tracking-wider font-body">
                               {remaining}
                             </span>
                           </div>
                         )}
                       </div>
                       <div className="p-5">
-                        <h3 className="font-display text-base text-cream mb-1 group-hover:text-primary transition-colors duration-300">
+                        <h3 className="font-display text-base text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
                           {lot.title}
                         </h3>
                         {lot.description && (
-                          <p className="font-body text-xs text-cream/40 mb-4 line-clamp-2">
+                          <p className="font-body text-xs text-muted-foreground mb-4 line-clamp-2">
                             {lot.description}
                           </p>
                         )}
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-[10px] uppercase tracking-[0.2em] text-cream/30 font-body">
+                            <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60 font-body">
                               {maxBids[lot.id] ? "Текущая цена" : "Старт"}
                             </p>
-                            <p className="font-numbers text-lg text-cream font-light">
+                            <p className="font-numbers text-lg text-foreground font-light">
                               {formatPrice(currentPrice)}
                             </p>
                           </div>
-                          <ArrowRight className="w-4 h-4 text-cream/20 group-hover:text-primary transition-colors duration-300" />
+                          <ArrowRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-primary transition-colors duration-300" />
                         </div>
                       </div>
                     </Link>
