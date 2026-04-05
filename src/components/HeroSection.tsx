@@ -57,7 +57,7 @@ const HeroSection = () => {
                 transition={{ duration: 1.2, delay: 0.5 }}
               >
                 <p className="font-body text-cream/40 text-xs md:text-sm uppercase tracking-[0.3em] mb-4">
-                  Благотворительный аукцион
+                  Благотворительный аукцион · 26 апреля 2026
                 </p>
                 <h1 className="font-display text-cream text-5xl sm:text-6xl md:text-[7rem] lg:text-[9rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]">
                   Отра
@@ -74,7 +74,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.8, delay: 1.0 }}
                 className="font-body text-cream/60 text-lg md:text-xl lg:text-2xl font-light mt-6 max-w-lg"
               >
-                Один вечер. Уникальные лоты. Все средства – на добрые дела.
+                Первый в России wellness-аукцион. Уникальные лоты. Все средства – на добрые дела.
               </motion.p>
             </div>
 
@@ -118,12 +118,12 @@ const HeroSection = () => {
               <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">на благотворительность</p>
             </div>
             <div>
-              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">10+</p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">уникальных лотов</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">15+</p>
+              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">лотов</p>
             </div>
             <div>
-              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">1</p>
-              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">незабываемый вечер</p>
+              <p className="font-numbers text-3xl md:text-4xl font-normal text-cream uppercase">50+</p>
+              <p className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body mt-1">гостей</p>
             </div>
           </motion.div>
         </div>
