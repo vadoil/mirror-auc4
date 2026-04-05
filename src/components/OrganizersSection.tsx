@@ -8,13 +8,13 @@ const OrganizersSection = () => {
 
   return (
     <section className="relative overflow-hidden bg-background">
-      <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 min-h-[480px] md:min-h-[560px]">
+      <div ref={ref} className="grid grid-cols-1 md:grid-cols-2">
         {/* Left — photo */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8 }}
-          className="relative overflow-hidden"
+          className="relative aspect-square md:aspect-auto overflow-hidden"
         >
           <img
             src={mirrorPhoto}
@@ -25,43 +25,41 @@ const OrganizersSection = () => {
 
         {/* Right — text */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-col justify-center items-start px-8 md:px-12 lg:px-16 py-12 md:py-16 relative"
+          className="relative flex flex-col justify-between p-10 md:p-14 lg:p-16 min-h-[400px] md:min-h-[520px]"
         >
-          {/* Top corners — date */}
-          <div className="absolute top-6 left-8 md:left-12 lg:left-16 flex flex-col leading-none">
-            <span className="font-display text-3xl md:text-4xl font-light tracking-tight text-foreground">
+          {/* Top row: Осень ... '26 */}
+          <div className="flex items-start justify-between">
+            <span className="font-display text-2xl md:text-3xl font-light text-foreground">
               Осень
             </span>
-          </div>
-          <div className="absolute top-6 right-8 md:right-12 lg:right-16">
-            <span className="font-display text-3xl md:text-4xl font-light tracking-tight text-foreground">
+            <span className="font-display text-2xl md:text-3xl font-light text-foreground">
               '26
             </span>
           </div>
 
           {/* Center content */}
-          <div className="mt-16 md:mt-20 w-full">
-            <p className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-muted-foreground font-body mb-4">
+          <div>
+            <p className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-muted-foreground font-body mb-5">
               Форум для женщин
             </p>
-
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight tracking-tight text-foreground leading-[0.95] mb-8">
-              <span className="block">Отражен
-              <span className="font-light">ие</span></span>
-              <span className="block">Отражение</span>
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] lg:text-[4rem] font-bold tracking-tight text-foreground leading-[1.1]">
+              Отражение
+              <br />
+              Отражение
             </h2>
+          </div>
 
-            <div className="mt-8 md:mt-12 space-y-1">
-              <p className="font-body text-xs md:text-sm uppercase tracking-[0.25em] text-foreground font-medium">
-                Начало твоей прайм эры
-              </p>
-              <p className="font-body text-xs md:text-sm uppercase tracking-[0.25em] text-muted-foreground">
-                Встречаемся в РБК События
-              </p>
-            </div>
+          {/* Bottom text */}
+          <div className="space-y-1">
+            <p className="font-body text-xs md:text-sm uppercase tracking-[0.25em] text-foreground font-semibold">
+              Начало твоей прайм эры
+            </p>
+            <p className="font-body text-xs md:text-sm uppercase tracking-[0.25em] text-muted-foreground">
+              Встречаемся в РБК События
+            </p>
           </div>
         </motion.div>
       </div>
