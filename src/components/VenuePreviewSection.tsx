@@ -26,14 +26,14 @@ const VenuePreviewSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-0 border border-border overflow-hidden rounded-lg">
+        <div className="grid lg:grid-cols-2 gap-0 border border-border overflow-hidden rounded-lg group/card hover:border-primary/20 hover:shadow-[0_20px_60px_-15px_hsl(var(--primary)/0.08)] transition-all duration-700">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative aspect-[4/3] lg:aspect-auto min-h-[350px] overflow-hidden"
+            className="relative aspect-[4/3] lg:aspect-auto min-h-[350px] overflow-hidden group"
           >
-            <img src={venueImage} alt="Место быть – баланс-холл" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+            <img src={venueImage} alt="Место быть – баланс-холл" loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
           </motion.div>
 
           <motion.div

@@ -10,7 +10,7 @@ const AboutSection = () => {
   return (
     <section id="about" className="relative bg-background overflow-hidden">
       <div ref={ref}>
-        <div className="py-20 md:py-32 section-padding">
+        <div className="py-24 md:py-32 section-padding">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0 }}

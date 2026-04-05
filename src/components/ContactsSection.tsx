@@ -36,10 +36,10 @@ const ContactsSection = () => {
           {contacts.map((c, i) => (
             <motion.div
               key={c.tg}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 * i }}
-              className="group relative text-center p-8 md:p-10 bg-card border border-border hover:border-primary/20 transition-all duration-500"
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 * i }}
+              className="group relative text-center p-8 md:p-10 bg-card border border-border rounded-lg hover:border-primary/20 hover:shadow-[0_12px_40px_-8px_hsl(var(--primary)/0.1)] hover:-translate-y-1 transition-all duration-500"
             >
               <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-5">
                 {c.role}
