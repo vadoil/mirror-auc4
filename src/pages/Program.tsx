@@ -89,50 +89,43 @@ const PersonCard = ({ person, index, isInView }: PersonCardProps) => (
     initial={{ opacity: 0, y: 30 }}
     animate={isInView ? { opacity: 1, y: 0 } : {}}
     transition={{ duration: 0.6, delay: 0.2 * index }}
-    className="group"
+    className="group flex flex-col items-center text-center"
   >
-    <div className="grid grid-cols-[1fr_1.2fr] gap-6 items-start">
-      {/* Photo — tall card like organizers */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-muted/30 rounded-lg">
-        {person.image ? (
-          <img
-            src={person.image}
-            alt={person.name}
-            className="absolute inset-0 w-full h-full object-cover object-top"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <User className="w-12 h-12 text-muted-foreground/20" />
-          </div>
-        )}
-      </div>
-
-      {/* Info */}
-      <div className="py-4">
-        <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">
-          {person.role}
-        </p>
-        <h3 className="font-display text-2xl md:text-3xl font-light text-foreground mb-4 leading-tight">
-          {person.name}
-        </h3>
-        <div className="w-10 h-px bg-primary mb-4" />
-
-        {person.bio && (
-          <p className="font-body text-sm font-light text-muted-foreground leading-relaxed mb-4">{person.bio}</p>
-        )}
-
-        {person.highlights.length > 0 && (
-          <ul className="space-y-2">
-            {person.highlights.map((h, i) => (
-              <li key={i} className="flex items-start gap-2">
-                <span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />
-                <span className="font-body text-sm font-light leading-relaxed text-muted-foreground">{h}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+    {/* Circle photo */}
+    <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden bg-muted/30 mb-6 ring-2 ring-border group-hover:ring-primary/30 transition-all duration-500">
+      {person.image ? (
+        <img
+          src={person.image}
+          alt={person.name}
+          className="absolute inset-0 w-full h-full object-cover object-top"
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <User className="w-12 h-12 text-muted-foreground/20" />
+        </div>
+      )}
     </div>
+
+    {/* Info */}
+    <h3 className="font-display text-xl md:text-2xl font-light text-foreground mb-1 leading-tight">
+      {person.name}
+    </h3>
+    <p className="font-body text-[10px] text-primary uppercase tracking-[0.15em] mb-3">{person.role}</p>
+
+    {person.bio && (
+      <p className="font-body text-sm font-light text-muted-foreground leading-relaxed mb-3 max-w-xs">{person.bio}</p>
+    )}
+
+    {person.highlights.length > 0 && (
+      <ul className="space-y-1.5 text-left">
+        {person.highlights.map((h, i) => (
+          <li key={i} className="flex items-start gap-2">
+            <span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />
+            <span className="font-body text-xs font-light text-muted-foreground">{h}</span>
+          </li>
+        ))}
+      </ul>
+    )}
   </motion.div>
 );
 
