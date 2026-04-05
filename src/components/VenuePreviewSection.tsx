@@ -26,7 +26,7 @@ const VenuePreviewSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-0 border border-border overflow-hidden rounded-lg">
+        <div className="grid lg:grid-cols-2 gap-0 border border-border overflow-hidden rounded-lg group/card hover:border-primary/20 hover:shadow-[0_20px_60px_-15px_hsl(var(--primary)/0.08)] transition-all duration-700">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
