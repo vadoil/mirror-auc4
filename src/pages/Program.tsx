@@ -74,7 +74,7 @@ const speakersData = [
     role: "Будет объявлено",
     bio: null,
     highlights: [],
-    image: null,
+    image: evnichPhoto,
   },
 ];
 
