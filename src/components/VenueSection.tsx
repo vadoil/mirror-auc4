@@ -106,7 +106,7 @@ const VenueSection = () => {
                   </div>
                   <div>
                     <p className="font-body text-xs text-cream/40 uppercase tracking-[0.2em]">Время</p>
-                    <p className="font-body text-sm text-cream"><p className="font-body text-sm text-cream">15:00 – 22:00</p> – 23:00</p>
+                    <p className="font-body text-sm text-cream">15:00 · 16:00 · 17:00</p>
                   </div>
                 </div>
 
