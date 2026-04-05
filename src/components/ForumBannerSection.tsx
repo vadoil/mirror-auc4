@@ -40,6 +40,7 @@ const ForumBannerSection = () => {
               className="w-full h-auto rounded-sm"
             />
           </div>
+        </motion.div>
 
 
         <motion.div
