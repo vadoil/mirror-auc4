@@ -1,11 +1,14 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Calendar, MapPin, Download } from "lucide-react";
 import forumBanner from "@/assets/forum-women-banner.png";
+import TicketRequestModal from "./TicketRequestModal";
 
 const ForumBannerSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [forumModal, setForumModal] = useState(false);
+  const [infoModal, setInfoModal] = useState(false);
 
   return (
     <section className="py-24 md:py-32 section-padding bg-charcoal relative overflow-hidden">
