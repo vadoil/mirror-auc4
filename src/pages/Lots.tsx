@@ -50,10 +50,18 @@ const timeLeft = (endAt: string | null) => {
   return `${h} ч. ${m} мин.`;
 };
 
+const categories = [
+  { label: "Нейрогастрономия", filter: "нейрогастрономия" },
+  { label: "Биохакинг и велнесс", filter: "биохакинг" },
+  { label: "Ретрит и восстановление", filter: "ретрит" },
+  { label: "Развитие и вдохновение", filter: "развитие" },
+];
+
 const Lots = () => {
   const [lots, setLots] = useState<Lot[]>([]);
   const [maxBids, setMaxBids] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,24 +99,9 @@ const Lots = () => {
 
   const getCurrentPrice = (lot: Lot) => maxBids[lot.id] || lot.starting_price;
 
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <div className="pt-28 pb-20 section-padding">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-12"
-          >
-            <h1 className="font-display text-5xl md:text-7xl text-foreground uppercase tracking-tight leading-[0.9] mb-4">
-              Каталог <span className="text-primary italic">лотов</span>
-            </h1>
-            <p className="font-body text-muted-foreground text-lg max-w-xl">
-              Каждый лот – это уникальная возможность. Все средства направляются на благотворительность.
-            </p>
-          </motion.div>
+  const filteredLots = activeFilter
+    ? lots.filter((l) => l.category?.toLowerCase().includes(activeFilter))
+    : lots;
 
           {loading ? (
             <div className="text-muted-foreground font-body text-center py-20">Загрузка лотов...</div>

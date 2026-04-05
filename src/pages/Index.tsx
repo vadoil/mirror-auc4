@@ -27,7 +27,7 @@ const Index = () => {
         <VenuePreviewSection />
         <TransparencySection />
         <ForumBannerSection />
-        <OrganizersSection />
+        
         <ContactsSection />
         <ForumBannerFooter />
         <Footer />
