@@ -1,16 +1,28 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import sashaPhoto from "@/assets/organizer-sasha-clean.png";
+import gizaPhoto from "@/assets/organizer-giza-clean.png";
 
 const organizers = [
   {
     name: "Александра Павлова",
     role: "Организатор",
-    desc: "Продюсер благотворительных мероприятий. Идейный вдохновитель и основатель аукциона.",
+    photo: sashaPhoto,
+    points: [
+      "Автор книги по поддержке женщин с раком щитовидной железы",
+      "Продюсер медицинских конференций",
+      "Предприниматель и попечитель фонда «Не напрасно»",
+    ],
   },
   {
     name: "Гизела Тольц",
     role: "Организатор",
-    desc: "Эксперт в области event-менеджмента. Отвечает за безупречный опыт каждого гостя.",
+    photo: gizaPhoto,
+    points: [
+      "Организатор медицинских, коммерческих, корпоративных и частных мероприятий",
+      "10 лет работы с лучшими врачами и экспертами России и Европы",
+      "Автор проекта «Поговори с Гизой» — подкасты и поддержка женщин",
+    ],
   },
 ];
 
@@ -50,11 +62,12 @@ const OrganizersSection = () => {
               className="group"
             >
               <div className="grid grid-cols-[1fr_1.2fr] gap-6 items-start">
-                <div className="relative aspect-[3/4] overflow-hidden bg-charcoal">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display text-5xl text-cream/10">{person.name.charAt(0)}</span>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-warm-black/40 to-transparent" />
+                <div className="relative aspect-[3/4] overflow-hidden bg-muted/30 rounded-lg">
+                  <img
+                    src={person.photo}
+                    alt={person.name}
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                  />
                 </div>
                 <div className="py-4">
                   <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">
@@ -64,9 +77,14 @@ const OrganizersSection = () => {
                     {person.name}
                   </h3>
                   <div className="w-10 h-px bg-primary mb-4" />
-                  <p className="font-body text-sm font-light leading-relaxed text-muted-foreground">
-                    {person.desc}
-                  </p>
+                  <ul className="space-y-2">
+                    {person.points.map((point, j) => (
+                      <li key={j} className="flex items-start gap-2">
+                        <span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />
+                        <span className="font-body text-sm font-light leading-relaxed text-muted-foreground">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </motion.div>
