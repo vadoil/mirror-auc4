@@ -59,9 +59,10 @@ const getImageUrl = (url: string | null) => {
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState<"lots" | "bids">("lots");
+  const [tab, setTab] = useState<"lots" | "bids" | "requests">("lots");
   const [lots, setLots] = useState<Lot[]>([]);
   const [bids, setBids] = useState<Bid[]>([]);
+  const [requests, setRequests] = useState<TicketRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingLot, setEditingLot] = useState<Partial<Lot> | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -71,7 +72,13 @@ const Admin = () => {
   useEffect(() => {
     if (tab === "lots") fetchLots();
     if (tab === "bids") fetchBids();
+    if (tab === "requests") fetchRequests();
   }, [tab]);
+
+  const fetchRequests = async () => {
+    const { data } = await supabase.from("ticket_requests").select("*").order("created_at", { ascending: false });
+    if (data) setRequests(data as TicketRequest[]);
+  };
 
   const checkAuth = async () => {
     const { data: { session } } = await supabase.auth.getSession();
