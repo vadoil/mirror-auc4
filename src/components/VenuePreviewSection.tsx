@@ -64,13 +64,24 @@ const VenuePreviewSection = () => {
               </div>
               <div className="flex items-center gap-4">
                 <Clock className="w-4 h-4 text-primary flex-shrink-0" />
-                <p className="font-body text-sm text-foreground">15:00 – 22:00</p>
+                <p className="font-body text-sm text-foreground">Сбор гостей: 15:00 · Public Talk: 16:00 · Аукцион: 17:00</p>
               </div>
             </div>
 
-            <Link to="/venue" className="btn-outline self-start">
-              Подробнее
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/venue" className="btn-outline">
+                Подробнее
+              </Link>
+              <a
+                href="https://mestobe.ru/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline inline-flex items-center gap-2"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                Сайт площадки
+              </a>
+            </div>
           </motion.div>
         </div>
       </div>
