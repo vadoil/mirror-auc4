@@ -7,6 +7,7 @@ import TicketRequestModal from "./TicketRequestModal";
 
 const navItems = [
   { label: "Лоты", href: "/lots" },
+  { label: "Программа", href: "/program" },
   { label: "Как участвовать", href: "/how-it-works" },
   { label: "Место", href: "/venue" },
 ];
