@@ -2,12 +2,11 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const speakers = [
-  { name: "Михаил Каменский", role: "Искусствовед, эксперт Sotheby's" },
-  { name: "Елена Воронова", role: "Куратор, галерея современного искусства" },
-  { name: "Андрей Петров", role: "Ювелир, основатель дома PETROV" },
-  { name: "Ирина Краснова", role: "Коллекционер, меценат" },
-  { name: "Дмитрий Соловьёв", role: "Винный эксперт, сомелье" },
-  { name: "Ольга Маркова", role: "Директор благотворительного фонда" },
+  { name: "Родион Ступин", role: "Генеральный директор сети клиник «Будь здоров» · Модератор" },
+  { name: "Ростислав Павлов", role: "Главный врач Гатчинской клиники, Forbes «30 до 30» · Модератор" },
+  { name: "Артём Спиро", role: "Импакт-предприниматель, ресторатор, эксперт здорового питания" },
+  { name: "Наталья Гундерина", role: "Продюсер Karmalogic, CEO Karmatravel" },
+  { name: "Анна Евнич", role: "" },
 ];
 
 const SpeakerCard = ({ speaker, index, isInView }: { speaker: typeof speakers[0]; index: number; isInView: boolean }) => (
@@ -28,9 +27,11 @@ const SpeakerCard = ({ speaker, index, isInView }: { speaker: typeof speakers[0]
       <h3 className="font-display text-xl md:text-2xl font-normal uppercase text-cream leading-tight">
         {speaker.name}
       </h3>
-      <p className="font-body text-xs md:text-sm font-light text-cream/40 mt-1.5 leading-snug">
-        {speaker.role}
-      </p>
+      {speaker.role && (
+        <p className="font-body text-xs md:text-sm font-light text-cream/40 mt-1.5 leading-snug">
+          {speaker.role}
+        </p>
+      )}
     </div>
   </motion.div>
 );
