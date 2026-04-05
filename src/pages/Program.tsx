@@ -29,7 +29,7 @@ const moderatorsData = [
       "Спикер ПМЭФ, СКОЛКОВО, Mediametrics",
       "Эксперт в превентивной медицине и управлении здоровьем",
     ],
-    image: null,
+    image: stupinPhoto,
   },
   {
     name: "Ростислав Павлов",
