@@ -104,7 +104,7 @@ const Header = () => {
               onClick={() => setTicketModal(true)}
               className="ml-4 bg-primary text-primary-foreground text-[11px] uppercase tracking-[0.2em] px-6 py-2.5 hover:opacity-90 transition-all duration-500 font-body"
             >
-              Записаться
+              Задать вопрос
             </button>
             {user ? (
               <button
@@ -162,7 +162,7 @@ const Header = () => {
                   onClick={() => { setMenuOpen(false); setTicketModal(true); }}
                   className="mt-4 bg-primary text-primary-foreground text-sm uppercase tracking-[0.2em] px-8 py-3 font-body"
                 >
-                  Записаться на аукцион
+                  Задать вопрос
                 </button>
                 {user ? (
                   <button onClick={() => { setMenuOpen(false); signOut(); }} className="text-muted-foreground text-sm uppercase tracking-[0.2em] font-body">
