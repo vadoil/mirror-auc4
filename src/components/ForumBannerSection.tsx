@@ -31,7 +31,16 @@ const ForumBannerSection = () => {
             Осень 2026 · Москва
           </p>
           <div className="w-16 h-px bg-primary mx-auto mb-8" />
-        </motion.div>
+
+          {/* Banner image */}
+          <div className="max-w-3xl mx-auto mb-12">
+            <img
+              src={forumBanner}
+              alt="Форум для женщин «Отражение» — осень '26"
+              className="w-full h-auto rounded-sm"
+            />
+          </div>
+
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
