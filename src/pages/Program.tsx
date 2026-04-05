@@ -1,0 +1,164 @@
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, Mic } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+const program = [
+  { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
+  { time: "16:00", title: "Public Talk", desc: "Тема будет объявлена", highlight: true, speakers: true },
+  { time: "17:30", title: "Открытие аукциона", desc: "Приветственное слово, представление аукциониста и миссии вечера", highlight: true },
+  { time: "18:00", title: "Торги", desc: "Аукцион лотов – wellness-программы, ретриты, эксклюзивный опыт", highlight: true },
+  { time: "19:30", title: "Перерыв и нетворкинг", desc: "Фуршет, живая музыка, общение с экспертами", highlight: false },
+  { time: "20:00", title: "Вторая сессия торгов", desc: "Финальные лоты и эксклюзивные впечатления", highlight: true },
+  { time: "21:00", title: "Церемония закрытия", desc: "Подведение итогов, вручение лотов, благодарности", highlight: false },
+  { time: "21:30", title: "After-party", desc: "Неформальное общение, DJ-сет, бар", highlight: false },
+];
+
+const moderators = [
+  { name: "Родион Ступин", role: "Генеральный директор сети клиник «Будь здоров»" },
+  { name: "Ростислав Павлов", role: "Главный врач Гатчинской клиники (ЛО ГБУЗ ГКМБ), победитель рейтинга Forbes «30 до 30»" },
+];
+
+const publicTalkSpeakers = [
+  { name: "Артём Спиро", role: "Импакт-предприниматель, ресторатор, эксперт в области здорового питания" },
+  { name: "Наталья Гундерина", role: "Продюсер проекта Karmalogic, основатель и CEO проекта Karmatravel" },
+  { name: "Анна Евнич", role: "" },
+];
+
+const Program = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="pt-28 pb-20 section-padding">
+        <div className="max-w-5xl mx-auto" ref={ref}>
+          <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground text-xs font-body uppercase tracking-[0.2em] hover:text-foreground transition-colors mb-12">
+            <ArrowLeft className="w-4 h-4" /> На главную
+          </Link>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="mb-16"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-px bg-primary" />
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
+                26 апреля 2026 · Москва
+              </p>
+            </div>
+            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-foreground leading-[0.9] mb-6">
+              Программа <span className="italic text-primary">вечера</span>
+            </h1>
+            <p className="font-body text-lg text-muted-foreground max-w-2xl">
+              Благотворительный аукцион «Отражение добра» в баланс-холле «Место быть»
+            </p>
+          </motion.div>
+
+          {/* Timeline */}
+          <div className="relative mb-24">
+            <div className="absolute left-[39px] md:left-[59px] top-0 bottom-0 w-px bg-border" />
+            <div className="space-y-0">
+              {program.map((item, i) => (
+                <motion.div
+                  key={item.time}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.08 * i }}
+                  className="group relative flex gap-6 md:gap-10"
+                >
+                  <div className="relative z-10 flex-shrink-0 w-20 md:w-[120px] flex items-start pt-8">
+                    <div className="w-full text-right pr-5 md:pr-7">
+                      <span className="font-numbers text-lg md:text-2xl font-light text-primary">
+                        {item.time}
+                      </span>
+                    </div>
+                    <div className={`absolute right-0 top-[34px] md:top-[38px] w-3 h-3 rounded-full border-2 transition-colors duration-300 -translate-x-[1px] ${
+                      item.highlight
+                        ? "bg-primary border-primary"
+                        : "bg-background border-primary/40 group-hover:border-primary"
+                    }`} />
+                  </div>
+                  <div className={`flex-1 py-6 md:py-8 pl-4 md:pl-6 border-b border-border group-hover:bg-muted/30 transition-colors duration-300 rounded-r-lg ${
+                    item.highlight ? "bg-primary/5" : ""
+                  }`}>
+                    <h3 className="font-body text-lg md:text-2xl font-medium text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                    <p className="font-body text-sm font-light text-muted-foreground">
+                      {item.desc}
+                    </p>
+
+                    {item.speakers && (
+                      <div className="mt-6 space-y-6">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Модераторы</p>
+                          <div className="space-y-3">
+                            {moderators.map(m => (
+                              <div key={m.name} className="flex items-start gap-3">
+                                <Mic className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                                <div>
+                                  <p className="font-body text-sm font-medium text-foreground">{m.name}</p>
+                                  <p className="font-body text-xs text-muted-foreground">{m.role}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Спикеры</p>
+                          <div className="space-y-3">
+                            {publicTalkSpeakers.map(s => (
+                              <div key={s.name} className="flex items-start gap-3">
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                                <div>
+                                  <p className="font-body text-sm font-medium text-foreground">{s.name}</p>
+                                  {s.role && <p className="font-body text-xs text-muted-foreground">{s.role}</p>}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="text-center bg-muted/40 border border-border rounded-lg p-10 md:p-16"
+          >
+            <h2 className="font-display text-3xl md:text-4xl font-light text-foreground mb-4">
+              Готовы присоединиться?
+            </h2>
+            <p className="font-body text-muted-foreground mb-8 max-w-md mx-auto">
+              Зарегистрируйтесь на аукцион и станьте частью вечера, который меняет жизни.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/lots" className="btn-primary">
+                Смотреть лоты
+              </Link>
+              <Link to="/how-it-works" className="btn-outline">
+                Как участвовать
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default Program;
