@@ -28,7 +28,7 @@ const VenueSection = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-0 border border-cream/10 overflow-hidden">
-          {/* Left — Map */}
+          {/* Left – Map */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -43,13 +43,13 @@ const VenueSection = () => {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Место быть — баланс-холл, Мясницкая 24/7"
+              title="Место быть – баланс-холл, Мясницкая 24/7"
               className="absolute inset-0 w-full h-full"
             />
             <div className="absolute inset-0 pointer-events-none border-r border-cream/10" />
           </motion.div>
 
-          {/* Right — Venue info */}
+          {/* Right – Venue info */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -59,7 +59,7 @@ const VenueSection = () => {
             <div className="aspect-[4/3] relative overflow-hidden">
               <img
                 src={venueImage}
-                alt="Место быть — первый в России баланс-холл"
+                alt="Место быть – первый в России баланс-холл"
                 loading="lazy"
                 width={1280}
                 height={960}
@@ -76,7 +76,7 @@ const VenueSection = () => {
                 Первый в России баланс-холл
               </p>
               <p className="font-body text-sm text-cream/60 leading-relaxed mb-8 max-w-md">
-                Пространство нового формата в центре Москвы, где соединяются wellbeing-культура, осознанность и эстетика. Место, где можно замедлиться, вдохнуть глубже и почувствовать баланс — идеальная атмосфера для вечера «Отражение».
+                Пространство нового формата в центре Москвы, где соединяются wellbeing-культура, осознанность и эстетика. Место, где можно замедлиться, вдохнуть глубже и почувствовать баланс – идеальная атмосфера для вечера «Отражение».
               </p>
 
               <div className="space-y-4">
@@ -96,7 +96,7 @@ const VenueSection = () => {
                   </div>
                   <div>
                     <p className="font-body text-xs text-cream/40 uppercase tracking-[0.2em]">Дата</p>
-                    <p className="font-body text-sm text-cream">28 апреля 2026</p>
+                    <p className="font-body text-sm text-cream"><p className="font-body text-sm text-cream">26 апреля 2026</p></p>
                   </div>
                 </div>
 
@@ -106,7 +106,7 @@ const VenueSection = () => {
                   </div>
                   <div>
                     <p className="font-body text-xs text-cream/40 uppercase tracking-[0.2em]">Время</p>
-                    <p className="font-body text-sm text-cream">19:00 — 23:00</p>
+                    <p className="font-body text-sm text-cream"><p className="font-body text-sm text-cream">15:00 – 22:00</p> – 23:00</p>
                   </div>
                 </div>
 

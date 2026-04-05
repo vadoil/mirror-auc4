@@ -12,6 +12,7 @@ import Venue from "./pages/Venue";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
+import Program from "./pages/Program";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/lots" element={<Lots />} />
             <Route path="/lots/:id" element={<LotDetail />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/program" element={<Program />} />
             <Route path="/venue" element={<Venue />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<Admin />} />

@@ -17,7 +17,7 @@ const Venue = () => {
                 Место <span className="text-primary italic">проведения</span>
               </h1>
               <p className="font-body text-muted-foreground text-lg max-w-xl">
-                Баланс-холл «Место быть» — первое в России пространство, объединяющее wellbeing-культуру, осознанность и эстетику.
+                Баланс-холл «Место быть» – первое в России пространство, объединяющее wellbeing-культуру, осознанность и эстетику.
               </p>
             </motion.div>
           </div>
@@ -27,7 +27,7 @@ const Venue = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.3 }} className="section-padding mb-16">
           <div className="max-w-7xl mx-auto">
             <div className="aspect-[21/9] relative overflow-hidden rounded-lg border border-border">
-              <img src={venueImage} alt="Место быть — баланс-холл" className="absolute inset-0 w-full h-full object-cover" />
+              <img src={venueImage} alt="Место быть – баланс-холл" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             </div>
           </div>
@@ -59,23 +59,23 @@ const Venue = () => {
               <Car className="w-6 h-6 text-primary mb-4" />
               <h3 className="font-display text-xl text-foreground uppercase mb-2">Парковка</h3>
               <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                Городская парковка — мест мало. Рекомендуем приехать на такси или метро.
+                Городская парковка – мест мало. Рекомендуем приехать на такси или метро.
               </p>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="bg-muted/50 border border-border rounded-lg p-8">
               <Calendar className="w-6 h-6 text-primary mb-4" />
               <h3 className="font-display text-xl text-foreground uppercase mb-2">Дата</h3>
-              <p className="font-body text-sm text-muted-foreground leading-relaxed">28 апреля 2026 года</p>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed">26 апреля 2026 года</p>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="bg-muted/50 border border-border rounded-lg p-8">
               <Clock className="w-6 h-6 text-primary mb-4" />
               <h3 className="font-display text-xl text-foreground uppercase mb-2">Время</h3>
               <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                Сбор гостей: 18:30<br />
-                Начало аукциона: 19:00<br />
-                Завершение: 23:00
+                Сбор гостей: 15:00<br />
+                Public Talk: 16:00<br />
+                Открытие аукциона: 17:30
               </p>
             </motion.div>
 
@@ -83,7 +83,7 @@ const Venue = () => {
               <ExternalLink className="w-6 h-6 text-primary mb-4" />
               <h3 className="font-display text-xl text-foreground uppercase mb-2">О площадке</h3>
               <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">
-                «Место быть» — баланс-холл нового формата, сочетающий wellbeing и атмосферу для событий.
+                «Место быть» – баланс-холл нового формата, сочетающий wellbeing и атмосферу для событий.
               </p>
               <a href="https://mestobe.ru/" target="_blank" rel="noopener noreferrer" className="text-primary text-xs font-body uppercase tracking-[0.2em] hover:opacity-80 transition-opacity">
                 mestobe.ru

@@ -361,7 +361,7 @@ const LotDetail = () => {
               </div>
 
               <p className="text-muted-foreground text-sm font-body mb-6">
-                Оставьте контактные данные, и мы свяжемся с вами для подтверждения брони. Покупка лота — в день аукциона.
+                Оставьте контактные данные, и мы свяжемся с вами для подтверждения брони. Покупка лота – в день аукциона.
               </p>
 
               <form onSubmit={handleBooking} className="space-y-4">

@@ -43,7 +43,7 @@ const VideoSection = () => {
           className="absolute bottom-8 left-8 md:left-16 z-10 hidden md:block"
         >
           <p className="font-display text-xl md:text-2xl italic text-cream/70">
-            «Инвестиция в себя — самая выгодная сделка»
+            «Инвестиция в себя – самая выгодная сделка»
           </p>
         </motion.div>
       </div>

@@ -260,7 +260,7 @@ const Admin = () => {
                   )}
                   <div className="flex-1 min-w-0">
                     <p className="font-body text-sm text-cream truncate">{lot.title}</p>
-                    <p className="text-cream/40 text-xs font-body">{lot.category || "—"} · {lot.starting_price.toLocaleString()} ₽ · шаг {lot.bid_step.toLocaleString()} ₽</p>
+                    <p className="text-cream/40 text-xs font-body">{lot.category || "–"} · {lot.starting_price.toLocaleString()} ₽ · шаг {lot.bid_step.toLocaleString()} ₽</p>
                   </div>
                   <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-1 ${
                     lot.status === "active" ? "bg-green-500/20 text-green-400" :

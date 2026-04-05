@@ -41,7 +41,7 @@ const ForumBannerSection = () => {
         >
           <p className="font-body text-sm md:text-base text-cream/60 leading-relaxed mb-8">
             После аукциона «Отражение Добра» нас ждёт масштабный форум, посвящённый велнесу, 
-            осознанности и инвестициям в себя. Следите за анонсами — скоро откроем регистрацию.
+            осознанности и инвестициям в себя. Следите за анонсами – скоро откроем регистрацию.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">

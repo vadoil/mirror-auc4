@@ -18,7 +18,7 @@ const HeroSection = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const target = new Date("2026-04-28T18:00:00").getTime();
+    const target = new Date("2026-04-26T15:00:00").getTime();
     const tick = () => {
       const now = Date.now();
       const diff = Math.max(0, target - now);
@@ -74,7 +74,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.8, delay: 1.0 }}
                 className="font-body text-cream/60 text-lg md:text-xl lg:text-2xl font-light mt-6 max-w-lg"
               >
-                Один вечер. Уникальные лоты. Все средства — на добрые дела.
+                Один вечер. Уникальные лоты. Все средства – на добрые дела.
               </motion.p>
             </div>
 

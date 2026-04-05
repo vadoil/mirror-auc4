@@ -33,7 +33,7 @@ const VenuePreviewSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative aspect-[4/3] lg:aspect-auto min-h-[350px] overflow-hidden"
           >
-            <img src={venueImage} alt="Место быть — баланс-холл" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+            <img src={venueImage} alt="Место быть – баланс-холл" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
           </motion.div>
 
           <motion.div
@@ -49,7 +49,7 @@ const VenuePreviewSection = () => {
               Первый в России баланс-холл
             </p>
             <p className="font-body text-sm text-muted-foreground leading-relaxed mb-8 max-w-md">
-              Пространство нового формата в центре Москвы — wellbeing-культура, осознанность и эстетика.
+              Пространство нового формата в центре Москвы – wellbeing-культура, осознанность и эстетика.
               Идеальная атмосфера для благотворительного вечера.
             </p>
 
@@ -60,11 +60,11 @@ const VenuePreviewSection = () => {
               </div>
               <div className="flex items-center gap-4">
                 <Calendar className="w-4 h-4 text-primary flex-shrink-0" />
-                <p className="font-body text-sm text-foreground">28 апреля 2026</p>
+                <p className="font-body text-sm text-foreground">26 апреля 2026</p>
               </div>
               <div className="flex items-center gap-4">
                 <Clock className="w-4 h-4 text-primary flex-shrink-0" />
-                <p className="font-body text-sm text-foreground">19:00 — 23:00</p>
+                <p className="font-body text-sm text-foreground">15:00 – 22:00</p>
               </div>
             </div>
 
