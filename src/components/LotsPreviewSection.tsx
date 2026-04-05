@@ -92,7 +92,7 @@ const LotsPreviewSection = () => {
               Лоты <span className="text-primary italic">аукциона</span>
             </h2>
           </div>
-          <Link to="/lots" className="btn-outline-light inline-flex items-center gap-2 self-start md:self-auto">
+          <Link to="/lots" className="btn-outline inline-flex items-center gap-2 self-start md:self-auto">
             Все лоты <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
