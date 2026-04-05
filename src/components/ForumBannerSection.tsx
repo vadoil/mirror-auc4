@@ -109,16 +109,30 @@ const ForumBannerSection = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <a href="#contacts" className="btn-primary-light text-center inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 text-xs uppercase tracking-[0.2em] font-body hover:opacity-90 transition-all">
+          <button onClick={() => setForumModal(true)} className="btn-primary-light text-center inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 text-xs uppercase tracking-[0.2em] font-body hover:opacity-90 transition-all">
             Оставить заявку на участие
-          </a>
-          <a href="#contacts" className="btn-outline-light text-center">
+          </button>
+          <button onClick={() => setInfoModal(true)} className="btn-outline-light text-center">
             Узнать о форуме
-          </a>
+          </button>
         </motion.div>
       </div>
+
+      <TicketRequestModal
+        isOpen={forumModal}
+        onClose={() => setForumModal(false)}
+        ticketType="Участие в форуме"
+        ticketPrice=""
+        showTrainingCheckbox={false}
+      />
+      <TicketRequestModal
+        isOpen={infoModal}
+        onClose={() => setInfoModal(false)}
+        ticketType="Узнать о форуме"
+        ticketPrice=""
+        showTrainingCheckbox={false}
+      />
     </section>
-  );
 };
 
 export default ForumBannerSection;
