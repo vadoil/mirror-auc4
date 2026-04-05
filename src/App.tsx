@@ -12,6 +12,7 @@ import Venue from "./pages/Venue";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
+import Program from "./pages/Program";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
