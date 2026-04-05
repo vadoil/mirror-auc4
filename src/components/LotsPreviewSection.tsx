@@ -124,14 +124,6 @@ const LotsPreviewSection = () => {
                   to={useStatic ? "/lots" : `/lots/${lot.id}`}
                   className="group block bg-card border border-border hover:border-primary/30 transition-all duration-500 overflow-hidden relative rounded-lg"
                 >
-                  {/* Hot badge on first lot */}
-                  {i === 0 && (
-                    <div className="absolute top-2 right-2 z-10 bg-accent text-accent-foreground px-2 py-1 flex items-center gap-1">
-                      <Flame className="w-3 h-3" />
-                      <span className="text-[9px] uppercase tracking-wider font-body font-medium">Хит</span>
-                    </div>
-                  )}
-
                   <div className="aspect-[4/3] relative overflow-hidden">
                     {imgUrl ? (
                       <img
@@ -148,13 +140,23 @@ const LotsPreviewSection = () => {
                       </div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-warm-black/70 via-transparent to-transparent" />
-                    {lot.category && (
-                      <div className="absolute top-2 left-2 bg-primary/90 px-2 py-0.5">
-                        <span className="text-primary-foreground text-[9px] uppercase tracking-[0.15em] font-body">{lot.category}</span>
-                      </div>
-                    )}
                   </div>
                   <div className="p-4">
+                    {(lot.category || i === 0) && (
+                      <div className="mb-3 flex flex-wrap items-center gap-2">
+                        {lot.category && (
+                          <div className="bg-primary/10 px-2.5 py-1">
+                            <span className="text-primary text-[9px] uppercase tracking-[0.15em] font-body font-medium">{lot.category}</span>
+                          </div>
+                        )}
+                        {i === 0 && (
+                          <div className="bg-accent/15 px-2.5 py-1 text-accent flex items-center gap-1">
+                            <Flame className="w-3 h-3" />
+                            <span className="text-[9px] uppercase tracking-wider font-body font-medium">Хит</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
                     <h3 className="font-display text-sm text-foreground mb-1 group-hover:text-primary transition-colors duration-300 line-clamp-1">{lot.title}</h3>
                     {lot.description && (
                       <p className="font-body text-[11px] text-muted-foreground mb-3 line-clamp-2 leading-relaxed">{lot.description}</p>
