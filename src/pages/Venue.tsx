@@ -75,7 +75,8 @@ const Venue = () => {
               <p className="font-body text-sm text-muted-foreground leading-relaxed">
                 Сбор гостей: 15:00<br />
                 Public Talk: 16:00<br />
-                Открытие аукциона: 17:30
+                Кофе-брейк: 16:45<br />
+                Аукцион: 17:00
               </p>
             </motion.div>
 
