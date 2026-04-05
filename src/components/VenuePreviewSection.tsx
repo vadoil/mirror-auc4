@@ -60,11 +60,11 @@ const VenuePreviewSection = () => {
               </div>
               <div className="flex items-center gap-4">
                 <Calendar className="w-4 h-4 text-primary flex-shrink-0" />
-                <p className="font-body text-sm text-foreground">28 апреля 2026</p>
+                <p className="font-body text-sm text-foreground">26 апреля 2026</p>
               </div>
               <div className="flex items-center gap-4">
                 <Clock className="w-4 h-4 text-primary flex-shrink-0" />
-                <p className="font-body text-sm text-foreground">19:00 – 23:00</p>
+                <p className="font-body text-sm text-foreground">15:00 – 22:00</p>
               </div>
             </div>
 
