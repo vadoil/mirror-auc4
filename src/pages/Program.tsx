@@ -8,6 +8,7 @@ import stupinPhoto from "@/assets/speaker-stupin.png";
 import pavlovPhoto from "@/assets/speaker-pavlov.png";
 import spiroPhoto from "@/assets/speaker-spiro.png";
 import gunderinaPhoto from "@/assets/speaker-gunderina.png";
+import evnichPhoto from "@/assets/speaker-evnich.png";
 
 const program = [
   { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
