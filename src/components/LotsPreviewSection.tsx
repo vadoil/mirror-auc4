@@ -115,7 +115,7 @@ const LotsPreviewSection = () => {
               >
                 <Link
                   to={useStatic ? "/lots" : `/lots/${lot.id}`}
-                  className="group block bg-cream/5 border border-cream/10 hover:border-primary/30 transition-all duration-500 overflow-hidden relative"
+                  className="group block bg-card border border-border hover:border-primary/30 transition-all duration-500 overflow-hidden relative rounded-lg"
                 >
                   {/* Hot badge on first lot */}
                   {i === 0 && (
