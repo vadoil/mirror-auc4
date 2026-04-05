@@ -18,7 +18,7 @@ const HeroSection = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const target = new Date("2026-04-28T18:00:00").getTime();
+    const target = new Date("2026-04-26T15:00:00").getTime();
     const tick = () => {
       const now = Date.now();
       const diff = Math.max(0, target - now);

@@ -66,16 +66,16 @@ const Venue = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="bg-muted/50 border border-border rounded-lg p-8">
               <Calendar className="w-6 h-6 text-primary mb-4" />
               <h3 className="font-display text-xl text-foreground uppercase mb-2">Дата</h3>
-              <p className="font-body text-sm text-muted-foreground leading-relaxed">28 апреля 2026 года</p>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed">26 апреля 2026 года</p>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="bg-muted/50 border border-border rounded-lg p-8">
               <Clock className="w-6 h-6 text-primary mb-4" />
               <h3 className="font-display text-xl text-foreground uppercase mb-2">Время</h3>
               <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                Сбор гостей: 18:30<br />
-                Начало аукциона: 19:00<br />
-                Завершение: 23:00
+                Сбор гостей: 15:00<br />
+                Public Talk: 16:00<br />
+                Открытие аукциона: 17:30
               </p>
             </motion.div>
 
