@@ -72,7 +72,7 @@ const LotsPreviewSection = () => {
   if (!loaded) return null;
 
   return (
-    <section id="lots-preview" className="relative z-20 py-24 md:py-32 bg-warm-black">
+    <section id="lots-preview" className="relative z-20 py-24 md:py-32 bg-background">
       <div className="section-padding">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
