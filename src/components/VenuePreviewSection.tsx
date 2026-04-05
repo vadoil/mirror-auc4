@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Calendar, Clock } from "lucide-react";
+import { MapPin, Calendar, Clock, ExternalLink } from "lucide-react";
 import venueImage from "@/assets/venue.jpg";
 
 const VenuePreviewSection = () => {
