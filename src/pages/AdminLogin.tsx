@@ -12,26 +12,12 @@ const AdminLogin = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
-    // Try sign in first
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      // If credentials invalid, try signing up
-      const { error: signUpError } = await supabase.auth.signUp({ email, password });
-      if (signUpError) {
-        toast.error("Ошибка: " + signUpError.message);
-        setLoading(false);
-        return;
-      }
-      // Try login again after signup
-      const { error: retryError } = await supabase.auth.signInWithPassword({ email, password });
-      if (retryError) {
-        toast.error("Аккаунт создан, попробуйте войти снова");
-        setLoading(false);
-        return;
-      }
-    }
     setLoading(false);
+    if (error) {
+      toast.error("Неверные данные для входа");
+      return;
+    }
     navigate("/admin");
   };
 
