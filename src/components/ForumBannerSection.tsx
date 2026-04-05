@@ -1,15 +1,18 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Calendar, MapPin, Download } from "lucide-react";
 import forumBanner from "@/assets/forum-women-banner.png";
+import TicketRequestModal from "./TicketRequestModal";
 
 const ForumBannerSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [forumModal, setForumModal] = useState(false);
+  const [infoModal, setInfoModal] = useState(false);
 
   return (
     <section className="py-24 md:py-32 section-padding bg-charcoal relative overflow-hidden">
-      <div ref={ref} className="max-w-5xl mx-auto relative z-10">
+      <div ref={ref} className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -106,14 +109,29 @@ const ForumBannerSection = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <a href="#contacts" className="btn-primary-light text-center inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 text-xs uppercase tracking-[0.2em] font-body hover:opacity-90 transition-all">
+          <button onClick={() => setForumModal(true)} className="btn-primary-light text-center inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 text-xs uppercase tracking-[0.2em] font-body hover:opacity-90 transition-all">
             Оставить заявку на участие
-          </a>
-          <a href="#contacts" className="btn-outline-light text-center">
+          </button>
+          <button onClick={() => setInfoModal(true)} className="btn-outline-light text-center">
             Узнать о форуме
-          </a>
+          </button>
         </motion.div>
       </div>
+
+      <TicketRequestModal
+        isOpen={forumModal}
+        onClose={() => setForumModal(false)}
+        ticketType="Участие в форуме"
+        ticketPrice=""
+        showTrainingCheckbox={false}
+      />
+      <TicketRequestModal
+        isOpen={infoModal}
+        onClose={() => setInfoModal(false)}
+        ticketType="Узнать о форуме"
+        ticketPrice=""
+        showTrainingCheckbox={false}
+      />
     </section>
   );
 };

@@ -31,6 +31,17 @@ type Bid = {
   created_at: string;
 };
 
+type TicketRequest = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  ticket_type: string;
+  message: string | null;
+  status: string;
+  created_at: string;
+};
+
 const statusLabels: Record<string, string> = {
   draft: "Черновик",
   active: "Активен",
@@ -48,9 +59,10 @@ const getImageUrl = (url: string | null) => {
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState<"lots" | "bids">("lots");
+  const [tab, setTab] = useState<"lots" | "bids" | "requests">("lots");
   const [lots, setLots] = useState<Lot[]>([]);
   const [bids, setBids] = useState<Bid[]>([]);
+  const [requests, setRequests] = useState<TicketRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingLot, setEditingLot] = useState<Partial<Lot> | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -60,7 +72,13 @@ const Admin = () => {
   useEffect(() => {
     if (tab === "lots") fetchLots();
     if (tab === "bids") fetchBids();
+    if (tab === "requests") fetchRequests();
   }, [tab]);
+
+  const fetchRequests = async () => {
+    const { data } = await supabase.from("ticket_requests").select("*").order("created_at", { ascending: false });
+    if (data) setRequests(data as TicketRequest[]);
+  };
 
   const checkAuth = async () => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -161,6 +179,7 @@ const Admin = () => {
   const tabs = [
     { key: "lots" as const, label: "Лоты" },
     { key: "bids" as const, label: "Ставки" },
+    { key: "requests" as const, label: "Заявки" },
   ];
 
   return (
@@ -297,6 +316,30 @@ const Admin = () => {
                 );
               })}
               {bids.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Нет ставок</p>}
+            </div>
+          </div>
+        )}
+
+        {tab === "requests" && (
+          <div>
+            <h2 className="font-display text-2xl uppercase mb-6">Заявки</h2>
+            <div className="space-y-2">
+              {requests.map((req) => (
+                <div key={req.id} className="bg-cream/5 border border-cream/10 p-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-1">
+                        <p className="font-body text-sm text-cream font-medium">{req.name}</p>
+                        <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-primary/20 text-primary">{req.ticket_type}</span>
+                      </div>
+                      <p className="text-cream/40 text-xs font-body">{req.email}{req.phone ? ` · ${req.phone}` : ''}</p>
+                      {req.message && <p className="text-cream/60 text-xs font-body mt-2 whitespace-pre-line">{req.message}</p>}
+                    </div>
+                    <p className="text-cream/30 text-xs font-body whitespace-nowrap">{new Date(req.created_at).toLocaleDateString("ru")}</p>
+                  </div>
+                </div>
+              ))}
+              {requests.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Нет заявок</p>}
             </div>
           </div>
         )}

@@ -182,8 +182,9 @@ const Header = () => {
       <TicketRequestModal
         isOpen={ticketModal}
         onClose={() => setTicketModal(false)}
-        ticketType="Аукцион"
-        ticketPrice="Бесплатная запись"
+        ticketType="Задать вопрос"
+        ticketPrice=""
+        showTrainingCheckbox={false}
       />
     </>
   );
