@@ -48,8 +48,11 @@ const OrganizersSection = () => {
             </p>
           </div>
           <h2 className="font-display text-5xl md:text-7xl font-light tracking-tight text-foreground leading-[0.9]">
-            Организаторы
+            Идеологи и <span className="italic text-primary">организаторы</span>
           </h2>
+          <p className="font-body text-sm text-muted-foreground mt-4">
+            Аукциона и форума «Отражение Добра»
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-12">
