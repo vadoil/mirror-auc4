@@ -1,7 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calendar, MapPin, Download } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const ForumBannerSection = () => {
   const ref = useRef(null);
@@ -40,8 +39,9 @@ const ForumBannerSection = () => {
           className="max-w-2xl mx-auto text-center mb-12"
         >
           <p className="font-body text-sm md:text-base text-cream/60 leading-relaxed mb-8">
-            После аукциона «Отражение Добра» нас ждёт масштабный форум, посвящённый велнесу, 
-            осознанности и инвестициям в себя. Следите за анонсами – скоро откроем регистрацию.
+            После аукциона «Отражение Добра» нас ждёт масштабный форум для женщин, посвящённый велнесу, 
+            осознанности и инвестициям в себя. Лучшие практики в области женского здоровья и красоты, 
+            биохакинг и забота о себе, материнство и развитие без границ.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
@@ -95,9 +95,9 @@ const ForumBannerSection = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Link to="/lots" className="btn-primary text-center">
-            Смотреть лоты аукциона
-          </Link>
+          <a href="#contacts" className="btn-primary-light text-center inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 text-xs uppercase tracking-[0.2em] font-body hover:opacity-90 transition-all">
+            Оставить заявку на участие
+          </a>
           <a href="#contacts" className="btn-outline-light text-center">
             Узнать о форуме
           </a>
