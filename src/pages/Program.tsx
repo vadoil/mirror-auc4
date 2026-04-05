@@ -66,7 +66,7 @@ const speakersData = [
       "Основатель и CEO проекта Karmatravel",
       "MBA ГУ ВШЭ «Политические и бизнес-коммуникации»",
     ],
-    image: null,
+    image: gunderinaPhoto,
   },
   {
     name: "Анна Евнич",
