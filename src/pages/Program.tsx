@@ -120,7 +120,15 @@ const PersonCard = ({ person, index, isInView }: PersonCardProps) => (
     <h3 className="font-display text-xl md:text-2xl font-light text-foreground mb-1 leading-tight">
       {person.name}
     </h3>
-    <p className="font-body text-[10px] text-primary uppercase tracking-[0.15em] mb-3">{person.role}</p>
+    <p className="font-body text-[10px] text-primary uppercase tracking-[0.15em] mb-2">{person.role}</p>
+
+    {(person as SpeakerData).jointTopic && (
+      <p className="font-body text-xs text-foreground/70 italic mb-3">
+        Совместное выступление с {(person as SpeakerData).jointWith}
+        <br />
+        <span className="text-primary font-medium not-italic">«{(person as SpeakerData).jointTopic}»</span>
+      </p>
+    )}
 
     {person.bio && (
       <p className="font-body text-sm font-light text-muted-foreground leading-relaxed mb-3 max-w-xs">{person.bio}</p>
