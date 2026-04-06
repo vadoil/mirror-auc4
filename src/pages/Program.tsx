@@ -12,7 +12,7 @@ import evnichPhoto from "@/assets/speaker-evnich.png";
 
 const program = [
   { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
-  { time: "16:00", title: "Public Talk", desc: "Тема будет объявлена", highlight: true, speakers: true },
+  { time: "16:00", title: "Public Talk", desc: "Ключевые подходы к долголетию и Healthspan", highlight: true, speakers: true },
   { time: "16:45", title: "Кофе-брейк", desc: "Перерыв, общение, подготовка к аукциону", highlight: false },
   { time: "17:00", title: "Аукцион", desc: "Торги – wellness-программы, ретриты, эксклюзивный опыт", highlight: true },
 ];
@@ -64,18 +64,32 @@ const speakersData = [
       "MBA ГУ ВШЭ «Политические и бизнес-коммуникации»",
     ],
     image: gunderinaPhoto,
+    jointWith: "Анна Евневич",
+    jointTopic: "Ключевые подходы к долголетию и Healthspan",
   },
   {
-    name: "Анна Евнич",
-    role: "Будет объявлено",
+    name: "Анна Евневич",
+    role: "Коллаборация Smart Energy by Alexey Sitnikov · Hedonist One",
     bio: null,
     highlights: [],
     image: evnichPhoto,
+    jointWith: "Наталия Гундерина",
+    jointTopic: "Ключевые подходы к долголетию и Healthspan",
   },
 ];
 
+type SpeakerData = {
+  name: string;
+  role: string;
+  bio: string | null;
+  highlights: string[];
+  image: string;
+  jointWith?: string;
+  jointTopic?: string;
+};
+
 type PersonCardProps = {
-  person: typeof moderatorsData[0];
+  person: SpeakerData;
   index: number;
   isInView: boolean;
 };
@@ -106,7 +120,15 @@ const PersonCard = ({ person, index, isInView }: PersonCardProps) => (
     <h3 className="font-display text-xl md:text-2xl font-light text-foreground mb-1 leading-tight">
       {person.name}
     </h3>
-    <p className="font-body text-[10px] text-primary uppercase tracking-[0.15em] mb-3">{person.role}</p>
+    <p className="font-body text-[10px] text-primary uppercase tracking-[0.15em] mb-2">{person.role}</p>
+
+    {(person as SpeakerData).jointTopic && (
+      <p className="font-body text-xs text-foreground/70 italic mb-3">
+        Совместное выступление с {(person as SpeakerData).jointWith}
+        <br />
+        <span className="text-primary font-medium not-italic">«{(person as SpeakerData).jointTopic}»</span>
+      </p>
+    )}
 
     {person.bio && (
       <p className="font-body text-sm font-light text-muted-foreground leading-relaxed mb-3 max-w-xs">{person.bio}</p>

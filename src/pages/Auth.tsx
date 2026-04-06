@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Gavel } from "lucide-react";
 
 const Auth = () => {
-  const [mode, setMode] = useState<"login" | "register">("login");
+  const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -15,6 +15,20 @@ const Auth = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    if (mode === "forgot") {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      setLoading(false);
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success("Ссылка для восстановления отправлена на email");
+        setMode("login");
+      }
+      return;
+    }
 
     if (mode === "register") {
       const { error } = await supabase.auth.signUp({
@@ -56,12 +70,14 @@ const Auth = () => {
         </a>
 
         <h1 className="font-display text-3xl text-cream uppercase tracking-tight mb-1">
-          {mode === "login" ? "Вход" : "Регистрация"}
+          {mode === "login" ? "Вход" : mode === "register" ? "Регистрация" : "Восстановление"}
         </h1>
         <p className="text-cream/40 text-xs font-body mb-8">
           {mode === "login"
             ? "Войдите, чтобы делать ставки на аукционе"
-            : "Создайте аккаунт для участия в аукционе"}
+            : mode === "register"
+            ? "Создайте аккаунт для участия в аукционе"
+            : "Введите email для получения ссылки"}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -84,15 +100,17 @@ const Auth = () => {
             className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
             required
           />
-          <input
-            type="password"
-            placeholder="Пароль"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
-            required
-            minLength={6}
-          />
+          {mode !== "forgot" && (
+            <input
+              type="password"
+              placeholder="Пароль"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
+              required
+              minLength={6}
+            />
+          )}
           <button
             type="submit"
             disabled={loading}
@@ -102,11 +120,21 @@ const Auth = () => {
               ? "Загрузка..."
               : mode === "login"
               ? "Войти"
-              : "Зарегистрироваться"}
+              : mode === "register"
+              ? "Зарегистрироваться"
+              : "Отправить ссылку"}
           </button>
         </form>
 
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center space-y-2">
+          {mode === "login" && (
+            <button
+              onClick={() => setMode("forgot")}
+              className="block w-full text-cream/40 text-xs font-body hover:text-cream/60 transition-colors"
+            >
+              Забыли пароль?
+            </button>
+          )}
           <button
             onClick={() => setMode(mode === "login" ? "register" : "login")}
             className="text-cream/40 text-xs font-body hover:text-cream/60 transition-colors"
