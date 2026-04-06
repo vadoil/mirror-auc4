@@ -70,12 +70,14 @@ const Auth = () => {
         </a>
 
         <h1 className="font-display text-3xl text-cream uppercase tracking-tight mb-1">
-          {mode === "login" ? "Вход" : "Регистрация"}
+          {mode === "login" ? "Вход" : mode === "register" ? "Регистрация" : "Восстановление"}
         </h1>
         <p className="text-cream/40 text-xs font-body mb-8">
           {mode === "login"
             ? "Войдите, чтобы делать ставки на аукционе"
-            : "Создайте аккаунт для участия в аукционе"}
+            : mode === "register"
+            ? "Создайте аккаунт для участия в аукционе"
+            : "Введите email для получения ссылки"}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
