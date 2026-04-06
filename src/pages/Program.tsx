@@ -64,13 +64,17 @@ const speakersData = [
       "MBA ГУ ВШЭ «Политические и бизнес-коммуникации»",
     ],
     image: gunderinaPhoto,
+    jointWith: "Анна Евневич",
+    jointTopic: "Ключевые подходы к долголетию и Healthspan",
   },
   {
-    name: "Анна Евнич",
-    role: "Будет объявлено",
+    name: "Анна Евневич",
+    role: "Коллаборация Smart Energy by Alexey Sitnikov · Hedonist One",
     bio: null,
     highlights: [],
     image: evnichPhoto,
+    jointWith: "Наталия Гундерина",
+    jointTopic: "Ключевые подходы к долголетию и Healthspan",
   },
 ];
 
