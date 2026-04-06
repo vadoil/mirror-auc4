@@ -141,11 +141,9 @@ const Header = () => {
                 <Link to="/" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light flex items-center gap-2">
                   <Home className="w-4 h-4" /> Главная
                 </Link>
-                {isHome && (
-                  <a href="#about" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
-                    О проекте
-                  </a>
-                )}
+                <Link to="/#about" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
+                  О проекте
+                </Link>
                 {navItems.map((item) => (
                   <Link key={item.href} to={item.href} onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
                     {item.label}
