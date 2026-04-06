@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
+import MasterclassSection from "@/components/MasterclassSection";
 import ProjectStorySection from "@/components/ProjectStorySection";
 import BeneficiariesSection from "@/components/BeneficiariesSection";
 import LotsPreviewSection from "@/components/LotsPreviewSection";
@@ -21,6 +22,7 @@ const Index = () => {
       <HeroSection />
       <div className="relative z-10">
         <AboutSection />
+        <MasterclassSection />
         <ProjectStorySection />
         <BeneficiariesSection />
         <LotsPreviewSection />
