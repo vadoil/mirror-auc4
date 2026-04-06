@@ -232,7 +232,7 @@ const Program = () => {
                 Public Talk · Модераторы
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="flex justify-center">
               {moderatorsData.map((person, i) => (
                 <PersonCard key={person.name} person={person} index={i} isInView={isInView} />
               ))}
