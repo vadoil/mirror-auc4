@@ -79,7 +79,7 @@ const ProgramSection = () => {
                   {item.speakers && (
                     <div className="mt-6 space-y-4">
                       <div>
-                        <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Модераторы</p>
+                        <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Модератор</p>
                         <div className="space-y-2">
                           {moderators.map(m => (
                             <div key={m.name}>
