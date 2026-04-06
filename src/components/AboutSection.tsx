@@ -77,7 +77,7 @@ const AboutSection = () => {
                   <Link to="/program" className="btn-outline inline-block">
                     Программа аукциона
                   </Link>
-                  <Link to="/lots" className="btn-primary inline-block">
+                  <Link to="/lots" className="border border-primary text-primary px-8 py-3 text-sm uppercase tracking-[0.15em] font-body hover:bg-primary hover:text-primary-foreground transition-colors inline-block">
                     Смотреть лоты
                   </Link>
                 </div>
