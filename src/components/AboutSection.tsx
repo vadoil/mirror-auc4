@@ -1,8 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Calendar } from "lucide-react";
-import aboutVenue from "@/assets/about-venue.jpg";
+import { MapPin } from "lucide-react";
 import aboutVenue from "@/assets/about-venue.jpg";
 
 const AboutSection = () => {
