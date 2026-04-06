@@ -249,7 +249,7 @@ const Program = () => {
             <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-px bg-primary" />
               <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-                Public Talk · Спикеры
+                Public Talk · Участники дискуссии
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
