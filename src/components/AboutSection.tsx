@@ -43,22 +43,6 @@ const AboutSection = () => {
 
 
 
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  <div className="border border-border p-5 flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-display text-lg text-foreground mb-1">Москва</p>
-                      <p className="font-numbers text-sm text-primary">26 апреля 2026</p>
-                    </div>
-                  </div>
-                  <div className="border border-border p-5 flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-display text-lg text-foreground mb-1">Санкт-Петербург</p>
-                      <p className="font-numbers text-sm text-primary">Ноябрь 2026</p>
-                    </div>
-                  </div>
-                </div>
 
                 <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary font-body mb-4">
                   Wellness · Долголетие · Нейрогастрономия
