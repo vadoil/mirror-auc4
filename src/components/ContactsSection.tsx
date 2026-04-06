@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Send, Phone } from "lucide-react";
+import { Send, Phone, Heart, Map, Sparkles } from "lucide-react";
 
 const contacts = [
   { role: "Организация", name: "Александра", phone: "8 (962) 364-66-46", tg: "@alexa_auction" },
