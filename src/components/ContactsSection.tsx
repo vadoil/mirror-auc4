@@ -63,16 +63,16 @@ const ContactsSection = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="flex justify-center gap-8 md:gap-12 mb-12"
         >
-          <div className="flex items-center gap-2">
-            <Heart className="w-4 h-4 text-primary" strokeWidth={1.5} />
+          <div className="flex items-center gap-2.5">
+            <HeartHandshake className="w-4 h-4 text-primary" strokeWidth={1.2} />
             <span className="font-body text-sm text-foreground/80 italic">две подруги</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Map className="w-4 h-4 text-primary" strokeWidth={1.5} />
+          <div className="flex items-center gap-2.5">
+            <MapPinned className="w-4 h-4 text-primary" strokeWidth={1.2} />
             <span className="font-body text-sm text-foreground/80 italic">два города</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-primary" strokeWidth={1.5} />
+          <div className="flex items-center gap-2.5">
+            <Wand2 className="w-4 h-4 text-primary" strokeWidth={1.2} />
             <span className="font-body text-sm text-foreground/80 italic">два формата</span>
           </div>
         </motion.div>
