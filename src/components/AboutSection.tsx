@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-
+import { MapPin } from "lucide-react";
 import aboutVenue from "@/assets/about-venue.jpg";
 
 const AboutSection = () => {
@@ -41,6 +41,46 @@ const AboutSection = () => {
                 </h2>
                 <div className="w-24 h-px bg-primary mb-8" />
 
+
+
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="border border-border p-5 flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-display text-lg text-foreground mb-1">Москва</p>
+                      <p className="font-numbers text-sm text-primary">26 апреля 2026</p>
+                    </div>
+                  </div>
+                  <div className="border border-border p-5 flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-display text-lg text-foreground mb-1">Санкт-Петербург</p>
+                      <p className="font-numbers text-sm text-primary">Ноябрь 2026</p>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary font-body mb-4">
+                  Wellness · Долголетие · Нейрогастрономия
+                </p>
+
+                <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
+                  В столице мы сфокусируемся на wellness-повестке, поговорим о долголетии и нейрогастрономии, проведём вкусную дегустацию безалкогольных коктейлей и проведём вечер в компании остроумного Александра Цыпкина – ведущего нашего аукциона.
+                </p>
+                <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
+                  Мы верим, что забота о себе и забота о других – не противоположности, а отражение друг друга. Поэтому перед началом аукциона мы организуем для вас public talk о современных возможностях поддержать свой организм и баланс внутри.
+                </p>
+                <p className="editorial-body text-muted-foreground mb-8 max-w-lg">
+                  «Отражение добра» – это аукцион, где каждый лот несёт смысл. Уникальные wellness-программы, ретриты, эксклюзивный опыт, а все вырученные средства направляются на системную помощь в борьбе с онкологией.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/program" className="btn-outline inline-block">
+                    Программа аукциона
+                  </Link>
+                  <Link to="/lots" className="btn-primary inline-block">
+                    Смотреть лоты
+                  </Link>
+                </div>
               </motion.div>
 
               <motion.div
@@ -69,36 +109,6 @@ const AboutSection = () => {
                 </div>
               </motion.div>
             </div>
-
-            {/* Description block */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-16 max-w-3xl"
-            >
-              <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary font-body mb-4">
-                Wellness · Долголетие · Нейрогастрономия
-              </p>
-
-              <p className="editorial-body text-muted-foreground mb-6">
-                В столице мы сфокусируемся на wellness-повестке, поговорим о долголетии и нейрогастрономии, проведём вкусную дегустацию безалкогольных коктейлей и проведём вечер в компании остроумного Александра Цыпкина – ведущего нашего аукциона.
-              </p>
-              <p className="editorial-body text-muted-foreground mb-6">
-                Мы верим, что забота о себе и забота о других – не противоположности, а отражение друг друга. Поэтому перед началом аукциона мы организуем для вас public talk о современных возможностях поддержать свой организм и баланс внутри.
-              </p>
-              <p className="editorial-body text-muted-foreground mb-8">
-                «Отражение добра» – это аукцион, где каждый лот несёт смысл. Уникальные wellness-программы, ретриты, эксклюзивный опыт, а все вырученные средства направляются на системную помощь в борьбе с онкологией.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link to="/program" className="btn-outline inline-block">
-                  Программа аукциона
-                </Link>
-                <Link to="/lots" className="border border-primary text-primary px-8 py-3 text-sm uppercase tracking-[0.15em] font-body hover:bg-primary hover:text-primary-foreground transition-colors inline-block">
-                  Смотреть лоты
-                </Link>
-              </div>
-            </motion.div>
           </div>
         </div>
 
@@ -122,3 +132,4 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
+
