@@ -1,7 +1,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Calendar, ArrowRight, Sparkles, Send } from "lucide-react";
+import { MapPin, Calendar, ArrowRight, Sparkles, Send, HeartHandshake, MapPinned, Wand2 } from "lucide-react";
 import sashaPhoto from "@/assets/organizer-sasha-clean.png";
 import gizaPhoto from "@/assets/organizer-giza-clean.png";
 import { supabase } from "@/integrations/supabase/client";
