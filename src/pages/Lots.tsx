@@ -184,7 +184,7 @@ const Lots = () => {
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                         {lot.category && (
-                          <div className="absolute top-3 left-3 bg-primary/90 px-3 py-1">
+                          <div className="absolute bottom-3 left-3 bg-primary/90 px-3 py-1">
                             <span className="text-primary-foreground text-[10px] uppercase tracking-[0.2em] font-body">
                               {lot.category}
                             </span>
