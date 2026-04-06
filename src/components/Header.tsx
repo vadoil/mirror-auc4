@@ -75,14 +75,12 @@ const Header = () => {
               <Home className="w-4 h-4" />
             </Link>
 
-            {isHome && (
-              <a
-                href="#about"
-                className={`${textColor} text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.1em] lg:tracking-[0.12em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300`}
-              >
-                О проекте
-              </a>
-            )}
+            <Link
+              to="/#about"
+              className={`${textColor} text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.1em] lg:tracking-[0.12em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300`}
+            >
+              О проекте
+            </Link>
             {navItems.map((item) => (
               <Link
                 key={item.href}
