@@ -100,15 +100,17 @@ const Auth = () => {
             className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
             required
           />
-          <input
-            type="password"
-            placeholder="Пароль"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
-            required
-            minLength={6}
-          />
+          {mode !== "forgot" && (
+            <input
+              type="password"
+              placeholder="Пароль"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
+              required
+              minLength={6}
+            />
+          )}
           <button
             type="submit"
             disabled={loading}
@@ -118,11 +120,21 @@ const Auth = () => {
               ? "Загрузка..."
               : mode === "login"
               ? "Войти"
-              : "Зарегистрироваться"}
+              : mode === "register"
+              ? "Зарегистрироваться"
+              : "Отправить ссылку"}
           </button>
         </form>
 
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center space-y-2">
+          {mode === "login" && (
+            <button
+              onClick={() => setMode("forgot")}
+              className="block w-full text-cream/40 text-xs font-body hover:text-cream/60 transition-colors"
+            >
+              Забыли пароль?
+            </button>
+          )}
           <button
             onClick={() => setMode(mode === "login" ? "register" : "login")}
             className="text-cream/40 text-xs font-body hover:text-cream/60 transition-colors"
