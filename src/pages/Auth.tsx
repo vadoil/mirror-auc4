@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Gavel } from "lucide-react";
 
 const Auth = () => {
-  const [mode, setMode] = useState<"login" | "register">("login");
+  const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
