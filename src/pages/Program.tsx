@@ -78,8 +78,18 @@ const speakersData = [
   },
 ];
 
+type SpeakerData = {
+  name: string;
+  role: string;
+  bio: string | null;
+  highlights: string[];
+  image: string;
+  jointWith?: string;
+  jointTopic?: string;
+};
+
 type PersonCardProps = {
-  person: typeof moderatorsData[0];
+  person: SpeakerData;
   index: number;
   isInView: boolean;
 };
