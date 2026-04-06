@@ -6,10 +6,6 @@ const program = [
   { time: "16:00", title: "Public Talk", desc: "Тема будет объявлена", highlight: true, speakers: true },
   { time: "16:45", title: "Кофе-брейк", desc: "Перерыв, общение, подготовка к аукциону", highlight: false },
   { time: "17:00", title: "Аукцион", desc: "Торги – wellness-программы, ретриты, эксклюзивный опыт", highlight: true },
-  { time: "19:00", title: "Перерыв и нетворкинг", desc: "Фуршет, живая музыка, общение с экспертами", highlight: false },
-  { time: "19:30", title: "Вторая сессия торгов", desc: "Финальные лоты и эксклюзивные впечатления", highlight: true },
-  { time: "20:30", title: "Церемония закрытия", desc: "Подведение итогов, вручение лотов, благодарности", highlight: false },
-  { time: "21:00", title: "After-party", desc: "Неформальное общение, DJ-сет, бар", highlight: false },
 ];
 
 const moderators = [
