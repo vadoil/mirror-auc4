@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { MapPin } from "lucide-react";
+
 import aboutVenue from "@/assets/about-venue.jpg";
 
 const AboutSection = () => {
@@ -41,22 +41,6 @@ const AboutSection = () => {
                 </h2>
                 <div className="w-24 h-px bg-primary mb-8" />
 
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  <div className="border border-border p-5 flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-display text-lg text-foreground mb-1">Москва</p>
-                      <p className="font-numbers text-sm text-primary">26 апреля 2026</p>
-                    </div>
-                  </div>
-                  <div className="border border-border p-5 flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-display text-lg text-foreground mb-1">Санкт-Петербург</p>
-                      <p className="font-numbers text-sm text-primary">Ноябрь 2026</p>
-                    </div>
-                  </div>
-                </div>
               </motion.div>
 
               <motion.div

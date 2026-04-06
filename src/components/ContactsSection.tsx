@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Send, Phone, Heart, Map, Sparkles } from "lucide-react";
+import { Send, Phone, Sparkles } from "lucide-react";
 
 const contacts = [
   { role: "Организация", name: "Александра", phone: "8 (962) 364-66-46", tg: "@alexa_auction" },
@@ -61,20 +61,20 @@ const ContactsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex justify-center gap-8 md:gap-12 mb-12"
+          className="flex justify-center gap-12 md:gap-20 mb-12"
         >
-          <div className="flex items-center gap-2">
-            <Heart className="w-4 h-4 text-primary" strokeWidth={1.5} />
-            <span className="font-body text-sm text-foreground/80 italic">две подруги</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Map className="w-4 h-4 text-primary" strokeWidth={1.5} />
-            <span className="font-body text-sm text-foreground/80 italic">два города</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-primary" strokeWidth={1.5} />
-            <span className="font-body text-sm text-foreground/80 italic">два формата</span>
-          </div>
+          {[
+            { label: "две подруги" },
+            { label: "два города" },
+            { label: "два формата" },
+          ].map((item, i) => (
+            <div key={i} className="flex flex-col items-center gap-2">
+              <span className="font-display text-lg md:text-xl text-foreground/80 italic tracking-wide">
+                {item.label}
+              </span>
+              <div className="w-10 h-0.5 bg-primary rounded-full" />
+            </div>
+          ))}
         </motion.div>
 
         <motion.div
