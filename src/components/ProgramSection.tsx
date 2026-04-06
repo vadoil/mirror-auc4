@@ -9,8 +9,7 @@ const program = [
 ];
 
 const moderators = [
-  { name: "Родион Ступин", role: "Генеральный директор сети клиник «Будь здоров»" },
-  { name: "Ростислав Павлов", role: "Главный врач Гатчинской клиники (ЛО ГБУЗ ГКМБ), победитель рейтинга Forbes «30 до 30»" },
+  { name: "Ростислав Павлов", role: "Вице-президент Сбербанка по здравоохранению, Forbes «30 до 30»" },
 ];
 
 const publicTalkSpeakers = [
@@ -80,7 +79,7 @@ const ProgramSection = () => {
                   {item.speakers && (
                     <div className="mt-6 space-y-4">
                       <div>
-                        <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Модераторы</p>
+                        <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Модератор</p>
                         <div className="space-y-2">
                           {moderators.map(m => (
                             <div key={m.name}>

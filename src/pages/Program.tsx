@@ -19,30 +19,30 @@ const program = [
 
 const moderatorsData = [
   {
-    name: "Родион Ступин",
-    role: "Генеральный директор сети клиник «Будь здоров»",
-    bio: "Один из ключевых управленцев в сфере частной медицины России. Выступал на ПМЭФ-2025 и «ЗдравФоруме СКОЛКОВО».",
-    highlights: [
-      "Руководитель сети клиник «Будь здоров»",
-      "Спикер ПМЭФ, СКОЛКОВО, Mediametrics",
-      "Эксперт в превентивной медицине и управлении здоровьем",
-    ],
-    image: stupinPhoto,
-  },
-  {
     name: "Ростислав Павлов",
-    role: "И.о. главного врача ГБУЗ ЛО «Гатчинская КМБ»",
+    role: "Вице-президент Сбербанка по здравоохранению",
     bio: "Хирург-онколог, кандидат медицинских наук. Номинант рейтинга Forbes «30 до 30». О нём снят документальный фильм.",
     highlights: [
+      "Вице-президент Сбербанка по здравоохранению",
       "Хирург-онколог, кандидат медицинских наук",
       "Рейтинг Forbes «30 самых перспективных россиян до 30»",
-      "Выпускник Высшей школы онкологии фонда «Не напрасно»",
     ],
     image: pavlovPhoto,
   },
 ];
 
 const speakersData = [
+  {
+    name: "Родион Ступин",
+    role: "Генеральный директор сети клиник «Будь здоров»",
+    bio: "Один из ключевых управленцев в сфере частной медицины России. Участник дискуссии.",
+    highlights: [
+      "Генеральный директор сети клиник «Будь здоров»",
+      "Спикер ПМЭФ, СКОЛКОВО, Mediametrics",
+      "Эксперт в превентивной медицине и управлении здоровьем",
+    ],
+    image: stupinPhoto,
+  },
   {
     name: "Артём Спиро",
     role: "Импакт-предприниматель, ресторатор",
@@ -232,7 +232,7 @@ const Program = () => {
                 Public Talk · Модераторы
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="flex justify-center">
               {moderatorsData.map((person, i) => (
                 <PersonCard key={person.name} person={person} index={i} isInView={isInView} />
               ))}
@@ -249,7 +249,7 @@ const Program = () => {
             <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-px bg-primary" />
               <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-                Public Talk · Спикеры
+                Public Talk · Участники дискуссии
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
