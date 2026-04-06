@@ -16,6 +16,20 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true);
 
+    if (mode === "forgot") {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      setLoading(false);
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success("Ссылка для восстановления отправлена на email");
+        setMode("login");
+      }
+      return;
+    }
+
     if (mode === "register") {
       const { error } = await supabase.auth.signUp({
         email,
