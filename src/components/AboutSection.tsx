@@ -41,6 +41,21 @@ const AboutSection = () => {
                 </h2>
                 <div className="w-24 h-px bg-primary mb-8" />
 
+                <div className="flex flex-wrap gap-6 mb-8">
+                  <div className="flex items-center gap-2">
+                    <Heart className="w-4 h-4 text-primary" strokeWidth={1.5} />
+                    <span className="font-body text-sm text-foreground/80 italic">Две подруги</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Map className="w-4 h-4 text-primary" strokeWidth={1.5} />
+                    <span className="font-body text-sm text-foreground/80 italic">Два города</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-primary" strokeWidth={1.5} />
+                    <span className="font-body text-sm text-foreground/80 italic">Два формата</span>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="border border-border p-5 flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
