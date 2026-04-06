@@ -22,6 +22,7 @@ const Index = () => {
       <HeroSection />
       <div className="relative z-10">
         <AboutSection />
+        <MasterclassSection />
         <ProjectStorySection />
         <BeneficiariesSection />
         <LotsPreviewSection />
