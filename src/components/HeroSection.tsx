@@ -62,9 +62,9 @@ const HeroSection = () => {
                 <h1 className="font-display text-cream text-5xl sm:text-6xl md:text-[7rem] lg:text-[9rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]">
                   Отра
                   <br />
-                  <span className="text-primary">жени</span>е
+                  жение
                   <br />
-                  добра
+                  <span className="text-primary">добра</span>
                 </h1>
               </motion.div>
 
