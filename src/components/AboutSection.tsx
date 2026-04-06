@@ -34,22 +34,44 @@ const AboutSection = () => {
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[0.9] text-foreground mb-8">
                   Благо
                   <br />
-                  <span className="italic text-primary">творительный</span>
+                  <span className="italic text-primary">творительные</span>
                   <br />
-                  аукцион
+                  аукционы
                 </h2>
                 <div className="w-24 h-px bg-primary mb-8" />
+
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="border border-border p-5">
+                    <p className="font-display text-lg text-foreground mb-1">Москва</p>
+                    <p className="font-numbers text-sm text-primary">26 апреля 2026</p>
+                  </div>
+                  <div className="border border-border p-5">
+                    <p className="font-display text-lg text-foreground mb-1">Санкт-Петербург</p>
+                    <p className="font-numbers text-sm text-primary">Ноябрь 2026</p>
+                  </div>
+                </div>
+
+                <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary font-body mb-4">
+                  Wellness · Долголетие · Нейрогастрономия
+                </p>
+
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
-                  Первый в России wellness-аукцион, где лоты – это не вещи, а трансформация. Биохакинг-программы, передовые оздоровительные технологии и эксклюзивный доступ к лучшим экспертам страны. Уникальная возможность познакомиться и провести совместное время с лидерами мнений в интересующей вас отрасли.
+                  В столице мы сфокусируемся на wellness-повестке, поговорим о долголетии и нейрогастрономии, проведём вкусную дегустацию безалкогольных коктейлей и проведём вечер в компании остроумного Александра Цыпкина – ведущего нашего аукциона.
+                </p>
+                <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
+                  Мы верим, что забота о себе и забота о других – не противоположности, а отражение друг друга. Поэтому перед началом аукциона мы организуем для вас public talk о современных возможностях поддержать свой организм и баланс внутри.
                 </p>
                 <p className="editorial-body text-muted-foreground mb-8 max-w-lg">
-                  Мы собираем тех, кто инвестирует в себя осознанно. Каждый лот – это путь к лучшей версии себя, а собранные средства пойдут на благотворительность. Аукцион создан в поддержку Фонда медицинских решений{" "}
-                  <a href="https://nenaprasno.ru/" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">«Не напрасно»</a>{" "}
-                  и Высшей Школы Онкологии.
+                  «Отражение добра» – это аукцион, где каждый лот несёт смысл. Уникальные wellness-программы, ретриты, эксклюзивный опыт, а все вырученные средства направляются на системную помощь в борьбе с онкологией.
                 </p>
-                <Link to="/how-it-works" className="btn-outline inline-block">
-                  Как это работает
-                </Link>
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/program" className="btn-outline inline-block">
+                    Программа аукциона
+                  </Link>
+                  <Link to="/lots" className="btn-primary inline-block">
+                    Смотреть лоты
+                  </Link>
+                </div>
               </motion.div>
 
               <motion.div
