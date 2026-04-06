@@ -21,7 +21,6 @@ const Auth = () => {
         email,
         password,
         options: {
-          emailRedirectTo: window.location.origin,
           data: { full_name: name },
         },
       });
@@ -30,7 +29,8 @@ const Auth = () => {
         toast.error(error.message);
         return;
       }
-      toast.success("Проверьте почту для подтверждения регистрации");
+      toast.success("Регистрация прошла успешно!");
+      navigate("/lots");
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       setLoading(false);
