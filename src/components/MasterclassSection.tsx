@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Calendar, MapPin, ExternalLink } from "lucide-react";
-import dmitrievaPhoto from "@/assets/speaker-dmitrieva.png";
+import dmitrievaPhoto from "@/assets/speaker-dmitrieva.jpg";
 import TicketRequestModal from "./TicketRequestModal";
 
 const MasterclassSection = () => {
