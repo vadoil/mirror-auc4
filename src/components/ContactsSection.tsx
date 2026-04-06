@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Send, Phone } from "lucide-react";
+import { Send, Phone, Heart, Map, Sparkles } from "lucide-react";
 
 const contacts = [
   { role: "Организация", name: "Александра", phone: "8 (962) 364-66-46", tg: "@alexa_auction" },
@@ -57,6 +57,40 @@ const ContactsSection = () => {
           ))}
         </div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex justify-center gap-8 md:gap-12 mb-12"
+        >
+          <div className="flex items-center gap-2">
+            <Heart className="w-4 h-4 text-primary" strokeWidth={1.5} />
+            <span className="font-body text-sm text-foreground/80 italic">две подруги</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Map className="w-4 h-4 text-primary" strokeWidth={1.5} />
+            <span className="font-body text-sm text-foreground/80 italic">два города</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-primary" strokeWidth={1.5} />
+            <span className="font-body text-sm text-foreground/80 italic">два формата</span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="text-center mb-16"
+        >
+          <div className="flex items-center justify-center gap-2 text-muted-foreground">
+            <Sparkles className="w-3.5 h-3.5 text-primary" strokeWidth={1.5} />
+            <p className="font-body text-sm">
+              Одна цель – сбор средств в поддержку фонда{" "}
+              <a href="https://nenaprasno.ru/" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">«Не напрасно»</a>
+            </p>
+          </div>
+        </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
