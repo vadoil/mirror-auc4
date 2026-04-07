@@ -40,6 +40,9 @@ const SponsorsSection = () => {
           <h2 className="font-display text-5xl md:text-6xl font-light tracking-tight text-foreground leading-[0.9]">
             Партнёры и <span className="italic text-primary">спонсоры</span>
           </h2>
+          <p className="mt-6 max-w-2xl mx-auto font-body text-base md:text-lg text-muted-foreground leading-relaxed">
+            Мы благодарим партнёров за поддержку и вклад в организацию аукциона, объединившего людей вокруг главного — возможности помогать, быть рядом и делать добро вместе
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
