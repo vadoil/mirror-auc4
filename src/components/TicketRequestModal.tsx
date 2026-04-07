@@ -30,7 +30,9 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       wantsTraining ? '✅ Хочу на тренировку «Либидо фитнес» 18.04' : '',
     ].filter(Boolean).join('\n') || null;
 
+    const requestId = crypto.randomUUID();
     const { error } = await supabase.from("ticket_requests").insert({
+      id: requestId,
       name: form.name.trim(),
       email: form.email.trim(),
       phone: form.phone.trim() || null,
@@ -42,6 +44,31 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       toast.error("Ошибка отправки. Попробуйте позже.");
       return;
     }
+
+    // Send notification emails to organizers
+    const recipients = [
+      "gizelatolts@gmail.com",
+      "alexa-ref@list.ru",
+      "vvm1976@gmail.com",
+    ];
+    const templateData = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim() || undefined,
+      ticketType,
+      message: message || undefined,
+    };
+    for (const recipientEmail of recipients) {
+      supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "ticket-request-notification",
+          recipientEmail,
+          idempotencyKey: `ticket-notify-${requestId}-${recipientEmail}`,
+          templateData,
+        },
+      });
+    }
+
     toast.success("Заявка отправлена! Мы свяжемся с вами.");
     setForm({ name: "", email: "", phone: "", message: "" });
     setWantsTraining(false);
