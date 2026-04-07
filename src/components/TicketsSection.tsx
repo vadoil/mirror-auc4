@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Check, Star, Shield, Gavel } from "lucide-react";
+import { Check, Gavel } from "lucide-react";
 import TicketRequestModal from "./TicketRequestModal";
 
 const ticket = {
