@@ -145,8 +145,8 @@ const LotsPreviewSection = () => {
                     {(lot.category || i === 0) && (
                       <div className="mb-3 flex flex-wrap items-center gap-2">
                         {lot.category && (
-                          <div className="bg-primary/10 px-2.5 py-1">
-                            <span className="text-primary text-[9px] uppercase tracking-[0.15em] font-body font-medium">{lot.category}</span>
+                          <div className="bg-gradient-to-r from-primary/15 to-primary/5 backdrop-blur-sm px-3 py-1 rounded-full border border-primary/20">
+                            <span className="text-primary text-[9px] uppercase tracking-[0.15em] font-body font-semibold">{lot.category}</span>
                           </div>
                         )}
                         {i === 0 && (

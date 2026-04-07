@@ -184,16 +184,16 @@ const Lots = () => {
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                         {lot.category && (
-                          <div className="absolute bottom-3 left-3 bg-primary/90 px-3 py-1">
-                            <span className="text-primary-foreground text-[10px] uppercase tracking-[0.2em] font-body">
+                          <div className="absolute bottom-3 left-3 bg-gradient-to-r from-primary/90 to-primary/60 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg shadow-primary/20 border border-primary/20">
+                            <span className="text-primary-foreground text-[10px] uppercase tracking-[0.2em] font-body font-medium drop-shadow-sm">
                               {lot.category}
                             </span>
                           </div>
                         )}
                         {remaining && (
-                          <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-3 py-1 flex items-center gap-1.5">
-                            <Clock className="w-3 h-3 text-white/60" />
-                            <span className="text-white/80 text-[10px] uppercase tracking-wider font-body">
+                          <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-xl px-3.5 py-1.5 rounded-full flex items-center gap-1.5 border border-white/10 shadow-lg">
+                            <Clock className="w-3 h-3 text-primary" />
+                            <span className="text-white/90 text-[10px] uppercase tracking-wider font-body font-medium">
                               {remaining}
                             </span>
                           </div>
