@@ -51,7 +51,7 @@ const ContactsSection = () => {
               </div>
               <div className="flex items-center justify-center gap-2">
                 <Send className="w-3 h-3 text-primary" />
-                <p className="font-body text-sm text-primary font-medium">{c.tg}</p>
+                <p className="font-body text-sm text-foreground font-medium">{c.tg}</p>
               </div>
             </motion.div>
           ))}

@@ -3,38 +3,21 @@ import { useRef, useState } from "react";
 import { Check, Star, Shield, Gavel } from "lucide-react";
 import TicketRequestModal from "./TicketRequestModal";
 
-const tickets = [
-  {
-    name: "Участник",
-    price: "10 000 ₽",
-    subtitle: "Регистрация на аукцион",
-    features: [
-      "Доступ на аукцион 26 апреля",
-      "Каталог лотов",
-      "Welcome-drink и фуршет",
-      "Wellness-зона и detox-бар",
-      "Нетворкинг с участниками",
-      "Сертификат участника",
-    ],
-    highlight: false,
-    icon: Shield,
-  },
-  {
-    name: "Участник + Депозит",
-    price: "25 000 ₽",
-    subtitle: "Регистрация + право на онлайн-ставки",
-    features: [
-      "Всё из «Участник»",
-      "Право делать ставки онлайн",
-      "Предварительное бронирование лотов",
-      "Приоритетный доступ к превью",
-      "Депозит 15 000 ₽ — возвращается, если не выиграли",
-      "10 000 ₽ — невозвратный регистрационный взнос",
-    ],
-    highlight: true,
-    icon: Gavel,
-  },
-];
+const ticket = {
+  name: "Участник аукциона",
+  price: "15 000 ₽",
+  subtitle: "Невозвратный регистрационный взнос",
+  features: [
+    "Доступ на аукцион 26 апреля",
+    "Право делать ставки онлайн",
+    "Каталог лотов",
+    "Welcome-drink и фуршет",
+    "Wellness-зона и detox-бар",
+    "Нетворкинг с участниками",
+    "Сертификат участника",
+  ],
+  icon: Gavel,
+};
 
 const TicketsSection = () => {
   const ref = useRef(null);
