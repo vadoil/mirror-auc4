@@ -16,6 +16,7 @@ import AdminLogin from "./pages/AdminLogin";
 import Program from "./pages/Program";
 import NotFound from "./pages/NotFound";
 import ResetPassword from "./pages/ResetPassword";
+import Unsubscribe from "./pages/Unsubscribe";
 
 const queryClient = new QueryClient();
 
