@@ -102,17 +102,17 @@ const ProjectStorySection = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-6 md:gap-10 mb-8 pt-6 border-t border-border">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-10 mb-8 pt-6 border-t border-border">
               <div className="flex items-center justify-center gap-2.5">
-                <HeartHandshake className="w-4 h-4 text-primary" strokeWidth={1.2} />
+                <HeartHandshake className="w-4 h-4 shrink-0 text-primary" strokeWidth={1.2} />
                 <p className="font-display text-lg md:text-xl text-foreground italic">две подруги</p>
               </div>
               <div className="flex items-center justify-center gap-2.5">
-                <MapPinned className="w-4 h-4 text-primary" strokeWidth={1.2} />
+                <MapPinned className="w-4 h-4 shrink-0 text-primary" strokeWidth={1.2} />
                 <p className="font-display text-lg md:text-xl text-foreground italic">два города</p>
               </div>
               <div className="flex items-center justify-center gap-2.5">
-                <Wand2 className="w-4 h-4 text-primary" strokeWidth={1.2} />
+                <Wand2 className="w-4 h-4 shrink-0 text-primary" strokeWidth={1.2} />
                 <p className="font-display text-lg md:text-xl text-foreground italic">два формата</p>
               </div>
             </div>
