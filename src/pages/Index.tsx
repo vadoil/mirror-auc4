@@ -11,6 +11,8 @@ import TransparencySection from "@/components/TransparencySection";
 import TicketsSection from "@/components/TicketsSection";
 import ForumBannerSection from "@/components/ForumBannerSection";
 
+import SponsorsSection from "@/components/SponsorsSection";
+import DressCodeSection from "@/components/DressCodeSection";
 import ForumBannerFooter from "@/components/ForumBannerFooter";
 import ContactsSection from "@/components/ContactsSection";
 import Footer from "@/components/Footer";
