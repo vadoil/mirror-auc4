@@ -33,7 +33,8 @@ const Index = () => {
         <TransparencySection />
         <TicketsSection />
         <ForumBannerSection />
-        
+        <DressCodeSection />
+        <SponsorsSection />
         <ContactsSection />
         <ForumBannerFooter />
         <Footer />
