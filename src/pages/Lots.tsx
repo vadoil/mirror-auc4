@@ -191,9 +191,9 @@ const Lots = () => {
                           </div>
                         )}
                         {remaining && (
-                          <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-3 py-1 flex items-center gap-1.5">
-                            <Clock className="w-3 h-3 text-white/60" />
-                            <span className="text-white/80 text-[10px] uppercase tracking-wider font-body">
+                          <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-xl px-3.5 py-1.5 rounded-full flex items-center gap-1.5 border border-white/10 shadow-lg">
+                            <Clock className="w-3 h-3 text-primary" />
+                            <span className="text-white/90 text-[10px] uppercase tracking-wider font-body font-medium">
                               {remaining}
                             </span>
                           </div>
