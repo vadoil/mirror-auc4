@@ -78,6 +78,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
     toast.success("Заявка отправлена! Мы свяжемся с вами.");
     setForm({ name: "", email: "", phone: "", message: "" });
     setWantsTraining(false);
+    setPrivacyConsent(false);
     onClose();
   };
 
