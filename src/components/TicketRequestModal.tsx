@@ -160,6 +160,22 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
                 </label>
               )}
 
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={privacyConsent}
+                  onChange={(e) => setPrivacyConsent(e.target.checked)}
+                  className="mt-1 w-4 h-4 accent-primary"
+                />
+                <span className="text-cream/60 text-xs font-body leading-relaxed group-hover:text-cream/80 transition-colors">
+                  Я ознакомлен(а) с{" "}
+                  <Link to="/privacy" target="_blank" className="text-primary/80 hover:text-primary underline transition-colors">
+                    политикой конфиденциальности
+                  </Link>{" "}
+                  и даю согласие на обработку персональных данных
+                </span>
+              </label>
+
               <button
                 type="submit"
                 disabled={loading}
