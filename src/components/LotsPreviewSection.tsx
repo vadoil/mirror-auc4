@@ -79,14 +79,15 @@ const LotsPreviewSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8 }}
-          className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+          className="mb-16 md:mb-20 flex flex-col items-center text-center gap-6"
         >
-          <div>
+          <div className="flex flex-col items-center">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-px bg-primary" />
               <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
                 Варианты лотов
               </p>
+              <div className="w-8 h-px bg-primary" />
             </div>
             <h2 className="font-display text-5xl md:text-7xl font-normal uppercase tracking-tight text-foreground leading-[0.9] mb-6">
               Лоты <span className="text-primary italic">аукциона</span>
@@ -99,7 +100,7 @@ const LotsPreviewSection = () => {
               <Link to="/lots?cat=Встреча" className="text-primary hover:underline">развитие и вдохновение</Link>.
             </p>
           </div>
-          <Link to="/lots" className="btn-outline inline-flex items-center gap-2 self-start md:self-auto">
+          <Link to="/lots" className="btn-outline inline-flex items-center gap-2">
             Все лоты <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
