@@ -134,16 +134,6 @@ const Auth = () => {
               </span>
             </label>
           )}
-            <input
-              type="password"
-              placeholder="Пароль"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
-              required
-              minLength={6}
-            />
-          )}
           <button
             type="submit"
             disabled={loading}
