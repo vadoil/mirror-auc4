@@ -398,6 +398,21 @@ const LotDetail = () => {
                   className="w-full bg-muted/30 border border-border text-foreground px-4 py-3 text-sm font-body placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors rounded"
                   maxLength={20}
                 />
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={bookingPrivacy}
+                    onChange={(e) => setBookingPrivacy(e.target.checked)}
+                    className="mt-1 w-4 h-4 accent-primary"
+                  />
+                  <span className="text-muted-foreground text-xs font-body leading-relaxed group-hover:text-foreground/60 transition-colors">
+                    Я ознакомлен(а) с{" "}
+                    <Link to="/privacy" target="_blank" className="text-primary/80 hover:text-primary underline transition-colors">
+                      политикой конфиденциальности
+                    </Link>{" "}
+                    и даю согласие на обработку персональных данных
+                  </span>
+                </label>
                 <button
                   type="submit"
                   disabled={bookingSending}
