@@ -57,13 +57,23 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-cream/10 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="font-body text-xs text-cream/30">
-              © 2026 «Отражение добра». Все права защищены. Благотворительный аукцион.
-            </p>
-            <p className="font-body text-xs text-cream/20">
-              Все средства направляются в благотворительные фонды-партнёры.
-            </p>
+          <div className="pt-8 border-t border-cream/10 space-y-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <p className="font-body text-xs text-cream/30">
+                © 2026 «Отражение добра». Все права защищены. Благотворительный аукцион.
+              </p>
+              <Link to="/privacy" className="font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">
+                Политика конфиденциальности
+              </Link>
+            </div>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-cream/20">
+              <p className="font-body text-[10px]">
+                ООО «БАХИНИ» · ИНН 7716649945 · ОГРН 1097746600577
+              </p>
+              <p className="font-body text-[10px]">
+                Все средства направляются в благотворительные фонды-партнёры.
+              </p>
+            </div>
           </div>
         </div>
       </div>
