@@ -36,6 +36,7 @@ const LotDetail = () => {
   const [showBooking, setShowBooking] = useState(false);
   const [bookingForm, setBookingForm] = useState({ name: "", email: "", phone: "" });
   const [bookingSending, setBookingSending] = useState(false);
+  const [bookingPrivacy, setBookingPrivacy] = useState(false);
 
   const currentPrice = bids.length > 0 ? bids[0].amount : lot?.starting_price || 0;
   const minBid = currentPrice + (lot?.bid_step || 0);
@@ -129,6 +130,10 @@ const LotDetail = () => {
     e.preventDefault();
     if (!bookingForm.name.trim() || !bookingForm.email.trim()) {
       toast.error("Заполните имя и email");
+      return;
+    }
+    if (!bookingPrivacy) {
+      toast.error("Необходимо согласие с политикой конфиденциальности");
       return;
     }
     setBookingSending(true);
@@ -393,6 +398,21 @@ const LotDetail = () => {
                   className="w-full bg-muted/30 border border-border text-foreground px-4 py-3 text-sm font-body placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors rounded"
                   maxLength={20}
                 />
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={bookingPrivacy}
+                    onChange={(e) => setBookingPrivacy(e.target.checked)}
+                    className="mt-1 w-4 h-4 accent-primary"
+                  />
+                  <span className="text-muted-foreground text-xs font-body leading-relaxed group-hover:text-foreground/60 transition-colors">
+                    Я ознакомлен(а) с{" "}
+                    <Link to="/privacy" target="_blank" className="text-primary/80 hover:text-primary underline transition-colors">
+                      политикой конфиденциальности
+                    </Link>{" "}
+                    и даю согласие на обработку персональных данных
+                  </span>
+                </label>
                 <button
                   type="submit"
                   disabled={bookingSending}

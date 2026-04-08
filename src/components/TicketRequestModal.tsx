@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -16,11 +17,16 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [wantsTraining, setWantsTraining] = useState(false);
+  const [privacyConsent, setPrivacyConsent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim()) {
       toast.error("Заполните имя и email");
+      return;
+    }
+    if (!privacyConsent) {
+      toast.error("Необходимо согласие с политикой конфиденциальности");
       return;
     }
     setLoading(true);
@@ -72,6 +78,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
     toast.success("Заявка отправлена! Мы свяжемся с вами.");
     setForm({ name: "", email: "", phone: "", message: "" });
     setWantsTraining(false);
+    setPrivacyConsent(false);
     onClose();
   };
 
@@ -152,6 +159,22 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
                   </span>
                 </label>
               )}
+
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={privacyConsent}
+                  onChange={(e) => setPrivacyConsent(e.target.checked)}
+                  className="mt-1 w-4 h-4 accent-primary"
+                />
+                <span className="text-cream/60 text-xs font-body leading-relaxed group-hover:text-cream/80 transition-colors">
+                  Я ознакомлен(а) с{" "}
+                  <Link to="/privacy" target="_blank" className="text-primary/80 hover:text-primary underline transition-colors">
+                    политикой конфиденциальности
+                  </Link>{" "}
+                  и даю согласие на обработку персональных данных
+                </span>
+              </label>
 
               <button
                 type="submit"

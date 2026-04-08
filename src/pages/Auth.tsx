@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Gavel } from "lucide-react";
@@ -10,6 +10,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [privacyConsent, setPrivacyConsent] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,6 +32,11 @@ const Auth = () => {
     }
 
     if (mode === "register") {
+      if (!privacyConsent) {
+        toast.error("Необходимо согласие с политикой конфиденциальности");
+        setLoading(false);
+        return;
+      }
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -110,6 +116,23 @@ const Auth = () => {
               required
               minLength={6}
             />
+          )}
+          {mode === "register" && (
+            <label className="flex items-start gap-3 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={privacyConsent}
+                onChange={(e) => setPrivacyConsent(e.target.checked)}
+                className="mt-1 w-4 h-4 accent-primary"
+              />
+              <span className="text-cream/60 text-xs font-body leading-relaxed group-hover:text-cream/80 transition-colors">
+                Я ознакомлен(а) с{" "}
+                <Link to="/privacy" target="_blank" className="text-primary/80 hover:text-primary underline transition-colors">
+                  политикой конфиденциальности
+                </Link>{" "}
+                и даю согласие на обработку персональных данных
+              </span>
+            </label>
           )}
           <button
             type="submit"
