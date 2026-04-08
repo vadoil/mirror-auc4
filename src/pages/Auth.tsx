@@ -32,6 +32,11 @@ const Auth = () => {
     }
 
     if (mode === "register") {
+      if (!privacyConsent) {
+        toast.error("Необходимо согласие с политикой конфиденциальности");
+        setLoading(false);
+        return;
+      }
       const { error } = await supabase.auth.signUp({
         email,
         password,
