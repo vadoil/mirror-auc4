@@ -117,6 +117,33 @@ const Auth = () => {
               minLength={6}
             />
           )}
+          {mode === "register" && (
+            <label className="flex items-start gap-3 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={privacyConsent}
+                onChange={(e) => setPrivacyConsent(e.target.checked)}
+                className="mt-1 w-4 h-4 accent-primary"
+              />
+              <span className="text-cream/60 text-xs font-body leading-relaxed group-hover:text-cream/80 transition-colors">
+                Я ознакомлен(а) с{" "}
+                <Link to="/privacy" target="_blank" className="text-primary/80 hover:text-primary underline transition-colors">
+                  политикой конфиденциальности
+                </Link>{" "}
+                и даю согласие на обработку персональных данных
+              </span>
+            </label>
+          )}
+            <input
+              type="password"
+              placeholder="Пароль"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
+              required
+              minLength={6}
+            />
+          )}
           <button
             type="submit"
             disabled={loading}
