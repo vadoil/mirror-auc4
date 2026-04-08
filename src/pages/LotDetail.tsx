@@ -36,6 +36,7 @@ const LotDetail = () => {
   const [showBooking, setShowBooking] = useState(false);
   const [bookingForm, setBookingForm] = useState({ name: "", email: "", phone: "" });
   const [bookingSending, setBookingSending] = useState(false);
+  const [bookingPrivacy, setBookingPrivacy] = useState(false);
 
   const currentPrice = bids.length > 0 ? bids[0].amount : lot?.starting_price || 0;
   const minBid = currentPrice + (lot?.bid_step || 0);
