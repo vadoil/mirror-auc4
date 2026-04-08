@@ -25,6 +25,10 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       toast.error("Заполните имя и email");
       return;
     }
+    if (!privacyConsent) {
+      toast.error("Необходимо согласие с политикой конфиденциальности");
+      return;
+    }
     setLoading(true);
 
     const message = [
