@@ -132,6 +132,10 @@ const LotDetail = () => {
       toast.error("Заполните имя и email");
       return;
     }
+    if (!bookingPrivacy) {
+      toast.error("Необходимо согласие с политикой конфиденциальности");
+      return;
+    }
     setBookingSending(true);
     const { error } = await supabase.from("lot_reservations" as any).insert({
       lot_id: id,
