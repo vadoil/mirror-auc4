@@ -24,16 +24,16 @@ const Index = () => {
       <HeroSection />
       <div className="relative z-10">
         <AboutSection />
-        <MasterclassSection />
         <ProjectStorySection />
         <BeneficiariesSection />
         <LotsPreviewSection />
         <AuctioneerSection />
         <VenuePreviewSection />
+        <DressCodeSection />
+        <MasterclassSection />
         <TransparencySection />
         <TicketsSection />
         <ForumBannerSection />
-        <DressCodeSection />
         <SponsorsSection />
         <ContactsSection />
         <ForumBannerFooter />

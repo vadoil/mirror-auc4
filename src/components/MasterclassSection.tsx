@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Calendar, MapPin, ExternalLink } from "lucide-react";
+import { Calendar, MapPin, Sparkles } from "lucide-react";
 import dmitrievaPhoto from "@/assets/speaker-dmitrieva.jpg";
 import TicketRequestModal from "./TicketRequestModal";
 
@@ -11,100 +11,78 @@ const MasterclassSection = () => {
 
   return (
     <>
-      <section className="py-24 md:py-32 section-padding bg-card relative overflow-hidden">
-        <div ref={ref} className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-px bg-primary" />
-              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-                Специальное мероприятие · 18 апреля 2026
-              </p>
-            </div>
-            <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-foreground leading-[0.9]">
-              Тренировка-<span className="italic text-primary">презентация</span>
-            </h2>
-          </motion.div>
+      <section className="py-20 md:py-28 section-padding bg-warm-black relative overflow-hidden">
+        {/* Subtle background accent */}
+        <div className="absolute inset-0 opacity-[0.03]">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary to-transparent" />
+        </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Photo */}
+        <div ref={ref} className="max-w-6xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center">
+            {/* Photo — compact */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
+              transition={{ duration: 0.7 }}
+              className="relative w-48 h-48 md:w-56 md:h-56 mx-auto lg:mx-0 flex-shrink-0"
             >
-              <div className="aspect-[3/4] overflow-hidden relative bg-muted/20">
+              <div className="w-full h-full rounded-full overflow-hidden border-2 border-primary/20">
                 <img
                   src={dmitrievaPhoto}
-                  alt="Маргарита Дмитриева — ведущая мастер-класса «Либидо фитнес»"
-                  className="absolute inset-0 w-full h-full object-cover object-top"
+                  alt="Маргарита Дмитриева — ведущая тренировки-презентации «Либидо фитнес»"
+                  className="w-full h-full object-cover object-top"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-warm-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="font-display text-2xl md:text-3xl text-cream font-light italic leading-tight">
-                    Маргарита Дмитриева
-                  </p>
-                  <p className="text-cream/60 text-xs font-body mt-2">
-                    Врач, сексолог, семейный психолог
-                  </p>
-                </div>
+              </div>
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-primary px-3 py-1 rounded-full">
+                <p className="text-[10px] text-cream font-body uppercase tracking-wider whitespace-nowrap">18 апреля</p>
               </div>
             </motion.div>
 
             {/* Info */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="text-center lg:text-left"
             >
-              <h3 className="font-display text-2xl md:text-3xl font-light text-foreground mb-4 leading-tight">
-                Программа женского здоровья
-                <br />
-                <span className="text-primary italic">«Либидо фитнес»</span>
-              </h3>
+              <div className="flex items-center gap-2 justify-center lg:justify-start mb-3">
+                <Sparkles className="w-3.5 h-3.5 text-primary" />
+                <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cream/40 font-body">
+                  Специальное мероприятие
+                </p>
+              </div>
 
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-3">
-                  <Calendar className="w-4 h-4 text-primary flex-shrink-0" />
-                  <p className="font-numbers text-sm text-foreground">18 апреля 2026</p>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-cream leading-[0.95] mb-3">
+                Тренировка-<span className="italic text-primary">презентация</span>
+              </h2>
+
+              <p className="font-display text-lg md:text-xl text-cream/70 font-light mb-4">
+                Программа женского здоровья <span className="italic text-primary/80">«Либидо фитнес»</span>
+              </p>
+
+              <p className="editorial-body text-cream/50 mb-6 max-w-lg mx-auto lg:mx-0 text-sm">
+                Маргарита Дмитриева — основательница Академии Женской Сексуальности, врач, сексолог. Эксклюзивная тренировка в зале «Место быть» за неделю до аукциона.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-4 justify-center lg:justify-start mb-8 text-cream/40">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-3.5 h-3.5 text-primary/60" />
+                  <span className="font-numbers text-xs">18 апреля 2026</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-                  <p className="font-body text-sm text-foreground">Пространство «Место быть» · Мясницкая 24/7</p>
+                <div className="w-px h-3 bg-cream/10" />
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-primary/60" />
+                  <span className="font-body text-xs">Мясницкая 24/7</span>
                 </div>
               </div>
 
-              <div className="w-16 h-px bg-primary mb-6" />
-
-              <p className="editorial-body text-muted-foreground mb-4">
-                Основательница Академии Женской Сексуальности. Мама двоих детей. Женщина, которая прошла сложный путь и смогла пробудить свою женскую силу.
-              </p>
-              <p className="editorial-body text-muted-foreground mb-8">
-                Приглашаем вас на эксклюзивную тренировку-презентацию программы женского здоровья в зале пространства «Место быть» за неделю до основного аукциона.
-              </p>
-
-              <div className="flex flex-wrap gap-4">
-                <button
-                  onClick={() => setModalOpen(true)}
-                  className="btn-primary"
-                >
-                  Записаться
-                </button>
-                <a
-                  href="https://academy-of-female-sexuality.ru"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline inline-flex items-center gap-2"
-                >
-                  Подробнее <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
+              <button
+                onClick={() => setModalOpen(true)}
+                className="btn-primary text-sm"
+              >
+                Записаться на тренировку
+              </button>
             </motion.div>
           </div>
         </div>
@@ -113,7 +91,7 @@ const MasterclassSection = () => {
       <TicketRequestModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        ticketType="Мастер-класс «Либидо фитнес» 18.04"
+        ticketType="Тренировка «Либидо фитнес» 18.04"
         ticketPrice=""
         showTrainingCheckbox={false}
       />
