@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Check, Tag } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -15,9 +15,32 @@ interface TicketRequestModalProps {
 
 const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrainingCheckbox = true }: TicketRequestModalProps) => {
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "", promoCode: "" });
   const [wantsTraining, setWantsTraining] = useState(false);
   const [privacyConsent, setPrivacyConsent] = useState(false);
+  const [promoValid, setPromoValid] = useState<boolean | null>(null);
+  const [promoChecking, setPromoChecking] = useState(false);
+
+  const checkPromoCode = async (code: string) => {
+    if (!code.trim()) {
+      setPromoValid(null);
+      return;
+    }
+    setPromoChecking(true);
+    const { data } = await supabase
+      .from("promo_codes")
+      .select("id, code, is_active, max_uses, current_uses")
+      .ilike("code", code.trim())
+      .eq("is_active", true)
+      .maybeSingle();
+
+    if (data && (!data.max_uses || data.current_uses < data.max_uses)) {
+      setPromoValid(true);
+    } else {
+      setPromoValid(false);
+    }
+    setPromoChecking(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,6 +59,8 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       wantsTraining ? '✅ Хочу на тренировку «Либидо фитнес» 18.04' : '',
     ].filter(Boolean).join('\n') || null;
 
+    const promoCode = promoValid ? form.promoCode.trim().toUpperCase() : null;
+
     const requestId = crypto.randomUUID();
     const { error } = await supabase.from("ticket_requests").insert({
       id: requestId,
@@ -44,11 +69,17 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       phone: form.phone.trim() || null,
       ticket_type: ticketType,
       message,
+      promo_code: promoCode,
     });
     setLoading(false);
     if (error) {
       toast.error("Ошибка отправки. Попробуйте позже.");
       return;
+    }
+
+    // Increment promo code usage
+    if (promoCode) {
+      supabase.rpc("increment_promo_usage" as any, { promo_code_value: promoCode });
     }
 
     // Send notification emails to organizers
@@ -63,6 +94,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       phone: form.phone.trim() || undefined,
       ticketType,
       message: message || undefined,
+      promoCode: promoCode || undefined,
     };
     for (const recipientEmail of recipients) {
       supabase.functions.invoke("send-transactional-email", {
@@ -75,12 +107,18 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       });
     }
 
-    toast.success("Заявка отправлена! Мы свяжемся с вами.");
-    setForm({ name: "", email: "", phone: "", message: "" });
+    toast.success(promoCode
+      ? "Заявка отправлена! Промокод применён — регистрация без оплаты."
+      : "Заявка отправлена! Мы свяжемся с вами."
+    );
+    setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
     setWantsTraining(false);
     setPrivacyConsent(false);
+    setPromoValid(null);
     onClose();
   };
+
+  const displayPrice = promoValid ? "Бесплатно" : ticketPrice;
 
   return (
     <AnimatePresence>
@@ -97,14 +135,17 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="bg-charcoal border border-cream/10 w-full max-w-md p-8"
+            className="bg-charcoal border border-cream/10 w-full max-w-md p-8 max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="font-display text-2xl text-cream uppercase tracking-tight">Заявка</h3>
-                {ticketPrice && <p className="text-cream/40 text-xs font-body mt-1">{ticketType} · {ticketPrice}</p>}
-                {!ticketPrice && <p className="text-cream/40 text-xs font-body mt-1">{ticketType}</p>}
+                <p className="text-cream/40 text-xs font-body mt-1">
+                  {ticketType} · {promoValid ? (
+                    <span className="text-green-400 font-medium">Бесплатно по промокоду</span>
+                  ) : displayPrice}
+                </p>
               </div>
               <button onClick={onClose} className="text-cream/40 hover:text-cream transition-colors">
                 <X size={20} />
@@ -138,6 +179,45 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
                 className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
                 maxLength={20}
               />
+
+              {/* Promo code field */}
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Tag className="w-3 h-3 text-cream/40" />
+                  <span className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body">Промокод</span>
+                </div>
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Введите промокод"
+                    value={form.promoCode}
+                    onChange={(e) => {
+                      setForm({ ...form, promoCode: e.target.value });
+                      setPromoValid(null);
+                    }}
+                    onBlur={() => checkPromoCode(form.promoCode)}
+                    className={`w-full bg-cream/5 border text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none transition-colors ${
+                      promoValid === true ? "border-green-400/50" : promoValid === false ? "border-red-400/50" : "border-cream/10 focus:border-primary"
+                    }`}
+                    maxLength={50}
+                  />
+                  {promoChecking && (
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-cream/30 text-xs font-body">
+                      проверка...
+                    </span>
+                  )}
+                  {promoValid === true && !promoChecking && (
+                    <Check className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-green-400" />
+                  )}
+                </div>
+                {promoValid === true && (
+                  <p className="text-green-400 text-xs font-body mt-1">Промокод применён — регистрация без оплаты</p>
+                )}
+                {promoValid === false && (
+                  <p className="text-red-400/70 text-xs font-body mt-1">Промокод не найден или недействителен</p>
+                )}
+              </div>
+
               <textarea
                 placeholder="Комментарий"
                 value={form.message}
@@ -181,7 +261,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
                 disabled={loading}
                 className="w-full bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:opacity-90 transition-all disabled:opacity-50"
               >
-                {loading ? "Отправка..." : "Отправить заявку"}
+                {loading ? "Отправка..." : promoValid ? "Зарегистрироваться бесплатно" : "Отправить заявку"}
               </button>
             </form>
           </motion.div>
