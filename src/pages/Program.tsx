@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Mic, User } from "lucide-react";
 import Header from "@/components/Header";
+import DressCodeSection from "@/components/DressCodeSection";
 import Footer from "@/components/Footer";
 import stupinPhoto from "@/assets/speaker-stupin.jpg";
 import pavlovPhoto from "@/assets/speaker-pavlov.png";
