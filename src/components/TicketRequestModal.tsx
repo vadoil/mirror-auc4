@@ -119,6 +119,9 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
   };
 
   const displayPrice = promoValid ? "Бесплатно" : ticketPrice;
+  const nonTicketTypes = ["Задать вопрос", "Узнать о форуме", "Участие в форуме", "Тренировка «Либидо фитнес» 18.04"];
+  const isTicketRegistration = !nonTicketTypes.includes(ticketType);
+  const needsPromo = isTicketRegistration && !promoValid;
 
   return (
     <AnimatePresence>
@@ -256,12 +259,20 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
                 </span>
               </label>
 
+              {needsPromo && (
+                <div className="bg-cream/5 border border-cream/10 px-4 py-3 text-center">
+                  <p className="text-cream/50 text-xs font-body leading-relaxed">
+                    Введите промокод для бесплатной регистрации или дождитесь подключения платёжной системы
+                  </p>
+                </div>
+              )}
+
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading || needsPromo}
                 className="w-full bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:opacity-90 transition-all disabled:opacity-50"
               >
-                {loading ? "Отправка..." : promoValid ? "Зарегистрироваться бесплатно" : "Отправить заявку"}
+                {loading ? "Отправка..." : promoValid ? "Зарегистрироваться бесплатно" : needsPromo ? "Введите промокод" : "Отправить заявку"}
               </button>
             </form>
           </motion.div>
