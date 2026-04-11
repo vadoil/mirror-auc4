@@ -135,7 +135,7 @@ const Header = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-background/98 backdrop-blur-xl border-t border-border"
+              className="lg:hidden bg-background backdrop-blur-xl border-t border-border"
             >
               <nav className="flex flex-col items-center py-8 gap-6">
                 <Link to="/" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light flex items-center gap-2">
