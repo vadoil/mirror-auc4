@@ -119,8 +119,9 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
   };
 
   const displayPrice = promoValid ? "Бесплатно" : ticketPrice;
-  const isTicketType = ticketType.toLowerCase().includes("участник") || ticketType.toLowerCase().includes("standard") || ticketType === "Задать вопрос" ? false : true;
-  const needsPromo = isTicketType && !promoValid;
+  const nonTicketTypes = ["Задать вопрос", "Узнать о форуме", "Участие в форуме", "Тренировка «Либидо фитнес» 18.04"];
+  const isTicketRegistration = !nonTicketTypes.includes(ticketType);
+  const needsPromo = isTicketRegistration && !promoValid;
 
   return (
     <AnimatePresence>
