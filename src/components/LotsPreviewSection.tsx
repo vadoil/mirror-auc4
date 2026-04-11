@@ -108,6 +108,7 @@ const LotsPreviewSection = () => {
               Зарегистрироваться
             </Link>
           </div>
+        </motion.div>
       </div>
 
       <div className="section-padding">
