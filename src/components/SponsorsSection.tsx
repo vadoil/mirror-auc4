@@ -12,6 +12,7 @@ import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
 import hedonistLogo from "@/assets/sponsors/hedonist.svg";
 import karmawomanLogo from "@/assets/sponsors/karmawoman.png";
 import oneLogo from "@/assets/sponsors/one.svg";
+import oneIcon from "@/assets/sponsors/one-icon.png";
 import shtabLogo from "@/assets/sponsors/shtab-kultury.svg";
 import levEdinorogLogo from "@/assets/sponsors/lev-edinorog.svg";
 
@@ -26,7 +27,7 @@ const sponsors = [
   { name: "HEDONIST", logo: hedonistLogo, invert: true },
   { name: "KARMA WOMAN", logo: karmawomanLogo },
   { name: "Smart Life", logo: null, textOnly: true },
-  { name: "Биохакинг центр ONE", logo: oneLogo },
+  { name: "Биохакинг центр ONE", logo: oneLogo, icon: oneIcon },
   { name: "ШТАБ КУЛЬТУРЫ", logo: shtabLogo },
   { name: "Лев & Единорог", logo: levEdinorogLogo },
 ];
@@ -59,12 +60,17 @@ const SponsorsSection = () => {
           {sponsor.name}
         </span>
       ) : sponsor.logo ? (
-        <img
-          src={sponsor.logo}
-          alt={sponsor.name}
-          className={`max-h-10 md:max-h-12 w-auto object-contain ${sponsor.invert ? "invert" : ""}`}
-          title={sponsor.name}
-        />
+        <div className="flex items-center gap-2">
+          {sponsor.icon && (
+            <img src={sponsor.icon} alt="" className="max-h-8 md:max-h-10 w-auto object-contain" />
+          )}
+          <img
+            src={sponsor.logo}
+            alt={sponsor.name}
+            className={`max-h-10 md:max-h-12 w-auto object-contain ${sponsor.invert ? "invert" : ""}`}
+            title={sponsor.name}
+          />
+        </div>
       ) : null}
     </motion.div>
   );
