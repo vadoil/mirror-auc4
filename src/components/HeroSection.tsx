@@ -35,7 +35,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
+    <section className="relative min-h-[80svh] md:min-h-[100svh] flex flex-col justify-end overflow-hidden">
       <div className="absolute inset-0 bg-warm-black">
         <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-60" width={1920} height={1080} />
         <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen" src={HERO_VIDEO_URL} />
