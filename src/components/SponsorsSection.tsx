@@ -26,7 +26,7 @@ const sponsors = [
   { name: "HEDONIST", logo: hedonistLogo, invert: true },
   { name: "KARMA WOMAN", logo: karmawomanLogo },
   { name: "Smart Life", logo: null, textOnly: true },
-  { name: "Биохакинг центр ONE", logo: oneLogo, icon: oneIcon },
+  { name: "Биохакинг центр ONE", logo: oneCombinedLogo },
   { name: "ШТАБ КУЛЬТУРЫ", logo: shtabLogo },
   { name: "Лев & Единорог", logo: levEdinorogLogo },
 ];
