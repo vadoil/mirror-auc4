@@ -10,6 +10,7 @@ const navItems = [
   { label: "Программа", href: "/program" },
   { label: "Как участвовать", href: "/how-it-works" },
   { label: "Место", href: "/venue" },
+  { label: "Контакты", href: "/#contacts" },
 ];
 
 const Header = () => {
