@@ -100,9 +100,14 @@ const LotsPreviewSection = () => {
               <Link to="/lots?cat=Встреча" className="text-primary hover:underline">развитие и вдохновение</Link>.
             </p>
           </div>
-          <Link to="/lots" className="btn-outline inline-flex items-center gap-2">
-            Все лоты <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link to="/lots" className="btn-outline inline-flex items-center gap-2">
+              Все лоты <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link to="/#tickets" className="btn-primary inline-flex items-center gap-2">
+              Зарегистрироваться
+            </Link>
+          </div>
         </motion.div>
       </div>
 

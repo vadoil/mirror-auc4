@@ -220,6 +220,23 @@ const Program = () => {
             </div>
           </div>
 
+          {/* Registration CTA after program */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center py-10 mb-16 border border-border rounded-lg bg-primary/5"
+          >
+            <p className="font-display text-2xl md:text-3xl font-light text-foreground mb-3">
+              Хотите быть <span className="italic text-primary">на аукционе?</span>
+            </p>
+            <p className="font-body text-sm text-muted-foreground mb-6 max-w-md mx-auto">
+              Зарегистрируйтесь сейчас — взнос 15 000 ₽ вычитается из стоимости выигранного лота
+            </p>
+            <Link to="/#tickets" className="btn-primary">
+              Зарегистрироваться
+            </Link>
+          </motion.div>
           {/* Moderators */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
