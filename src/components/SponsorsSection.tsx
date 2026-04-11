@@ -59,17 +59,13 @@ const SponsorsSection = () => {
           {sponsor.name}
         </span>
       ) : sponsor.logo ? (
-        <div className="flex items-center gap-2">
-          {sponsor.icon && (
-            <img src={sponsor.icon} alt="" className="max-h-8 md:max-h-10 w-auto object-contain" />
-          )}
-          <img
-            src={sponsor.logo}
-            alt={sponsor.name}
-            className={`max-h-10 md:max-h-12 w-auto object-contain ${sponsor.invert ? "invert" : ""}`}
-            title={sponsor.name}
-          />
-        </div>
+        <img
+          src={sponsor.logo}
+          alt={sponsor.name}
+          className={`max-h-10 md:max-h-12 w-auto object-contain ${sponsor.invert ? "invert" : ""}`}
+          title={sponsor.name}
+        />
+
       ) : null}
     </motion.div>
   );
