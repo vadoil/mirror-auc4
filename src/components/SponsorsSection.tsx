@@ -12,6 +12,7 @@ import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
 import hedonistLogo from "@/assets/sponsors/hedonist.svg";
 import karmawomanLogo from "@/assets/sponsors/karmawoman.png";
 import oneLogo from "@/assets/sponsors/one.svg";
+import oneIcon from "@/assets/sponsors/one-icon.png";
 import shtabLogo from "@/assets/sponsors/shtab-kultury.svg";
 import levEdinorogLogo from "@/assets/sponsors/lev-edinorog.svg";
 
