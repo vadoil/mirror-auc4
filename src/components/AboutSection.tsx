@@ -64,6 +64,9 @@ const AboutSection = () => {
                   <Link to="/lots" className="btn-primary inline-block">
                     Смотреть лоты
                   </Link>
+                  <a href="#tickets" className="btn-outline inline-block">
+                    Зарегистрироваться
+                  </a>
                 </div>
 
                 <div className="border-t border-border pt-6 space-y-3 max-w-lg">
