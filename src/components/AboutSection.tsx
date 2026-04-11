@@ -58,13 +58,13 @@ const AboutSection = () => {
                   «Отражение добра» – это аукцион, где каждый лот несёт смысл. Уникальные wellness-программы, ретриты, эксклюзивный опыт, а все вырученные средства направляются на системную помощь в борьбе с онкологией.
                 </p>
                 <div className="flex flex-nowrap gap-4 mb-8">
-                  <Link to="/program" className="btn-outline inline-block">
+                  <Link to="/program" className="btn-outline inline-block flex-1 text-center">
                     Программа аукциона
                   </Link>
-                  <Link to="/lots" className="btn-primary inline-block">
+                  <Link to="/lots" className="btn-outline inline-block flex-1 text-center">
                     Смотреть лоты
                   </Link>
-                  <a href="#tickets" className="btn-outline inline-block">
+                  <a href="#tickets" className="btn-primary inline-block flex-1 text-center">
                     Зарегистрироваться
                   </a>
                 </div>
