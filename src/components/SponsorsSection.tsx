@@ -69,7 +69,8 @@ const SponsorsSection = () => {
             alt={sponsor.name}
             className={`max-h-10 md:max-h-12 w-auto object-contain ${sponsor.invert ? "invert" : ""}`}
             title={sponsor.name}
-        />
+          />
+        </div>
       ) : null}
     </motion.div>
   );
