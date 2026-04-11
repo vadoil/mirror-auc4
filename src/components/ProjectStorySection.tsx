@@ -91,9 +91,9 @@ const ProjectStorySection = () => {
               {/* Giza */}
               <div className="flex flex-col items-center text-center">
                 <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-4 border-2 border-primary/20">
-                  <img src={gizaPhoto} alt="Гизела Тольц" className="w-full h-full object-cover" />
+                  <img src={gizaPhoto} alt="Гизела" className="w-full h-full object-cover" />
                 </div>
-                <h4 className="font-display text-xl md:text-2xl font-light text-foreground mb-2">Гизела Тольц</h4>
+                <h4 className="font-display text-xl md:text-2xl font-light text-foreground mb-2">Гизела</h4>
                 <ul className="font-body text-sm text-muted-foreground space-y-1 text-left">
                   <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />Организатор медицинских, коммерческих, корпоративных и частных мероприятий</li>
                   <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />10 лет работы с лучшими врачами и экспертами России и Европы</li>
