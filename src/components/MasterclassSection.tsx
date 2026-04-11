@@ -54,11 +54,11 @@ const MasterclassSection = () => {
               </div>
 
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-cream leading-[0.95] mb-3">
-                Тренировка-<span className="italic text-primary">презентация</span>
+                Превью-<span className="italic text-primary">событие</span>
               </h2>
 
               <p className="font-display text-lg md:text-xl text-cream/70 font-light mb-4">
-                Программа женского здоровья <span className="italic text-primary/80">«Либидо фитнес»</span>
+                Безоплатная тренировка для участниц клуба <span className="italic text-primary/80">«Отражение»</span>
               </p>
 
               <p className="editorial-body text-cream/50 mb-6 max-w-lg mx-auto lg:mx-0 text-sm">

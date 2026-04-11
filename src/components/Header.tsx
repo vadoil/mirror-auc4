@@ -149,6 +149,9 @@ const Header = () => {
                     {item.label}
                   </Link>
                 ))}
+                <a href="/#contacts" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
+                  Контакты
+                </a>
                 {isAdmin && (
                   <Link to="/admin" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
                     Админ

@@ -57,13 +57,25 @@ const AboutSection = () => {
                 <p className="editorial-body text-muted-foreground mb-8 max-w-lg">
                   «Отражение добра» – это аукцион, где каждый лот несёт смысл. Уникальные wellness-программы, ретриты, эксклюзивный опыт, а все вырученные средства направляются на системную помощь в борьбе с онкологией.
                 </p>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-4 mb-8">
                   <Link to="/program" className="btn-outline inline-block">
                     Программа аукциона
                   </Link>
                   <Link to="/lots" className="btn-primary inline-block">
                     Смотреть лоты
                   </Link>
+                </div>
+
+                <div className="border-t border-border pt-6 space-y-3 max-w-lg">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Контакты</p>
+                  <div className="space-y-2">
+                    <p className="font-body text-sm text-muted-foreground">
+                      <span className="text-foreground font-medium">Организация:</span> Александра · 8 (962) 364-66-46 · <a href="https://t.me/alexa_auction" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@alexa_auction</a>
+                    </p>
+                    <p className="font-body text-sm text-muted-foreground">
+                      <span className="text-foreground font-medium">Партнёры:</span> Гизела · 8 (985) 809-53-70 · <a href="https://t.me/gisela_events" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@gisela_events</a>
+                    </p>
+                  </div>
                 </div>
               </motion.div>
 
