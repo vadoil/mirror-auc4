@@ -12,7 +12,6 @@ import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
 import hedonistLogo from "@/assets/sponsors/hedonist.svg";
 import karmawomanLogo from "@/assets/sponsors/karmawoman.png";
 import oneLogo from "@/assets/sponsors/one.svg";
-import oneCircle from "@/assets/sponsors/one-circle.png";
 import shtabLogo from "@/assets/sponsors/shtab-kultury.svg";
 import levEdinorogLogo from "@/assets/sponsors/lev-edinorog.svg";
 
@@ -25,9 +24,9 @@ const sponsors = [
   { name: "ЛИСИЗМ", logo: lisizmLogo },
   { name: "Место быть", logo: mestoBytLogo },
   { name: "HEDONIST", logo: hedonistLogo, invert: true },
-  { name: "KARMA WOMAN", logo: karmawomanLogo, large: true },
-  { name: "Smart Life", logo: null, textOnly: true, large: true },
-  { name: "Биохакинг центр ONE", logo: oneLogo, icon: oneCircle },
+  { name: "KARMA WOMAN", logo: karmawomanLogo },
+  { name: "Smart Life", logo: null, textOnly: true },
+  { name: "Биохакинг центр ONE", logo: oneLogo },
   { name: "ШТАБ КУЛЬТУРЫ", logo: shtabLogo },
   { name: "Лев & Единорог", logo: levEdinorogLogo },
 ];
@@ -56,21 +55,16 @@ const SponsorsSection = () => {
       className="flex items-center justify-center p-4 md:p-6 bg-card border border-border hover:border-primary/20 transition-all duration-300 min-h-[80px] md:min-h-[90px]"
     >
       {sponsor.textOnly ? (
-        <span className={`font-display ${sponsor.large ? "text-lg md:text-2xl" : "text-base md:text-lg"} font-medium text-foreground tracking-wide`}>
+        <span className="font-display text-base md:text-lg font-medium text-foreground tracking-wide">
           {sponsor.name}
         </span>
       ) : sponsor.logo ? (
-        <div className="flex items-center gap-2">
-          {sponsor.icon && (
-            <img src={sponsor.icon} alt="" className="w-6 h-6 md:w-8 md:h-8 object-contain" />
-          )}
-          <img
-            src={sponsor.logo}
-            alt={sponsor.name}
-            className={`${sponsor.large ? "max-h-14 md:max-h-20" : "max-h-10 md:max-h-12"} w-auto object-contain ${sponsor.invert ? "invert" : ""}`}
-            title={sponsor.name}
-          />
-        </div>
+        <img
+          src={sponsor.logo}
+          alt={sponsor.name}
+          className={`max-h-10 md:max-h-12 w-auto object-contain ${sponsor.invert ? "invert" : ""}`}
+          title={sponsor.name}
+        />
       ) : null}
     </motion.div>
   );
