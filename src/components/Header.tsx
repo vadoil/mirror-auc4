@@ -67,7 +67,7 @@ const Header = () => {
             </div>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-2 xl:gap-6 2xl:gap-8">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-4 2xl:gap-8">
             {/* Home icon – always visible */}
             <Link
               to="/"
@@ -79,7 +79,7 @@ const Header = () => {
 
             <Link
               to="/#about"
-              className={`${textColor} text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.1em] lg:tracking-[0.12em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300`}
+              className={`${textColor} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300 whitespace-nowrap`}
             >
               О проекте
             </Link>
@@ -87,7 +87,7 @@ const Header = () => {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`${textColor} text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.1em] lg:tracking-[0.12em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300`}
+                className={`${textColor} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300 whitespace-nowrap`}
               >
                 {item.label}
               </Link>
@@ -95,28 +95,28 @@ const Header = () => {
             {isAdmin && (
               <Link
                 to="/admin"
-                className={`${textColor} text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.1em] lg:tracking-[0.12em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300`}
+                className={`${textColor} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300 whitespace-nowrap`}
               >
                 Админ
               </Link>
             )}
             <button
               onClick={() => setTicketModal(true)}
-              className="ml-2 xl:ml-4 bg-primary text-primary-foreground text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.1em] lg:tracking-[0.12em] xl:tracking-[0.2em] px-4 lg:px-5 xl:px-6 py-2.5 hover:opacity-90 transition-all duration-500 font-body"
+              className="ml-1 xl:ml-4 bg-primary text-primary-foreground text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] px-3 lg:px-4 xl:px-6 py-2 xl:py-2.5 hover:opacity-90 transition-all duration-500 font-body whitespace-nowrap"
             >
               Задать вопрос
             </button>
             {user ? (
               <button
                 onClick={() => signOut()}
-                className={`${secondaryText} text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.1em] lg:tracking-[0.12em] xl:tracking-[0.2em] font-body font-light ${secondaryHover} transition-colors duration-300`}
+                className={`${secondaryText} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${secondaryHover} transition-colors duration-300 whitespace-nowrap`}
               >
                 Выйти
               </button>
             ) : (
               <Link
                 to="/auth"
-                className={`flex items-center gap-1.5 ${secondaryText} text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.1em] lg:tracking-[0.12em] xl:tracking-[0.2em] font-body font-light ${secondaryHover} transition-colors duration-300`}
+                className={`flex items-center gap-1.5 ${secondaryText} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${secondaryHover} transition-colors duration-300 whitespace-nowrap`}
               >
                 <LogIn className="w-3.5 h-3.5" /> Войти
               </Link>
