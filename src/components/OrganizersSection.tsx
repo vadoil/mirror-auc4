@@ -8,7 +8,6 @@ const organizers = [
   {
     name: "Гизела Тольц",
     photo: gizaPhoto,
-    skyline: moscowSkyline,
     city: "Москва",
     bullets: [
       "Организатор медицинских, коммерческих, корпоративных и частных мероприятий",
@@ -19,7 +18,6 @@ const organizers = [
   {
     name: "Александра Павлова",
     photo: sashaPhoto,
-    skyline: spbSkyline,
     city: "Санкт-Петербург",
     bullets: [
       "Автор книги по поддержке женщин с раком щитовидной железы",
