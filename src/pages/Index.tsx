@@ -37,6 +37,7 @@ const Index = () => {
         <ForumBannerSection />
         <SponsorsSection />
         <ContactsSection />
+        <OrganizersSection />
         <ForumBannerFooter />
         <Footer />
       </div>
