@@ -65,7 +65,7 @@ const AboutSection = () => {
                     Смотреть лоты
                   </Link>
                   <a href="#tickets" className="btn-primary inline-flex items-center justify-center flex-1 min-w-[140px] text-center leading-tight">
-                    Зарегистри-<br />роваться
+                    Зарегистри&shy;роваться
                   </a>
                 </div>
 
