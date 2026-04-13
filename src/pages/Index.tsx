@@ -10,6 +10,7 @@ import VenuePreviewSection from "@/components/VenuePreviewSection";
 import TransparencySection from "@/components/TransparencySection";
 import TicketsSection from "@/components/TicketsSection";
 import ForumBannerSection from "@/components/ForumBannerSection";
+import OrganizersSection from "@/components/OrganizersSection";
 
 import SponsorsSection from "@/components/SponsorsSection";
 import DressCodeSection from "@/components/DressCodeSection";
