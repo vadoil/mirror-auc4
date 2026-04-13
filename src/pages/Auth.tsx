@@ -3,14 +3,14 @@ import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Gavel } from "lucide-react";
+import TicketRequestModal from "@/components/TicketRequestModal";
 
 const Auth = () => {
-  const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
+  const [mode, setMode] = useState<"login" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [privacyConsent, setPrivacyConsent] = useState(false);
+  const [ticketModal, setTicketModal] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,36 +31,14 @@ const Auth = () => {
       return;
     }
 
-    if (mode === "register") {
-      if (!privacyConsent) {
-        toast.error("Необходимо согласие с политикой конфиденциальности");
-        setLoading(false);
-        return;
-      }
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: { full_name: name },
-        },
-      });
-      setLoading(false);
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
-      toast.success("Регистрация прошла успешно!");
-      navigate("/lots");
-    } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      setLoading(false);
-      if (error) {
-        toast.error("Неверный email или пароль");
-        return;
-      }
-      toast.success("Вы вошли в систему");
-      navigate("/lots");
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    setLoading(false);
+    if (error) {
+      toast.error("Неверный email или пароль");
+      return;
     }
+    toast.success("Вы вошли в систему");
+    navigate("/lots");
   };
 
   return (
@@ -76,28 +54,15 @@ const Auth = () => {
         </a>
 
         <h1 className="font-display text-3xl text-cream uppercase tracking-tight mb-1">
-          {mode === "login" ? "Вход" : mode === "register" ? "Регистрация" : "Восстановление"}
+          {mode === "login" ? "Вход" : "Восстановление"}
         </h1>
         <p className="text-cream/40 text-xs font-body mb-8">
           {mode === "login"
             ? "Войдите, чтобы делать ставки на аукционе"
-            : mode === "register"
-            ? "Создайте аккаунт для участия в аукционе"
             : "Введите email для получения ссылки"}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {mode === "register" && (
-            <input
-              type="text"
-              placeholder="Ваше имя"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
-              required
-              maxLength={100}
-            />
-          )}
           <input
             type="email"
             placeholder="Email"
@@ -106,7 +71,7 @@ const Auth = () => {
             className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
             required
           />
-          {mode !== "forgot" && (
+          {mode === "login" && (
             <input
               type="password"
               placeholder="Пароль"
@@ -117,23 +82,6 @@ const Auth = () => {
               minLength={6}
             />
           )}
-          {mode === "register" && (
-            <label className="flex items-start gap-3 cursor-pointer group">
-              <input
-                type="checkbox"
-                checked={privacyConsent}
-                onChange={(e) => setPrivacyConsent(e.target.checked)}
-                className="mt-1 w-4 h-4 accent-primary"
-              />
-              <span className="text-cream/60 text-xs font-body leading-relaxed group-hover:text-cream/80 transition-colors">
-                Я ознакомлен(а) с{" "}
-                <Link to="/privacy" target="_blank" className="text-primary/80 hover:text-primary underline transition-colors">
-                  политикой конфиденциальности
-                </Link>{" "}
-                и даю согласие на обработку персональных данных
-              </span>
-            </label>
-          )}
           <button
             type="submit"
             disabled={loading}
@@ -143,8 +91,6 @@ const Auth = () => {
               ? "Загрузка..."
               : mode === "login"
               ? "Войти"
-              : mode === "register"
-              ? "Зарегистрироваться"
               : "Отправить ссылку"}
           </button>
         </form>
@@ -158,13 +104,19 @@ const Auth = () => {
               Забыли пароль?
             </button>
           )}
+          {mode === "forgot" && (
+            <button
+              onClick={() => setMode("login")}
+              className="text-cream/40 text-xs font-body hover:text-cream/60 transition-colors"
+            >
+              Вернуться к входу
+            </button>
+          )}
           <button
-            onClick={() => setMode(mode === "login" ? "register" : "login")}
-            className="text-cream/40 text-xs font-body hover:text-cream/60 transition-colors"
+            onClick={() => setTicketModal(true)}
+            className="text-primary/80 text-xs font-body hover:text-primary transition-colors"
           >
-            {mode === "login"
-              ? "Нет аккаунта? Зарегистрироваться"
-              : "Уже есть аккаунт? Войти"}
+            Нет аккаунта? Зарегистрироваться на аукцион
           </button>
         </div>
 
@@ -175,6 +127,13 @@ const Auth = () => {
           ← На главную
         </a>
       </div>
+
+      <TicketRequestModal
+        isOpen={ticketModal}
+        onClose={() => setTicketModal(false)}
+        ticketType="Участник аукциона"
+        ticketPrice="15 000 ₽"
+      />
     </div>
   );
 };
