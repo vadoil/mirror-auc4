@@ -104,8 +104,8 @@ const LotsPreviewSection = () => {
             <Link to="/lots" className="btn-outline inline-flex items-center gap-2">
               Все лоты <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link to="/#tickets" className="btn-primary inline-flex items-center gap-2">
-              Зарегистрироваться
+            <Link to="/#tickets" className="btn-primary inline-flex items-center gap-2 text-center leading-tight">
+              Зарегистри-<br />роваться
             </Link>
           </div>
         </motion.div>
