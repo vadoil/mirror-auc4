@@ -76,7 +76,7 @@ const AboutSection = () => {
                       <span className="text-foreground font-medium">Организация:</span> Александра Павлова · 8 (962) 364-66-46 · <a href="https://t.me/alexa_ah_alexa" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@alexa_ah_alexa</a>
                     </p>
                     <p className="font-body text-sm text-muted-foreground">
-                      <span className="text-foreground font-medium">Партнёры:</span> Гизела Тольц · 8 (985) 809-53-70 · <a href="https://t.me/gisela_events" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@gisela_events</a>
+                      <span className="text-foreground font-medium">Партнёры:</span> Гизела Тольц · 8 (985) 809-53-70 · <a href="https://t.me/Jiselle_Tolts" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@Jiselle_Tolts</a>
                     </p>
                   </div>
                 </div>
