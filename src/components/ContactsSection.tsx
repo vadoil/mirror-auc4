@@ -3,8 +3,8 @@ import { useRef } from "react";
 import { Send, Phone, HeartHandshake, MapPinned, Wand2, Sparkles } from "lucide-react";
 
 const contacts = [
-  { role: "Организация", name: "Александра Павлова", phone: "8 (962) 364-66-46", tg: "@alexa_ah_alexa" },
-  { role: "Партнёры и спонсоры", name: "Гизела Тольц", phone: "8 (985) 809-53-70", tg: "@gisela_events" },
+  { role: "Организация", name: "Александра Павлова", phone: "8 (962) 364-66-46", tg: "@alexa_ah_alexa", tgLink: "https://t.me/alexa_ah_alexa" },
+  { role: "Партнёры и спонсоры", name: "Гизела Тольц", phone: "8 (985) 809-53-70", tg: "@Jiselle_Tolts", tgLink: "https://t.me/Jiselle_Tolts" },
 ];
 
 const ContactsSection = () => {
@@ -49,10 +49,10 @@ const ContactsSection = () => {
                 <Phone className="w-3 h-3 text-muted-foreground" />
                 <p className="font-body text-sm text-muted-foreground">{c.phone}</p>
               </div>
-              <div className="flex items-center justify-center gap-2">
+              <a href={c.tgLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 hover:opacity-80 transition-opacity">
                 <Send className="w-3 h-3 text-primary" />
-                <p className="font-body text-sm text-foreground font-medium">{c.tg}</p>
-              </div>
+                <p className="font-body text-sm text-primary font-medium">{c.tg}</p>
+              </a>
             </motion.div>
           ))}
         </div>
