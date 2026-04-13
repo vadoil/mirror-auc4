@@ -65,24 +65,24 @@ const OrganizersSection = () => {
               className="relative flex flex-col items-center text-center"
             >
               {/* Photo with city skyline behind */}
-              <div className="relative w-56 h-56 md:w-64 md:h-64 mb-6">
-                {/* Skyline background */}
-                <div className="absolute inset-0 flex items-end justify-center opacity-30 pointer-events-none">
+              <div className="relative w-72 h-64 md:w-80 md:h-72 mb-6">
+                {/* Skyline background — large and visible */}
+                <div className="absolute inset-0 flex items-end justify-center pointer-events-none">
                   <img
                     src={org.skyline}
                     alt={`Силуэт ${org.city}`}
-                    className="w-[140%] max-w-none h-auto object-contain"
+                    className="w-full h-auto object-contain opacity-15"
                     loading="lazy"
                     width={1024}
                     height={512}
                   />
                 </div>
-                {/* Circular photo with border */}
-                <div className="absolute inset-4 rounded-full overflow-hidden border-2 border-primary/30 shadow-lg">
+                {/* Photo without circle — just the person */}
+                <div className="relative z-10 flex justify-center h-full items-end">
                   <img
                     src={org.photo}
                     alt={org.name}
-                    className="w-full h-full object-cover"
+                    className="h-52 md:h-60 w-auto object-contain drop-shadow-lg"
                     loading="lazy"
                   />
                 </div>
