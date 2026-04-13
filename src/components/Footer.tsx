@@ -40,12 +40,12 @@ const Footer = () => {
             <div>
               <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em] mb-4">Контакты</p>
               <div className="space-y-2">
-                <p className="font-body text-xs text-cream/30">Александра Павлова</p>
-                <p className="font-body text-xs text-cream/30">8 (962) 364-66-46</p>
-                <a href="https://t.me/alexa_ah_alexa" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-primary/60 hover:text-primary transition-colors">@alexa_ah_alexa</a>
-                <p className="font-body text-xs text-cream/30 mt-3">Гизела Тольц</p>
+                <p className="font-body text-xs text-cream/30">Гизела Тольц</p>
                 <p className="font-body text-xs text-cream/30">8 (985) 809-53-70</p>
                 <a href="https://t.me/Jiselle_Tolts" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-primary/60 hover:text-primary transition-colors">@Jiselle_Tolts</a>
+                <p className="font-body text-xs text-cream/30 mt-3">Александра Павлова</p>
+                <p className="font-body text-xs text-cream/30">8 (962) 364-66-46</p>
+                <a href="https://t.me/alexa_ah_alexa" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-primary/60 hover:text-primary transition-colors">@alexa_ah_alexa</a>
               </div>
             </div>
             <div>
