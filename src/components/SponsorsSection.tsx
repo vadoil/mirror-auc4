@@ -16,19 +16,19 @@ import shtabLogo from "@/assets/sponsors/shtab-kultury.svg";
 import levEdinorogLogo from "@/assets/sponsors/lev-edinorog.svg";
 
 const sponsors = [
-  { name: "Высшая школа онкологии", logo: hsoLogo },
-  { name: "Первая Линия (Health Care Resort)", logo: pervayaLiniyaLogo, invert: true },
-  { name: "Фонд «Не напрасно»", logo: nenaprasnoLogo },
-  { name: "VIPAVENUE", logo: vipavenueLogo },
-  { name: "VOLUMINOUS", logo: voluminousLogo },
-  { name: "ЛИСИЗМ", logo: lisizmLogo },
-  { name: "Место быть", logo: mestoBytLogo },
-  { name: "HEDONIST", logo: hedonistLogo, invert: true },
-  { name: "KARMA WOMAN", logo: karmawomanLogo },
-  { name: "Smart Life", logo: null, textOnly: true },
-  { name: "Биохакинг центр ONE", logo: oneCombinedLogo },
-  { name: "ШТАБ КУЛЬТУРЫ", logo: shtabLogo },
-  { name: "Лев & Единорог", logo: levEdinorogLogo },
+  { name: "Высшая школа онкологии", logo: hsoLogo, url: "https://higherschoolofoncology.ru/" },
+  { name: "Первая Линия (Health Care Resort)", logo: pervayaLiniyaLogo, invert: true, url: "https://hcresort.ru/" },
+  { name: "Фонд «Не напрасно»", logo: nenaprasnoLogo, url: "https://nenaprasno.ru/" },
+  { name: "VIPAVENUE", logo: vipavenueLogo, url: "https://vipavenue.ru/" },
+  { name: "VOLUMINOUS", logo: voluminousLogo, url: "https://voluminous.shop/" },
+  { name: "ЛИСИЗМ", logo: lisizmLogo, url: "https://lisizm.moscow/" },
+  { name: "Место быть", logo: mestoBytLogo, url: "https://mestobe.ru/" },
+  { name: "HEDONIST", logo: hedonistLogo, invert: true, url: "https://hedonistgroup.ru/" },
+  { name: "KARMA WOMAN", logo: karmawomanLogo, url: "https://www.sitnikov.com/" },
+  { name: "Smart Life", logo: null, textOnly: true, url: "https://smartlife.bio/" },
+  { name: "Биохакинг центр ONE", logo: oneCombinedLogo, url: "https://one-future.ru/" },
+  { name: "ШТАБ КУЛЬТУРЫ", logo: shtabLogo, url: "https://t.me/hq_culture" },
+  { name: "Лев & Единорог", logo: levEdinorogLogo, url: "https://levik.ru/" },
 ];
 
 const SponsorsSection = () => {
@@ -47,8 +47,11 @@ const SponsorsSection = () => {
   const totalSlides = Math.ceil(sponsors.length / 2);
 
   const renderCard = (sponsor: typeof sponsors[0], i: number) => (
-    <motion.div
+    <motion.a
       key={sponsor.name}
+      href={sponsor.url}
+      target="_blank"
+      rel="noopener noreferrer"
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.05 * i }}
@@ -65,13 +68,12 @@ const SponsorsSection = () => {
           className={`max-h-10 md:max-h-12 w-auto object-contain ${sponsor.invert ? "invert" : ""}`}
           title={sponsor.name}
         />
-
       ) : null}
-    </motion.div>
+    </motion.a>
   );
 
   return (
-    <section className="py-24 md:py-32 section-padding bg-background relative overflow-hidden">
+    <section id="sponsors" className="py-24 md:py-32 section-padding bg-background relative overflow-hidden">
       <div ref={ref} className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
