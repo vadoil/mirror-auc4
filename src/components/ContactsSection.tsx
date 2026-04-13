@@ -3,8 +3,8 @@ import { useRef } from "react";
 import { Send, Phone, HeartHandshake, MapPinned, Wand2, Sparkles } from "lucide-react";
 
 const contacts = [
-  { role: "Организация", name: "Александра Павлова", phone: "8 (962) 364-66-46", tg: "@alexa_ah_alexa", tgLink: "https://t.me/alexa_ah_alexa" },
   { role: "Партнёры и спонсоры", name: "Гизела Тольц", phone: "8 (985) 809-53-70", tg: "@Jiselle_Tolts", tgLink: "https://t.me/Jiselle_Tolts" },
+  { role: "Организация", name: "Александра Павлова", phone: "8 (962) 364-66-46", tg: "@alexa_ah_alexa", tgLink: "https://t.me/alexa_ah_alexa" },
 ];
 
 const ContactsSection = () => {
