@@ -3,8 +3,6 @@ import { useRef } from "react";
 import { Heart, Users, Sparkles } from "lucide-react";
 import gizaPhoto from "@/assets/organizer-giza-clean.png";
 import sashaPhoto from "@/assets/organizer-sasha-clean.png";
-import moscowSkyline from "@/assets/moscow-skyline.png";
-import spbSkyline from "@/assets/spb-skyline.png";
 
 const organizers = [
   {
