@@ -3,14 +3,11 @@ import { useRef } from "react";
 import { Heart, Users, Sparkles } from "lucide-react";
 import gizaPhoto from "@/assets/organizer-giza-clean.png";
 import sashaPhoto from "@/assets/organizer-sasha-clean.png";
-import moscowSkyline from "@/assets/moscow-skyline.png";
-import spbSkyline from "@/assets/spb-skyline.png";
 
 const organizers = [
   {
     name: "Гизела Тольц",
     photo: gizaPhoto,
-    skyline: moscowSkyline,
     city: "Москва",
     bullets: [
       "Организатор медицинских, коммерческих, корпоративных и частных мероприятий",
@@ -21,7 +18,6 @@ const organizers = [
   {
     name: "Александра Павлова",
     photo: sashaPhoto,
-    skyline: spbSkyline,
     city: "Санкт-Петербург",
     bullets: [
       "Автор книги по поддержке женщин с раком щитовидной железы",
@@ -64,28 +60,14 @@ const OrganizersSection = () => {
               transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
               className="relative flex flex-col items-center text-center"
             >
-              {/* Photo with city skyline behind */}
-              <div className="relative w-72 h-64 md:w-80 md:h-72 mb-6">
-                {/* Skyline background — large and visible */}
-                <div className="absolute inset-0 flex items-end justify-center pointer-events-none">
-                  <img
-                    src={org.skyline}
-                    alt={`Силуэт ${org.city}`}
-                    className="w-full h-auto object-contain opacity-15"
-                    loading="lazy"
-                    width={1024}
-                    height={512}
-                  />
-                </div>
-                {/* Photo without circle — just the person */}
-                <div className="relative z-10 flex justify-center h-full items-end">
-                  <img
-                    src={org.photo}
-                    alt={org.name}
-                    className="h-52 md:h-60 w-auto object-contain drop-shadow-lg"
-                    loading="lazy"
-                  />
-                </div>
+              {/* Photo */}
+              <div className="w-48 h-48 md:w-56 md:h-56 mb-6 rounded-full overflow-hidden border-2 border-primary/30 shadow-lg">
+                <img
+                  src={org.photo}
+                  alt={org.name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
 
               {/* Name */}
