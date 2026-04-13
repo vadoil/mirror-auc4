@@ -107,6 +107,20 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       });
     }
 
+    // Send confirmation email to the client
+    supabase.functions.invoke("send-transactional-email", {
+      body: {
+        templateName: "ticket-request-confirmation",
+        recipientEmail: form.email.trim(),
+        idempotencyKey: `ticket-confirm-${requestId}`,
+        templateData: {
+          name: form.name.trim(),
+          ticketType,
+          promoCode: promoCode || undefined,
+        },
+      },
+    });
+
     toast.success(promoCode
       ? "Заявка отправлена! Промокод применён — регистрация без оплаты."
       : "Заявка отправлена! Мы свяжемся с вами."
