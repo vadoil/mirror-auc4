@@ -73,10 +73,10 @@ const AboutSection = () => {
                   <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Контакты</p>
                   <div className="space-y-2">
                     <p className="font-body text-sm text-muted-foreground">
-                      <span className="text-foreground font-medium">Организация:</span> Александра Павлова · 8 (962) 364-66-46 · <a href="https://t.me/alexa_ah_alexa" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@alexa_ah_alexa</a>
+                      <span className="text-foreground font-medium">Партнёры:</span> Гизела Тольц · 8 (985) 809-53-70 · <a href="https://t.me/Jiselle_Tolts" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@Jiselle_Tolts</a>
                     </p>
                     <p className="font-body text-sm text-muted-foreground">
-                      <span className="text-foreground font-medium">Партнёры:</span> Гизела Тольц · 8 (985) 809-53-70 · <a href="https://t.me/Jiselle_Tolts" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@Jiselle_Tolts</a>
+                      <span className="text-foreground font-medium">Организация:</span> Александра Павлова · 8 (962) 364-66-46 · <a href="https://t.me/alexa_ah_alexa" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@alexa_ah_alexa</a>
                     </p>
                   </div>
                 </div>
