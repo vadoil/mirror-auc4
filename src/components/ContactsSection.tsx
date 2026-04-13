@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Send, Phone, HeartHandshake, MapPinned, Wand2, Sparkles } from "lucide-react";
+import TicketRequestModal from "./TicketRequestModal";
 
 const contacts = [
   { role: "Партнёры и спонсоры", name: "Гизела Тольц", phone: "8 (985) 809-53-70", tg: "@Jiselle_Tolts", tgLink: "https://t.me/Jiselle_Tolts" },
@@ -10,6 +11,7 @@ const contacts = [
 const ContactsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [questionModal, setQuestionModal] = useState(false);
 
   return (
     <section id="contacts" className="py-24 md:py-32 section-padding bg-background relative">
@@ -97,14 +99,22 @@ const ContactsSection = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <a href="#" className="btn-primary text-center">
+          <a href="https://t.me/Jiselle_Tolts" target="_blank" rel="noopener noreferrer" className="btn-primary text-center">
             Стать партнёром
           </a>
-          <a href="#" className="btn-outline text-center">
+          <button onClick={() => setQuestionModal(true)} className="btn-outline text-center">
             Задать вопрос
-          </a>
+          </button>
         </motion.div>
       </div>
+
+      <TicketRequestModal
+        isOpen={questionModal}
+        onClose={() => setQuestionModal(false)}
+        ticketType="Задать вопрос"
+        ticketPrice=""
+        showTrainingCheckbox={false}
+      />
     </section>
   );
 };
