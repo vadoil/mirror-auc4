@@ -9,7 +9,7 @@ const program = [
 ];
 
 const moderators = [
-  { name: "Ростислав Павлов", role: "Вице-президент Сбербанка по здравоохранению, Forbes «30 до 30»" },
+  { name: "Ростислав Павлов", role: "Известный хирург-онколог" },
 ];
 
 const publicTalkSpeakers = [
