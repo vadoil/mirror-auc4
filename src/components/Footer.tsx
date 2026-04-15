@@ -61,6 +61,7 @@ const Footer = () => {
                 <div className="flex items-center gap-1.5 pt-3 text-cream/20">
                   <span className="font-body text-[10px]">сделано с</span>
                   <span className="text-red-400 text-[10px]">♥</span>
+                  <span className="font-body text-[10px]">студия</span>
                   <a href="https://триии.рф" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:opacity-70 transition-opacity">
                     <img src={triiLogo} alt="триии" className="h-[10px] w-auto opacity-20 brightness-[10]" />
                   </a>
