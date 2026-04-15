@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import triiLogo from "@/assets/sponsors/triii-logo.png";
 
+
 const Footer = () => {
   return (
     <footer className="bg-warm-black text-cream/40">
