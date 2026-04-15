@@ -58,6 +58,13 @@ const Footer = () => {
                 <a href="https://mestobe.ru/" target="_blank" rel="noopener noreferrer" className="block font-body text-xs text-primary/60 hover:text-primary transition-colors">
                   mestobe.ru
                 </a>
+                <div className="flex items-center gap-1.5 pt-3 text-cream/20">
+                  <span className="font-body text-[10px]">сделано с</span>
+                  <span className="text-red-400 text-[10px]">♥</span>
+                  <a href="https://триии.рф" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:opacity-70 transition-opacity">
+                    <img src={triiLogo} alt="триии" className="h-[10px] w-auto opacity-20 brightness-[10]" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -78,13 +85,6 @@ const Footer = () => {
               <p className="font-body text-[10px]">
                 Все деньги, вырученные с продаж билетов и аукциона, направляются в поддержку фонда «Не напрасно».
               </p>
-            </div>
-            <div className="flex items-center justify-center gap-1.5 pt-6 text-cream/20">
-              <span className="font-body text-[10px]">сделано с</span>
-              <span className="text-red-400 text-xs">♥</span>
-              <a href="https://триии.рф" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:opacity-70 transition-opacity">
-                <img src={triiLogo} alt="триии" className="h-[12px] w-auto opacity-20 brightness-[10]" />
-              </a>
             </div>
           </div>
         </div>
