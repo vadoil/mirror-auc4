@@ -14,6 +14,7 @@ import karmawomanLogo from "@/assets/sponsors/karmawoman.png";
 import oneCombinedLogo from "@/assets/sponsors/one-combined.png";
 import shtabLogo from "@/assets/sponsors/shtab-kultury.svg";
 import levEdinorogLogo from "@/assets/sponsors/lev-edinorog.svg";
+import marriottLogo from "@/assets/sponsors/marriott.png";
 
 const sponsors = [
   { name: "Высшая школа онкологии", logo: hsoLogo, url: "https://higherschoolofoncology.ru/" },
@@ -29,6 +30,7 @@ const sponsors = [
   { name: "Биохакинг центр ONE", logo: oneCombinedLogo, url: "https://one-future.ru/" },
   { name: "ШТАБ КУЛЬТУРЫ", logo: shtabLogo, url: "https://t.me/hq_culture" },
   { name: "Лев & Единорог", logo: levEdinorogLogo, url: "https://levik.ru/" },
+  { name: "Marriott Imperial Plaza", logo: marriottLogo, url: "https://marriottimperialplaza.moscow/" },
 ];
 
 const SponsorsSection = () => {
