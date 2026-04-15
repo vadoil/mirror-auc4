@@ -14,6 +14,7 @@ import karmawomanLogo from "@/assets/sponsors/karmawoman.png";
 import oneCombinedLogo from "@/assets/sponsors/one-combined.png";
 import shtabLogo from "@/assets/sponsors/shtab-kultury.svg";
 import levEdinorogLogo from "@/assets/sponsors/lev-edinorog.svg";
+import marriottLogo from "@/assets/sponsors/marriott.png";
 
 const sponsors = [
   { name: "Высшая школа онкологии", logo: hsoLogo, url: "https://higherschoolofoncology.ru/" },
