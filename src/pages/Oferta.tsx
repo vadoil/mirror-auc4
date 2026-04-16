@@ -54,8 +54,8 @@ const Oferta = () => {
               <p className="mt-3">
                 Оплата производится безналичным переводом на расчётный счёт Организатора
                 либо иным способом, предложенным Организатором на сайте{" "}
-                <a href="https://отражение.рф" className="text-primary hover:text-primary/80 transition-colors">
-                  отражение.рф
+                <a href="https://отразись.рф" className="text-primary hover:text-primary/80 transition-colors">
+                  отразись.рф
                 </a>.
               </p>
               <p className="mt-3">
@@ -130,8 +130,8 @@ const Oferta = () => {
               <h2 className="font-display text-lg text-cream mb-3">8. Срок действия оферты</h2>
               <p>
                 Настоящая оферта вступает в силу с момента её публикации на сайте{" "}
-                <a href="https://отражение.рф" className="text-primary hover:text-primary/80 transition-colors">
-                  отражение.рф
+                <a href="https://отразись.рф" className="text-primary hover:text-primary/80 transition-colors">
+                  отразись.рф
                 </a>{" "}
                 и действует до окончания Мероприятия.
               </p>
