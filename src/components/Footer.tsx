@@ -75,9 +75,14 @@ const Footer = () => {
               <p className="font-body text-xs text-cream/30">
                 © 2026 «Отражение добра». Все права защищены. Благотворительный аукцион.
               </p>
-              <Link to="/privacy" className="font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">
-                Политика конфиденциальности
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link to="/privacy" className="font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">
+                  Политика конфиденциальности
+                </Link>
+                <Link to="/oferta" className="font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">
+                  Оферта
+                </Link>
+              </div>
             </div>
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-cream/20">
               <p className="font-body text-[10px]">

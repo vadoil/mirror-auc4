@@ -43,6 +43,7 @@ const App = () => (
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/oferta" element={<Oferta />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
