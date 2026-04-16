@@ -18,6 +18,7 @@ import NotFound from "./pages/NotFound";
 import ResetPassword from "./pages/ResetPassword";
 import Unsubscribe from "./pages/Unsubscribe";
 import Privacy from "./pages/Privacy";
+import Oferta from "./pages/Oferta";
 
 const queryClient = new QueryClient();
 
