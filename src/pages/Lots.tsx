@@ -13,8 +13,9 @@ import lotWatch from "@/assets/lot-watch-ballet.jpg";
 import lotHockey from "@/assets/lot-hockey-belov.jpg";
 import lotBallet from "@/assets/lot-ballet-lopatkina.jpg";
 import lotEmelianenko from "@/assets/lot-emelianenko.jpg";
+import lotSmartlife from "@/assets/lot-smartlife.png";
 
-const fallbackImages = [lotDinner, lotBiohacking, lotReels, lotWatch, lotHockey, lotBallet, lotEmelianenko];
+const fallbackImages = [lotDinner, lotBiohacking, lotReels, lotWatch, lotHockey, lotBallet, lotEmelianenko, lotSmartlife];
 
 type Lot = {
   id: string;
