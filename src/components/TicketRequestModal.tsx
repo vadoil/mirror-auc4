@@ -126,19 +126,39 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
 
     toast.success(promoCode
       ? "Заявка отправлена! Промокод применён — регистрация без оплаты."
-      : "Заявка отправлена! Мы свяжемся с вами."
+      : "Заявка сохранена. Перейдите к оплате."
     );
+
+    if (promoCode) {
+      // Free registration → close modal
+      setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
+      setWantsTraining(false);
+      setPrivacyConsent(false);
+      setPromoValid(null);
+      onClose();
+    } else {
+      // Paid → show YooKassa payment form
+      setSubmittedName(form.name.trim());
+      setSubmittedEmail(form.email.trim());
+      setShowPayment(true);
+    }
+  };
+
+  const handleClosePayment = () => {
+    setShowPayment(false);
     setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
     setWantsTraining(false);
     setPrivacyConsent(false);
     setPromoValid(null);
+    setSubmittedName("");
+    setSubmittedEmail("");
     onClose();
   };
 
   const displayPrice = promoValid ? "Бесплатно" : ticketPrice;
   const nonTicketTypes = ["Задать вопрос", "Узнать о форуме", "Участие в форуме", "Тренировка «Либидо фитнес» 18.04"];
   const isTicketRegistration = !nonTicketTypes.includes(ticketType);
-  const needsPromo = isTicketRegistration && !promoValid;
+  const needsPromo = false;
 
   return (
     <AnimatePresence>
