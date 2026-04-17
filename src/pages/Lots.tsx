@@ -157,7 +157,7 @@ const Lots = () => {
           ) : filteredLots.length === 0 ? (
             <div className="text-muted-foreground font-body text-center py-20">Лотов в этой категории пока нет</div>
           ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
               {filteredLots.map((lot, i) => {
                 const imgUrl = getImageUrl(lot.image_url) || fallbackImages[i];
                 const currentPrice = getCurrentPrice(lot);
