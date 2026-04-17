@@ -118,8 +118,8 @@ const SponsorsSection = () => {
               >
                 {Array.from({ length: totalSlides }).map((_, slideIdx) => (
                   <div key={slideIdx} className="min-w-full grid grid-cols-2 gap-3 px-1">
-                    {sponsors.slice(slideIdx * 2, slideIdx * 2 + 2).map((s, i) =>
-                      renderCard(s, slideIdx * 2 + i)
+                    {sponsors.slice(slideIdx * PER_SLIDE_MOBILE, slideIdx * PER_SLIDE_MOBILE + PER_SLIDE_MOBILE).map((s, i) =>
+                      renderCard(s, slideIdx * PER_SLIDE_MOBILE + i)
                     )}
                   </div>
                 ))}
