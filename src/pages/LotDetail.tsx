@@ -90,7 +90,7 @@ const LotDetail = () => {
 
   const placeBid = async () => {
     if (!user) {
-      toast.error("Войдите в систему, чтобы сделать ставку");
+      toast.error("Войдите в систему, чтобы проявить интерес");
       return;
     }
     const amount = Number(bidAmount);
@@ -255,7 +255,7 @@ const LotDetail = () => {
                         disabled={placing}
                         className="bg-primary text-primary-foreground px-6 py-3 text-xs uppercase tracking-[0.2em] font-body hover:opacity-90 transition-all disabled:opacity-50 whitespace-nowrap rounded"
                       >
-                        {placing ? "..." : "Сделать ставку"}
+                        {placing ? "..." : "Проявить интерес"}
                       </button>
                     </div>
                   ) : (
