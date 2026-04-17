@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Tag } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import YooKassaPaymentForm from "./YooKassaPaymentForm";
 
 interface TicketRequestModalProps {
   isOpen: boolean;
@@ -20,6 +21,9 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [promoValid, setPromoValid] = useState<boolean | null>(null);
   const [promoChecking, setPromoChecking] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [submittedName, setSubmittedName] = useState("");
+  const [submittedEmail, setSubmittedEmail] = useState("");
 
   const checkPromoCode = async (code: string) => {
     if (!code.trim()) {
@@ -123,19 +127,39 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
 
     toast.success(promoCode
       ? "Заявка отправлена! Промокод применён — регистрация без оплаты."
-      : "Заявка отправлена! Мы свяжемся с вами."
+      : "Заявка сохранена. Перейдите к оплате."
     );
+
+    if (promoCode) {
+      // Free registration → close modal
+      setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
+      setWantsTraining(false);
+      setPrivacyConsent(false);
+      setPromoValid(null);
+      onClose();
+    } else {
+      // Paid → show YooKassa payment form
+      setSubmittedName(form.name.trim());
+      setSubmittedEmail(form.email.trim());
+      setShowPayment(true);
+    }
+  };
+
+  const handleClosePayment = () => {
+    setShowPayment(false);
     setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
     setWantsTraining(false);
     setPrivacyConsent(false);
     setPromoValid(null);
+    setSubmittedName("");
+    setSubmittedEmail("");
     onClose();
   };
 
   const displayPrice = promoValid ? "Бесплатно" : ticketPrice;
   const nonTicketTypes = ["Задать вопрос", "Узнать о форуме", "Участие в форуме", "Тренировка «Либидо фитнес» 18.04"];
   const isTicketRegistration = !nonTicketTypes.includes(ticketType);
-  const needsPromo = isTicketRegistration && !promoValid;
+  const needsPromo = false;
 
   return (
     <AnimatePresence>
@@ -145,7 +169,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-warm-black/80 backdrop-blur-sm"
-          onClick={onClose}
+          onClick={handleClosePayment}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -157,18 +181,23 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
           >
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="font-display text-2xl text-cream uppercase tracking-tight">Заявка</h3>
+                <h3 className="font-display text-2xl text-cream uppercase tracking-tight">
+                  {showPayment ? "Оплата" : "Заявка"}
+                </h3>
                 <p className="text-cream/40 text-xs font-body mt-1">
                   {ticketType} · {promoValid ? (
                     <span className="text-green-400 font-medium">Бесплатно по промокоду</span>
                   ) : displayPrice}
                 </p>
               </div>
-              <button onClick={onClose} className="text-cream/40 hover:text-cream transition-colors">
+              <button onClick={handleClosePayment} className="text-cream/40 hover:text-cream transition-colors">
                 <X size={20} />
               </button>
             </div>
 
+            {showPayment ? (
+              <YooKassaPaymentForm name={submittedName} email={submittedEmail} />
+            ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="text"
@@ -283,12 +312,13 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
 
               <button
                 type="submit"
-                disabled={loading || needsPromo}
+                disabled={loading}
                 className="w-full bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:opacity-90 transition-all disabled:opacity-50"
               >
-                {loading ? "Отправка..." : promoValid ? "Зарегистрироваться бесплатно" : needsPromo ? "Введите промокод" : "Отправить заявку"}
+                {loading ? "Отправка..." : promoValid ? "Зарегистрироваться бесплатно" : "Перейти к оплате"}
               </button>
             </form>
+            )}
           </motion.div>
         </motion.div>
       )}
