@@ -20,6 +20,9 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [promoValid, setPromoValid] = useState<boolean | null>(null);
   const [promoChecking, setPromoChecking] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [submittedName, setSubmittedName] = useState("");
+  const [submittedEmail, setSubmittedEmail] = useState("");
 
   const checkPromoCode = async (code: string) => {
     if (!code.trim()) {
