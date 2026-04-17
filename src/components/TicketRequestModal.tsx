@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Tag } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import YooKassaPaymentForm from "./YooKassaPaymentForm";
 
 interface TicketRequestModalProps {
   isOpen: boolean;
