@@ -311,12 +311,13 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
 
               <button
                 type="submit"
-                disabled={loading || needsPromo}
+                disabled={loading}
                 className="w-full bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:opacity-90 transition-all disabled:opacity-50"
               >
-                {loading ? "Отправка..." : promoValid ? "Зарегистрироваться бесплатно" : needsPromo ? "Введите промокод" : "Отправить заявку"}
+                {loading ? "Отправка..." : promoValid ? "Зарегистрироваться бесплатно" : "Перейти к оплате"}
               </button>
             </form>
+            )}
           </motion.div>
         </motion.div>
       )}
