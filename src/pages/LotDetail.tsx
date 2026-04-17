@@ -274,14 +274,14 @@ const LotDetail = () => {
                 )}
               </div>
 
-              {/* Book lot button */}
-              <button
-                onClick={() => setShowBooking(true)}
+              {/* Register CTA */}
+              <Link
+                to="/auth"
                 className="flex items-center justify-center gap-2 w-full border-2 border-primary text-primary py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:bg-primary hover:text-primary-foreground transition-all rounded mb-6"
               >
                 <Bookmark className="w-4 h-4" />
                 Зарегистрироваться на мероприятие
-              </button>
+              </Link>
 
               {/* Delivery & restrictions */}
               {(lot.delivery_terms || lot.restrictions) && (
