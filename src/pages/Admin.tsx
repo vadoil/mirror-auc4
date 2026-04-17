@@ -181,7 +181,7 @@ const Admin = () => {
       "Телефон": r.phone || "",
       "Тип билета": r.ticket_type,
       "Сообщение": r.message || "",
-      "Статус": r.status,
+      "Статус": r.status === "paid" ? "Оплачено" : "Новая",
     }));
     const ws = XLSX.utils.json_to_sheet(rows);
     ws["!cols"] = [{ wch: 18 }, { wch: 22 }, { wch: 28 }, { wch: 16 }, { wch: 14 }, { wch: 40 }, { wch: 12 }];
@@ -190,6 +190,14 @@ const Admin = () => {
     const date = new Date().toISOString().slice(0, 10);
     XLSX.writeFile(wb, `zayavki-${date}.xlsx`);
     toast.success("Файл сохранён");
+  };
+
+  const togglePaid = async (req: TicketRequest) => {
+    const newStatus = req.status === "paid" ? "new" : "paid";
+    const { error } = await supabase.from("ticket_requests").update({ status: newStatus }).eq("id", req.id);
+    if (error) { toast.error("Ошибка обновления"); return; }
+    setRequests((prev) => prev.map((r) => r.id === req.id ? { ...r, status: newStatus } : r));
+    toast.success(newStatus === "paid" ? "Отмечено как оплачено" : "Снята отметка об оплате");
   };
 
   if (loading) {
