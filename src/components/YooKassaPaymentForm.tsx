@@ -35,8 +35,8 @@ const YooKassaPaymentForm = ({ name, email }: YooKassaPaymentFormProps) => {
   }, []);
 
   return (
-    <div ref={containerRef} className="text-cream">
-      <p className="text-cream/60 text-xs font-body mb-4 leading-relaxed">
+    <div ref={containerRef} className="bg-white rounded-lg p-6 text-neutral-900">
+      <p className="text-neutral-700 text-sm font-body mb-5 leading-relaxed">
         {name && <>Спасибо, {name}! </>}
         Заявка сохранена. Завершите регистрацию оплатой через ЮKassa.
       </p>
@@ -110,7 +110,7 @@ const YooKassaPaymentForm = ({ name, email }: YooKassaPaymentFormProps) => {
         <input name="shopId" type="hidden" value={SHOP_ID} />
       </form>
 
-      <p className="text-cream/40 text-[10px] font-body mt-4 leading-relaxed">
+      <p className="text-neutral-500 text-xs font-body mt-6 leading-relaxed">
         Если есть промокод — закройте окно и введите его в форме заявки для бесплатной регистрации.
       </p>
     </div>
