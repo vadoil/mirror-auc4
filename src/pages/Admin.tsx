@@ -364,21 +364,39 @@ const Admin = () => {
               </button>
             </div>
             <div className="space-y-2">
-              {requests.map((req) => (
-                <div key={req.id} className="bg-cream/5 border border-cream/10 p-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-1">
-                        <p className="font-body text-sm text-cream font-medium">{req.name}</p>
-                        <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-primary/20 text-primary">{req.ticket_type}</span>
+              {requests.map((req) => {
+                const isPaid = req.status === "paid";
+                return (
+                  <div key={req.id} className="bg-cream/5 border border-cream/10 p-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-1 flex-wrap">
+                          <p className="font-body text-sm text-cream font-medium">{req.name}</p>
+                          <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-primary/20 text-primary">{req.ticket_type}</span>
+                          <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-0.5 ${isPaid ? "bg-green-500/20 text-green-400" : "bg-yellow-500/20 text-yellow-400"}`}>
+                            {isPaid ? "Оплачено" : "Не оплачено"}
+                          </span>
+                        </div>
+                        <p className="text-cream/40 text-xs font-body">{req.email}{req.phone ? ` · ${req.phone}` : ''}</p>
+                        {req.message && <p className="text-cream/60 text-xs font-body mt-2 whitespace-pre-line">{req.message}</p>}
                       </div>
-                      <p className="text-cream/40 text-xs font-body">{req.email}{req.phone ? ` · ${req.phone}` : ''}</p>
-                      {req.message && <p className="text-cream/60 text-xs font-body mt-2 whitespace-pre-line">{req.message}</p>}
+                      <div className="flex flex-col items-end gap-2 shrink-0">
+                        <p className="text-cream/30 text-xs font-body whitespace-nowrap">{new Date(req.created_at).toLocaleDateString("ru")}</p>
+                        <button
+                          onClick={() => togglePaid(req)}
+                          className={`flex items-center gap-1.5 px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] font-body transition-colors ${
+                            isPaid
+                              ? "border border-cream/20 text-cream/60 hover:text-cream hover:border-cream/40"
+                              : "bg-green-500/20 text-green-400 hover:bg-green-500/30"
+                          }`}
+                        >
+                          <Check size={12} /> {isPaid ? "Снять оплату" : "Отметить оплачено"}
+                        </button>
+                      </div>
                     </div>
-                    <p className="text-cream/30 text-xs font-body whitespace-nowrap">{new Date(req.created_at).toLocaleDateString("ru")}</p>
                   </div>
-                </div>
-              ))}
+                );
+              })}
               {requests.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Нет заявок</p>}
             </div>
           </div>
