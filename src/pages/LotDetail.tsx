@@ -211,7 +211,7 @@ const LotDetail = () => {
                 {lot.title}
               </h1>
               {lot.description && (
-                <p className="font-body text-sm text-muted-foreground leading-relaxed mb-6">{lot.description}</p>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed mb-6 whitespace-pre-line">{lot.description}</p>
               )}
 
               {/* Timer */}
