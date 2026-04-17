@@ -168,7 +168,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-warm-black/80 backdrop-blur-sm"
-          onClick={onClose}
+          onClick={handleClosePayment}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -180,18 +180,23 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
           >
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="font-display text-2xl text-cream uppercase tracking-tight">Заявка</h3>
+                <h3 className="font-display text-2xl text-cream uppercase tracking-tight">
+                  {showPayment ? "Оплата" : "Заявка"}
+                </h3>
                 <p className="text-cream/40 text-xs font-body mt-1">
                   {ticketType} · {promoValid ? (
                     <span className="text-green-400 font-medium">Бесплатно по промокоду</span>
                   ) : displayPrice}
                 </p>
               </div>
-              <button onClick={onClose} className="text-cream/40 hover:text-cream transition-colors">
+              <button onClick={handleClosePayment} className="text-cream/40 hover:text-cream transition-colors">
                 <X size={20} />
               </button>
             </div>
 
+            {showPayment ? (
+              <YooKassaPaymentForm name={submittedName} email={submittedEmail} />
+            ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="text"
