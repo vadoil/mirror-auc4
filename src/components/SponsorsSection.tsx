@@ -102,58 +102,10 @@ const SponsorsSection = () => {
           </p>
         </motion.div>
 
-        {/* Desktop: 3-row grid */}
-        {!isMobile && (
-          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-5">
-            {sponsors.map((sponsor, i) => renderCard(sponsor, i))}
-          </div>
-        )}
-
-        {/* Mobile: carousel, 2 per slide */}
-        {isMobile && (
-          <div className="relative">
-            <div className="overflow-hidden">
-              <motion.div
-                animate={{ x: `-${currentSlide * 100}%` }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="flex"
-              >
-                {Array.from({ length: totalSlides }).map((_, slideIdx) => (
-                  <div key={slideIdx} className="min-w-full grid grid-cols-2 gap-3 px-1">
-                    {sponsors.slice(slideIdx * PER_SLIDE_MOBILE, slideIdx * PER_SLIDE_MOBILE + PER_SLIDE_MOBILE).map((s, i) =>
-                      renderCard(s, slideIdx * PER_SLIDE_MOBILE + i)
-                    )}
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-            <div className="flex items-center justify-center gap-4 mt-6">
-              <button
-                onClick={() => setCurrentSlide(Math.max(0, currentSlide - 1))}
-                disabled={currentSlide === 0}
-                className="p-2 text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <div className="flex gap-1.5">
-                {Array.from({ length: totalSlides }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrentSlide(i)}
-                    className={`w-2 h-2 rounded-full transition-colors ${i === currentSlide ? "bg-primary" : "bg-border"}`}
-                  />
-                ))}
-              </div>
-              <button
-                onClick={() => setCurrentSlide(Math.min(totalSlides - 1, currentSlide + 1))}
-                disabled={currentSlide === totalSlides - 1}
-                className="p-2 text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        )}
+        {/* Все партнёры: 2 колонки на мобилке, 4-5 на десктопе */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-5">
+          {sponsors.map((sponsor, i) => renderCard(sponsor, i))}
+        </div>
 
         <motion.div
           initial={{ opacity: 0 }}
