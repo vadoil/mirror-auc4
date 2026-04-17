@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { LogOut, Plus, Trash2, Save, Eye, Upload, X } from "lucide-react";
+import { LogOut, Plus, Trash2, Save, Eye, Upload, X, Download } from "lucide-react";
+import * as XLSX from "xlsx";
 
 type Lot = {
   id: string;
@@ -168,6 +169,29 @@ const Admin = () => {
     navigate("/admin/login");
   };
 
+  const exportRequestsToExcel = () => {
+    if (requests.length === 0) {
+      toast.error("Нет заявок для экспорта");
+      return;
+    }
+    const rows = requests.map((r) => ({
+      "Дата": new Date(r.created_at).toLocaleString("ru-RU"),
+      "Имя": r.name,
+      "Email": r.email,
+      "Телефон": r.phone || "",
+      "Тип билета": r.ticket_type,
+      "Сообщение": r.message || "",
+      "Статус": r.status,
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws["!cols"] = [{ wch: 18 }, { wch: 22 }, { wch: 28 }, { wch: 16 }, { wch: 14 }, { wch: 40 }, { wch: 12 }];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Заявки");
+    const date = new Date().toISOString().slice(0, 10);
+    XLSX.writeFile(wb, `zayavki-${date}.xlsx`);
+    toast.success("Файл сохранён");
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-warm-black flex items-center justify-center">
@@ -322,7 +346,15 @@ const Admin = () => {
 
         {tab === "requests" && (
           <div>
-            <h2 className="font-display text-2xl uppercase mb-6">Заявки</h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="font-display text-2xl uppercase">Заявки</h2>
+              <button
+                onClick={exportRequestsToExcel}
+                className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 text-xs uppercase tracking-[0.2em] font-body hover:opacity-90 transition-opacity"
+              >
+                <Download size={14} /> Экспорт в Excel
+              </button>
+            </div>
             <div className="space-y-2">
               {requests.map((req) => (
                 <div key={req.id} className="bg-cream/5 border border-cream/10 p-4">
