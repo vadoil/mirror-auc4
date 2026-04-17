@@ -169,6 +169,29 @@ const Admin = () => {
     navigate("/admin/login");
   };
 
+  const exportRequestsToExcel = () => {
+    if (requests.length === 0) {
+      toast.error("Нет заявок для экспорта");
+      return;
+    }
+    const rows = requests.map((r) => ({
+      "Дата": new Date(r.created_at).toLocaleString("ru-RU"),
+      "Имя": r.name,
+      "Email": r.email,
+      "Телефон": r.phone || "",
+      "Тип билета": r.ticket_type,
+      "Сообщение": r.message || "",
+      "Статус": r.status,
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws["!cols"] = [{ wch: 18 }, { wch: 22 }, { wch: 28 }, { wch: 16 }, { wch: 14 }, { wch: 40 }, { wch: 12 }];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Заявки");
+    const date = new Date().toISOString().slice(0, 10);
+    XLSX.writeFile(wb, `zayavki-${date}.xlsx`);
+    toast.success("Файл сохранён");
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-warm-black flex items-center justify-center">
