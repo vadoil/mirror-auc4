@@ -346,7 +346,15 @@ const Admin = () => {
 
         {tab === "requests" && (
           <div>
-            <h2 className="font-display text-2xl uppercase mb-6">Заявки</h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="font-display text-2xl uppercase">Заявки</h2>
+              <button
+                onClick={exportRequestsToExcel}
+                className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 text-xs uppercase tracking-[0.2em] font-body hover:opacity-90 transition-opacity"
+              >
+                <Download size={14} /> Экспорт в Excel
+              </button>
+            </div>
             <div className="space-y-2">
               {requests.map((req) => (
                 <div key={req.id} className="bg-cream/5 border border-cream/10 p-4">
