@@ -263,7 +263,7 @@ const LotDetail = () => {
                       to="/auth"
                       className="block text-center bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body hover:opacity-90 transition-all rounded"
                     >
-                      Войти, чтобы сделать ставку
+                      Войти, чтобы проявить интерес
                     </Link>
                   )
                 ) : (
@@ -280,7 +280,7 @@ const LotDetail = () => {
                 className="flex items-center justify-center gap-2 w-full border-2 border-primary text-primary py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:bg-primary hover:text-primary-foreground transition-all rounded mb-6"
               >
                 <Bookmark className="w-4 h-4" />
-                Забронировать лот
+                Зарегистрироваться на мероприятие
               </button>
 
               {/* Delivery & restrictions */}
