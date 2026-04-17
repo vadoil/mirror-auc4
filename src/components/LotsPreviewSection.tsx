@@ -52,7 +52,7 @@ const LotsPreviewSection = () => {
         .select("id, title, description, image_url, starting_price, category, status, end_at")
         .eq("status", "active")
         .order("sort_order")
-        .limit(7);
+        .limit(12);
       if (data && data.length > 0) setDbLots(data as Lot[]);
       setLoaded(true);
     };
