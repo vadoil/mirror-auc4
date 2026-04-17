@@ -17,6 +17,7 @@ import levEdinorogLogo from "@/assets/sponsors/lev-edinorog.svg";
 import marriottLogo from "@/assets/sponsors/marriott.png";
 
 const sponsors = [
+  { name: "Smart Life", logo: null, textOnly: true, url: "https://smartlife.bio/" },
   { name: "Высшая школа онкологии", logo: hsoLogo, url: "https://higherschoolofoncology.ru/" },
   { name: "Первая Линия (Health Care Resort)", logo: pervayaLiniyaLogo, invert: true, url: "https://hcresort.ru/" },
   { name: "Фонд «Не напрасно»", logo: nenaprasnoLogo, url: "https://nenaprasno.ru/" },
@@ -26,12 +27,13 @@ const sponsors = [
   { name: "Место быть", logo: mestoBytLogo, url: "https://mestobe.ru/" },
   { name: "HEDONIST", logo: hedonistLogo, invert: true, url: "https://hedonistgroup.ru/" },
   { name: "KARMA WOMAN", logo: karmawomanLogo, url: "https://www.sitnikov.com/" },
-  { name: "Smart Life", logo: null, textOnly: true, url: "https://smartlife.bio/" },
   { name: "Биохакинг центр ONE", logo: oneCombinedLogo, url: "https://one-future.ru/" },
   { name: "ШТАБ КУЛЬТУРЫ", logo: shtabLogo, url: "https://t.me/hq_culture" },
   { name: "Лев & Единорог", logo: levEdinorogLogo, url: "https://levik.ru/" },
   { name: "Marriott Imperial Plaza", logo: marriottLogo, url: "https://marriottimperialplaza.moscow/" },
 ];
+
+const PER_SLIDE_MOBILE = 4;
 
 const SponsorsSection = () => {
   const ref = useRef(null);
@@ -46,7 +48,7 @@ const SponsorsSection = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const totalSlides = Math.ceil(sponsors.length / 2);
+  const totalSlides = Math.ceil(sponsors.length / PER_SLIDE_MOBILE);
 
   const renderCard = (sponsor: typeof sponsors[0], i: number) => (
     <motion.a
@@ -116,8 +118,8 @@ const SponsorsSection = () => {
               >
                 {Array.from({ length: totalSlides }).map((_, slideIdx) => (
                   <div key={slideIdx} className="min-w-full grid grid-cols-2 gap-3 px-1">
-                    {sponsors.slice(slideIdx * 2, slideIdx * 2 + 2).map((s, i) =>
-                      renderCard(s, slideIdx * 2 + i)
+                    {sponsors.slice(slideIdx * PER_SLIDE_MOBILE, slideIdx * PER_SLIDE_MOBILE + PER_SLIDE_MOBILE).map((s, i) =>
+                      renderCard(s, slideIdx * PER_SLIDE_MOBILE + i)
                     )}
                   </div>
                 ))}
