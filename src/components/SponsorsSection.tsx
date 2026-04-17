@@ -48,7 +48,7 @@ const SponsorsSection = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const totalSlides = Math.ceil(sponsors.length / 2);
+  const totalSlides = Math.ceil(sponsors.length / PER_SLIDE_MOBILE);
 
   const renderCard = (sponsor: typeof sponsors[0], i: number) => (
     <motion.a
