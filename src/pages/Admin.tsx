@@ -89,7 +89,7 @@ const Admin = () => {
   }, [tab]);
 
   const fetchUtmVisits = async () => {
-    const { data } = await supabase.from("utm_visits").select("*").order("created_at", { ascending: false }).limit(500);
+    const { data } = await supabase.from("utm_visits").select("*").order("created_at", { ascending: false }).limit(10000);
     if (data) setUtmVisits(data as UtmVisit[]);
   };
 
