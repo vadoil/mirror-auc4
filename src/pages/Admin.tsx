@@ -43,6 +43,16 @@ type TicketRequest = {
   created_at: string;
 };
 
+type UtmVisit = {
+  id: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  landing_page: string | null;
+  referrer: string | null;
+  created_at: string;
+};
+
 const statusLabels: Record<string, string> = {
   draft: "Черновик",
   active: "Активен",
@@ -60,10 +70,11 @@ const getImageUrl = (url: string | null) => {
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState<"lots" | "bids" | "requests">("lots");
+  const [tab, setTab] = useState<"lots" | "bids" | "requests" | "utm">("lots");
   const [lots, setLots] = useState<Lot[]>([]);
   const [bids, setBids] = useState<Bid[]>([]);
   const [requests, setRequests] = useState<TicketRequest[]>([]);
+  const [utmVisits, setUtmVisits] = useState<UtmVisit[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingLot, setEditingLot] = useState<Partial<Lot> | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -74,7 +85,13 @@ const Admin = () => {
     if (tab === "lots") fetchLots();
     if (tab === "bids") fetchBids();
     if (tab === "requests") fetchRequests();
+    if (tab === "utm") fetchUtmVisits();
   }, [tab]);
+
+  const fetchUtmVisits = async () => {
+    const { data } = await supabase.from("utm_visits").select("*").order("created_at", { ascending: false }).limit(500);
+    if (data) setUtmVisits(data as UtmVisit[]);
+  };
 
   const fetchRequests = async () => {
     const { data } = await supabase.from("ticket_requests").select("*").order("created_at", { ascending: false });
@@ -212,6 +229,7 @@ const Admin = () => {
     { key: "lots" as const, label: "Лоты" },
     { key: "bids" as const, label: "Ставки" },
     { key: "requests" as const, label: "Заявки" },
+    { key: "utm" as const, label: "UTM" },
   ];
 
   return (
@@ -398,6 +416,44 @@ const Admin = () => {
                 );
               })}
               {requests.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Нет заявок</p>}
+            </div>
+          </div>
+        )}
+
+        {tab === "utm" && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="font-display text-2xl uppercase">UTM-заходы</h2>
+              <p className="text-cream/40 text-xs font-body">Последние {utmVisits.length} визитов с UTM-метками</p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm font-body">
+                <thead>
+                  <tr className="border-b border-cream/10 text-cream/40 text-[10px] uppercase tracking-[0.15em]">
+                    <th className="text-left py-2 pr-4">Дата</th>
+                    <th className="text-left py-2 pr-4">Source</th>
+                    <th className="text-left py-2 pr-4">Medium</th>
+                    <th className="text-left py-2 pr-4">Campaign</th>
+                    <th className="text-left py-2 pr-4">Страница</th>
+                    <th className="text-left py-2">Referrer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {utmVisits.map((v) => (
+                    <tr key={v.id} className="border-b border-cream/5 text-cream/80">
+                      <td className="py-2 pr-4 text-cream/40 whitespace-nowrap text-xs">
+                        {new Date(v.created_at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                      </td>
+                      <td className="py-2 pr-4 text-cream">{v.utm_source || "—"}</td>
+                      <td className="py-2 pr-4">{v.utm_medium || "—"}</td>
+                      <td className="py-2 pr-4">{v.utm_campaign || "—"}</td>
+                      <td className="py-2 pr-4 text-cream/60 truncate max-w-[200px]" title={v.landing_page || ""}>{v.landing_page || "—"}</td>
+                      <td className="py-2 text-cream/40 truncate max-w-[200px] text-xs" title={v.referrer || ""}>{v.referrer || "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {utmVisits.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Заходов с UTM-метками пока нет</p>}
             </div>
           </div>
         )}
