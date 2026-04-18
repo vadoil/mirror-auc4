@@ -424,7 +424,7 @@ const Admin = () => {
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-display text-2xl uppercase">UTM-заходы</h2>
-              <p className="text-cream/40 text-xs font-body">Последние {utmVisits.length} визитов с UTM-метками</p>
+              <p className="text-cream/40 text-xs font-body">Всего: {utmVisits.length}</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm font-body">
