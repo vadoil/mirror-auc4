@@ -16,24 +16,39 @@ const UtmTracker = () => {
     const utm_medium = params.get("utm_medium");
     const utm_campaign = params.get("utm_campaign");
 
-    if (!utm_source && !utm_medium && !utm_campaign) return;
+    if (!utm_source && !utm_medium && !utm_campaign) {
+      console.log("[utm] no utm params, skip");
+      return;
+    }
 
     // дедуп: тот же набор UTM в рамках одной вкладки логируем один раз
     const key = `utm_logged:${utm_source || ""}:${utm_medium || ""}:${utm_campaign || ""}`;
-    if (sessionStorage.getItem(key)) return;
+    if (sessionStorage.getItem(key)) {
+      console.log("[utm] already logged in this session", key);
+      return;
+    }
     sessionStorage.setItem(key, "1");
+
+    const payload = {
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      landing_page: location.pathname + location.search,
+      referrer: document.referrer || null,
+    };
+    console.log("[utm] inserting", payload);
 
     supabase
       .from("utm_visits")
-      .insert({
-        utm_source,
-        utm_medium,
-        utm_campaign,
-        landing_page: location.pathname + location.search,
-        referrer: document.referrer || null,
-      })
+      .insert(payload)
       .then(({ error }) => {
-        if (error) console.warn("[utm] insert failed", error.message);
+        if (error) {
+          console.warn("[utm] insert failed", error.message, error);
+          // снимаем дедуп, чтобы можно было повторить
+          sessionStorage.removeItem(key);
+        } else {
+          console.log("[utm] inserted ok");
+        }
       });
   }, [location.pathname, location.search]);
 
