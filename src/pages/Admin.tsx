@@ -43,6 +43,16 @@ type TicketRequest = {
   created_at: string;
 };
 
+type UtmVisit = {
+  id: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  landing_page: string | null;
+  referrer: string | null;
+  created_at: string;
+};
+
 const statusLabels: Record<string, string> = {
   draft: "Черновик",
   active: "Активен",
@@ -60,10 +70,11 @@ const getImageUrl = (url: string | null) => {
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState<"lots" | "bids" | "requests">("lots");
+  const [tab, setTab] = useState<"lots" | "bids" | "requests" | "utm">("lots");
   const [lots, setLots] = useState<Lot[]>([]);
   const [bids, setBids] = useState<Bid[]>([]);
   const [requests, setRequests] = useState<TicketRequest[]>([]);
+  const [utmVisits, setUtmVisits] = useState<UtmVisit[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingLot, setEditingLot] = useState<Partial<Lot> | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -74,7 +85,13 @@ const Admin = () => {
     if (tab === "lots") fetchLots();
     if (tab === "bids") fetchBids();
     if (tab === "requests") fetchRequests();
+    if (tab === "utm") fetchUtmVisits();
   }, [tab]);
+
+  const fetchUtmVisits = async () => {
+    const { data } = await supabase.from("utm_visits").select("*").order("created_at", { ascending: false }).limit(500);
+    if (data) setUtmVisits(data as UtmVisit[]);
+  };
 
   const fetchRequests = async () => {
     const { data } = await supabase.from("ticket_requests").select("*").order("created_at", { ascending: false });
@@ -212,6 +229,7 @@ const Admin = () => {
     { key: "lots" as const, label: "Лоты" },
     { key: "bids" as const, label: "Ставки" },
     { key: "requests" as const, label: "Заявки" },
+    { key: "utm" as const, label: "UTM" },
   ];
 
   return (
