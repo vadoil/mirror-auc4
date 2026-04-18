@@ -419,6 +419,44 @@ const Admin = () => {
             </div>
           </div>
         )}
+
+        {tab === "utm" && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="font-display text-2xl uppercase">UTM-заходы</h2>
+              <p className="text-cream/40 text-xs font-body">Последние {utmVisits.length} визитов с UTM-метками</p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm font-body">
+                <thead>
+                  <tr className="border-b border-cream/10 text-cream/40 text-[10px] uppercase tracking-[0.15em]">
+                    <th className="text-left py-2 pr-4">Дата</th>
+                    <th className="text-left py-2 pr-4">Source</th>
+                    <th className="text-left py-2 pr-4">Medium</th>
+                    <th className="text-left py-2 pr-4">Campaign</th>
+                    <th className="text-left py-2 pr-4">Страница</th>
+                    <th className="text-left py-2">Referrer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {utmVisits.map((v) => (
+                    <tr key={v.id} className="border-b border-cream/5 text-cream/80">
+                      <td className="py-2 pr-4 text-cream/40 whitespace-nowrap text-xs">
+                        {new Date(v.created_at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                      </td>
+                      <td className="py-2 pr-4 text-cream">{v.utm_source || "—"}</td>
+                      <td className="py-2 pr-4">{v.utm_medium || "—"}</td>
+                      <td className="py-2 pr-4">{v.utm_campaign || "—"}</td>
+                      <td className="py-2 pr-4 text-cream/60 truncate max-w-[200px]" title={v.landing_page || ""}>{v.landing_page || "—"}</td>
+                      <td className="py-2 text-cream/40 truncate max-w-[200px] text-xs" title={v.referrer || ""}>{v.referrer || "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {utmVisits.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Заходов с UTM-метками пока нет</p>}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
