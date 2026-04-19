@@ -14,3 +14,9 @@ verify_jwt = false
 
 [functions.handle-email-suppression]
 verify_jwt = false
+
+[functions.yookassa-webhook]
+verify_jwt = false
+
+[functions.create-yookassa-payment]
+verify_jwt = false
