@@ -41,6 +41,7 @@ type TicketRequest = {
   message: string | null;
   status: string;
   created_at: string;
+  promo_code: string | null;
 };
 
 type UtmVisit = {
