@@ -198,11 +198,12 @@ const Admin = () => {
       "Email": r.email,
       "Телефон": r.phone || "",
       "Тип билета": r.ticket_type,
+      "Промокод": r.promo_code || "",
       "Сообщение": r.message || "",
-      "Статус": r.status === "paid" ? "Оплачено" : "Новая",
+      "Статус": r.status === "paid" ? "Оплачено" : (r.promo_code ? "По промокоду" : "Новая"),
     }));
     const ws = XLSX.utils.json_to_sheet(rows);
-    ws["!cols"] = [{ wch: 18 }, { wch: 22 }, { wch: 28 }, { wch: 16 }, { wch: 14 }, { wch: 40 }, { wch: 12 }];
+    ws["!cols"] = [{ wch: 18 }, { wch: 22 }, { wch: 28 }, { wch: 16 }, { wch: 14 }, { wch: 14 }, { wch: 40 }, { wch: 14 }];
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Заявки");
     const date = new Date().toISOString().slice(0, 10);
