@@ -109,7 +109,7 @@ const HowItWorks = () => {
       <TicketRequestModal
         isOpen={ticketModalOpen}
         onClose={() => setTicketModalOpen(false)}
-        ticketType="Стандарт"
+        ticketType="Участник аукциона"
         ticketPrice="15 000 ₽"
         showTrainingCheckbox={false}
       />
