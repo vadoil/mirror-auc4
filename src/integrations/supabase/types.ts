@@ -258,28 +258,40 @@ export type Database = {
           amount: number
           created_at: string
           id: string
-          lot_id: string
+          lot_id: string | null
+          metadata: Json | null
           provider: string | null
           status: string
+          ticket_request_id: string | null
+          updated_at: string
           user_id: string | null
+          yookassa_payment_id: string | null
         }
         Insert: {
           amount: number
           created_at?: string
           id?: string
-          lot_id: string
+          lot_id?: string | null
+          metadata?: Json | null
           provider?: string | null
           status?: string
+          ticket_request_id?: string | null
+          updated_at?: string
           user_id?: string | null
+          yookassa_payment_id?: string | null
         }
         Update: {
           amount?: number
           created_at?: string
           id?: string
-          lot_id?: string
+          lot_id?: string | null
+          metadata?: Json | null
           provider?: string | null
           status?: string
+          ticket_request_id?: string | null
+          updated_at?: string
           user_id?: string | null
+          yookassa_payment_id?: string | null
         }
         Relationships: [
           {
@@ -287,6 +299,13 @@ export type Database = {
             columns: ["lot_id"]
             isOneToOne: false
             referencedRelation: "lots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_ticket_request_id_fkey"
+            columns: ["ticket_request_id"]
+            isOneToOne: false
+            referencedRelation: "ticket_requests"
             referencedColumns: ["id"]
           },
         ]
@@ -352,6 +371,7 @@ export type Database = {
           id: string
           message: string | null
           name: string
+          paid_at: string | null
           phone: string | null
           promo_code: string | null
           status: string
@@ -363,6 +383,7 @@ export type Database = {
           id?: string
           message?: string | null
           name: string
+          paid_at?: string | null
           phone?: string | null
           promo_code?: string | null
           status?: string
@@ -374,6 +395,7 @@ export type Database = {
           id?: string
           message?: string | null
           name?: string
+          paid_at?: string | null
           phone?: string | null
           promo_code?: string | null
           status?: string
