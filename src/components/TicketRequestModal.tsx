@@ -24,6 +24,14 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
   const [showPayment, setShowPayment] = useState(false);
   const [submittedName, setSubmittedName] = useState("");
   const [submittedEmail, setSubmittedEmail] = useState("");
+  const [submittedRequestId, setSubmittedRequestId] = useState("");
+
+  // Parse price like "15 000 ₽" → 15000
+  const parsedAmount = (() => {
+    const digits = (ticketPrice || "").replace(/[^\d]/g, "");
+    const n = parseInt(digits, 10);
+    return Number.isFinite(n) && n > 0 ? n : 15000;
+  })();
 
   const checkPromoCode = async (code: string) => {
     if (!code.trim()) {
@@ -141,6 +149,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       // Paid → show YooKassa payment form
       setSubmittedName(form.name.trim());
       setSubmittedEmail(form.email.trim());
+      setSubmittedRequestId(requestId);
       setShowPayment(true);
     }
   };
@@ -153,6 +162,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
     setPromoValid(null);
     setSubmittedName("");
     setSubmittedEmail("");
+    setSubmittedRequestId("");
     onClose();
   };
 
@@ -196,7 +206,13 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
             </div>
 
             {showPayment ? (
-              <YooKassaPaymentForm name={submittedName} email={submittedEmail} />
+              <YooKassaPaymentForm
+                ticketRequestId={submittedRequestId}
+                name={submittedName}
+                email={submittedEmail}
+                ticketType={ticketType}
+                amount={parsedAmount}
+              />
             ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <input
