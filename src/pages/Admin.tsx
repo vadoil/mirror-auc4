@@ -393,8 +393,13 @@ const Admin = () => {
                         <div className="flex items-center gap-3 mb-1 flex-wrap">
                           <p className="font-body text-sm text-cream font-medium">{req.name}</p>
                           <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-primary/20 text-primary">{req.ticket_type}</span>
-                          <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-0.5 ${isPaid ? "bg-green-500/20 text-green-400" : "bg-yellow-500/20 text-yellow-400"}`}>
-                            {isPaid ? "Оплачено" : "Не оплачено"}
+                          {req.promo_code && (
+                            <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-purple-500/20 text-purple-300 border border-purple-400/30">
+                              🎟 Промокод: {req.promo_code}
+                            </span>
+                          )}
+                          <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-0.5 ${isPaid ? "bg-green-500/20 text-green-400" : req.promo_code ? "bg-purple-500/20 text-purple-300" : "bg-yellow-500/20 text-yellow-400"}`}>
+                            {isPaid ? "Оплачено" : req.promo_code ? "По промокоду" : "Не оплачено"}
                           </span>
                         </div>
                         <p className="text-cream/40 text-xs font-body">{req.email}{req.phone ? ` · ${req.phone}` : ''}</p>
