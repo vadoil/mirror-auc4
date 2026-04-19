@@ -4,6 +4,7 @@ import { UserPlus, Search, Gavel, CreditCard, Heart, ChevronDown } from "lucide-
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TicketRequestModal from "@/components/TicketRequestModal";
 
 const steps = [
   { icon: UserPlus, title: "Зарегистрируйтесь", desc: "Создайте аккаунт на сайте – это бесплатно и займёт 1 минуту." },
@@ -25,6 +26,8 @@ const faqs = [
 
 const HowItWorks = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [ticketModalOpen, setTicketModalOpen] = useState(false);
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -66,7 +69,13 @@ const HowItWorks = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 mb-24">
             <Link to="/lots" className="btn-primary text-center">Смотреть лоты</Link>
-            <Link to="/auth" className="btn-outline text-center">Зарегистрироваться</Link>
+            <button
+              type="button"
+              onClick={() => setTicketModalOpen(true)}
+              className="btn-outline text-center"
+            >
+              Купить билет
+            </button>
           </div>
 
           {/* FAQ */}
@@ -97,6 +106,13 @@ const HowItWorks = () => {
         </div>
       </div>
       <Footer />
+      <TicketRequestModal
+        isOpen={ticketModalOpen}
+        onClose={() => setTicketModalOpen(false)}
+        ticketType="Стандарт"
+        ticketPrice="15 000 ₽"
+        showTrainingCheckbox={false}
+      />
     </div>
   );
 };
