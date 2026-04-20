@@ -34,6 +34,7 @@ const sponsors = [
   { name: "Marriott Imperial Plaza", logo: marriottLogo, url: "https://marriottimperialplaza.moscow/" },
   { name: "Лев & Единорог", logo: levEdinorogLogo, url: "https://levik.ru/" },
   { name: "Соловьи — женская русская баня", logo: soloviyLogo, url: "https://soloviy.ru/" },
+  { name: "Сказ по краю", logo: skazPoKrayuLogo, url: "https://skazpokrayu.ru" },
 ];
 
 const PER_SLIDE_MOBILE = 4;
