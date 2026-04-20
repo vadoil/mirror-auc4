@@ -34,7 +34,7 @@ const sponsors = [
   { name: "Marriott Imperial Plaza", logo: marriottLogo, url: "https://marriottimperialplaza.moscow/" },
   { name: "Лев & Единорог", logo: levEdinorogLogo, url: "https://levik.ru/" },
   { name: "Соловьи — женская русская баня", logo: soloviyLogo, url: "https://soloviy.ru/" },
-  { name: "Сказ по краю", logo: skazPoKrayuLogo, url: "https://skazpokrayu.ru" },
+  { name: "Сказ по краю", logo: skazPoKrayuLogo, url: "https://skazpokrayu.ru", fill: true },
 ];
 
 const PER_SLIDE_MOBILE = 4;
@@ -63,7 +63,7 @@ const SponsorsSection = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.05 * i }}
-      className="flex items-center justify-center p-4 md:p-6 bg-card border border-border hover:border-primary/20 transition-all duration-300 min-h-[80px] md:min-h-[90px]"
+      className="relative overflow-hidden flex items-center justify-center p-4 md:p-6 bg-card border border-border hover:border-primary/20 transition-all duration-300 min-h-[80px] md:min-h-[90px]"
     >
       {sponsor.textOnly ? (
         <span className="font-display text-base md:text-lg font-medium text-foreground tracking-wide">
