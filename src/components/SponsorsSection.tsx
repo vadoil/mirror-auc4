@@ -16,6 +16,7 @@ import shtabLogo from "@/assets/sponsors/shtab-kultury.svg";
 import levEdinorogLogo from "@/assets/sponsors/lev-edinorog.svg";
 import marriottLogo from "@/assets/sponsors/marriott.png";
 import soloviyLogo from "@/assets/sponsors/soloviy.png";
+import skazPoKrayuLogo from "@/assets/sponsors/skaz-po-krayu.jpg";
 
 const sponsors = [
   { name: "Smart Life", logo: null, textOnly: true, url: "https://smartlife.bio/" },
@@ -33,6 +34,7 @@ const sponsors = [
   { name: "Marriott Imperial Plaza", logo: marriottLogo, url: "https://marriottimperialplaza.moscow/" },
   { name: "Лев & Единорог", logo: levEdinorogLogo, url: "https://levik.ru/" },
   { name: "Соловьи — женская русская баня", logo: soloviyLogo, url: "https://soloviy.ru/" },
+  { name: "Сказ по краю", logo: skazPoKrayuLogo, url: "https://skazpokrayu.ru" },
 ];
 
 const PER_SLIDE_MOBILE = 4;
