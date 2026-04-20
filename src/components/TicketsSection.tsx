@@ -5,7 +5,7 @@ import TicketRequestModal from "./TicketRequestModal";
 
 const ticket = {
   name: "Участник аукциона",
-  price: "15 000 ₽",
+  price: "10 ₽",
   subtitle: "Невозвратный регистрационный взнос",
   features: [
     "Доступ на аукцион 26 апреля",
