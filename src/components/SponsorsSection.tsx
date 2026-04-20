@@ -17,6 +17,7 @@ import levEdinorogLogo from "@/assets/sponsors/lev-edinorog.svg";
 import marriottLogo from "@/assets/sponsors/marriott.png";
 import soloviyLogo from "@/assets/sponsors/soloviy.png";
 import skazPoKrayuLogo from "@/assets/sponsors/skaz-po-krayu.jpg";
+import sorokaLogo from "@/assets/sponsors/soroka.png";
 
 const sponsors = [
   { name: "Smart Life", logo: null, textOnly: true, url: "https://smartlife.bio/" },
