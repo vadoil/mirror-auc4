@@ -36,6 +36,7 @@ const sponsors = [
   { name: "Лев & Единорог", logo: levEdinorogLogo, url: "https://levik.ru/" },
   { name: "Соловьи — женская русская баня", logo: soloviyLogo, url: "https://soloviy.ru/" },
   { name: "Сказ по краю", logo: skazPoKrayuLogo, url: "https://skazpokrayu.ru", fill: true },
+  { name: "SOROKA Moscow", logo: sorokaLogo, url: "https://t.me/sorokamoscow/" },
 ];
 
 const PER_SLIDE_MOBILE = 4;
