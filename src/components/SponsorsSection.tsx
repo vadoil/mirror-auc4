@@ -70,12 +70,21 @@ const SponsorsSection = () => {
           {sponsor.name}
         </span>
       ) : sponsor.logo ? (
-        <img
-          src={sponsor.logo}
-          alt={sponsor.name}
-          className={`max-h-10 md:max-h-12 w-auto object-contain ${sponsor.invert ? "invert" : ""}`}
-          title={sponsor.name}
-        />
+        sponsor.fill ? (
+          <img
+            src={sponsor.logo}
+            alt={sponsor.name}
+            className="absolute inset-0 w-full h-full object-cover"
+            title={sponsor.name}
+          />
+        ) : (
+          <img
+            src={sponsor.logo}
+            alt={sponsor.name}
+            className={`max-h-10 md:max-h-12 w-auto object-contain ${sponsor.invert ? "invert" : ""}`}
+            title={sponsor.name}
+          />
+        )
       ) : null}
     </motion.a>
   );
