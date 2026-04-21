@@ -11,7 +11,7 @@ const MasterclassSection = () => {
 
   return (
     <>
-      <section className="py-20 md:py-28 section-padding bg-warm-black relative overflow-hidden">
+      <section className="py-12 md:py-16 section-padding bg-warm-black relative overflow-hidden">
         {/* Subtle background accent */}
         <div className="absolute inset-0 opacity-[0.03]">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary to-transparent" />

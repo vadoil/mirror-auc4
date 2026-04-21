@@ -92,7 +92,7 @@ const SponsorsSection = () => {
   );
 
   return (
-    <section id="sponsors" className="py-24 md:py-32 section-padding bg-background relative overflow-hidden">
+    <section id="sponsors" className="py-12 md:py-16 section-padding bg-background relative overflow-hidden">
       <div ref={ref} className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -26,7 +26,7 @@ const TicketsSection = () => {
 
   return (
     <>
-      <section id="tickets" className="relative py-24 md:py-32 section-padding overflow-hidden">
+      <section id="tickets" className="relative py-12 md:py-16 section-padding overflow-hidden">
         <div className="absolute inset-0 bg-charcoal" />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
 
