@@ -5,6 +5,7 @@ import { Menu, X, LogIn, Home } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import TicketRequestModal from "./TicketRequestModal";
 import logoOtrazhenie from "@/assets/logo-otrazhenie-final.png";
+import logoOtrazhenieLight from "@/assets/logo-otrazhenie-light.png";
 
 const navItems = [
   { label: "Лоты", href: "/lots" },
@@ -58,9 +59,9 @@ const Header = () => {
                 Благотворительный аукцион
               </span>
               <img
-                src={logoOtrazhenie}
+                src={useDarkText ? logoOtrazhenie : logoOtrazhenieLight}
                 alt="Отражение — благотворительный аукцион"
-                className={`h-10 md:h-12 w-auto transition-all duration-300 ${useDarkText ? "" : "[filter:invert(1)_brightness(1.2)]"}`}
+                className="h-10 md:h-12 w-auto transition-all duration-300"
               />
             </div>
           </Link>
