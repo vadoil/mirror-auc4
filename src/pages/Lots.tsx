@@ -22,6 +22,7 @@ type Lot = {
   title: string;
   description: string | null;
   image_url: string | null;
+  preview_image_url: string | null;
   starting_price: number;
   category: string | null;
   status: string;
@@ -69,7 +70,7 @@ const Lots = () => {
     const fetchData = async () => {
       const { data: lotsData } = await supabase
         .from("lots")
-        .select("id, title, description, image_url, starting_price, category, status, end_at, bid_step")
+        .select("id, title, description, image_url, preview_image_url, starting_price, category, status, end_at, bid_step")
         .eq("status", "active")
         .order("sort_order");
 
@@ -159,7 +160,7 @@ const Lots = () => {
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {filteredLots.map((lot, i) => {
-                const imgUrl = getImageUrl(lot.image_url) || fallbackImages[i];
+                const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackImages[i];
                 const currentPrice = getCurrentPrice(lot);
                 const remaining = timeLeft(lot.end_at);
 
