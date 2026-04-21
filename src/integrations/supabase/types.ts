@@ -205,6 +205,7 @@ export type Database = {
           id: string
           image_url: string | null
           is_active: boolean
+          preview_image_url: string | null
           restrictions: string | null
           sort_order: number
           start_at: string | null
@@ -224,6 +225,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean
+          preview_image_url?: string | null
           restrictions?: string | null
           sort_order?: number
           start_at?: string | null
@@ -243,6 +245,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean
+          preview_image_url?: string | null
           restrictions?: string | null
           sort_order?: number
           start_at?: string | null

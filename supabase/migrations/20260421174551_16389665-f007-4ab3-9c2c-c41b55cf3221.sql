@@ -1,0 +1,1 @@
+ALTER TABLE public.lots ADD COLUMN IF NOT EXISTS preview_image_url text;
