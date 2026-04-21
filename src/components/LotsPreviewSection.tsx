@@ -28,6 +28,7 @@ type Lot = {
   title: string;
   description: string | null;
   image_url: string | null;
+  preview_image_url: string | null;
   starting_price: number;
   category: string | null;
   status: string;
@@ -49,7 +50,7 @@ const LotsPreviewSection = () => {
     const fetchLots = async () => {
       const { data } = await supabase
         .from("lots")
-        .select("id, title, description, image_url, starting_price, category, status, end_at")
+        .select("id, title, description, image_url, preview_image_url, starting_price, category, status, end_at")
         .eq("status", "active")
         .order("sort_order")
         .limit(12);
@@ -62,7 +63,7 @@ const LotsPreviewSection = () => {
   // Use DB lots if available, otherwise show static preview
   const useStatic = loaded && dbLots.length === 0;
   const displayLots = useStatic
-    ? staticLots.map(l => ({ ...l, image_url: null, status: "active", end_at: null }))
+    ? staticLots.map(l => ({ ...l, image_url: null, preview_image_url: null, status: "active", end_at: null }))
     : dbLots;
   const staticImages = Object.fromEntries(staticLots.map(l => [l.id, l.image]));
 
@@ -116,7 +117,7 @@ const LotsPreviewSection = () => {
           {displayLots.map((lot, i) => {
             const imgUrl = useStatic
               ? staticImages[lot.id]
-              : (getImageUrl((lot as Lot).image_url) || fallbackImages[i]);
+              : (getImageUrl((lot as Lot).preview_image_url) || getImageUrl((lot as Lot).image_url) || fallbackImages[i]);
 
             return (
               <motion.div
