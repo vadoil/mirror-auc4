@@ -85,60 +85,123 @@ type PersonCardProps = {
   person: SpeakerData;
   index: number;
   isInView: boolean;
+  layout?: "centered" | "alternating";
 };
 
-const PersonCard = ({ person, index, isInView }: PersonCardProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={isInView ? { opacity: 1, y: 0 } : {}}
-    transition={{ duration: 0.6, delay: 0.2 * index }}
-    className="group flex flex-col items-center text-center"
-  >
-    {/* Circle photo */}
-    <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden bg-muted/30 mb-6 ring-2 ring-border group-hover:ring-primary/30 transition-all duration-500">
-      {person.image ? (
-        <img
-          src={person.image}
-          alt={person.name}
-          className="absolute inset-0 w-full h-full object-cover object-top"
-        />
-      ) : (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <User className="w-12 h-12 text-muted-foreground/20" />
+const PersonCard = ({ person, index, isInView, layout = "centered" }: PersonCardProps) => {
+  if (layout === "alternating") {
+    const reverse = index % 2 === 1;
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.15 * index }}
+        className={`group flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10 py-8 border-b border-border ${
+          reverse ? "md:flex-row-reverse text-center md:text-right" : "text-center md:text-left"
+        }`}
+      >
+        {/* Photo */}
+        <div className="relative w-36 h-36 md:w-48 md:h-48 rounded-full overflow-hidden bg-muted/30 ring-2 ring-border group-hover:ring-primary/30 transition-all duration-500 shrink-0">
+          {person.image ? (
+            <img
+              src={person.image}
+              alt={person.name}
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <User className="w-12 h-12 text-muted-foreground/20" />
+            </div>
+          )}
         </div>
+
+        {/* Info */}
+        <div className="flex-1 min-w-0">
+          <h3 className="font-display text-xl md:text-2xl font-light text-foreground mb-1 leading-tight">
+            {person.name}
+          </h3>
+          <p className="font-body text-[10px] text-primary uppercase tracking-[0.15em] mb-3">{person.role}</p>
+
+          {person.jointTopic && (
+            <p className="font-body text-xs text-foreground/70 italic mb-3">
+              Совместное выступление с {person.jointWith}
+              <br />
+              <span className="text-primary font-medium not-italic">«{person.jointTopic}»</span>
+            </p>
+          )}
+
+          {person.bio && (
+            <p className="font-body text-sm font-light text-muted-foreground leading-relaxed mb-3">{person.bio}</p>
+          )}
+
+          {person.highlights.length > 0 && (
+            <ul className={`space-y-1.5 inline-block text-left ${reverse ? "md:text-left" : ""}`}>
+              {person.highlights.map((h, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />
+                  <span className="font-body text-xs font-light text-muted-foreground">{h}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: 0.2 * index }}
+      className="group flex flex-col items-center text-center"
+    >
+      {/* Circle photo */}
+      <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden bg-muted/30 mb-6 ring-2 ring-border group-hover:ring-primary/30 transition-all duration-500">
+        {person.image ? (
+          <img
+            src={person.image}
+            alt={person.name}
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <User className="w-12 h-12 text-muted-foreground/20" />
+          </div>
+        )}
+      </div>
+
+      {/* Info */}
+      <h3 className="font-display text-xl md:text-2xl font-light text-foreground mb-1 leading-tight">
+        {person.name}
+      </h3>
+      <p className="font-body text-[10px] text-primary uppercase tracking-[0.15em] mb-2">{person.role}</p>
+
+      {person.jointTopic && (
+        <p className="font-body text-xs text-foreground/70 italic mb-3">
+          Совместное выступление с {person.jointWith}
+          <br />
+          <span className="text-primary font-medium not-italic">«{person.jointTopic}»</span>
+        </p>
       )}
-    </div>
 
-    {/* Info */}
-    <h3 className="font-display text-xl md:text-2xl font-light text-foreground mb-1 leading-tight">
-      {person.name}
-    </h3>
-    <p className="font-body text-[10px] text-primary uppercase tracking-[0.15em] mb-2">{person.role}</p>
+      {person.bio && (
+        <p className="font-body text-sm font-light text-muted-foreground leading-relaxed mb-3 max-w-xs">{person.bio}</p>
+      )}
 
-    {(person as SpeakerData).jointTopic && (
-      <p className="font-body text-xs text-foreground/70 italic mb-3">
-        Совместное выступление с {(person as SpeakerData).jointWith}
-        <br />
-        <span className="text-primary font-medium not-italic">«{(person as SpeakerData).jointTopic}»</span>
-      </p>
-    )}
-
-    {person.bio && (
-      <p className="font-body text-sm font-light text-muted-foreground leading-relaxed mb-3 max-w-xs">{person.bio}</p>
-    )}
-
-    {person.highlights.length > 0 && (
-      <ul className="space-y-1.5 text-left">
-        {person.highlights.map((h, i) => (
-          <li key={i} className="flex items-start gap-2">
-            <span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />
-            <span className="font-body text-xs font-light text-muted-foreground">{h}</span>
-          </li>
-        ))}
-      </ul>
-    )}
-  </motion.div>
-);
+      {person.highlights.length > 0 && (
+        <ul className="space-y-1.5 text-left">
+          {person.highlights.map((h, i) => (
+            <li key={i} className="flex items-start gap-2">
+              <span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />
+              <span className="font-body text-xs font-light text-muted-foreground">{h}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </motion.div>
+  );
+};
 
 const Program = () => {
   const ref = useRef(null);
@@ -262,9 +325,9 @@ const Program = () => {
                 Public Talk · Участники дискуссии
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="max-w-4xl mx-auto">
               {speakersData.map((person, i) => (
-                <PersonCard key={person.name} person={person} index={i} isInView={isInView} />
+                <PersonCard key={person.name} person={person} index={i} isInView={isInView} layout="alternating" />
               ))}
             </div>
           </motion.div>
