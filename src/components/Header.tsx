@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Gavel, LogIn, Home } from "lucide-react";
+import { Menu, X, LogIn, Home } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import TicketRequestModal from "./TicketRequestModal";
+import logoOtrazhenie from "@/assets/logo-otrazhenie-final.png";
 
 const navItems = [
   { label: "Лоты", href: "/lots" },
@@ -52,18 +53,15 @@ const Header = () => {
       >
         <div className="section-padding flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <div className="flex flex-col items-center">
-              <span className={`${logoSub} text-[7px] md:text-[8px] uppercase tracking-[0.35em] font-body leading-none mb-1 transition-colors duration-300`}>
+            <div className="flex flex-col items-start">
+              <span className={`${logoSub} text-[7px] md:text-[8px] uppercase tracking-[0.35em] font-body leading-none mb-1.5 transition-colors duration-300`}>
                 Благотворительный аукцион
               </span>
-              <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 border border-primary flex items-center justify-center">
-                  <Gavel className="w-3.5 h-3.5 text-primary" />
-                </div>
-                <span className={`font-display text-lg md:text-xl font-normal tracking-[0.15em] ${logoText} uppercase transition-colors duration-300`}>
-                  Отражение
-                </span>
-              </div>
+              <img
+                src={logoOtrazhenie}
+                alt="Отражение — благотворительный аукцион"
+                className={`h-6 md:h-7 w-auto transition-all duration-300 ${useDarkText ? "" : "[filter:invert(1)_brightness(1.2)]"}`}
+              />
             </div>
           </Link>
 

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import triiLogo from "@/assets/sponsors/triii-logo.png";
+import logoOtrazhenie from "@/assets/logo-otrazhenie-final.png";
 
 
 const Footer = () => {
@@ -7,13 +8,20 @@ const Footer = () => {
     <footer className="bg-warm-black text-cream/40">
       <div className="section-padding py-16 md:py-20 border-b border-cream/10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <h3 className="font-display text-3xl md:text-4xl font-light text-cream mb-2">
-              Увидимся <span className="italic text-primary">26 апреля</span>
-            </h3>
-            <p className="font-body text-sm text-cream/40">
-              Москва · Мясницкая 24/7 · Баланс-холл «Место быть»
-            </p>
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <img
+              src={logoOtrazhenie}
+              alt="Отражение"
+              className="h-8 md:h-10 w-auto invert brightness-0 [filter:invert(1)]"
+            />
+            <div>
+              <h3 className="font-display text-3xl md:text-4xl font-light text-cream mb-2">
+                Увидимся <span className="italic text-primary">26 апреля</span>
+              </h3>
+              <p className="font-body text-sm text-cream/40">
+                Москва · Мясницкая 24/7 · Баланс-холл «Место быть»
+              </p>
+            </div>
           </div>
           <Link to="/#tickets" className="btn-primary">
             Зарегистрироваться
