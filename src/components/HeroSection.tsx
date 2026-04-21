@@ -74,7 +74,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.8, delay: 1.0 }}
                 className="font-body text-cream/60 text-lg md:text-xl lg:text-2xl font-light mt-6 max-w-lg"
               >
-                Первый в России wellness-аукцион. Уникальные лоты. Все средства – на добрые дела.
+                Первый в России аукцион заботы о здоровье. Уникальные лоты. Все средства – на добрые дела.
               </motion.p>
             </div>
 
