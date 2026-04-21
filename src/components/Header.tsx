@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Gavel, LogIn, Home } from "lucide-react";
+import { Menu, X, LogIn, Home } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import TicketRequestModal from "./TicketRequestModal";
+import logoOtrazhenie from "@/assets/logo-otrazhenie-final.png";
 
 const navItems = [
   { label: "Лоты", href: "/lots" },
