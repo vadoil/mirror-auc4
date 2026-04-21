@@ -349,11 +349,11 @@ const Program = () => {
               Зарегистрируйтесь на аукцион и станьте частью вечера, который меняет жизни.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/lots" className="btn-primary">
+              <Link to="/lots" className="btn-outline">
                 Смотреть лоты
               </Link>
-              <Link to="/how-it-works" className="btn-outline">
-                Как участвовать
+              <Link to="/#tickets" className="btn-primary">
+                Зарегистрироваться
               </Link>
             </div>
           </motion.div>
