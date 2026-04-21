@@ -29,7 +29,7 @@ const DressCodeSection = () => {
           </div>
 
           <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-foreground leading-[0.85]">
-            Smart <span className="italic text-primary">Casual</span>
+            Элегантная <span className="italic text-primary">непринуждённость</span>
           </h2>
 
           <motion.p
