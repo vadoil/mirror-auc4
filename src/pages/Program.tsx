@@ -7,7 +7,6 @@ import DressCodeSection from "@/components/DressCodeSection";
 import Footer from "@/components/Footer";
 import stupinPhoto from "@/assets/speaker-stupin.jpg";
 import pavlovPhoto from "@/assets/speaker-pavlov.png";
-import spiroPhoto from "@/assets/speaker-spiro.png";
 import gunderinaPhoto from "@/assets/speaker-gunderina.png";
 import evnichPhoto from "@/assets/speaker-evnich.png";
 
