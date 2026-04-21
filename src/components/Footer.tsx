@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import triiLogo from "@/assets/sponsors/triii-logo.png";
-import logoOtrazhenie from "@/assets/logo-otrazhenie-final.png";
+import logoOtrazhenie from "@/assets/logo-otrazhenie-light.png";
 
 
 const Footer = () => {
@@ -12,7 +12,7 @@ const Footer = () => {
             <img
               src={logoOtrazhenie}
               alt="Отражение"
-              className="h-8 md:h-10 w-auto invert brightness-0 [filter:invert(1)]"
+              className="h-10 md:h-12 w-auto"
             />
             <div>
               <h3 className="font-display text-3xl md:text-4xl font-light text-cream mb-2">
