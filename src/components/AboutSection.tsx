@@ -120,7 +120,7 @@ const AboutSection = () => {
           >
             {Array.from({ length: 10 }).map((_, i) => (
               <span key={i} className="font-display text-lg md:text-xl text-primary-foreground/80 font-light italic tracking-wide">
-                Благотворительность · Wellbeing · Осознанность · Ретриты · Здоровье · Баланс · Добро ·
+                Благотворительность · Забота о здоровье · Осознанность · Ретриты · Здоровье · Баланс · Добро ·
               </span>
             ))}
           </motion.div>

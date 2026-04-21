@@ -79,7 +79,7 @@ const speakersData = [
     ],
     image: evnichPhoto,
     jointWith: "Наталией Гундериной",
-    jointTopic: "Ключевые подходы к долголетию и Healthspan",
+    jointTopic: "Ключевые подходы к долголетию и активному долголетию",
   },
 ];
 
