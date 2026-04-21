@@ -325,9 +325,9 @@ const Program = () => {
                 Public Talk · Участники дискуссии
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="max-w-4xl mx-auto">
               {speakersData.map((person, i) => (
-                <PersonCard key={person.name} person={person} index={i} isInView={isInView} />
+                <PersonCard key={person.name} person={person} index={i} isInView={isInView} layout="alternating" />
               ))}
             </div>
           </motion.div>
