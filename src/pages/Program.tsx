@@ -7,7 +7,6 @@ import DressCodeSection from "@/components/DressCodeSection";
 import Footer from "@/components/Footer";
 import stupinPhoto from "@/assets/speaker-stupin.jpg";
 import pavlovPhoto from "@/assets/speaker-pavlov.png";
-import spiroPhoto from "@/assets/speaker-spiro.png";
 import gunderinaPhoto from "@/assets/speaker-gunderina.png";
 import evnichPhoto from "@/assets/speaker-evnich.png";
 
@@ -43,17 +42,6 @@ const speakersData = [
       "Эксперт в превентивной медицине и управлении здоровьем",
     ],
     image: stupinPhoto,
-  },
-  {
-    name: "Артём Спиро",
-    role: "Импакт-предприниматель, ресторатор",
-    bio: "Основатель венчурной студии Spiro Ventures и нейробистро Inspiro. Эксперт в здоровом питании и устойчивом развитии.",
-    highlights: [
-      "Основатель Spiro Ventures — венчурная студия «стартапов будущего»",
-      "Создатель нейробистро Inspiro в Москве",
-      "Эксперт в области здорового питания и sustainability",
-    ],
-    image: spiroPhoto,
   },
   {
     name: "Наталия Гундерина",
