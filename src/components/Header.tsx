@@ -54,16 +54,11 @@ const Header = () => {
       >
         <div className="section-padding flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <div className="flex flex-col items-start">
-              <span className={`${logoSub} text-[7px] md:text-[8px] uppercase tracking-[0.35em] font-body leading-none mb-2 transition-colors duration-300`}>
-                Благотворительный аукцион
-              </span>
-              <img
-                src={useDarkText ? logoOtrazhenie : logoOtrazhenieLight}
-                alt="Отражение — благотворительный аукцион"
-                className="h-10 md:h-12 w-auto transition-all duration-300"
-              />
-            </div>
+            <img
+              src={useDarkText ? logoOtrazhenie : logoOtrazhenieLight}
+              alt="Отражение — благотворительный аукцион"
+              className="h-10 md:h-12 w-auto transition-all duration-300"
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1 xl:gap-4 2xl:gap-8">
