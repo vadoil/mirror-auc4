@@ -12,9 +12,9 @@ import evnichPhoto from "@/assets/speaker-evnich.png";
 
 const program = [
   { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
-  { time: "16:00", title: "Public Talk", desc: "Ключевые подходы к долголетию и активному долголетию", highlight: true, speakers: true },
+  { time: "16:00", title: "Открытая лекция", desc: "Ключевые подходы к долголетию и активному долголетию", highlight: true, speakers: true },
   { time: "16:45", title: "Кофе-брейк", desc: "Перерыв, общение, подготовка к аукциону", highlight: false },
-  { time: "17:00", title: "Аукцион", desc: "Торги – wellness-программы, ретриты, эксклюзивный опыт", highlight: true },
+  { time: "17:00", title: "Аукцион", desc: "Торги – оздоровительные программы, ретриты, эксклюзивный опыт", highlight: true },
 ];
 
 const moderatorsData = [
@@ -322,7 +322,7 @@ const Program = () => {
             <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-px bg-primary" />
               <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-                Public Talk · Участники дискуссии
+                Открытая лекция · Участники дискуссии
               </p>
             </div>
             <div className="max-w-4xl mx-auto">

@@ -17,7 +17,7 @@ const Venue = () => {
                 Место <span className="text-primary italic">проведения</span>
               </h1>
               <p className="font-body text-muted-foreground text-lg max-w-xl">
-                Баланс-холл «Место быть» – первое в России пространство, объединяющее wellbeing-культуру, осознанность и эстетику.
+                Баланс-холл «Место быть» – первое в России пространство, объединяющее культуру заботы о здоровье, осознанность и эстетику.
               </p>
             </motion.div>
           </div>
@@ -74,7 +74,7 @@ const Venue = () => {
               <h3 className="font-display text-xl text-foreground uppercase mb-2">Время</h3>
               <p className="font-body text-sm text-muted-foreground leading-relaxed">
                 Сбор гостей: 15:00<br />
-                Public Talk: 16:00<br />
+                Открытая лекция: 16:00<br />
                 Кофе-брейк: 16:45<br />
                 Аукцион: 17:00
               </p>
@@ -84,7 +84,7 @@ const Venue = () => {
               <ExternalLink className="w-6 h-6 text-primary mb-4" />
               <h3 className="font-display text-xl text-foreground uppercase mb-2">О площадке</h3>
               <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">
-                «Место быть» – баланс-холл нового формата, сочетающий wellbeing и атмосферу для событий.
+                «Место быть» – баланс-холл нового формата, сочетающий заботу о здоровье и атмосферу для событий.
               </p>
               <a href="https://mestobe.ru/" target="_blank" rel="noopener noreferrer" className="text-primary text-xs font-body uppercase tracking-[0.2em] hover:opacity-80 transition-opacity">
                 mestobe.ru

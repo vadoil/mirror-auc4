@@ -3,9 +3,9 @@ import { useRef } from "react";
 
 const program = [
   { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
-  { time: "16:00", title: "Public Talk", desc: "Тема будет объявлена", highlight: true, speakers: true },
+  { time: "16:00", title: "Открытая лекция", desc: "Тема будет объявлена", highlight: true, speakers: true },
   { time: "16:45", title: "Кофе-брейк", desc: "Перерыв, общение, подготовка к аукциону", highlight: false },
-  { time: "17:00", title: "Аукцион", desc: "Торги – wellness-программы, ретриты, эксклюзивный опыт", highlight: true },
+  { time: "17:00", title: "Аукцион", desc: "Торги – оздоровительные программы, ретриты, эксклюзивный опыт", highlight: true },
 ];
 
 const moderators = [
@@ -75,7 +75,7 @@ const ProgramSection = () => {
                     {item.desc}
                   </p>
 
-                  {/* Public Talk details */}
+                  {/* Открытая лекция details */}
                   {item.speakers && (
                     <div className="mt-6 space-y-4">
                       <div>
