@@ -54,13 +54,13 @@ const Header = () => {
         <div className="section-padding flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <div className="flex flex-col items-start">
-              <span className={`${logoSub} text-[7px] md:text-[8px] uppercase tracking-[0.35em] font-body leading-none mb-1.5 transition-colors duration-300`}>
+              <span className={`${logoSub} text-[7px] md:text-[8px] uppercase tracking-[0.35em] font-body leading-none mb-2 transition-colors duration-300`}>
                 Благотворительный аукцион
               </span>
               <img
                 src={logoOtrazhenie}
                 alt="Отражение — благотворительный аукцион"
-                className={`h-6 md:h-7 w-auto transition-all duration-300 ${useDarkText ? "" : "[filter:invert(1)_brightness(1.2)]"}`}
+                className={`h-10 md:h-12 w-auto transition-all duration-300 ${useDarkText ? "" : "[filter:invert(1)_brightness(1.2)]"}`}
               />
             </div>
           </Link>
