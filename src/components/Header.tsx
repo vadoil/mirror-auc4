@@ -60,7 +60,7 @@ const Header = () => {
               <img
                 src={logoOtrazhenie}
                 alt="Отражение — благотворительный аукцион"
-                className={`h-6 md:h-7 w-auto transition-all duration-300 ${useDarkText ? "" : "invert brightness-0 contrast-100 [filter:invert(1)_sepia(0)_saturate(0)_brightness(2)]"}`}
+                className={`h-6 md:h-7 w-auto transition-all duration-300 ${useDarkText ? "" : "[filter:invert(1)_brightness(1.2)]"}`}
               />
             </div>
           </Link>
