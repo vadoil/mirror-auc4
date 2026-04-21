@@ -6,7 +6,7 @@ const DressCodeSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-16 md:py-20 section-padding bg-beige-warm relative overflow-hidden">
+    <section className="py-12 md:py-16 section-padding bg-beige-warm relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-64 h-64 bg-primary/[0.03] rounded-full -translate-x-1/2 -translate-y-1/2" />

@@ -38,7 +38,7 @@ const OrganizersSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 section-padding bg-background overflow-hidden">
+    <section className="py-12 md:py-16 section-padding bg-background overflow-hidden">
       <div ref={ref} className="max-w-6xl mx-auto">
         {/* Intro text */}
         <motion.p

@@ -42,7 +42,7 @@ const ProjectStorySection = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 section-padding bg-background">
+    <section className="py-12 md:py-16 section-padding bg-background">
       <div ref={ref} className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
