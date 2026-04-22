@@ -32,7 +32,7 @@ const sponsors = [
   { name: "HEDONIST", logo: hedonistLogo, invert: true, url: "https://hedonistgroup.ru/" },
   { name: "KARMA WOMAN", logo: karmawomanLogo, url: "https://www.sitnikov.com/" },
   { name: "Биохакинг центр ONE", logo: oneCombinedLogo, url: "https://one-future.ru/" },
-  { name: "ШТАБ КУЛЬТУРЫ", logo: shtabLogo, url: "https://t.me/hq_culture" },
+  { name: "ШТАБ КУЛЬТУРЫ", logo: shtabLogo, url: "https://levik.ru/" },
   { name: "Marriott Imperial Plaza", logo: marriottLogo, url: "https://marriottimperialplaza.moscow/" },
   { name: "Лев & Единорог", logo: levEdinorogLogo, url: "https://levik.ru/" },
   { name: "Соловьи — женская русская баня", logo: soloviyLogo, url: "https://soloviy.ru/" },
