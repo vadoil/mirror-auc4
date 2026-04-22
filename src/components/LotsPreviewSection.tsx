@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 // Static lot images for preview
 import lotDinner from "@/assets/lot-dinner-sitnikov.jpg";
 import lotBiohacking from "@/assets/lot-biohacking-one.jpg";
-import lotReels from "@/assets/lot-reels-sobolev.jpg";
+import lotReels from "@/assets/lot-fishing-sobolev.jpg";
 import lotWatch from "@/assets/lot-watch-ballet.jpg";
 import lotHockey from "@/assets/lot-hockey-belov.jpg";
 import lotBallet from "@/assets/lot-ballet-lopatkina.jpg";
@@ -16,7 +16,7 @@ import lotEmelianenko from "@/assets/lot-emelianenko.jpg";
 const staticLots = [
   { id: "static-1", title: "Обед с Алексеем Ситниковым", description: "Эксклюзивный обед с единственным в мире четырёхкратным доктором наук, автором с аудиторией 2 млн на YouTube", starting_price: 100000, category: "Встреча", image: lotDinner },
   { id: "static-2", title: "Биохакинг-центр ONE + Мария Грудина", description: "Несколько часов в биохакинг-центре ONE и встреча с идеологом курорта «Первая Линия» в Санкт-Петербурге", starting_price: 100000, category: "Биохакинг", image: lotBiohacking },
-  { id: "static-3", title: "Рилс с Ильёй Соболевым", description: "Встреча и запись совместного рилс со стендап-комиком и шоуменом с аудиторией 1,5 млн подписчиков", starting_price: 100000, category: "Контент", image: lotReels },
+  { id: "static-3", title: "Секретная рыбалка с Ильёй Соболевым", description: "Несколько часов на озере Янисъярви в Карелии в закрытом рыболовном кружке резидента Comedy Club: катер, гид-мастер и весёлая компания КВНщиков", starting_price: 1000000, category: "Рыбалка", image: lotReels },
   { id: "static-4", title: "Часы «Балет» Чугунова", description: "Коллекционные часы «Балет» от мастера Чугунова – лучшие российские часы 2025 года", starting_price: 250000, category: "Коллекция", image: lotWatch },
   { id: "static-5", title: "Обед или хоккей с Антоном Беловым", description: "Обед или хоккейная тренировка с чемпионом мира 2014, двукратным обладателем Кубка Гагарина", starting_price: 100000, category: "Спорт", image: lotHockey },
   { id: "static-6", title: "Обед или балет с Ульяной Лопаткиной", description: "Обед или балетная тренировка с легендарной примой-балериной Мариинского театра", starting_price: 100000, category: "Искусство", image: lotBallet },
