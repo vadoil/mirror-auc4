@@ -18,7 +18,7 @@ import marriottLogo from "@/assets/sponsors/marriott.png";
 import soloviyLogo from "@/assets/sponsors/soloviy.png";
 import skazPoKrayuLogo from "@/assets/sponsors/skaz-po-krayu.jpg";
 import sorokaLogo from "@/assets/sponsors/soroka.png";
-import vintageDreamLogo from "@/assets/sponsors/vintage-dream.jpg";
+import vintageDreamLogo from "@/assets/sponsors/vintage-dream.png";
 
 const sponsors = [
   { name: "Smart Life", logo: null, textOnly: true, url: "https://smartlife.bio/" },
@@ -38,7 +38,7 @@ const sponsors = [
   { name: "Соловьи — женская русская баня", logo: soloviyLogo, url: "https://soloviy.ru/" },
   { name: "Сказ по краю", logo: skazPoKrayuLogo, url: "https://skazpokrayu.ru", fill: true },
   { name: "SOROKA Moscow", logo: sorokaLogo, url: "https://t.me/sorokamoscow/" },
-  { name: "Vintage Dream", logo: vintageDreamLogo },
+  { name: "Vintage Dream", logo: vintageDreamLogo, url: "https://vintagedream.ru/" },
 ];
 
 const PER_SLIDE_MOBILE = 4;
