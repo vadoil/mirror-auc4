@@ -53,11 +53,11 @@ const Header = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}
       >
         <div className="section-padding flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3 shrink-0">
             <img
               src={useDarkText ? logoOtrazhenie : logoOtrazhenieLight}
               alt="Отражение — благотворительный аукцион"
-              className="h-10 md:h-12 w-auto transition-all duration-300"
+              className="h-10 md:h-12 w-auto shrink-0 transition-all duration-300"
             />
           </Link>
 
