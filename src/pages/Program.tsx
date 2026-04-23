@@ -106,7 +106,7 @@ const PersonCard = ({ person, index, isInView, layout = "centered" }: PersonCard
             <img
               src={person.image}
               alt={person.name}
-              className="absolute inset-0 w-full h-full object-cover object-top"
+              className="absolute inset-0 w-full h-full object-cover object-center"
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -162,7 +162,7 @@ const PersonCard = ({ person, index, isInView, layout = "centered" }: PersonCard
           <img
             src={person.image}
             alt={person.name}
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            className="absolute inset-0 w-full h-full object-cover object-center"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
