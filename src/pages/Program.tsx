@@ -50,7 +50,6 @@ const speakersData = [
     highlights: [
       "Продюсер и операционный директор проектов Алексея Ситникова",
       "Основатель и CEO проекта Karmatravel",
-      "\n",
     ],
     image: gunderinaPhoto,
     jointWith: "Анной Евневич",
