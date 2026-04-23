@@ -1,0 +1,1 @@
+UPDATE public.lots SET category = 'Развитие и вдохновение' WHERE id = 'ac7e8e40-c7dd-4672-9c75-b1caa86224c0';
