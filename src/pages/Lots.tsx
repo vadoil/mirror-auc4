@@ -162,7 +162,6 @@ const Lots = () => {
               {filteredLots.map((lot, i) => {
                 const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackImages[i];
                 const currentPrice = getCurrentPrice(lot);
-                const remaining = timeLeft(lot.end_at);
 
                 return (
                   <motion.div
@@ -189,14 +188,6 @@ const Lots = () => {
                           <div className="absolute bottom-3 left-3 bg-gradient-to-r from-primary/90 to-primary/60 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg shadow-primary/20 border border-primary/20">
                             <span className="text-primary-foreground text-[10px] uppercase tracking-[0.2em] font-body font-medium drop-shadow-sm">
                               {lot.category}
-                            </span>
-                          </div>
-                        )}
-                        {remaining && (
-                          <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-xl px-3.5 py-1.5 rounded-full flex items-center gap-1.5 border border-white/10 shadow-lg">
-                            <Clock className="w-3 h-3 text-primary" />
-                            <span className="text-white/90 text-[10px] uppercase tracking-wider font-body font-medium">
-                              {remaining}
                             </span>
                           </div>
                         )}
