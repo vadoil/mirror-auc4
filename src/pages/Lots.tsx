@@ -41,16 +41,6 @@ const getImageUrl = (url: string | null) => {
   return data.publicUrl;
 };
 
-const timeLeft = (endAt: string | null) => {
-  if (!endAt) return null;
-  const diff = new Date(endAt).getTime() - Date.now();
-  if (diff <= 0) return "Завершён";
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  if (d > 0) return `${d} дн. ${h} ч.`;
-  const m = Math.floor((diff % 3600000) / 60000);
-  return `${h} ч. ${m} мин.`;
-};
 
 const categories = [
   { label: "Развитие и вдохновение", filter: "развитие" },
