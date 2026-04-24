@@ -496,6 +496,22 @@ const Admin = () => {
                             <KeyRound size={12} /> Доступ в ЛК
                           </button>
                         )}
+                        <div className="flex gap-1.5">
+                          <button
+                            onClick={() => sendManualEmail(req)}
+                            className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] font-body bg-cream/10 text-cream/80 hover:bg-cream/20 transition-colors"
+                            title="Открыть подтверждение в почтовом клиенте"
+                          >
+                            <Mail size={12} /> Письмо
+                          </button>
+                          <button
+                            onClick={() => copyEmailText(req)}
+                            className="flex items-center gap-1.5 px-2 py-1.5 text-[10px] uppercase tracking-[0.15em] font-body bg-cream/5 text-cream/60 hover:bg-cream/15 transition-colors"
+                            title="Скопировать текст письма"
+                          >
+                            <Copy size={12} />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
