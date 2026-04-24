@@ -288,6 +288,8 @@ const Admin = () => {
       toast.error("Не удалось скопировать");
     }
   };
+
+  if (loading) {
     return (
       <div className="min-h-screen bg-warm-black flex items-center justify-center">
         <p className="text-cream/40 font-body">Загрузка...</p>
