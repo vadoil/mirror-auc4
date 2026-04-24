@@ -5,12 +5,22 @@ import heroBg from "@/assets/hero-bg.jpg";
 
 const HERO_VIDEO_URL = "/__l5e/assets-v1/bbea364f-09e2-4f9f-84fa-32e5d7e08eae/hero-bg.mp4";
 
-const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
+const CountdownUnit = ({ value, label, urgent }: { value: number; label: string; urgent?: boolean }) => (
   <div className="text-center">
-    <div className="font-numbers text-4xl sm:text-5xl md:text-6xl font-normal text-cream leading-none uppercase">
+    <div
+      className={`font-numbers text-4xl sm:text-5xl md:text-6xl font-normal leading-none uppercase ${
+        urgent ? "text-red-500 animate-pulse" : "text-cream"
+      }`}
+    >
       {String(value).padStart(2, "0")}
     </div>
-    <div className="text-cream/40 text-[10px] uppercase tracking-[0.3em] font-body mt-2">{label}</div>
+    <div
+      className={`text-[10px] uppercase tracking-[0.3em] font-body mt-2 ${
+        urgent ? "text-red-500/80" : "text-cream/40"
+      }`}
+    >
+      {label}
+    </div>
   </div>
 );
 
@@ -85,14 +95,14 @@ const HeroSection = () => {
               className="flex flex-col gap-8 lg:items-end"
             >
               <div className="flex gap-6 md:gap-8">
-                <CountdownUnit value={timeLeft.days} label="дней" />
+                <CountdownUnit value={timeLeft.days} label="дней" urgent={timeLeft.days <= 1} />
                 <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
-                <CountdownUnit value={timeLeft.hours} label="часов" />
+                <CountdownUnit value={timeLeft.hours} label="часов" urgent={timeLeft.days <= 1} />
                 <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
-                <CountdownUnit value={timeLeft.minutes} label="минут" />
+                <CountdownUnit value={timeLeft.minutes} label="минут" urgent={timeLeft.days <= 1} />
                 <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start hidden sm:block">:</span>
                 <div className="hidden sm:block">
-                  <CountdownUnit value={timeLeft.seconds} label="секунд" />
+                  <CountdownUnit value={timeLeft.seconds} label="секунд" urgent={timeLeft.days <= 1} />
                 </div>
               </div>
 
