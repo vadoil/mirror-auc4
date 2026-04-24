@@ -219,26 +219,71 @@ const Admin = () => {
     toast.success(newStatus === "paid" ? "Отмечено как оплачено" : "Снята отметка об оплате");
   };
 
+  const buildCredentialsEmail = (req: TicketRequest, password: string) => {
+    const subject = "Ваш доступ в личный кабинет — Аукцион «Отражение добра»";
+    const body = `Здравствуйте, ${req.name}!
+
+Для вас создан личный кабинет участника благотворительного аукциона «Отражение добра».
+
+🔑 Данные для входа:
+Логин (email): ${req.email}
+Пароль: ${password}
+
+Войти в кабинет: https://xn--80aodvkjc9f.xn--p1ai/auth
+
+В личном кабинете вы можете заранее посмотреть лоты и отметить те, за которые планируете торговаться. Рекомендуем сменить пароль после первого входа («Забыли пароль?» на странице входа).
+
+📅 Аукцион: 24 апреля 2026
+📍 Москва, Мясницкая 24/7, баланс-холл «Место быть»
+🕖 Сбор гостей: 19:00
+
+Аукционист вечера — Александр Цыпкин.
+
+С уважением,
+Команда «Отражение добра»`;
+    return { subject, body };
+  };
+
   const provisionAccount = async (req: TicketRequest, force = false) => {
     const confirmMsg = force
-      ? `Сбросить пароль для ${req.email} и отправить новое письмо?`
-      : `Создать аккаунт для ${req.email} и отправить письмо с доступом?`;
+      ? `Сбросить пароль для ${req.email} и подготовить письмо с новым доступом?`
+      : `Создать аккаунт для ${req.email} и подготовить письмо с логином и паролем?`;
     if (!window.confirm(confirmMsg)) return;
-    const t = toast.loading("Отправляем...");
+    const t = toast.loading("Создаём аккаунт...");
     const { data, error } = await supabase.functions.invoke("provision-account", {
       body: { email: req.email, name: req.name, force },
     });
     toast.dismiss(t);
     if (error) { toast.error("Ошибка: " + error.message); return; }
     const action = (data as any)?.action;
-    if (action === "created") toast.success("Аккаунт создан, письмо отправлено");
-    else if (action === "password_reset") toast.success("Пароль сброшен, письмо отправлено");
-    else if (action === "skipped") {
-      if (window.confirm(`Аккаунт для ${req.email} уже существует. Сбросить пароль и отправить новое письмо?`)) {
+    const password = (data as any)?.password;
+
+    if (action === "skipped") {
+      if (window.confirm(`Аккаунт для ${req.email} уже существует. Сбросить пароль и подготовить письмо?`)) {
         provisionAccount(req, true);
       }
-    } else toast.success("Готово");
+      return;
+    }
+
+    if (password) {
+      const { subject, body } = buildCredentialsEmail(req, password);
+      // Копируем в буфер на всякий случай
+      try {
+        await navigator.clipboard.writeText(`Кому: ${req.email}\nТема: ${subject}\n\n${body}`);
+      } catch {}
+      // Открываем почтовый клиент
+      window.location.href = `mailto:${encodeURIComponent(req.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      toast.success(
+        action === "created"
+          ? `Аккаунт создан. Пароль: ${password}. Письмо открыто в почте (и скопировано).`
+          : `Пароль сброшен: ${password}. Письмо открыто в почте (и скопировано).`,
+        { duration: 15000 }
+      );
+    } else {
+      toast.success("Готово");
+    }
   };
+
 
   const buildConfirmationEmail = (req: TicketRequest) => {
     const subject = "Подтверждение регистрации — Аукцион «Отражение добра»";
