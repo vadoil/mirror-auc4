@@ -114,6 +114,15 @@ Deno.serve(async (req) => {
             },
           });
         }
+
+        // Provision auth account + send credentials email
+        try {
+          await supabase.functions.invoke("provision-account", {
+            body: { email: tr.email, name: tr.name },
+          });
+        } catch (e) {
+          console.error("[yookassa-webhook] provision-account failed:", e);
+        }
       }
     }
 

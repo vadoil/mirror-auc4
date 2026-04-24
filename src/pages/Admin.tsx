@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { LogOut, Plus, Trash2, Save, Eye, Upload, X, Download, Check } from "lucide-react";
+import { LogOut, Plus, Trash2, Save, Eye, Upload, X, Download, Check, KeyRound } from "lucide-react";
 import * as XLSX from "xlsx";
 
 type Lot = {
@@ -219,6 +219,27 @@ const Admin = () => {
     toast.success(newStatus === "paid" ? "Отмечено как оплачено" : "Снята отметка об оплате");
   };
 
+  const provisionAccount = async (req: TicketRequest, force = false) => {
+    const confirmMsg = force
+      ? `Сбросить пароль для ${req.email} и отправить новое письмо?`
+      : `Создать аккаунт для ${req.email} и отправить письмо с доступом?`;
+    if (!window.confirm(confirmMsg)) return;
+    const t = toast.loading("Отправляем...");
+    const { data, error } = await supabase.functions.invoke("provision-account", {
+      body: { email: req.email, name: req.name, force },
+    });
+    toast.dismiss(t);
+    if (error) { toast.error("Ошибка: " + error.message); return; }
+    const action = (data as any)?.action;
+    if (action === "created") toast.success("Аккаунт создан, письмо отправлено");
+    else if (action === "password_reset") toast.success("Пароль сброшен, письмо отправлено");
+    else if (action === "skipped") {
+      if (window.confirm(`Аккаунт для ${req.email} уже существует. Сбросить пароль и отправить новое письмо?`)) {
+        provisionAccount(req, true);
+      }
+    } else toast.success("Готово");
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-warm-black flex items-center justify-center">
@@ -417,6 +438,15 @@ const Admin = () => {
                         >
                           <Check size={12} /> {isPaid ? "Снять оплату" : "Отметить оплачено"}
                         </button>
+                        {isPaid && (
+                          <button
+                            onClick={() => provisionAccount(req)}
+                            className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] font-body bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 transition-colors"
+                            title="Создать аккаунт и отправить письмо с логином и паролем"
+                          >
+                            <KeyRound size={12} /> Доступ в ЛК
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>

@@ -20,3 +20,7 @@ verify_jwt = false
 
 [functions.create-yookassa-payment]
 verify_jwt = false
+
+[functions.provision-account]
+verify_jwt = false
+
