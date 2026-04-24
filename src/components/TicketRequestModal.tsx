@@ -133,8 +133,18 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       },
     });
 
+    // If promo code used → auto-provision account (sends email with login + password)
+    if (promoCode) {
+      supabase.functions.invoke("provision-account", {
+        body: {
+          email: form.email.trim(),
+          name: form.name.trim(),
+        },
+      });
+    }
+
     toast.success(promoCode
-      ? "Заявка отправлена! Промокод применён — регистрация без оплаты."
+      ? "Заявка отправлена! Промокод применён — регистрация без оплаты. Данные для входа придут на почту."
       : "Заявка сохранена. Перейдите к оплате."
     );
 
