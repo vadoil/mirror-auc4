@@ -9,14 +9,14 @@ const CountdownUnit = ({ value, label, urgent }: { value: number; label: string;
   <div className="text-center">
     <div
       className={`font-numbers text-4xl sm:text-5xl md:text-6xl font-normal leading-none uppercase ${
-        urgent ? "text-red-500 animate-pulse" : "text-cream"
+        urgent ? "text-primary animate-pulse" : "text-cream"
       }`}
     >
       {String(value).padStart(2, "0")}
     </div>
     <div
       className={`text-[10px] uppercase tracking-[0.3em] font-body mt-2 ${
-        urgent ? "text-red-500/80" : "text-cream/40"
+        urgent ? "text-primary/80" : "text-cream/40"
       }`}
     >
       {label}
