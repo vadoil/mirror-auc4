@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { LogOut, Plus, Trash2, Save, Eye, Upload, X, Download, Check, KeyRound } from "lucide-react";
+import { LogOut, Plus, Trash2, Save, Eye, Upload, X, Download, Check, KeyRound, Mail, Copy } from "lucide-react";
 import * as XLSX from "xlsx";
 
 type Lot = {
