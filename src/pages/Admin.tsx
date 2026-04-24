@@ -240,7 +240,54 @@ const Admin = () => {
     } else toast.success("Готово");
   };
 
-  if (loading) {
+  const buildConfirmationEmail = (req: TicketRequest) => {
+    const subject = "Подтверждение регистрации — Аукцион «Отражение добра»";
+    const tierLabels: Record<string, string> = {
+      friend: "Друг (по промокоду)",
+      participant: "Участник аукциона",
+      patron: "Меценат",
+      partner: "Партнёр",
+    };
+    const tier = tierLabels[req.ticket_type] || req.ticket_type;
+    const body = `Здравствуйте, ${req.name}!
+
+Спасибо за регистрацию на благотворительный аукцион «Отражение добра».
+
+Ваш статус: ${tier}${req.promo_code ? `\nПромокод: ${req.promo_code}` : ""}
+
+📅 Дата: 24 апреля 2026
+📍 Место: Москва, Мясницкая 24/7, баланс-холл «Место быть»
+🕖 Сбор гостей: 19:00
+
+Аукционист вечера — Александр Цыпкин.
+
+Все средства от продажи лотов направляются на поддержку благотворительных проектов наших партнёров.
+
+Подробности и список лотов: https://xn--80aodvkjc9f.xn--p1ai
+
+При любых вопросах напишите в ответ на это письмо.
+
+С уважением,
+Команда «Отражение добра»`;
+    return { subject, body };
+  };
+
+  const sendManualEmail = (req: TicketRequest) => {
+    const { subject, body } = buildConfirmationEmail(req);
+    const url = `mailto:${encodeURIComponent(req.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = url;
+  };
+
+  const copyEmailText = async (req: TicketRequest) => {
+    const { subject, body } = buildConfirmationEmail(req);
+    const text = `Кому: ${req.email}\nТема: ${subject}\n\n${body}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success("Текст письма скопирован");
+    } catch {
+      toast.error("Не удалось скопировать");
+    }
+  };
     return (
       <div className="min-h-screen bg-warm-black flex items-center justify-center">
         <p className="text-cream/40 font-body">Загрузка...</p>
