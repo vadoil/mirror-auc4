@@ -532,7 +532,7 @@ const Admin = () => {
                         >
                           <Check size={12} /> {isPaid ? "Снять оплату" : "Отметить оплачено"}
                         </button>
-                        {isPaid && (
+                        {(isPaid || req.ticket_type === "friend" || req.promo_code) && (
                           <button
                             onClick={() => provisionAccount(req)}
                             className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] font-body bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 transition-colors"
