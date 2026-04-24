@@ -94,17 +94,23 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 1.3 }}
               className="flex flex-col gap-8 lg:items-end"
             >
-              <div className="flex gap-6 md:gap-8">
-                <CountdownUnit value={timeLeft.days} label="дней" urgent={timeLeft.days <= 1} />
-                <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
-                <CountdownUnit value={timeLeft.hours} label="часов" urgent={timeLeft.days <= 1} />
-                <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
-                <CountdownUnit value={timeLeft.minutes} label="минут" urgent={timeLeft.days <= 1} />
-                <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start hidden sm:block">:</span>
-                <div className="hidden sm:block">
-                  <CountdownUnit value={timeLeft.seconds} label="секунд" urgent={timeLeft.days <= 1} />
+              {timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0 ? (
+                <div className="font-display text-3xl sm:text-4xl md:text-5xl text-primary uppercase tracking-wider animate-pulse">
+                  Аукцион начался
                 </div>
-              </div>
+              ) : (
+                <div className="flex gap-6 md:gap-8">
+                  <CountdownUnit value={timeLeft.days} label="дней" urgent={timeLeft.days <= 1} />
+                  <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
+                  <CountdownUnit value={timeLeft.hours} label="часов" />
+                  <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
+                  <CountdownUnit value={timeLeft.minutes} label="минут" />
+                  <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start hidden sm:block">:</span>
+                  <div className="hidden sm:block">
+                    <CountdownUnit value={timeLeft.seconds} label="секунд" />
+                  </div>
+                </div>
+              )}
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link to="/lots" className="btn-primary text-center">
