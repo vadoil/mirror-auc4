@@ -41,24 +41,19 @@ Deno.serve(async (req) => {
     // Authorization: either service-role secret (used by other edge funcs) or admin JWT
     const authHeader = req.headers.get("Authorization") ?? "";
     const token = authHeader.replace(/^Bearer\s+/i, "");
-    const isServiceCall = token === SERVICE_KEY;
+    const isServiceCall = token && token === SERVICE_KEY;
 
     if (!isServiceCall) {
-      // Validate that the caller is an authenticated admin
-      const userClient = createClient(SUPABASE_URL, Deno.env.get("SUPABASE_ANON_KEY")!, {
-        global: { headers: { Authorization: authHeader } },
-      });
-      const { data: claimsData, error: claimsErr } = await userClient.auth.getClaims(token);
-      if (claimsErr || !claimsData?.claims?.sub) {
+      const adminCheck = createClient(SUPABASE_URL, SERVICE_KEY);
+      const { data: userData, error: userErr } = await adminCheck.auth.getUser(token);
+      if (userErr || !userData?.user?.id) {
         return new Response(JSON.stringify({ error: "Unauthorized" }), {
           status: 401,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      const callerId = claimsData.claims.sub;
-      const adminCheck = createClient(SUPABASE_URL, SERVICE_KEY);
       const { data: isAdmin } = await adminCheck.rpc("has_role", {
-        _user_id: callerId,
+        _user_id: userData.user.id,
         _role: "admin",
       });
       if (!isAdmin) {
