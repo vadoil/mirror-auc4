@@ -95,14 +95,14 @@ const HeroSection = () => {
               className="flex flex-col gap-8 lg:items-end"
             >
               <div className="flex gap-6 md:gap-8">
-                <CountdownUnit value={timeLeft.days} label="дней" />
+                <CountdownUnit value={timeLeft.days} label="дней" urgent={timeLeft.days <= 1} />
                 <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
-                <CountdownUnit value={timeLeft.hours} label="часов" />
+                <CountdownUnit value={timeLeft.hours} label="часов" urgent={timeLeft.days <= 1} />
                 <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
-                <CountdownUnit value={timeLeft.minutes} label="минут" />
+                <CountdownUnit value={timeLeft.minutes} label="минут" urgent={timeLeft.days <= 1} />
                 <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start hidden sm:block">:</span>
                 <div className="hidden sm:block">
-                  <CountdownUnit value={timeLeft.seconds} label="секунд" />
+                  <CountdownUnit value={timeLeft.seconds} label="секунд" urgent={timeLeft.days <= 1} />
                 </div>
               </div>
 
