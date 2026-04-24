@@ -13,7 +13,9 @@ const formatPrice = (n: number) => n.toLocaleString("ru-RU") + " ₽";
 const getImageUrl = (url: string | null) => {
   if (!url) return null;
   if (url.startsWith("http")) return url;
-  const { data } = supabase.storage.from("lot-images").getPublicUrl(url);
+  const { data } = supabase.storage.from("lot-images").getPublicUrl(url, {
+    transform: { width: 1200, height: 900, resize: "contain", quality: 80 },
+  });
   return data.publicUrl;
 };
 
