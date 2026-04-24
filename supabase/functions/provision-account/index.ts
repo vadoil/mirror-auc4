@@ -131,8 +131,9 @@ Deno.serve(async (req) => {
       console.error("[provision-account] email send error:", mailErr);
     }
 
+    // Return password so admin can send credentials manually if auto-email fails
     return new Response(
-      JSON.stringify({ ok: true, action, email }),
+      JSON.stringify({ ok: true, action, email, password }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (e) {
