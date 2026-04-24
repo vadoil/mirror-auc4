@@ -36,7 +36,7 @@ const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
 }
 
 // Configuration
-const SITE_NAME = "mirror-auc4"
+const SITE_NAME = "Аукцион Отражение добра"
 const SENDER_DOMAIN = "notify.otrazis.ru"
 const ROOT_DOMAIN = "otrazis.ru"
 const FROM_DOMAIN = "notify.otrazis.ru" // Domain shown in From address (may be root or sender subdomain)
