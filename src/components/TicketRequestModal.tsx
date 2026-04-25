@@ -66,12 +66,30 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
     }
     setLoading(true);
 
+    // Force-validate promo code if entered but not yet validated
+    let effectivePromoValid = promoValid;
+    if (form.promoCode.trim() && promoValid !== true) {
+      const { data } = await supabase
+        .from("promo_codes")
+        .select("id, code, is_active, max_uses, current_uses")
+        .ilike("code", form.promoCode.trim())
+        .eq("is_active", true)
+        .maybeSingle();
+      if (data && (!data.max_uses || data.current_uses < data.max_uses)) {
+        effectivePromoValid = true;
+        setPromoValid(true);
+      } else {
+        effectivePromoValid = false;
+        setPromoValid(false);
+      }
+    }
+
     const message = [
       form.message.trim(),
       wantsTraining ? '✅ Хочу на тренировку «Либидо фитнес» 18.04' : '',
     ].filter(Boolean).join('\n') || null;
 
-    const promoCode = promoValid ? form.promoCode.trim().toUpperCase() : null;
+    const promoCode = effectivePromoValid ? form.promoCode.trim().toUpperCase() : null;
 
     const requestId = crypto.randomUUID();
     const { error } = await supabase.from("ticket_requests").insert({
