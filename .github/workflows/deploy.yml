@@ -29,7 +29,9 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci --no-audit --no-fund
+        # npm ci требует синхронности package.json и lock-файла.
+        # Lovable не всегда обновляет package-lock.json, поэтому используем npm install.
+        run: npm install --no-audit --no-fund
 
       - name: Prepare production env
         run: cp deploy/.env.vps .env.production
