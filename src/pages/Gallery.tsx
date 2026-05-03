@@ -8,12 +8,32 @@ import photo02 from "@/assets/gallery/photo-02.jpg";
 import photo03 from "@/assets/gallery/photo-03.jpg";
 import photo04 from "@/assets/gallery/photo-04.jpg";
 import photo05 from "@/assets/gallery/photo-05.jpg";
+import photo06 from "@/assets/gallery/photo-06.jpg";
+import photo07 from "@/assets/gallery/photo-07.jpg";
+import photo08 from "@/assets/gallery/photo-08.jpg";
+import photo09 from "@/assets/gallery/photo-09.jpg";
+import photo10 from "@/assets/gallery/photo-10.jpg";
+import photo11 from "@/assets/gallery/photo-11.jpg";
+import photo12 from "@/assets/gallery/photo-12.jpg";
+import photo13 from "@/assets/gallery/photo-13.jpg";
+import photo14 from "@/assets/gallery/photo-14.jpg";
+import photo15 from "@/assets/gallery/photo-15.jpg";
 
 const photos = [
+  { src: photo07, alt: "Инсталляция «Отражение добра»" },
+  { src: photo06, alt: "Зал перед началом аукциона" },
+  { src: photo10, alt: "Лоты — фарфоровые башни" },
   { src: photo01, alt: "Гостья у лота «Башня Огненной Искры»" },
   { src: photo04, alt: "Александр Цыпкин ведёт аукцион" },
+  { src: photo09, alt: "Витрина с украшениями" },
   { src: photo02, alt: "Гостья вечера в зрительном зале" },
+  { src: photo11, alt: "Гостьи в фойе" },
+  { src: photo08, alt: "Стенд SmartLife" },
+  { src: photo13, alt: "Гости беседуют у лестницы" },
   { src: photo03, alt: "Гость аукциона «Отражение добра»" },
+  { src: photo12, alt: "Безалкогольные напитки Inspiro Blends" },
+  { src: photo14, alt: "Диджей вечера" },
+  { src: photo15, alt: "Гостья в зелёной шляпке" },
   { src: photo05, alt: "Участница с табличкой «не напрасно»" },
 ];
 
