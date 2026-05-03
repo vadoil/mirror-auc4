@@ -5,7 +5,7 @@
 set -euo pipefail
 
 SUPABASE_HOST="mmuwfeiunaqjljnplpgh.supabase.co"
-DOMAIN_PUNY="xn--80aafhd1akd.xn--p1ai"      # отразись.рф
+DOMAIN_PUNY="xn--80aodvkjc9f.xn--p1ai"      # отразись.рф
 API_PUNY="api.${DOMAIN_PUNY}"
 CONF_NAME="mirror-api-proxy.conf"
 
