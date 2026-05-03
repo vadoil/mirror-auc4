@@ -123,9 +123,6 @@ const Gallery = () => {
             ))}
           </div>
 
-          <p className="mt-10 font-body text-sm text-muted-foreground/70 italic">
-            Фотохроника пополняется — скоро здесь появятся новые кадры с вечера.
-          </p>
         </div>
       </div>
 
