@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# Первичная настройка VPS под отразись.рф
+# Безопасная установка отразись.рф на VPS, где уже работают другие сайты.
+# - НЕ трогает чужие конфиги nginx
+# - НЕ переустанавливает Node (используется уже стоящий)
+# - НЕ трогает ufw
+# - НЕ удаляет default
 # Запускать от root: bash setup-vps.sh
 set -euo pipefail
 
@@ -7,39 +11,41 @@ REPO="https://github.com/vadoil/mirror-auc4.git"
 APP_DIR="/var/www/mirror"
 SUPABASE_HOST="mmuwfeiunaqjljnplpgh.supabase.co"
 
-# Punycode для отразись.рф
-DOMAIN_PUNY="xn--80aafhd1akd.xn--p1ai"
-API_PUNY="api.${DOMAIN_PUNY}"
+DOMAIN_PUNY="xn--80aafhd1akd.xn--p1ai"          # отразись.рф
+API_PUNY="api.${DOMAIN_PUNY}"                    # api.отразись.рф
+CONF_NAME="mirror-otrazis.conf"
 
-echo "==> 1/6 Установка пакетов"
-apt-get update
-apt-get install -y curl ca-certificates gnupg git nginx certbot python3-certbot-nginx ufw
-
-echo "==> 2/6 Node.js 20"
-if ! command -v node >/dev/null || ! node -v | grep -q "^v20"; then
-  curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-  apt-get install -y nodejs
+echo "==> Проверка: домены ещё не заняты другими конфигами"
+if grep -RIl --exclude="${CONF_NAME}" -E "server_name[^;]*(${DOMAIN_PUNY}|${API_PUNY})" /etc/nginx/sites-enabled/ 2>/dev/null; then
+  echo "ОШИБКА: эти домены уже используются в других конфигах nginx (см. выше). Останавливаюсь."
+  exit 1
 fi
 
-echo "==> 3/6 Firewall"
-ufw allow OpenSSH || true
-ufw allow 'Nginx Full' || true
-ufw --force enable || true
+echo "==> Установка только недостающих пакетов (git, certbot)"
+apt-get update -qq
+DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+  git certbot python3-certbot-nginx >/dev/null
 
-echo "==> 4/6 Клонирование и сборка"
-mkdir -p "$APP_DIR"
+echo "==> Node: $(node -v) — оставляю как есть"
+
+echo "==> Клонирование/обновление репозитория"
+mkdir -p "$(dirname "$APP_DIR")"
 if [ ! -d "$APP_DIR/.git" ]; then
   git clone "$REPO" "$APP_DIR"
+else
+  git -C "$APP_DIR" pull
 fi
+
 cd "$APP_DIR"
-git pull
 cp deploy/.env.vps .env.production
-npm ci
+
+echo "==> Сборка фронта"
+npm ci --no-audit --no-fund
 npm run build
 
-echo "==> 5/6 Nginx конфиг"
-cat >/etc/nginx/sites-available/mirror.conf <<EOF
-# --- Фронт ---
+echo "==> Nginx-конфиг (HTTP, для прохождения certbot)"
+cat >/etc/nginx/sites-available/${CONF_NAME} <<EOF
+# === Фронт отразись.рф ===
 server {
   listen 80;
   listen [::]:80;
@@ -52,20 +58,19 @@ server {
     try_files \$uri /index.html;
   }
 
-  # длинный кеш для статики
-  location ~* \.(js|css|png|jpg|jpeg|svg|webp|woff2?)$ {
+  location ~* \.(?:js|css|png|jpg|jpeg|svg|webp|woff2?|mp4)$ {
     expires 30d;
     add_header Cache-Control "public, immutable";
+    try_files \$uri =404;
   }
 }
 
-# --- Прокси к Supabase ---
+# === Прокси к Supabase: api.отразись.рф ===
 server {
   listen 80;
   listen [::]:80;
   server_name ${API_PUNY};
 
-  # увеличиваем размер для загрузки изображений в Storage
   client_max_body_size 50m;
 
   location / {
@@ -77,28 +82,32 @@ server {
     proxy_ssl_server_name on;
 
     proxy_http_version 1.1;
-    # WebSocket для realtime
+    # WebSocket для realtime ставок
     proxy_set_header Upgrade \$http_upgrade;
     proxy_set_header Connection "upgrade";
+
     proxy_read_timeout 86400;
     proxy_send_timeout 86400;
   }
 }
 EOF
 
-ln -sf /etc/nginx/sites-available/mirror.conf /etc/nginx/sites-enabled/mirror.conf
-rm -f /etc/nginx/sites-enabled/default
+ln -sf /etc/nginx/sites-available/${CONF_NAME} /etc/nginx/sites-enabled/${CONF_NAME}
+
+echo "==> Проверка конфига nginx"
 nginx -t
 systemctl reload nginx
 
-echo "==> 6/6 SSL (Let's Encrypt)"
-echo "ВАЖНО: убедитесь что DNS уже указывает на этот сервер."
-echo "Запускаю certbot..."
-certbot --nginx --non-interactive --agree-tos -m admin@${DOMAIN_PUNY} \
-  -d ${DOMAIN_PUNY} -d www.${DOMAIN_PUNY} -d ${API_PUNY} \
-  --redirect
+echo "==> SSL через Let's Encrypt"
+certbot --nginx --non-interactive --agree-tos --redirect \
+  -m admin@${DOMAIN_PUNY} \
+  -d ${DOMAIN_PUNY} -d www.${DOMAIN_PUNY} -d ${API_PUNY}
 
 echo ""
-echo "==> Готово!"
-echo "Фронт:  https://отразись.рф"
-echo "API:    https://api.отразись.рф"
+echo "============================================"
+echo "Готово!"
+echo "  Фронт:  https://отразись.рф"
+echo "  API:    https://api.отразись.рф"
+echo "Чужие сайты не тронуты."
+echo "Для обновлений: bash ${APP_DIR}/deploy/update.sh"
+echo "============================================"
