@@ -28,6 +28,15 @@ import photo22 from "@/assets/gallery/photo-22.jpg";
 import photo23 from "@/assets/gallery/photo-23.jpg";
 import photo24 from "@/assets/gallery/photo-24.jpg";
 import photo25 from "@/assets/gallery/photo-25.jpg";
+import photo26 from "@/assets/gallery/photo-26.jpg";
+import photo27 from "@/assets/gallery/photo-27.jpg";
+import photo28 from "@/assets/gallery/photo-28.jpg";
+import photo29 from "@/assets/gallery/photo-29.jpg";
+import photo30 from "@/assets/gallery/photo-30.jpg";
+import photo31 from "@/assets/gallery/photo-31.jpg";
+import photo32 from "@/assets/gallery/photo-32.jpg";
+import photo33 from "@/assets/gallery/photo-33.jpg";
+import photo34 from "@/assets/gallery/photo-34.jpg";
 
 const photos = [
   { src: photo07, alt: "Инсталляция «Отражение добра»" },
@@ -55,6 +64,15 @@ const photos = [
   { src: photo24, alt: "Гостья с улыбкой" },
   { src: photo15, alt: "Гостья в зелёной шляпке" },
   { src: photo05, alt: "Участница с табличкой «не напрасно»" },
+  { src: photo26, alt: "Гостьи с табличкой №1" },
+  { src: photo31, alt: "Ведущие с лотами «Башня Огненной Искры»" },
+  { src: photo28, alt: "Золотое колье ручной работы" },
+  { src: photo33, alt: "Лот — наручные часы" },
+  { src: photo32, alt: "Ведущий показывает лот гостям" },
+  { src: photo29, alt: "Гостья вечера с букетом" },
+  { src: photo27, alt: "Гости в зрительном зале" },
+  { src: photo34, alt: "Гости у стенда SmartLife 365" },
+  { src: photo30, alt: "Гость вечера в винтажном образе" },
 ];
 
 const Gallery = () => {
