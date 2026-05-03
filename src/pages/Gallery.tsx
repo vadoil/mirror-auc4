@@ -18,6 +18,16 @@ import photo12 from "@/assets/gallery/photo-12.jpg";
 import photo13 from "@/assets/gallery/photo-13.jpg";
 import photo14 from "@/assets/gallery/photo-14.jpg";
 import photo15 from "@/assets/gallery/photo-15.jpg";
+import photo16 from "@/assets/gallery/photo-16.jpg";
+import photo17 from "@/assets/gallery/photo-17.jpg";
+import photo18 from "@/assets/gallery/photo-18.jpg";
+import photo19 from "@/assets/gallery/photo-19.jpg";
+import photo20 from "@/assets/gallery/photo-20.jpg";
+import photo21 from "@/assets/gallery/photo-21.jpg";
+import photo22 from "@/assets/gallery/photo-22.jpg";
+import photo23 from "@/assets/gallery/photo-23.jpg";
+import photo24 from "@/assets/gallery/photo-24.jpg";
+import photo25 from "@/assets/gallery/photo-25.jpg";
 
 const photos = [
   { src: photo07, alt: "Инсталляция «Отражение добра»" },
@@ -25,14 +35,24 @@ const photos = [
   { src: photo10, alt: "Лоты — фарфоровые башни" },
   { src: photo01, alt: "Гостья у лота «Башня Огненной Искры»" },
   { src: photo04, alt: "Александр Цыпкин ведёт аукцион" },
+  { src: photo23, alt: "Ведущие открывают аукцион" },
   { src: photo09, alt: "Витрина с украшениями" },
+  { src: photo16, alt: "Гости вечера" },
   { src: photo02, alt: "Гостья вечера в зрительном зале" },
+  { src: photo20, alt: "Спикеры на сцене" },
   { src: photo11, alt: "Гостьи в фойе" },
   { src: photo08, alt: "Стенд SmartLife" },
+  { src: photo22, alt: "Ведущий аукциона" },
   { src: photo13, alt: "Гости беседуют у лестницы" },
+  { src: photo18, alt: "Беседа у видеоинсталляции" },
+  { src: photo25, alt: "Александр Цыпкин с микрофоном" },
+  { src: photo21, alt: "Гости в зрительном зале" },
   { src: photo03, alt: "Гость аукциона «Отражение добра»" },
+  { src: photo17, alt: "Гость в красных брюках" },
   { src: photo12, alt: "Безалкогольные напитки Inspiro Blends" },
+  { src: photo19, alt: "Гостьи в первом ряду" },
   { src: photo14, alt: "Диджей вечера" },
+  { src: photo24, alt: "Гостья с улыбкой" },
   { src: photo15, alt: "Гостья в зелёной шляпке" },
   { src: photo05, alt: "Участница с табличкой «не напрасно»" },
 ];
