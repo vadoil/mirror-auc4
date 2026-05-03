@@ -40,7 +40,7 @@ cd "$APP_DIR"
 cp deploy/.env.vps .env.production
 
 echo "==> Сборка фронта"
-npm ci --no-audit --no-fund
+npm install --no-audit --no-fund
 npm run build
 
 echo "==> Nginx-конфиг (HTTP, для прохождения certbot)"
