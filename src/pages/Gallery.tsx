@@ -1,9 +1,25 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Camera } from "lucide-react";
+import { X } from "lucide-react";
+import photo01 from "@/assets/gallery/photo-01.jpg";
+import photo02 from "@/assets/gallery/photo-02.jpg";
+import photo03 from "@/assets/gallery/photo-03.jpg";
+import photo04 from "@/assets/gallery/photo-04.jpg";
+import photo05 from "@/assets/gallery/photo-05.jpg";
+
+const photos = [
+  { src: photo01, alt: "Гостья у лота «Башня Огненной Искры»" },
+  { src: photo04, alt: "Александр Цыпкин ведёт аукцион" },
+  { src: photo02, alt: "Гостья вечера в зрительном зале" },
+  { src: photo03, alt: "Гость аукциона «Отражение добра»" },
+  { src: photo05, alt: "Участница с табличкой «не напрасно»" },
+];
 
 const Gallery = () => {
+  const [active, setActive] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -27,23 +43,58 @@ const Gallery = () => {
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="border border-border rounded-lg p-16 md:p-24 flex flex-col items-center justify-center text-center bg-muted/20"
-          >
-            <Camera className="w-12 h-12 text-muted-foreground/40 mb-6" />
-            <p className="font-display text-2xl md:text-3xl text-foreground uppercase tracking-tight mb-3">
-              Фотографии скоро появятся
-            </p>
-            <p className="font-body text-sm text-muted-foreground max-w-md">
-              Мы готовим фотоотчёт с вечера. Загляните позже — здесь будет полная галерея
-              кадров от профессиональных фотографов мероприятия.
-            </p>
-          </motion.div>
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+            {photos.map((photo, i) => (
+              <motion.button
+                key={i}
+                type="button"
+                onClick={() => setActive(i)}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
+                className="group block w-full break-inside-avoid overflow-hidden rounded-sm bg-muted/20 focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  loading="lazy"
+                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+              </motion.button>
+            ))}
+          </div>
+
+          <p className="mt-10 font-body text-sm text-muted-foreground/70 italic">
+            Фотохроника пополняется — скоро здесь появятся новые кадры с вечера.
+          </p>
         </div>
       </div>
+
+      {active !== null && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setActive(null)}
+          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in"
+        >
+          <button
+            type="button"
+            onClick={() => setActive(null)}
+            className="absolute top-6 right-6 text-white/80 hover:text-white transition-colors"
+            aria-label="Закрыть"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img
+            src={photos[active].src}
+            alt={photos[active].alt}
+            className="max-w-full max-h-[90vh] object-contain rounded-sm"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+
       <Footer />
     </div>
   );
