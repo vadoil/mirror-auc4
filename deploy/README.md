@@ -15,8 +15,8 @@
 
 Подождать пропагации (5–30 минут). Проверить:
 ```bash
-dig +short xn--80aafhd1akd.xn--p1ai
-dig +short api.xn--80aafhd1akd.xn--p1ai
+dig +short xn--80aodvkjc9f.xn--p1ai
+dig +short api.xn--80aodvkjc9f.xn--p1ai
 ```
 
 ## Шаг 2. Первичная настройка сервера

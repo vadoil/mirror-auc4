@@ -11,7 +11,7 @@ REPO="https://github.com/vadoil/mirror-auc4.git"
 APP_DIR="/var/www/mirror"
 SUPABASE_HOST="mmuwfeiunaqjljnplpgh.supabase.co"
 
-DOMAIN_PUNY="xn--80aafhd1akd.xn--p1ai"          # отразись.рф
+DOMAIN_PUNY="xn--80aodvkjc9f.xn--p1ai"          # отразись.рф
 API_PUNY="api.${DOMAIN_PUNY}"                    # api.отразись.рф
 CONF_NAME="mirror-otrazis.conf"
 
