@@ -63,7 +63,7 @@ const Lots = () => {
       const { data: lotsData } = await supabase
         .from("lots")
         .select("id, title, description, image_url, preview_image_url, starting_price, category, status, end_at, bid_step")
-        .eq("status", "active")
+        .in("status", ["active", "ended", "paid"])
         .order("sort_order");
 
       if (lotsData) {
@@ -154,6 +154,7 @@ const Lots = () => {
               {filteredLots.map((lot, i) => {
                 const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackImages[i];
                 const currentPrice = getCurrentPrice(lot);
+                const isSold = lot.status === "paid" || lot.status === "ended";
 
                 return (
                   <motion.div
@@ -172,7 +173,7 @@ const Lots = () => {
                             src={imgUrl}
                             alt={lot.title}
                             loading="lazy"
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            className={`absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ${isSold ? "grayscale-[40%]" : ""}`}
                           />
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -180,6 +181,13 @@ const Lots = () => {
                           <div className="absolute bottom-3 left-3 bg-gradient-to-r from-primary/90 to-primary/60 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg shadow-primary/20 border border-primary/20">
                             <span className="text-primary-foreground text-[10px] uppercase tracking-[0.2em] font-body font-medium drop-shadow-sm">
                               {lot.category}
+                            </span>
+                          </div>
+                        )}
+                        {isSold && (
+                          <div className="absolute top-3 right-3 bg-foreground text-background px-3 py-1.5 rounded-sm shadow-lg">
+                            <span className="text-[10px] uppercase tracking-[0.25em] font-body font-semibold">
+                              Продано
                             </span>
                           </div>
                         )}
@@ -196,9 +204,9 @@ const Lots = () => {
                         <div className="flex items-center justify-between">
                           <div>
                             <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60 font-body">
-                              {maxBids[lot.id] ? "Текущая цена" : "Старт"}
+                              {isSold ? "Финальная цена" : maxBids[lot.id] ? "Текущая цена" : "Старт"}
                             </p>
-                            <p className="font-numbers text-lg text-foreground font-light">
+                            <p className={`font-numbers text-lg font-light ${isSold ? "text-primary" : "text-foreground"}`}>
                               {formatPrice(currentPrice)}
                             </p>
                           </div>

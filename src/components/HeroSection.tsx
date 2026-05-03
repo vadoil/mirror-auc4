@@ -95,8 +95,8 @@ const HeroSection = () => {
               className="flex flex-col gap-8 lg:items-end"
             >
               {timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0 ? (
-                <div className="font-display text-3xl sm:text-4xl md:text-5xl text-primary uppercase tracking-wider animate-pulse">
-                  Аукцион начался
+                <div className="font-display text-3xl sm:text-4xl md:text-5xl text-primary uppercase tracking-wider">
+                  Аукцион закончился
                 </div>
               ) : (
                 <div className="flex gap-6 md:gap-8">
@@ -114,10 +114,10 @@ const HeroSection = () => {
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link to="/lots" className="btn-primary text-center">
-                  Смотреть лоты
+                  Итоги аукциона
                 </Link>
-                <Link to="/how-it-works" className="btn-outline-light text-center">
-                  Как участвовать
+                <Link to="/gallery" className="btn-outline-light text-center">
+                  Галерея вечера
                 </Link>
               </div>
             </motion.div>

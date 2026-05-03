@@ -10,6 +10,7 @@ import logoOtrazhenieLight from "@/assets/logo-otrazhenie-light.png";
 const navItems = [
   { label: "Лоты", href: "/lots" },
   { label: "Программа", href: "/program" },
+  { label: "Галерея", href: "/gallery" },
   { label: "Как участвовать", href: "/how-it-works" },
   { label: "Место", href: "/venue" },
   { label: "Партнёры", href: "/#sponsors" },

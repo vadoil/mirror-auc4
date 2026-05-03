@@ -53,7 +53,7 @@ const LotsPreviewSection = () => {
       const { data } = await supabase
         .from("lots")
         .select("id, title, description, image_url, preview_image_url, starting_price, category, status, end_at")
-        .eq("status", "active")
+        .in("status", ["active", "ended", "paid"])
         .order("sort_order")
         .limit(12);
       if (data && data.length > 0) setDbLots(data as Lot[]);
@@ -120,6 +120,7 @@ const LotsPreviewSection = () => {
             const imgUrl = useStatic
               ? staticImages[lot.id]
               : (getImageUrl((lot as Lot).preview_image_url) || getImageUrl((lot as Lot).image_url) || fallbackImages[i]);
+            const isSold = !useStatic && ((lot as Lot).status === "paid" || (lot as Lot).status === "ended");
 
             return (
               <motion.div
@@ -141,7 +142,7 @@ const LotsPreviewSection = () => {
                         loading="lazy"
                         width={1024}
                         height={768}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        className={`absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ${isSold ? "grayscale-[40%]" : ""}`}
                       />
                     ) : (
                       <div className="absolute inset-0 bg-muted flex items-center justify-center">
@@ -149,16 +150,23 @@ const LotsPreviewSection = () => {
                       </div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-warm-black/70 via-transparent to-transparent" />
+                    {isSold && (
+                      <div className="absolute top-3 right-3 bg-foreground text-background px-3 py-1.5 rounded-sm shadow-lg">
+                        <span className="text-[10px] uppercase tracking-[0.25em] font-body font-semibold">
+                          Продано
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div className="p-4">
-                    {(lot.category || i === 0) && (
+                    {(lot.category || (i === 0 && !isSold)) && (
                       <div className="mb-3 flex flex-wrap items-center gap-2">
                         {lot.category && (
                           <div className="bg-gradient-to-r from-primary/15 to-primary/5 backdrop-blur-sm px-3 py-1 rounded-full border border-primary/20">
                             <span className="text-primary text-[9px] uppercase tracking-[0.15em] font-body font-semibold">{lot.category}</span>
                           </div>
                         )}
-                        {i === 0 && (
+                        {i === 0 && !isSold && (
                           <div className="bg-accent/15 px-2.5 py-1 text-accent flex items-center gap-1">
                             <Flame className="w-3 h-3" />
                             <span className="text-[9px] uppercase tracking-wider font-body font-medium">Хит</span>
@@ -172,8 +180,10 @@ const LotsPreviewSection = () => {
                     )}
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-[9px] uppercase tracking-[0.15em] text-muted-foreground/60 font-body">Старт</p>
-                        <p className="font-numbers text-base text-foreground font-light">{lot.starting_price.toLocaleString("ru-RU")} ₽</p>
+                        <p className="text-[9px] uppercase tracking-[0.15em] text-muted-foreground/60 font-body">
+                          {isSold ? "Финальная цена" : "Старт"}
+                        </p>
+                        <p className={`font-numbers text-base font-light ${isSold ? "text-primary" : "text-foreground"}`}>{lot.starting_price.toLocaleString("ru-RU")} ₽</p>
                       </div>
                       <ArrowRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors duration-300" />
                     </div>
