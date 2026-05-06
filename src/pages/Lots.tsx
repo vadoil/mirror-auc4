@@ -2,30 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-
-import lotDinner from "@/assets/lot-dinner-sitnikov.jpg";
-import lotBiohacking from "@/assets/lot-biohacking-one.jpg";
-import lotReels from "@/assets/lot-reels-sobolev.jpg";
-import lotWatch from "@/assets/lot-watch-ballet.jpg";
-import lotHockey from "@/assets/lot-hockey-belov.jpg";
-import lotBallet from "@/assets/lot-ballet-lopatkina.jpg";
-import lotEmelianenko from "@/assets/lot-emelianenko.jpg";
-import lotSmartlife from "@/assets/lot-smartlife.png";
-import lotBurunov from "@/assets/lot-burunov-tea.jpg";
-import lotShnurov from "@/assets/lot-shnurov.jpg";
-import lotListovets from "@/assets/lot-listovets.jpg";
-
-const fallbackImages = [lotDinner, lotBiohacking, lotReels, lotWatch, lotHockey, lotBallet, lotEmelianenko, lotSmartlife];
-
-const localAssets: Record<string, string> = {
-  "lot-burunov-tea.jpg": lotBurunov,
-  "lot-shnurov.jpg": lotShnurov,
-  "lot-listovets.jpg": lotListovets,
-};
+import { getLotImageUrl, fallbackLotImages, LOTS_TENTATIVE_TIMING } from "@/lib/lotAssets";
 
 type ArchiveResult = { paid: boolean; price: number };
 
@@ -44,16 +25,7 @@ type Lot = {
   archive_results: ArchiveResult[] | null;
 };
 
-const getImageUrl = (url: string | null) => {
-  if (!url) return null;
-  if (url.startsWith("http")) return url;
-  const fname = url.split("/").pop() ?? "";
-  if (localAssets[fname]) return localAssets[fname];
-  const { data } = supabase.storage.from("lot-images").getPublicUrl(url, {
-    transform: { width: 600, height: 450, resize: "cover", quality: 75 },
-  });
-  return data.publicUrl;
-};
+const getImageUrl = getLotImageUrl;
 
 const categories = [
   { label: "Развитие и вдохновение", filter: "развитие" },
@@ -124,8 +96,9 @@ const Lots = () => {
   );
 
   const renderActiveCard = (lot: Lot, i: number) => {
-    const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackImages[i % fallbackImages.length];
+    const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackLotImages[i % fallbackLotImages.length];
     const currentPrice = maxBids[lot.id] || lot.starting_price;
+    const isTentative = LOTS_TENTATIVE_TIMING.has(lot.id);
     return (
       <motion.div
         key={lot.id}
@@ -152,6 +125,12 @@ const Lots = () => {
                 <span className="text-primary-foreground text-[10px] uppercase tracking-[0.2em] font-body font-medium drop-shadow-sm">{lot.category}</span>
               </div>
             )}
+            {isTentative && (
+              <div className="absolute top-3 right-3 bg-amber-500/95 text-warm-black px-2.5 py-1 rounded-sm shadow-lg flex items-center gap-1.5 backdrop-blur-sm">
+                <Clock className="w-3 h-3" />
+                <span className="text-[9px] uppercase tracking-[0.18em] font-body font-bold">Уточняйте сроки</span>
+              </div>
+            )}
           </div>
           <div className="p-5">
             <h3 className="font-display text-base text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{lot.title}</h3>
@@ -174,7 +153,7 @@ const Lots = () => {
   };
 
   const renderArchiveCard = (lot: Lot, i: number) => {
-    const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackImages[i % fallbackImages.length];
+    const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackLotImages[i % fallbackLotImages.length];
     const results = lot.archive_results ?? [];
     const sold = results.length > 0;
     const total = results.reduce((s, r) => s + r.price, 0);

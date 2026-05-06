@@ -1,27 +1,9 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { ArrowRight, Flame } from "lucide-react";
+import { ArrowRight, Flame, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-
-// Static lot images for preview
-import lotDinner from "@/assets/lot-dinner-sitnikov.jpg";
-import lotBiohacking from "@/assets/lot-biohacking-one.jpg";
-import lotReels from "@/assets/lot-fishing-sobolev.jpg";
-import lotWatch from "@/assets/lot-watch-ballet.jpg";
-import lotHockey from "@/assets/lot-hockey-belov.jpg";
-import lotBallet from "@/assets/lot-ballet-lopatkina.jpg";
-import lotEmelianenko from "@/assets/lot-emelianenko.jpg";
-
-const staticLots = [
-  { id: "static-1", title: "Обед с Алексеем Ситниковым", description: "Эксклюзивный обед с единственным в мире четырёхкратным доктором наук, автором с аудиторией 2 млн на YouTube", starting_price: 100000, category: "Встреча", image: lotDinner },
-  { id: "static-2", title: "Биохакинг-центр ONE + Мария Грудина", description: "Несколько часов в биохакинг-центре ONE и встреча с идеологом курорта «Первая Линия» в Санкт-Петербурге", starting_price: 100000, category: "Биохакинг", image: lotBiohacking },
-  { id: "static-3", title: "Секретная рыбалка с Ильёй Соболевым", description: "Несколько часов на озере Янисъярви в Карелии в закрытом рыболовном кружке резидента Comedy Club: катер, гид-мастер и весёлая компания КВНщиков", starting_price: 1000000, category: "Рыбалка", image: lotReels },
-  { id: "static-4", title: "Часы «Балет» Чугунова", description: "Коллекционные часы «Балет» от мастера Чугунова – лучшие российские часы 2025 года", starting_price: 250000, category: "Коллекция", image: lotWatch },
-  { id: "static-5", title: "Обед или хоккей с Антоном Беловым", description: "Обед или хоккейная тренировка с чемпионом мира 2014, двукратным обладателем Кубка Гагарина", starting_price: 100000, category: "Спорт", image: lotHockey },
-  { id: "static-6", title: "Обед или балет с Ульяной Лопаткиной", description: "Обед или балетная тренировка с легендарной примой-балериной Мариинского театра", starting_price: 100000, category: "Искусство", image: lotBallet },
-  { id: "static-7", title: "Футболка Емельяненко с автографом", description: "Футболка с автографом легендарного бойца ММА, четырёхкратного чемпиона мира", starting_price: 50000, category: "Коллекция", image: lotEmelianenko },
-];
+import { getLotImageUrl, fallbackLotImages, LOTS_TENTATIVE_TIMING } from "@/lib/lotAssets";
 
 type Lot = {
   id: string;
@@ -35,15 +17,6 @@ type Lot = {
   end_at: string | null;
 };
 
-const getImageUrl = (url: string | null) => {
-  if (!url) return null;
-  if (url.startsWith("http")) return url;
-  const { data } = supabase.storage.from("lot-images").getPublicUrl(url, {
-    transform: { width: 600, height: 450, resize: "cover", quality: 75 },
-  });
-  return data.publicUrl;
-};
-
 const LotsPreviewSection = () => {
   const [dbLots, setDbLots] = useState<Lot[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -52,25 +25,14 @@ const LotsPreviewSection = () => {
     const fetchLots = async () => {
       const { data } = await supabase
         .from("lots")
-        .select("id, title, description, image_url, preview_image_url, starting_price, category, status, end_at")
-        .in("status", ["active", "ended", "paid"])
-        .order("sort_order")
-        .limit(12);
-      if (data && data.length > 0) setDbLots(data as Lot[]);
+        .select("id, title, description, image_url, preview_image_url, starting_price, category, status, end_at, archive_date, sort_order")
+        .is("archive_date", null)
+        .order("sort_order");
+      if (data) setDbLots(data as unknown as Lot[]);
       setLoaded(true);
     };
     fetchLots();
   }, []);
-
-  // Use DB lots if available, otherwise show static preview
-  const useStatic = loaded && dbLots.length === 0;
-  const displayLots = useStatic
-    ? staticLots.map(l => ({ ...l, image_url: null, preview_image_url: null, status: "active", end_at: null }))
-    : dbLots;
-  const staticImages = Object.fromEntries(staticLots.map(l => [l.id, l.image]));
-
-  // Fallback images for DB lots by sort order
-  const fallbackImages = [lotDinner, lotBiohacking, lotReels, lotWatch, lotHockey, lotBallet, lotEmelianenko];
 
   if (!loaded) return null;
 
@@ -88,7 +50,7 @@ const LotsPreviewSection = () => {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-px bg-primary" />
               <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-                Варианты лотов
+                Актуальные лоты
               </p>
               <div className="w-8 h-px bg-primary" />
             </div>
@@ -96,11 +58,8 @@ const LotsPreviewSection = () => {
               Лоты <span className="text-primary italic">аукциона</span>
             </h2>
             <p className="font-body text-sm text-muted-foreground max-w-2xl leading-relaxed">
-              Мы предлагаем лоты в направлениях:{" "}
-              <Link to="/lots?cat=Нейрогастрономия" className="text-primary hover:underline">нейрогастрономия</Link>,{" "}
-              <Link to="/lots?cat=Биохакинг" className="text-primary hover:underline">биохакинг и велнес</Link>,{" "}
-              <Link to="/lots?cat=Ретрит" className="text-primary hover:underline">ретрит и восстановление</Link>,{" "}
-              <Link to="/lots?cat=Встреча" className="text-primary hover:underline">развитие и вдохновение</Link>.
+              Развитие и вдохновение, биохакинг и велнесс, искусство, хобби, ретриты —{" "}
+              {dbLots.length} лотов, доступных к торгам сейчас.
             </p>
           </div>
           <div className="flex flex-wrap gap-4 justify-center">
@@ -116,11 +75,10 @@ const LotsPreviewSection = () => {
 
       <div className="section-padding">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {displayLots.map((lot, i) => {
-            const imgUrl = useStatic
-              ? staticImages[lot.id]
-              : (getImageUrl((lot as Lot).preview_image_url) || getImageUrl((lot as Lot).image_url) || fallbackImages[i]);
-            const isSold = !useStatic && ((lot as Lot).status === "paid" || (lot as Lot).status === "ended");
+          {dbLots.map((lot, i) => {
+            const imgUrl = getLotImageUrl(lot.preview_image_url) || getLotImageUrl(lot.image_url) || fallbackLotImages[i % fallbackLotImages.length];
+            const isSold = lot.status === "paid" || lot.status === "ended";
+            const isTentative = LOTS_TENTATIVE_TIMING.has(lot.id);
 
             return (
               <motion.div
@@ -128,11 +86,11 @@ const LotsPreviewSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: 0.06 * i }}
+                transition={{ duration: 0.6, delay: 0.04 * i }}
               >
                 <Link
-                  to={useStatic ? "/lots" : `/lots/${lot.id}`}
-                  className="group block bg-card border border-border hover:border-primary/30 transition-all duration-500 overflow-hidden relative rounded-lg"
+                  to={`/lots/${lot.id}`}
+                  className="group block bg-card border border-border hover:border-primary/30 transition-all duration-500 overflow-hidden relative rounded-lg h-full"
                 >
                   <div className="aspect-[4/3] relative overflow-hidden">
                     {imgUrl ? (
@@ -150,13 +108,24 @@ const LotsPreviewSection = () => {
                       </div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-warm-black/70 via-transparent to-transparent" />
-                    {isSold && (
-                      <div className="absolute top-3 right-3 bg-foreground text-background px-3 py-1.5 rounded-sm shadow-lg">
-                        <span className="text-[10px] uppercase tracking-[0.25em] font-body font-semibold">
-                          Продано
-                        </span>
-                      </div>
-                    )}
+
+                    <div className="absolute top-3 right-3 flex flex-col gap-2 items-end">
+                      {isSold && (
+                        <div className="bg-foreground text-background px-3 py-1.5 rounded-sm shadow-lg">
+                          <span className="text-[10px] uppercase tracking-[0.25em] font-body font-semibold">
+                            Продано
+                          </span>
+                        </div>
+                      )}
+                      {isTentative && !isSold && (
+                        <div className="bg-amber-500/95 text-warm-black px-2.5 py-1 rounded-sm shadow-lg flex items-center gap-1.5 backdrop-blur-sm">
+                          <Clock className="w-3 h-3" />
+                          <span className="text-[9px] uppercase tracking-[0.18em] font-body font-bold">
+                            Уточняйте сроки
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="p-4">
                     {(lot.category || (i === 0 && !isSold)) && (
