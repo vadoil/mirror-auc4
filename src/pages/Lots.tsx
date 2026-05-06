@@ -343,7 +343,21 @@ const Lots = () => {
                   </div>
                 </div>
 
-                {filteredArchive.length === 0 ? (
+                {/* Обращение к победителям */}
+                <div className="mb-8 p-6 bg-primary/5 border border-primary/20 rounded-lg flex gap-4 items-start">
+                  <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                    <Heart className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-display text-sm uppercase tracking-[0.15em] text-foreground mb-2">
+                      Обращение к победителям торгов
+                    </h4>
+                    <p className="font-body text-sm text-foreground/80 leading-relaxed">
+                      Дорогие друзья! Просим победителей аукциона завершить оплату приобретённых лотов — каждый рубль идёт на добрые дела фонда «Не напрасно». Мы ценим каждого из вас и всегда рады видеть на наших мероприятиях, но просим беречь взаимное доверие: без него благотворительность просто невозможна.
+                    </p>
+                  </div>
+                </div>
+
                   <div className="text-muted-foreground font-body text-center py-20">
                     Нет лотов в этой категории
                   </div>
