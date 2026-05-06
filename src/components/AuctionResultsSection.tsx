@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import { Award, Banknote, Gift, Sparkles } from "lucide-react";
+import { Award, Banknote, Gift, Sparkles, Heart } from "lucide-react";
 
 type ArchiveItem = { price: number; paid: boolean };
 
