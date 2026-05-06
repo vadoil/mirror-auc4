@@ -4,11 +4,11 @@ import lotWatch from "@/assets/lot-watch-ballet.jpg";
 import lotHockey from "@/assets/lot-hockey-belov.jpg";
 import lotBallet from "@/assets/lot-ballet-lopatkina.jpg";
 import lotEmelianenko from "@/assets/lot-emelianenko.jpg";
-import lotSmartlife from "@/assets/lot-smartlife.png";
+import lotSmartlife from "@/assets/lot-smartlife.jpg";
 import lotBurunov from "@/assets/lot-burunov-tea.jpg";
 import lotShnurov from "@/assets/lot-shnurov.jpg";
 import lotListovets from "@/assets/lot-listovets.jpg";
-import lotTsypkin from "@/assets/lot-tsypkin.png";
+import lotTsypkin from "@/assets/lot-tsypkin.jpg";
 import lotHakamada from "@/assets/lot-hakamada.jpg";
 import lotVase from "@/assets/lot-vase.jpg";
 import lotBookSitnikov from "@/assets/lot-book-sitnikov.jpg";
@@ -24,10 +24,12 @@ export const localLotAssets: Record<string, string> = {
   "lot-ballet-lopatkina.jpg": lotBallet,
   "lot-emelianenko.jpg": lotEmelianenko,
   "lot-smartlife.png": lotSmartlife,
+  "lot-smartlife.jpg": lotSmartlife,
   "lot-burunov-tea.jpg": lotBurunov,
   "lot-shnurov.jpg": lotShnurov,
   "lot-listovets.jpg": lotListovets,
   "lot-tsypkin.png": lotTsypkin,
+  "lot-tsypkin.jpg": lotTsypkin,
   "lot-hakamada.jpg": lotHakamada,
   "lot-vase.jpg": lotVase,
   "lot-book-sitnikov.jpg": lotBookSitnikov,

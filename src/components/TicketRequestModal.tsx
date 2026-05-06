@@ -17,7 +17,7 @@ interface TicketRequestModalProps {
 const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrainingCheckbox = true }: TicketRequestModalProps) => {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "", promoCode: "" });
-  const [wantsTraining, setWantsTraining] = useState(false);
+  
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [promoValid, setPromoValid] = useState<boolean | null>(null);
   const [promoChecking, setPromoChecking] = useState(false);
@@ -84,10 +84,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       }
     }
 
-    const message = [
-      form.message.trim(),
-      wantsTraining ? '✅ Хочу на тренировку «Либидо фитнес» 18.04' : '',
-    ].filter(Boolean).join('\n') || null;
+    const message = form.message.trim() || null;
 
     const promoCode = effectivePromoValid ? form.promoCode.trim().toUpperCase() : null;
 
@@ -185,7 +182,6 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
     if (promoCode) {
       // Free registration → close modal
       setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
-      setWantsTraining(false);
       setPrivacyConsent(false);
       setPromoValid(null);
       onClose();
@@ -201,7 +197,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
   const handleClosePayment = () => {
     setShowPayment(false);
     setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
-    setWantsTraining(false);
+    
     setPrivacyConsent(false);
     setPromoValid(null);
     setSubmittedName("");
@@ -332,19 +328,6 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
                 maxLength={500}
               />
 
-              {showTrainingCheckbox && (
-                <label className="flex items-start gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={wantsTraining}
-                    onChange={(e) => setWantsTraining(e.target.checked)}
-                    className="mt-1 w-4 h-4 accent-primary"
-                  />
-                  <span className="text-cream/60 text-xs font-body leading-relaxed group-hover:text-cream/80 transition-colors">
-                    Хочу получить приглашение на тренировку-презентацию программы женского здоровья «Либидо фитнес» 18.04 в зале пространства «Место быть»
-                  </span>
-                </label>
-              )}
 
               <label className="flex items-start gap-3 cursor-pointer group">
                 <input

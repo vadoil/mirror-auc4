@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import MasterclassSection from "@/components/MasterclassSection";
+
 import ProjectStorySection from "@/components/ProjectStorySection";
 import BeneficiariesSection from "@/components/BeneficiariesSection";
 import LotsPreviewSection from "@/components/LotsPreviewSection";
@@ -35,7 +35,7 @@ const Index = () => {
         <AuctioneerSection />
         <VenuePreviewSection />
         <DressCodeSection />
-        <MasterclassSection />
+        
         <TransparencySection />
         <TicketsSection />
         <ForumBannerSection />
