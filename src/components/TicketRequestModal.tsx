@@ -182,7 +182,6 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
     if (promoCode) {
       // Free registration → close modal
       setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
-      setWantsTraining(false);
       setPrivacyConsent(false);
       setPromoValid(null);
       onClose();
