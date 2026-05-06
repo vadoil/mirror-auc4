@@ -207,6 +207,12 @@ const LotDetail = () => {
               <h1 className="font-display text-3xl md:text-4xl text-foreground uppercase tracking-tight mb-4">
                 {lot.title}
               </h1>
+              {LOTS_TENTATIVE_TIMING.has(lot.id) && (
+                <div className="mb-4 inline-flex self-start items-center gap-2 bg-amber-500/15 border border-amber-500/40 text-amber-600 dark:text-amber-400 px-3 py-2 rounded-md">
+                  <Clock className="w-4 h-4" />
+                  <span className="text-xs uppercase tracking-[0.18em] font-body font-bold">Уточняйте сроки исполнения</span>
+                </div>
+              )}
               {lot.description && (
                 <p className="font-body text-sm text-muted-foreground leading-relaxed mb-6 whitespace-pre-line">{lot.description}</p>
               )}
