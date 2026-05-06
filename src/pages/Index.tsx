@@ -35,7 +35,7 @@ const Index = () => {
         <AuctioneerSection />
         <VenuePreviewSection />
         <DressCodeSection />
-        <MasterclassSection />
+        
         <TransparencySection />
         <TicketsSection />
         <ForumBannerSection />
