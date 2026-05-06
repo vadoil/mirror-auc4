@@ -13,6 +13,7 @@ import lotHakamada from "@/assets/lot-hakamada.jpg";
 import lotVase from "@/assets/lot-vase.jpg";
 import lotBookSitnikov from "@/assets/lot-book-sitnikov.jpg";
 import lotSoloviy from "@/assets/lot-soloviy.jpg";
+import lotLevEdinorog from "@/assets/lot-lev-edinorog.jpg";
 
 import { supabase } from "@/integrations/supabase/client";
 
@@ -34,6 +35,7 @@ export const localLotAssets: Record<string, string> = {
   "lot-vase.jpg": lotVase,
   "lot-book-sitnikov.jpg": lotBookSitnikov,
   "lot-soloviy.jpg": lotSoloviy,
+  "lot-lev-edinorog.jpg": lotLevEdinorog,
 };
 
 export const fallbackLotImages = [

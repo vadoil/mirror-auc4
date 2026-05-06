@@ -67,7 +67,7 @@ const HeroSection = () => {
                 transition={{ duration: 1.2, delay: 0.5 }}
               >
                 <p className="font-body text-cream/40 text-xs md:text-sm uppercase tracking-[0.3em] mb-4">
-                  Благотворительный аукцион · 26 апреля 2026
+                  Благотворительный аукцион
                 </p>
                 <h1 className="font-display text-cream text-5xl sm:text-6xl md:text-[7rem] lg:text-[9rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]">
                   Отра

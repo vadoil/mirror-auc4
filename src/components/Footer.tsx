@@ -16,7 +16,7 @@ const Footer = () => {
             />
             <div>
               <h3 className="font-display text-3xl md:text-4xl font-light text-cream mb-2">
-                Увидимся <span className="italic text-primary">26 апреля</span>
+                увидимся <span className="italic text-primary">скоро</span>
               </h3>
               <p className="font-body text-sm text-cream/40">
                 Москва · Мясницкая 24/7 · Баланс-холл «Место быть»
