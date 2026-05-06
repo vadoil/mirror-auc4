@@ -1,0 +1,1 @@
+UPDATE public.lots SET preview_image_url = 'listovets-preview.png' WHERE id = 'e6803e3c-b7ce-42b8-b6b2-38b2b5999b5e';
