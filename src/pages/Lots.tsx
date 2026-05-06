@@ -125,6 +125,12 @@ const Lots = () => {
                 <span className="text-primary-foreground text-[10px] uppercase tracking-[0.2em] font-body font-medium drop-shadow-sm">{lot.category}</span>
               </div>
             )}
+            {isTentative && (
+              <div className="absolute top-3 right-3 bg-amber-500/95 text-warm-black px-2.5 py-1 rounded-sm shadow-lg flex items-center gap-1.5 backdrop-blur-sm">
+                <Clock className="w-3 h-3" />
+                <span className="text-[9px] uppercase tracking-[0.18em] font-body font-bold">Уточняйте сроки</span>
+              </div>
+            )}
           </div>
           <div className="p-5">
             <h3 className="font-display text-base text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{lot.title}</h3>
