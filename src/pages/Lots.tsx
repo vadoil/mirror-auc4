@@ -98,6 +98,7 @@ const Lots = () => {
   const renderActiveCard = (lot: Lot, i: number) => {
     const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackLotImages[i % fallbackLotImages.length];
     const currentPrice = maxBids[lot.id] || lot.starting_price;
+    const isTentative = LOTS_TENTATIVE_TIMING.has(lot.id);
     return (
       <motion.div
         key={lot.id}
