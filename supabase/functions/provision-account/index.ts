@@ -30,6 +30,7 @@ Deno.serve(async (req) => {
     const email = String(body.email ?? "").trim().toLowerCase();
     const name = body.name ? String(body.name).trim() : undefined;
     const force = Boolean(body.force);
+    const promoCode = body.promo_code ? String(body.promo_code).trim() : "";
 
     if (!email || !email.includes("@")) {
       return new Response(JSON.stringify({ error: "Invalid email" }), {
@@ -38,30 +39,42 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Authorization: either service-role secret (used by other edge funcs) or admin JWT
+    // Authorization: service-role secret, admin JWT, or valid active promo code
     const authHeader = req.headers.get("Authorization") ?? "";
     const token = authHeader.replace(/^Bearer\s+/i, "");
     const isServiceCall = token && token === SERVICE_KEY;
+    const adminCheck = createClient(SUPABASE_URL, SERVICE_KEY);
 
-    if (!isServiceCall) {
-      const adminCheck = createClient(SUPABASE_URL, SERVICE_KEY);
-      const { data: userData, error: userErr } = await adminCheck.auth.getUser(token);
-      if (userErr || !userData?.user?.id) {
-        return new Response(JSON.stringify({ error: "Unauthorized" }), {
-          status: 401,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
+    let authorized = isServiceCall;
+
+    if (!authorized && token) {
+      const { data: userData } = await adminCheck.auth.getUser(token);
+      if (userData?.user?.id) {
+        const { data: isAdmin } = await adminCheck.rpc("has_role", {
+          _user_id: userData.user.id,
+          _role: "admin",
         });
+        if (isAdmin) authorized = true;
       }
-      const { data: isAdmin } = await adminCheck.rpc("has_role", {
-        _user_id: userData.user.id,
-        _role: "admin",
+    }
+
+    if (!authorized && promoCode) {
+      const { data: promo } = await adminCheck
+        .from("promo_codes")
+        .select("id, is_active, max_uses, current_uses")
+        .ilike("code", promoCode)
+        .eq("is_active", true)
+        .maybeSingle();
+      if (promo && (promo.max_uses == null || promo.current_uses < promo.max_uses)) {
+        authorized = true;
+      }
+    }
+
+    if (!authorized) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
-      if (!isAdmin) {
-        return new Response(JSON.stringify({ error: "Forbidden" }), {
-          status: 403,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
     }
 
     const admin = createClient(SUPABASE_URL, SERVICE_KEY, {

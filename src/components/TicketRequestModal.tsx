@@ -157,6 +157,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
         body: {
           email: form.email.trim(),
           name: form.name.trim(),
+          promo_code: promoCode,
         },
       });
     }
