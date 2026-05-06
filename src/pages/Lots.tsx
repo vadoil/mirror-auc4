@@ -274,12 +274,29 @@ const Lots = () => {
             <div className="text-muted-foreground font-body text-center py-20">Загрузка лотов…</div>
           ) : (
             <Tabs defaultValue="active" className="w-full">
-              <TabsList className="mb-8 bg-muted/30 border border-border">
-                <TabsTrigger value="active" className="font-body text-xs uppercase tracking-[0.2em] px-6">
-                  Актуальные лоты
+              <TabsList className="mb-10 h-auto bg-transparent border-b border-border/60 rounded-none p-0 w-full justify-start gap-1">
+                <TabsTrigger
+                  value="active"
+                  className="relative font-display text-sm md:text-base uppercase tracking-[0.18em] px-6 py-4 rounded-none bg-transparent text-muted-foreground border-b-2 border-transparent transition-all duration-300 hover:text-foreground data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:border-primary data-[state=active]:shadow-none"
+                >
+                  <span className="flex items-center gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary opacity-0 data-[state=active]:opacity-100 transition-opacity" />
+                    Актуальные лоты
+                    <span className="font-numbers text-[10px] tracking-normal bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                      {activeLots.length}
+                    </span>
+                  </span>
                 </TabsTrigger>
-                <TabsTrigger value="archive" className="font-body text-xs uppercase tracking-[0.2em] px-6">
-                  Аукцион 26 апреля
+                <TabsTrigger
+                  value="archive"
+                  className="relative font-display text-sm md:text-base uppercase tracking-[0.18em] px-6 py-4 rounded-none bg-transparent text-muted-foreground border-b-2 border-transparent transition-all duration-300 hover:text-foreground data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:border-foreground data-[state=active]:shadow-none"
+                >
+                  <span className="flex items-center gap-2.5">
+                    Аукцион 26 апреля
+                    <span className="font-numbers text-[10px] tracking-normal bg-muted text-muted-foreground px-2 py-0.5 rounded-full">
+                      {archivedLots.length}
+                    </span>
+                  </span>
                 </TabsTrigger>
               </TabsList>
 
