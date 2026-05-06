@@ -122,7 +122,7 @@ const HeroSection = () => {
               )}
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Link to="/lots" className="btn-primary text-center">
+                <Link to="/#results" className="btn-primary text-center">
                   Итоги аукциона
                 </Link>
                 <Link to="/gallery" className="btn-outline-light text-center">
