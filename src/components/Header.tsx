@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, LogIn, Home } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -23,7 +23,23 @@ const Header = () => {
   const [ticketModal, setTicketModal] = useState(false);
   const { user, isAdmin, signOut } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === "/";
+
+  const handleAnchorClick = (e: React.MouseEvent, href: string) => {
+    if (!href.includes("#")) return;
+    const [path, hash] = href.split("#");
+    const targetPath = path || "/";
+    if (location.pathname === targetPath) {
+      e.preventDefault();
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false);
+    } else {
+      // Different page — let navigation happen, then ScrollToTop will scroll
+      setMenuOpen(false);
+    }
+  };
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
