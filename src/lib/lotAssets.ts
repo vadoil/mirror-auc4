@@ -8,7 +8,7 @@ import lotSmartlife from "@/assets/lot-smartlife.jpg";
 import lotBurunov from "@/assets/lot-burunov-tea.jpg";
 import lotShnurov from "@/assets/lot-shnurov.jpg";
 import lotListovets from "@/assets/lot-listovets.jpg";
-import lotTsypkin from "@/assets/lot-tsypkin.png";
+import lotTsypkin from "@/assets/lot-tsypkin.jpg";
 import lotHakamada from "@/assets/lot-hakamada.jpg";
 import lotVase from "@/assets/lot-vase.jpg";
 import lotBookSitnikov from "@/assets/lot-book-sitnikov.jpg";
