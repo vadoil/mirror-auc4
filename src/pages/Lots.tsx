@@ -25,16 +25,7 @@ type Lot = {
   archive_results: ArchiveResult[] | null;
 };
 
-const getImageUrl = (url: string | null) => {
-  if (!url) return null;
-  if (url.startsWith("http")) return url;
-  const fname = url.split("/").pop() ?? "";
-  if (localAssets[fname]) return localAssets[fname];
-  const { data } = supabase.storage.from("lot-images").getPublicUrl(url, {
-    transform: { width: 600, height: 450, resize: "cover", quality: 75 },
-  });
-  return data.publicUrl;
-};
+const getImageUrl = getLotImageUrl;
 
 const categories = [
   { label: "Развитие и вдохновение", filter: "развитие" },
