@@ -5,6 +5,8 @@ import MasterclassSection from "@/components/MasterclassSection";
 import ProjectStorySection from "@/components/ProjectStorySection";
 import BeneficiariesSection from "@/components/BeneficiariesSection";
 import LotsPreviewSection from "@/components/LotsPreviewSection";
+import AuctionResultsSection from "@/components/AuctionResultsSection";
+import PrizesSection from "@/components/PrizesSection";
 import AuctioneerSection from "@/components/AuctioneerSection";
 import VenuePreviewSection from "@/components/VenuePreviewSection";
 import TransparencySection from "@/components/TransparencySection";
@@ -26,6 +28,8 @@ const Index = () => {
       <div className="relative z-10">
         <AboutSection />
         <ProjectStorySection />
+        <AuctionResultsSection />
+        <PrizesSection />
         <BeneficiariesSection />
         <LotsPreviewSection />
         <AuctioneerSection />

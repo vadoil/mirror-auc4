@@ -21,6 +21,7 @@ import Unsubscribe from "./pages/Unsubscribe";
 import Privacy from "./pages/Privacy";
 import Oferta from "./pages/Oferta";
 import Gallery from "./pages/Gallery";
+import Partners from "./pages/Partners";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/oferta" element={<Oferta />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/partners" element={<Partners />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
