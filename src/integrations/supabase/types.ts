@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      auction_prizes: {
+        Row: {
+          created_at: string
+          event_date: string | null
+          id: string
+          partner: string | null
+          sort_order: number
+          title: string
+          winner_ticket: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_date?: string | null
+          id?: string
+          partner?: string | null
+          sort_order?: number
+          title: string
+          winner_ticket?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_date?: string | null
+          id?: string
+          partner?: string | null
+          sort_order?: number
+          title?: string
+          winner_ticket?: string | null
+        }
+        Relationships: []
+      }
       bids: {
         Row: {
           amount: number
@@ -142,6 +172,53 @@ export type Database = {
         }
         Relationships: []
       }
+      lot_interests: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          lot_id: string | null
+          lot_title: string
+          message: string | null
+          name: string
+          notified_telegram: boolean
+          phone: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          lot_id?: string | null
+          lot_title: string
+          message?: string | null
+          name: string
+          notified_telegram?: boolean
+          phone: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          lot_id?: string | null
+          lot_title?: string
+          message?: string | null
+          name?: string
+          notified_telegram?: boolean
+          phone?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lot_interests_lot_id_fkey"
+            columns: ["lot_id"]
+            isOneToOne: false
+            referencedRelation: "lots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lot_reservations: {
         Row: {
           created_at: string
@@ -195,6 +272,8 @@ export type Database = {
       }
       lots: {
         Row: {
+          archive_date: string | null
+          archive_results: Json | null
           bid_step: number
           category: string | null
           created_at: string
@@ -215,6 +294,8 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          archive_date?: string | null
+          archive_results?: Json | null
           bid_step?: number
           category?: string | null
           created_at?: string
@@ -235,6 +316,8 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          archive_date?: string | null
+          archive_results?: Json | null
           bid_step?: number
           category?: string | null
           created_at?: string
