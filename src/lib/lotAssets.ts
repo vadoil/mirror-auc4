@@ -29,6 +29,7 @@ export const localLotAssets: Record<string, string> = {
   "lot-shnurov.jpg": lotShnurov,
   "lot-listovets.jpg": lotListovets,
   "lot-tsypkin.png": lotTsypkin,
+  "lot-tsypkin.jpg": lotTsypkin,
   "lot-hakamada.jpg": lotHakamada,
   "lot-vase.jpg": lotVase,
   "lot-book-sitnikov.jpg": lotBookSitnikov,
