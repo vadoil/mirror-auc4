@@ -332,19 +332,6 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
                 maxLength={500}
               />
 
-              {showTrainingCheckbox && (
-                <label className="flex items-start gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={wantsTraining}
-                    onChange={(e) => setWantsTraining(e.target.checked)}
-                    className="mt-1 w-4 h-4 accent-primary"
-                  />
-                  <span className="text-cream/60 text-xs font-body leading-relaxed group-hover:text-cream/80 transition-colors">
-                    Хочу получить приглашение на тренировку-презентацию программы женского здоровья «Либидо фитнес» 18.04 в зале пространства «Место быть»
-                  </span>
-                </label>
-              )}
 
               <label className="flex items-start gap-3 cursor-pointer group">
                 <input
