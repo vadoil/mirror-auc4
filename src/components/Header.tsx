@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, LogIn, Home } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -23,7 +23,23 @@ const Header = () => {
   const [ticketModal, setTicketModal] = useState(false);
   const { user, isAdmin, signOut } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === "/";
+
+  const handleAnchorClick = (e: React.MouseEvent, href: string) => {
+    if (!href.includes("#")) return;
+    const [path, hash] = href.split("#");
+    const targetPath = path || "/";
+    if (location.pathname === targetPath) {
+      e.preventDefault();
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false);
+    } else {
+      // Different page — let navigation happen, then ScrollToTop will scroll
+      setMenuOpen(false);
+    }
+  };
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -74,6 +90,7 @@ const Header = () => {
 
             <Link
               to="/#about"
+              onClick={(e) => handleAnchorClick(e, "/#about")}
               className={`${textColor} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300 whitespace-nowrap`}
             >
               О проекте
@@ -82,6 +99,7 @@ const Header = () => {
               <Link
                 key={item.href}
                 to={item.href}
+                onClick={(e) => handleAnchorClick(e, item.href)}
                 className={`${textColor} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300 whitespace-nowrap`}
               >
                 {item.label}
@@ -138,17 +156,14 @@ const Header = () => {
                 <Link to="/" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light flex items-center gap-2">
                   <Home className="w-4 h-4" /> Главная
                 </Link>
-                <Link to="/#about" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
+                <Link to="/#about" onClick={(e) => { handleAnchorClick(e, "/#about"); setMenuOpen(false); }} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
                   О проекте
                 </Link>
                 {navItems.map((item) => (
-                  <Link key={item.href} to={item.href} onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
+                  <Link key={item.href} to={item.href} onClick={(e) => { handleAnchorClick(e, item.href); setMenuOpen(false); }} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
                     {item.label}
                   </Link>
                 ))}
-                <a href="/#contacts" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
-                  Контакты
-                </a>
                 {isAdmin && (
                   <Link to="/admin" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
                     Админ
