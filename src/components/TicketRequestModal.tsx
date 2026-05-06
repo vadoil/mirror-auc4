@@ -162,6 +162,21 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       });
     }
 
+    // Telegram notification
+    supabase.functions.invoke("notify-telegram", {
+      body: {
+        event: promoCode ? "promo_registration" : "ticket_request",
+        data: {
+          ticket_type: ticketType,
+          name: form.name.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim() || undefined,
+          promo_code: promoCode || undefined,
+          message: message || undefined,
+        },
+      },
+    });
+
     toast.success(promoCode
       ? "Заявка отправлена! Промокод применён — регистрация без оплаты. Данные для входа придут на почту."
       : "Заявка сохранена. Перейдите к оплате."

@@ -123,6 +123,24 @@ Deno.serve(async (req) => {
         } catch (e) {
           console.error("[yookassa-webhook] provision-account failed:", e);
         }
+
+        // Telegram notification
+        try {
+          await supabase.functions.invoke("notify-telegram", {
+            body: {
+              event: "payment_succeeded",
+              data: {
+                name: tr.name,
+                email: tr.email,
+                ticket_type: tr.ticket_type,
+                amount: Number(obj.amount?.value ?? 0),
+                yookassa_payment_id: obj.id,
+              },
+            },
+          });
+        } catch (e) {
+          console.error("[yookassa-webhook] notify-telegram failed:", e);
+        }
       }
     }
 

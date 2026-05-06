@@ -120,6 +120,17 @@ const LotDetail = () => {
     }
     toast.success("Ставка принята!");
     setBidAmount("");
+    supabase.functions.invoke("notify-telegram", {
+      body: {
+        event: "new_bid",
+        data: {
+          lot_title: lot?.title,
+          amount,
+          bidder_name: user.user_metadata?.full_name || user.email || "Аноним",
+          bidder_email: user.email,
+        },
+      },
+    });
     fetchBids();
   };
 
