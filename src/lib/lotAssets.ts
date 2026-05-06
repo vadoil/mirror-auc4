@@ -4,7 +4,7 @@ import lotWatch from "@/assets/lot-watch-ballet.jpg";
 import lotHockey from "@/assets/lot-hockey-belov.jpg";
 import lotBallet from "@/assets/lot-ballet-lopatkina.jpg";
 import lotEmelianenko from "@/assets/lot-emelianenko.jpg";
-import lotSmartlife from "@/assets/lot-smartlife.png";
+import lotSmartlife from "@/assets/lot-smartlife.jpg";
 import lotBurunov from "@/assets/lot-burunov-tea.jpg";
 import lotShnurov from "@/assets/lot-shnurov.jpg";
 import lotListovets from "@/assets/lot-listovets.jpg";
