@@ -90,6 +90,7 @@ const Header = () => {
 
             <Link
               to="/#about"
+              onClick={(e) => handleAnchorClick(e, "/#about")}
               className={`${textColor} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300 whitespace-nowrap`}
             >
               О проекте
@@ -98,6 +99,7 @@ const Header = () => {
               <Link
                 key={item.href}
                 to={item.href}
+                onClick={(e) => handleAnchorClick(e, item.href)}
                 className={`${textColor} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300 whitespace-nowrap`}
               >
                 {item.label}
