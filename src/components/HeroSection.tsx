@@ -95,8 +95,17 @@ const HeroSection = () => {
               className="flex flex-col gap-8 lg:items-end"
             >
               {timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0 ? (
-                <div className="font-display text-3xl sm:text-4xl md:text-5xl text-primary uppercase tracking-wider">
-                  Аукцион закончился
+                <div className="lg:text-right">
+                  <p className="font-body text-cream/40 text-[10px] md:text-xs uppercase tracking-[0.3em] mb-3">
+                    26 апреля 2026
+                  </p>
+                  <div className="font-display text-2xl sm:text-3xl md:text-4xl text-cream font-light leading-tight">
+                    Вечер прошёл — <br className="hidden sm:block" />
+                    <span className="italic text-primary">добро продолжается</span>
+                  </div>
+                  <p className="font-body text-cream/50 text-sm md:text-base mt-3 max-w-sm lg:ml-auto">
+                    Онлайн-торги по части лотов ещё открыты
+                  </p>
                 </div>
               ) : (
                 <div className="flex gap-6 md:gap-8">
