@@ -358,6 +358,7 @@ const Lots = () => {
                   </div>
                 </div>
 
+                {filteredArchive.length === 0 ? (
                   <div className="text-muted-foreground font-body text-center py-20">
                     Нет лотов в этой категории
                   </div>
