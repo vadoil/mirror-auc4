@@ -116,6 +116,27 @@ const AuctionResultsSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Обращение к победителям */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-10 p-6 md:p-8 bg-primary/5 border border-primary/20 rounded-lg flex gap-4 md:gap-5 items-start"
+        >
+          <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+            <Heart className="w-5 h-5 text-primary" />
+          </div>
+          <div>
+            <h4 className="font-display text-sm uppercase tracking-[0.15em] text-foreground mb-2">
+              Обращение к победителям торгов
+            </h4>
+            <p className="font-body text-sm text-foreground/80 leading-relaxed">
+              Дорогие друзья! Просим победителей аукциона завершить оплату приобретённых лотов — каждый рубль идёт на добрые дела фонда «Не напрасно». Мы ценим каждого из вас и всегда рады видеть на наших мероприятиях, но просим беречь взаимное доверие: без него благотворительность просто невозможна.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
