@@ -197,7 +197,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
   const handleClosePayment = () => {
     setShowPayment(false);
     setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
-    setWantsTraining(false);
+    
     setPrivacyConsent(false);
     setPromoValid(null);
     setSubmittedName("");
