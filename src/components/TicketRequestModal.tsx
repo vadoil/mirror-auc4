@@ -17,7 +17,7 @@ interface TicketRequestModalProps {
 const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrainingCheckbox = true }: TicketRequestModalProps) => {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "", promoCode: "" });
-  const [wantsTraining, setWantsTraining] = useState(false);
+  
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [promoValid, setPromoValid] = useState<boolean | null>(null);
   const [promoChecking, setPromoChecking] = useState(false);
