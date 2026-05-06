@@ -84,10 +84,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       }
     }
 
-    const message = [
-      form.message.trim(),
-      wantsTraining ? '✅ Хочу на тренировку «Либидо фитнес» 18.04' : '',
-    ].filter(Boolean).join('\n') || null;
+    const message = form.message.trim() || null;
 
     const promoCode = effectivePromoValid ? form.promoCode.trim().toUpperCase() : null;
 
