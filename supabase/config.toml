@@ -2,3 +2,6 @@ project_id = "mmuwfeiunaqjljnplpgh"
 
 [functions.admin-bulk-provision]
 verify_jwt = false
+
+[functions.notify-lot-interest]
+verify_jwt = false
