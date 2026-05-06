@@ -2,30 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-
-import lotDinner from "@/assets/lot-dinner-sitnikov.jpg";
-import lotBiohacking from "@/assets/lot-biohacking-one.jpg";
-import lotReels from "@/assets/lot-reels-sobolev.jpg";
-import lotWatch from "@/assets/lot-watch-ballet.jpg";
-import lotHockey from "@/assets/lot-hockey-belov.jpg";
-import lotBallet from "@/assets/lot-ballet-lopatkina.jpg";
-import lotEmelianenko from "@/assets/lot-emelianenko.jpg";
-import lotSmartlife from "@/assets/lot-smartlife.png";
-import lotBurunov from "@/assets/lot-burunov-tea.jpg";
-import lotShnurov from "@/assets/lot-shnurov.jpg";
-import lotListovets from "@/assets/lot-listovets.jpg";
-
-const fallbackImages = [lotDinner, lotBiohacking, lotReels, lotWatch, lotHockey, lotBallet, lotEmelianenko, lotSmartlife];
-
-const localAssets: Record<string, string> = {
-  "lot-burunov-tea.jpg": lotBurunov,
-  "lot-shnurov.jpg": lotShnurov,
-  "lot-listovets.jpg": lotListovets,
-};
+import { getLotImageUrl, fallbackLotImages, LOTS_TENTATIVE_TIMING } from "@/lib/lotAssets";
 
 type ArchiveResult = { paid: boolean; price: number };
 
