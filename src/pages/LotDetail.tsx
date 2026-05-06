@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { ArrowLeft, Clock, Gavel, User, AlertCircle, Bookmark, X } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import LotInterestModal from "@/components/LotInterestModal";
 
 const formatPrice = (n: number) => n.toLocaleString("ru-RU") + " ₽";
 
@@ -275,6 +276,24 @@ const LotDetail = () => {
                   </div>
                 )}
               </div>
+
+              {/* Interest CTA — отправит заявку с именем и телефоном в Telegram */}
+              {isActive && (
+                <div className="mb-3">
+                  <LotInterestModal
+                    lotId={lot.id}
+                    lotTitle={lot.title}
+                    trigger={
+                      <button
+                        type="button"
+                        className="w-full bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:opacity-90 transition-all rounded"
+                      >
+                        Оставить заявку — мы свяжемся
+                      </button>
+                    }
+                  />
+                </div>
+              )}
 
               {/* Register CTA */}
               <Link
