@@ -96,7 +96,7 @@ const Lots = () => {
   );
 
   const renderActiveCard = (lot: Lot, i: number) => {
-    const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackLotImages[i % fallbackImages.length];
+    const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackLotImages[i % fallbackLotImages.length];
     const currentPrice = maxBids[lot.id] || lot.starting_price;
     return (
       <motion.div
@@ -146,7 +146,7 @@ const Lots = () => {
   };
 
   const renderArchiveCard = (lot: Lot, i: number) => {
-    const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackLotImages[i % fallbackImages.length];
+    const imgUrl = getImageUrl(lot.preview_image_url) || getImageUrl(lot.image_url) || fallbackLotImages[i % fallbackLotImages.length];
     const results = lot.archive_results ?? [];
     const sold = results.length > 0;
     const total = results.reduce((s, r) => s + r.price, 0);
