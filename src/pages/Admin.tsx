@@ -526,28 +526,39 @@ const Admin = () => {
             )}
 
             <div className="space-y-2">
-              {lots.map((lot) => (
-                <div key={lot.id} className="bg-cream/5 border border-cream/10 p-4 flex items-center gap-4">
-                  {lot.image_url && (
-                    <img src={getImageUrl(lot.image_url) || ""} alt="" className="w-12 h-12 object-cover" />
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <p className="font-body text-sm text-cream truncate">{lot.title}</p>
-                    <p className="text-cream/40 text-xs font-body">{lot.category || "–"} · {lot.starting_price.toLocaleString()} ₽ · шаг {lot.bid_step.toLocaleString()} ₽</p>
-                  </div>
-                  <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-1 ${
-                    lot.status === "active" ? "bg-green-500/20 text-green-400" :
-                    lot.status === "ended" ? "bg-yellow-500/20 text-yellow-400" :
-                    lot.status === "draft" ? "bg-cream/10 text-cream/30" :
-                    "bg-cream/10 text-cream/30"
-                  }`}>
-                    {statusLabels[lot.status] || lot.status}
-                  </span>
-                  <button onClick={() => setEditingLot(lot)} className="text-cream/40 hover:text-cream text-xs font-body">Ред.</button>
-                  <button onClick={() => deleteLot(lot.id)} className="text-cream/40 hover:text-destructive"><Trash2 size={14} /></button>
-                </div>
-              ))}
-              {lots.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Нет лотов</p>}
+              {(() => {
+                const filtered = lots.filter(l => lotsSubtab === "archive" ? l.status === "archived" : l.status !== "archived");
+                if (filtered.length === 0) return <p className="text-cream/30 text-sm font-body text-center py-8">Нет лотов</p>;
+                return filtered.map((lot) => {
+                  const thumb = lot.preview_image_url || lot.image_url;
+                  return (
+                    <div key={lot.id} className="bg-cream/5 border border-cream/10 p-3 flex items-center gap-4">
+                      {thumb ? (
+                        <img src={getImageUrl(thumb) || ""} alt="" className="w-20 h-20 object-cover rounded shrink-0" />
+                      ) : (
+                        <div className="w-20 h-20 bg-cream/5 border border-cream/10 rounded shrink-0 flex items-center justify-center text-cream/20 text-[10px] font-body">нет фото</div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <p className="font-body text-sm text-cream truncate">{lot.title}</p>
+                        <p className="text-cream/40 text-xs font-body mt-1">{lot.category || "–"} · {lot.starting_price.toLocaleString()} ₽ · шаг {lot.bid_step.toLocaleString()} ₽</p>
+                        {!lot.preview_image_url && lot.image_url && (
+                          <p className="text-yellow-400/60 text-[10px] font-body mt-1">⚠ Нет превью — карточка использует основное фото</p>
+                        )}
+                      </div>
+                      <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-1 ${
+                        lot.status === "active" ? "bg-green-500/20 text-green-400" :
+                        lot.status === "ended" ? "bg-yellow-500/20 text-yellow-400" :
+                        lot.status === "archived" ? "bg-cream/10 text-cream/40" :
+                        "bg-cream/10 text-cream/30"
+                      }`}>
+                        {statusLabels[lot.status] || lot.status}
+                      </span>
+                      <button onClick={() => setEditingLot(lot)} className="text-cream/40 hover:text-cream text-xs font-body">Ред.</button>
+                      <button onClick={() => deleteLot(lot.id)} className="text-cream/40 hover:text-destructive"><Trash2 size={14} /></button>
+                    </div>
+                  );
+                });
+              })()}
             </div>
           </div>
         )}
