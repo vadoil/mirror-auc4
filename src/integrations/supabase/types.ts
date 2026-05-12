@@ -172,6 +172,42 @@ export type Database = {
         }
         Relationships: []
       }
+      forum_registrations: {
+        Row: {
+          city: string | null
+          created_at: string
+          email: string
+          id: string
+          message: string | null
+          name: string
+          notified_telegram: boolean
+          phone: string | null
+          status: string
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          message?: string | null
+          name: string
+          notified_telegram?: boolean
+          phone?: string | null
+          status?: string
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string | null
+          name?: string
+          notified_telegram?: boolean
+          phone?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       lot_interests: {
         Row: {
           created_at: string
@@ -221,6 +257,7 @@ export type Database = {
       }
       lot_reservations: {
         Row: {
+          bid_amount: number | null
           created_at: string
           email: string
           id: string
@@ -228,10 +265,12 @@ export type Database = {
           message: string | null
           name: string
           phone: string | null
+          request_type: string
           status: string
           ticket_request_id: string | null
         }
         Insert: {
+          bid_amount?: number | null
           created_at?: string
           email: string
           id?: string
@@ -239,10 +278,12 @@ export type Database = {
           message?: string | null
           name: string
           phone?: string | null
+          request_type?: string
           status?: string
           ticket_request_id?: string | null
         }
         Update: {
+          bid_amount?: number | null
           created_at?: string
           email?: string
           id?: string
@@ -250,6 +291,7 @@ export type Database = {
           message?: string | null
           name?: string
           phone?: string | null
+          request_type?: string
           status?: string
           ticket_request_id?: string | null
         }
