@@ -453,19 +453,41 @@ const Admin = () => {
                 </div>
 
                 {/* Image upload */}
-                <div className="flex items-center gap-4">
-                  {editingLot.image_url && (
-                    <div className="relative w-20 h-20 border border-cream/10 overflow-hidden">
-                      <img src={getImageUrl(editingLot.image_url) || ""} alt="" className="w-full h-full object-cover" />
-                      <button onClick={() => setEditingLot({ ...editingLot, image_url: null })} className="absolute top-0 right-0 bg-destructive text-destructive-foreground p-0.5">
-                        <X size={12} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-cream/50 text-[10px] uppercase tracking-[0.2em] font-body mb-2">Основное фото</p>
+                    <div className="flex items-center gap-3">
+                      {editingLot.image_url && (
+                        <div className="relative w-24 h-24 border border-cream/10 overflow-hidden rounded">
+                          <img src={getImageUrl(editingLot.image_url) || ""} alt="" className="w-full h-full object-cover" />
+                          <button onClick={() => setEditingLot({ ...editingLot, image_url: null })} className="absolute top-0 right-0 bg-destructive text-destructive-foreground p-0.5">
+                            <X size={12} />
+                          </button>
+                        </div>
+                      )}
+                      <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) uploadImage(e.target.files[0], "image_url"); }} />
+                      <button onClick={() => fileRef.current?.click()} disabled={uploading} className="flex items-center gap-2 border border-cream/10 text-cream/60 px-4 py-2 text-xs uppercase tracking-[0.2em] font-body hover:text-cream hover:border-cream/30 transition-colors disabled:opacity-50">
+                        <Upload size={14} /> {uploading ? "..." : "Фото"}
                       </button>
                     </div>
-                  )}
-                  <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) uploadImage(e.target.files[0]); }} />
-                  <button onClick={() => fileRef.current?.click()} disabled={uploading} className="flex items-center gap-2 border border-cream/10 text-cream/60 px-4 py-2 text-xs uppercase tracking-[0.2em] font-body hover:text-cream hover:border-cream/30 transition-colors disabled:opacity-50">
-                    <Upload size={14} /> {uploading ? "Загрузка..." : "Загрузить фото"}
-                  </button>
+                  </div>
+                  <div>
+                    <p className="text-cream/50 text-[10px] uppercase tracking-[0.2em] font-body mb-2">Превью (для карточки)</p>
+                    <div className="flex items-center gap-3">
+                      {editingLot.preview_image_url && (
+                        <div className="relative w-24 h-24 border border-cream/10 overflow-hidden rounded">
+                          <img src={getImageUrl(editingLot.preview_image_url) || ""} alt="" className="w-full h-full object-cover" />
+                          <button onClick={() => setEditingLot({ ...editingLot, preview_image_url: null })} className="absolute top-0 right-0 bg-destructive text-destructive-foreground p-0.5">
+                            <X size={12} />
+                          </button>
+                        </div>
+                      )}
+                      <input ref={previewFileRef} type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) uploadImage(e.target.files[0], "preview_image_url"); }} />
+                      <button onClick={() => previewFileRef.current?.click()} disabled={uploading} className="flex items-center gap-2 border border-cream/10 text-cream/60 px-4 py-2 text-xs uppercase tracking-[0.2em] font-body hover:text-cream hover:border-cream/30 transition-colors disabled:opacity-50">
+                        <Upload size={14} /> {uploading ? "..." : "Превью"}
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-4 flex-wrap">
