@@ -19,6 +19,7 @@ type Lot = {
 
 const LotsPreviewSection = () => {
   const [dbLots, setDbLots] = useState<Lot[]>([]);
+  const [maxBids, setMaxBids] = useState<Record<string, number>>({});
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -28,7 +29,24 @@ const LotsPreviewSection = () => {
         .select("id, title, description, image_url, preview_image_url, starting_price, category, status, end_at, archive_date, sort_order")
         .is("archive_date", null)
         .order("sort_order");
-      if (data) setDbLots(data as unknown as Lot[]);
+      if (data) {
+        setDbLots(data as unknown as Lot[]);
+        const ids = (data as Lot[]).map((l) => l.id);
+        if (ids.length > 0) {
+          const map: Record<string, number> = {};
+          const [{ data: bidsData }, { data: resData }] = await Promise.all([
+            supabase.from("bids").select("lot_id, amount").in("lot_id", ids),
+            supabase.from("lot_reservations" as any).select("lot_id, bid_amount").in("lot_id", ids).not("bid_amount", "is", null),
+          ]);
+          (bidsData ?? []).forEach((b: any) => {
+            if (!map[b.lot_id] || b.amount > map[b.lot_id]) map[b.lot_id] = b.amount;
+          });
+          (resData ?? []).forEach((r: any) => {
+            if (r.bid_amount && (!map[r.lot_id] || r.bid_amount > map[r.lot_id])) map[r.lot_id] = r.bid_amount;
+          });
+          setMaxBids(map);
+        }
+      }
       setLoaded(true);
     };
     fetchLots();
