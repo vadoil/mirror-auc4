@@ -611,6 +611,71 @@ const Admin = () => {
           </div>
         )}
 
+        {tab === "lot_requests" && (
+          <div>
+            <h2 className="font-display text-2xl uppercase mb-6">Заявки на лоты (ставки и покупки)</h2>
+            <div className="space-y-2">
+              {lotReservations.map((r) => {
+                const lotTitle = lots.find(l => l.id === r.lot_id)?.title || r.lot_id.slice(0, 8);
+                const isBuy = r.request_type === "buy";
+                return (
+                  <div key={r.id} className="bg-cream/5 border border-cream/10 p-4">
+                    <div className="flex items-start justify-between gap-4 flex-wrap">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-1 flex-wrap">
+                          <p className="font-body text-sm text-cream font-medium">{r.name}</p>
+                          <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-0.5 ${isBuy ? "bg-primary/20 text-primary" : "bg-blue-500/20 text-blue-300"}`}>
+                            {isBuy ? "Купить" : "Ставка"}
+                          </span>
+                          <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-cream/10 text-cream/60">
+                            {r.status}
+                          </span>
+                        </div>
+                        <p className="text-cream/60 text-xs font-body">Лот: {lotTitle}</p>
+                        <p className="text-cream/40 text-xs font-body mt-0.5">{r.email}{r.phone ? ` · ${r.phone}` : ""}</p>
+                        {r.message && <p className="text-cream/60 text-xs font-body mt-2 whitespace-pre-line">{r.message}</p>}
+                      </div>
+                      <div className="flex flex-col items-end gap-1 shrink-0">
+                        {r.bid_amount != null && (
+                          <p className="font-numbers text-lg text-cream">{r.bid_amount.toLocaleString("ru-RU")} ₽</p>
+                        )}
+                        <p className="text-cream/30 text-xs font-body whitespace-nowrap">{new Date(r.created_at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+              {lotReservations.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Нет заявок на лоты</p>}
+            </div>
+          </div>
+        )}
+
+        {tab === "forum" && (
+          <div>
+            <h2 className="font-display text-2xl uppercase mb-6">Заявки на форум</h2>
+            <div className="space-y-2">
+              {forumRegs.map((r) => (
+                <div key={r.id} className="bg-cream/5 border border-cream/10 p-4">
+                  <div className="flex items-start justify-between gap-4 flex-wrap">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-1 flex-wrap">
+                        <p className="font-body text-sm text-cream font-medium">{r.name}</p>
+                        <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-cream/10 text-cream/60">
+                          {r.status}
+                        </span>
+                      </div>
+                      <p className="text-cream/40 text-xs font-body">{r.email}{r.phone ? ` · ${r.phone}` : ""}{r.city ? ` · ${r.city}` : ""}</p>
+                      {r.message && <p className="text-cream/60 text-xs font-body mt-2 whitespace-pre-line">{r.message}</p>}
+                    </div>
+                    <p className="text-cream/30 text-xs font-body whitespace-nowrap">{new Date(r.created_at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</p>
+                  </div>
+                </div>
+              ))}
+              {forumRegs.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Нет заявок на форум</p>}
+            </div>
+          </div>
+        )}
+
         {tab === "utm" && (
           <div>
             <div className="flex items-center justify-between mb-6">
