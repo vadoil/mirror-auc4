@@ -40,7 +40,7 @@ const LotDetail = () => {
     const fetchBids = async () => {
       const [{ data: bidsData }, { data: resData }] = await Promise.all([
         supabase.from("bids").select("id, amount, created_at, user_id").eq("lot_id", id).limit(50),
-        supabase.from("lot_reservations" as any).select("id, bid_amount, created_at").eq("lot_id", id).not("bid_amount", "is", null).limit(50),
+        supabase.from("lot_reservation_bids" as any).select("id, bid_amount, created_at").eq("lot_id", id).not("bid_amount", "is", null).limit(50),
       ]);
       const merged: Bid[] = [
         ...((bidsData ?? []) as any[]).map((b) => ({ id: b.id, amount: b.amount, created_at: b.created_at, user_id: b.user_id })),
