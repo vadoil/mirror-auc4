@@ -169,14 +169,14 @@ const Admin = () => {
     if (data) setBids(data as Bid[]);
   };
 
-  const uploadImage = async (file: File) => {
+  const uploadImage = async (file: File, field: "image_url" | "preview_image_url" = "image_url") => {
     setUploading(true);
     const ext = file.name.split(".").pop();
     const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
     const { error } = await supabase.storage.from("lot-images").upload(path, file);
     setUploading(false);
     if (error) { toast.error("Ошибка загрузки фото"); return; }
-    setEditingLot((prev) => prev ? { ...prev, image_url: path } : prev);
+    setEditingLot((prev) => prev ? { ...prev, [field]: path } : prev);
     toast.success("Фото загружено");
   };
 
