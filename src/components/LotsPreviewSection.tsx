@@ -165,10 +165,14 @@ const LotsPreviewSection = () => {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-[9px] uppercase tracking-[0.15em] text-muted-foreground/60 font-body">
-                          {isSold ? "Финальная цена" : "Старт"}
+                          {isSold ? "Финальная цена" : maxBids[lot.id] ? "Текущая ставка" : "Старт"}
                         </p>
-                        <p className={`font-numbers text-base font-light ${isSold ? "text-primary" : "text-foreground"}`}>{lot.starting_price.toLocaleString("ru-RU")} ₽</p>
+                        <p className={`font-numbers text-base font-light ${isSold ? "text-primary" : maxBids[lot.id] ? "text-primary" : "text-foreground"}`}>
+                          {(maxBids[lot.id] || lot.starting_price).toLocaleString("ru-RU")} ₽
+                        </p>
                       </div>
+                      <ArrowRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors duration-300" />
+                    </div>
                       <ArrowRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors duration-300" />
                     </div>
                   </div>
