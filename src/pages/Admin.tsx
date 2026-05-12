@@ -195,6 +195,7 @@ const Admin = () => {
       title: editingLot.title,
       description: editingLot.description || null,
       image_url: editingLot.image_url || null,
+      preview_image_url: editingLot.preview_image_url || null,
       starting_price: editingLot.starting_price || 0,
       current_price: editingLot.current_price || 0,
       bid_step: editingLot.bid_step || 1000,
