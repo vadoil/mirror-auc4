@@ -54,18 +54,18 @@ const Lots = () => {
         setAllLots(lotsData as unknown as Lot[]);
         const ids = (lotsData as Lot[]).map((l) => l.id);
         if (ids.length > 0) {
-          const { data: bidsData } = await supabase
-            .from("bids")
-            .select("lot_id, amount")
-            .in("lot_id", ids)
-            .order("amount", { ascending: false });
-          if (bidsData) {
-            const map: Record<string, number> = {};
-            bidsData.forEach((b: any) => {
-              if (!map[b.lot_id] || b.amount > map[b.lot_id]) map[b.lot_id] = b.amount;
-            });
-            setMaxBids(map);
-          }
+          const map: Record<string, number> = {};
+          const [{ data: bidsData }, { data: resData }] = await Promise.all([
+            supabase.from("bids").select("lot_id, amount").in("lot_id", ids),
+            supabase.from("lot_reservations" as any).select("lot_id, bid_amount").in("lot_id", ids).not("bid_amount", "is", null),
+          ]);
+          (bidsData ?? []).forEach((b: any) => {
+            if (!map[b.lot_id] || b.amount > map[b.lot_id]) map[b.lot_id] = b.amount;
+          });
+          (resData ?? []).forEach((r: any) => {
+            if (r.bid_amount && (!map[r.lot_id] || r.bid_amount > map[r.lot_id])) map[r.lot_id] = r.bid_amount;
+          });
+          setMaxBids(map);
         }
       }
       setLoading(false);

@@ -38,13 +38,15 @@ const LotDetail = () => {
       setLoading(false);
     };
     const fetchBids = async () => {
-      const { data } = await supabase
-        .from("bids")
-        .select("id, amount, created_at, user_id")
-        .eq("lot_id", id)
-        .order("amount", { ascending: false })
-        .limit(20);
-      if (data) setBids(data);
+      const [{ data: bidsData }, { data: resData }] = await Promise.all([
+        supabase.from("bids").select("id, amount, created_at, user_id").eq("lot_id", id).limit(50),
+        supabase.from("lot_reservations" as any).select("id, bid_amount, created_at").eq("lot_id", id).not("bid_amount", "is", null).limit(50),
+      ]);
+      const merged: Bid[] = [
+        ...((bidsData ?? []) as any[]).map((b) => ({ id: b.id, amount: b.amount, created_at: b.created_at, user_id: b.user_id })),
+        ...((resData ?? []) as any[]).map((r) => ({ id: r.id, amount: r.bid_amount, created_at: r.created_at, user_id: null })),
+      ].sort((a, b) => b.amount - a.amount);
+      setBids(merged.slice(0, 20));
     };
     fetchLot();
     fetchBids();
