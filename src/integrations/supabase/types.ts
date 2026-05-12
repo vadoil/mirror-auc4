@@ -581,7 +581,35 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      lot_reservation_bids: {
+        Row: {
+          bid_amount: number | null
+          created_at: string | null
+          id: string | null
+          lot_id: string | null
+        }
+        Insert: {
+          bid_amount?: number | null
+          created_at?: string | null
+          id?: string | null
+          lot_id?: string | null
+        }
+        Update: {
+          bid_amount?: number | null
+          created_at?: string | null
+          id?: string | null
+          lot_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lot_reservations_lot_id_fkey"
+            columns: ["lot_id"]
+            isOneToOne: false
+            referencedRelation: "lots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       delete_email: {
