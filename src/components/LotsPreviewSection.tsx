@@ -173,8 +173,6 @@ const LotsPreviewSection = () => {
                       </div>
                       <ArrowRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors duration-300" />
                     </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors duration-300" />
-                    </div>
                   </div>
                 </Link>
               </motion.div>
