@@ -23,8 +23,8 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <Link to="/#tickets" className="btn-primary">
-            Зарегистрироваться
+          <Link to="/forum#registration" className="btn-primary">
+            Регистрация на форум
           </Link>
         </div>
       </div>
