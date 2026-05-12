@@ -10,6 +10,8 @@ type Lot = {
   title: string;
   description: string | null;
   image_url: string | null;
+  preview_image_url: string | null;
+  archive_date: string | null;
   starting_price: number;
   current_price: number;
   bid_step: number;
