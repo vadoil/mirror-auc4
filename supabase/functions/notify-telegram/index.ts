@@ -54,14 +54,42 @@ function buildText(event: string, data: Record<string, unknown>): string {
         fmt("Телефон", data.bidder_phone)
       );
     }
-    case "lot_interest": {
+    case "lot_interest":
+    case "lot_bid_request": {
+      const amount = data.amount ? `${Number(data.amount).toLocaleString("ru-RU")} ₽` : "—";
       return (
-        `<b>🔔 Заявка на лот</b>\n\n` +
-        fmt("Лот", data.lot_title) +
-        fmt("Имя", data.name) +
-        fmt("Телефон", data.phone) +
-        fmt("Email", data.email) +
-        (data.message ? `\n<i>${escapeHtml(String(data.message))}</i>` : "")
+        `🔨 <b>Новая ставка на лот</b>\n` +
+        `━━━━━━━━━━━━━━━━━━\n\n` +
+        `🎁 <b>Лот:</b> ${escapeHtml(String(data.lot_title ?? ""))}\n` +
+        `💰 <b>Ставка:</b> ${amount}\n\n` +
+        `👤 <b>${escapeHtml(String(data.name ?? ""))}</b>\n` +
+        `📞 <a href="tel:${escapeHtml(String(data.phone ?? ""))}">${escapeHtml(String(data.phone ?? ""))}</a>` +
+        (data.email ? `\n✉️ ${escapeHtml(String(data.email))}` : "") +
+        (data.message ? `\n\n💬 <i>${escapeHtml(String(data.message))}</i>` : "") +
+        `\n\n<i>Свяжитесь с участником для подтверждения ставки.</i>`
+      );
+    }
+    case "lot_buy_request": {
+      return (
+        `🛒 <b>Заявка на покупку лота</b>\n` +
+        `━━━━━━━━━━━━━━━━━━\n\n` +
+        `🎁 <b>Лот:</b> ${escapeHtml(String(data.lot_title ?? ""))}\n\n` +
+        `👤 <b>${escapeHtml(String(data.name ?? ""))}</b>\n` +
+        `📞 <a href="tel:${escapeHtml(String(data.phone ?? ""))}">${escapeHtml(String(data.phone ?? ""))}</a>` +
+        (data.email ? `\n✉️ ${escapeHtml(String(data.email))}` : "") +
+        (data.message ? `\n\n💬 <i>${escapeHtml(String(data.message))}</i>` : "") +
+        `\n\n<i>Участник хочет купить лот напрямую — свяжитесь для оформления.</i>`
+      );
+    }
+    case "forum_registration": {
+      return (
+        `🌿 <b>Заявка на форум «Отражение»</b>\n` +
+        `━━━━━━━━━━━━━━━━━━\n\n` +
+        `👤 <b>${escapeHtml(String(data.name ?? ""))}</b>\n` +
+        (data.phone ? `📞 <a href="tel:${escapeHtml(String(data.phone))}">${escapeHtml(String(data.phone))}</a>\n` : "") +
+        (data.email ? `✉️ ${escapeHtml(String(data.email))}\n` : "") +
+        (data.city ? `📍 ${escapeHtml(String(data.city))}\n` : "") +
+        (data.message ? `\n💬 <i>${escapeHtml(String(data.message))}</i>` : "")
       );
     }
     default: {
