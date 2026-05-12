@@ -278,7 +278,7 @@ const LotDetail = () => {
                         <div className="flex items-center gap-2">
                           <User className="w-3.5 h-3.5 text-muted-foreground" />
                           <span className="text-muted-foreground">
-                            Участник ***{bid.user_id?.slice(-4) || "????"}
+                            Участник{bid.user_id ? ` ***${bid.user_id.slice(-4)}` : ""}
                           </span>
                         </div>
                         <div className="flex items-center gap-4">
