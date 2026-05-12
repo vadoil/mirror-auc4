@@ -426,7 +426,7 @@ const Admin = () => {
       <div className="p-6 max-w-7xl mx-auto">
         {tab === "lots" && (
           <div>
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
               <h2 className="font-display text-2xl uppercase">Управление лотами</h2>
               <button
                 onClick={() => setEditingLot({ title: "", starting_price: 0, current_price: 0, bid_step: 1000, status: "draft", sort_order: lots.length })}
@@ -434,6 +434,22 @@ const Admin = () => {
               >
                 <Plus size={14} /> Новый лот
               </button>
+            </div>
+            <div className="flex gap-1 mb-6 border-b border-cream/10">
+              {([
+                { key: "current", label: `Актуальные (${lots.filter(l => l.status !== "archived").length})` },
+                { key: "archive", label: `Архив (${lots.filter(l => l.status === "archived").length})` },
+              ] as const).map((s) => (
+                <button
+                  key={s.key}
+                  onClick={() => setLotsSubtab(s.key)}
+                  className={`px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-body transition-colors border-b-2 -mb-px ${
+                    lotsSubtab === s.key ? "border-primary text-cream" : "border-transparent text-cream/40 hover:text-cream"
+                  }`}
+                >
+                  {s.label}
+                </button>
+              ))}
             </div>
 
             {editingLot && (
