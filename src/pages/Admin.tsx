@@ -44,6 +44,30 @@ type TicketRequest = {
   promo_code: string | null;
 };
 
+type LotReservation = {
+  id: string;
+  lot_id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  message: string | null;
+  bid_amount: number | null;
+  request_type: string;
+  status: string;
+  created_at: string;
+};
+
+type ForumRegistration = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  city: string | null;
+  message: string | null;
+  status: string;
+  created_at: string;
+};
+
 type UtmVisit = {
   id: string;
   utm_source: string | null;
