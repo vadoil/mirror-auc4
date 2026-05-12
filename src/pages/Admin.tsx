@@ -387,7 +387,9 @@ const Admin = () => {
   const tabs = [
     { key: "lots" as const, label: "Лоты" },
     { key: "bids" as const, label: "Ставки" },
-    { key: "requests" as const, label: "Заявки" },
+    { key: "lot_requests" as const, label: "Заявки на лоты" },
+    { key: "forum" as const, label: "Форум" },
+    { key: "requests" as const, label: "Билеты" },
     { key: "utm" as const, label: "UTM" },
   ];
 
