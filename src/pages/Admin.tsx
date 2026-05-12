@@ -672,17 +672,25 @@ const Admin = () => {
               {lotReservations.map((r) => {
                 const lotTitle = lots.find(l => l.id === r.lot_id)?.title || r.lot_id.slice(0, 8);
                 const isBuy = r.request_type === "buy";
+                const isCancelled = r.status === "cancelled";
+                const cancelBid = async () => {
+                  if (!confirm(`Отменить ставку ${r.name} (${r.bid_amount?.toLocaleString("ru-RU")} ₽)? Текущая цена лота вернётся к предыдущей.`)) return;
+                  const { error } = await supabase.from("lot_reservations" as any).update({ status: "cancelled" }).eq("id", r.id);
+                  if (error) { toast.error("Не удалось отменить"); return; }
+                  toast.success("Ставка отменена");
+                  fetchLotReservations();
+                };
                 return (
-                  <div key={r.id} className="bg-cream/5 border border-cream/10 p-4">
-                    <div className="flex items-start justify-between gap-4 flex-wrap">
+                  <div key={r.id} className={`bg-cream/5 border border-cream/10 p-4 ${isCancelled ? "opacity-60" : ""}`}>
+                    <div className={`flex items-start justify-between gap-4 flex-wrap ${isCancelled ? "line-through decoration-primary/70 decoration-2" : ""}`}>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-3 mb-1 flex-wrap">
                           <p className="font-body text-sm text-cream font-medium">{r.name}</p>
-                          <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-0.5 ${isBuy ? "bg-primary/20 text-primary" : "bg-blue-500/20 text-blue-300"}`}>
+                          <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-0.5 no-underline ${isBuy ? "bg-primary/20 text-primary" : "bg-blue-500/20 text-blue-300"}`}>
                             {isBuy ? "Купить" : "Ставка"}
                           </span>
-                          <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-cream/10 text-cream/60">
-                            {r.status}
+                          <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-0.5 no-underline ${isCancelled ? "bg-primary/30 text-primary" : "bg-cream/10 text-cream/60"}`}>
+                            {isCancelled ? "отменена" : r.status}
                           </span>
                         </div>
                         <p className="text-cream/60 text-xs font-body">Лот: {lotTitle}</p>
@@ -693,9 +701,16 @@ const Admin = () => {
                         {r.bid_amount != null && (
                           <p className="font-numbers text-lg text-cream">{r.bid_amount.toLocaleString("ru-RU")} ₽</p>
                         )}
-                        <p className="text-cream/30 text-xs font-body whitespace-nowrap">{new Date(r.created_at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</p>
+                        <p className="text-cream/30 text-xs font-body whitespace-nowrap no-underline">{new Date(r.created_at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</p>
                       </div>
                     </div>
+                    {!isBuy && r.bid_amount != null && !isCancelled && (
+                      <div className="mt-3 flex justify-end">
+                        <button onClick={cancelBid} className="text-[10px] uppercase tracking-wider font-body px-3 py-1.5 border border-primary/40 text-primary hover:bg-primary/10 transition rounded">
+                          Отменить ставку
+                        </button>
+                      </div>
+                    )}
                   </div>
                 );
               })}
