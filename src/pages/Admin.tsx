@@ -95,10 +95,12 @@ const getImageUrl = (url: string | null) => {
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState<"lots" | "bids" | "requests" | "utm">("lots");
+  const [tab, setTab] = useState<"lots" | "bids" | "lot_requests" | "forum" | "requests" | "utm">("lots");
   const [lots, setLots] = useState<Lot[]>([]);
   const [bids, setBids] = useState<Bid[]>([]);
   const [requests, setRequests] = useState<TicketRequest[]>([]);
+  const [lotReservations, setLotReservations] = useState<LotReservation[]>([]);
+  const [forumRegs, setForumRegs] = useState<ForumRegistration[]>([]);
   const [utmVisits, setUtmVisits] = useState<UtmVisit[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingLot, setEditingLot] = useState<Partial<Lot> | null>(null);
@@ -110,8 +112,24 @@ const Admin = () => {
     if (tab === "lots") fetchLots();
     if (tab === "bids") fetchBids();
     if (tab === "requests") fetchRequests();
+    if (tab === "lot_requests") fetchLotReservations();
+    if (tab === "forum") fetchForumRegs();
     if (tab === "utm") fetchUtmVisits();
   }, [tab]);
+
+  const fetchLotReservations = async () => {
+    const { data } = await supabase.from("lot_reservations" as any).select("*").order("created_at", { ascending: false });
+    if (data) setLotReservations(data as any);
+    if (!lots.length) {
+      const { data: l } = await supabase.from("lots").select("*");
+      if (l) setLots(l as Lot[]);
+    }
+  };
+
+  const fetchForumRegs = async () => {
+    const { data } = await supabase.from("forum_registrations" as any).select("*").order("created_at", { ascending: false });
+    if (data) setForumRegs(data as any);
+  };
 
   const fetchUtmVisits = async () => {
     const { data } = await supabase.from("utm_visits").select("*").order("created_at", { ascending: false }).limit(10000);
