@@ -10,6 +10,8 @@ type Lot = {
   title: string;
   description: string | null;
   image_url: string | null;
+  preview_image_url: string | null;
+  archive_date: string | null;
   starting_price: number;
   current_price: number;
   bid_step: number;
@@ -105,7 +107,9 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [editingLot, setEditingLot] = useState<Partial<Lot> | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [lotsSubtab, setLotsSubtab] = useState<"current" | "archive">("current");
   const fileRef = useRef<HTMLInputElement>(null);
+  const previewFileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => { checkAuth(); }, []);
   useEffect(() => {
@@ -165,14 +169,14 @@ const Admin = () => {
     if (data) setBids(data as Bid[]);
   };
 
-  const uploadImage = async (file: File) => {
+  const uploadImage = async (file: File, field: "image_url" | "preview_image_url" = "image_url") => {
     setUploading(true);
     const ext = file.name.split(".").pop();
     const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
     const { error } = await supabase.storage.from("lot-images").upload(path, file);
     setUploading(false);
     if (error) { toast.error("Ошибка загрузки фото"); return; }
-    setEditingLot((prev) => prev ? { ...prev, image_url: path } : prev);
+    setEditingLot((prev) => prev ? { ...prev, [field]: path } : prev);
     toast.success("Фото загружено");
   };
 
@@ -191,6 +195,7 @@ const Admin = () => {
       title: editingLot.title,
       description: editingLot.description || null,
       image_url: editingLot.image_url || null,
+      preview_image_url: editingLot.preview_image_url || null,
       starting_price: editingLot.starting_price || 0,
       current_price: editingLot.current_price || 0,
       bid_step: editingLot.bid_step || 1000,
@@ -421,7 +426,7 @@ const Admin = () => {
       <div className="p-6 max-w-7xl mx-auto">
         {tab === "lots" && (
           <div>
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
               <h2 className="font-display text-2xl uppercase">Управление лотами</h2>
               <button
                 onClick={() => setEditingLot({ title: "", starting_price: 0, current_price: 0, bid_step: 1000, status: "draft", sort_order: lots.length })}
@@ -429,6 +434,22 @@ const Admin = () => {
               >
                 <Plus size={14} /> Новый лот
               </button>
+            </div>
+            <div className="flex gap-1 mb-6 border-b border-cream/10">
+              {([
+                { key: "current", label: `Актуальные (${lots.filter(l => l.status !== "archived").length})` },
+                { key: "archive", label: `Архив (${lots.filter(l => l.status === "archived").length})` },
+              ] as const).map((s) => (
+                <button
+                  key={s.key}
+                  onClick={() => setLotsSubtab(s.key)}
+                  className={`px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-body transition-colors border-b-2 -mb-px ${
+                    lotsSubtab === s.key ? "border-primary text-cream" : "border-transparent text-cream/40 hover:text-cream"
+                  }`}
+                >
+                  {s.label}
+                </button>
+              ))}
             </div>
 
             {editingLot && (
@@ -448,19 +469,41 @@ const Admin = () => {
                 </div>
 
                 {/* Image upload */}
-                <div className="flex items-center gap-4">
-                  {editingLot.image_url && (
-                    <div className="relative w-20 h-20 border border-cream/10 overflow-hidden">
-                      <img src={getImageUrl(editingLot.image_url) || ""} alt="" className="w-full h-full object-cover" />
-                      <button onClick={() => setEditingLot({ ...editingLot, image_url: null })} className="absolute top-0 right-0 bg-destructive text-destructive-foreground p-0.5">
-                        <X size={12} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-cream/50 text-[10px] uppercase tracking-[0.2em] font-body mb-2">Основное фото</p>
+                    <div className="flex items-center gap-3">
+                      {editingLot.image_url && (
+                        <div className="relative w-24 h-24 border border-cream/10 overflow-hidden rounded">
+                          <img src={getImageUrl(editingLot.image_url) || ""} alt="" className="w-full h-full object-cover" />
+                          <button onClick={() => setEditingLot({ ...editingLot, image_url: null })} className="absolute top-0 right-0 bg-destructive text-destructive-foreground p-0.5">
+                            <X size={12} />
+                          </button>
+                        </div>
+                      )}
+                      <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) uploadImage(e.target.files[0], "image_url"); }} />
+                      <button onClick={() => fileRef.current?.click()} disabled={uploading} className="flex items-center gap-2 border border-cream/10 text-cream/60 px-4 py-2 text-xs uppercase tracking-[0.2em] font-body hover:text-cream hover:border-cream/30 transition-colors disabled:opacity-50">
+                        <Upload size={14} /> {uploading ? "..." : "Фото"}
                       </button>
                     </div>
-                  )}
-                  <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) uploadImage(e.target.files[0]); }} />
-                  <button onClick={() => fileRef.current?.click()} disabled={uploading} className="flex items-center gap-2 border border-cream/10 text-cream/60 px-4 py-2 text-xs uppercase tracking-[0.2em] font-body hover:text-cream hover:border-cream/30 transition-colors disabled:opacity-50">
-                    <Upload size={14} /> {uploading ? "Загрузка..." : "Загрузить фото"}
-                  </button>
+                  </div>
+                  <div>
+                    <p className="text-cream/50 text-[10px] uppercase tracking-[0.2em] font-body mb-2">Превью (для карточки)</p>
+                    <div className="flex items-center gap-3">
+                      {editingLot.preview_image_url && (
+                        <div className="relative w-24 h-24 border border-cream/10 overflow-hidden rounded">
+                          <img src={getImageUrl(editingLot.preview_image_url) || ""} alt="" className="w-full h-full object-cover" />
+                          <button onClick={() => setEditingLot({ ...editingLot, preview_image_url: null })} className="absolute top-0 right-0 bg-destructive text-destructive-foreground p-0.5">
+                            <X size={12} />
+                          </button>
+                        </div>
+                      )}
+                      <input ref={previewFileRef} type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) uploadImage(e.target.files[0], "preview_image_url"); }} />
+                      <button onClick={() => previewFileRef.current?.click()} disabled={uploading} className="flex items-center gap-2 border border-cream/10 text-cream/60 px-4 py-2 text-xs uppercase tracking-[0.2em] font-body hover:text-cream hover:border-cream/30 transition-colors disabled:opacity-50">
+                        <Upload size={14} /> {uploading ? "..." : "Превью"}
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-4 flex-wrap">
@@ -483,28 +526,39 @@ const Admin = () => {
             )}
 
             <div className="space-y-2">
-              {lots.map((lot) => (
-                <div key={lot.id} className="bg-cream/5 border border-cream/10 p-4 flex items-center gap-4">
-                  {lot.image_url && (
-                    <img src={getImageUrl(lot.image_url) || ""} alt="" className="w-12 h-12 object-cover" />
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <p className="font-body text-sm text-cream truncate">{lot.title}</p>
-                    <p className="text-cream/40 text-xs font-body">{lot.category || "–"} · {lot.starting_price.toLocaleString()} ₽ · шаг {lot.bid_step.toLocaleString()} ₽</p>
-                  </div>
-                  <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-1 ${
-                    lot.status === "active" ? "bg-green-500/20 text-green-400" :
-                    lot.status === "ended" ? "bg-yellow-500/20 text-yellow-400" :
-                    lot.status === "draft" ? "bg-cream/10 text-cream/30" :
-                    "bg-cream/10 text-cream/30"
-                  }`}>
-                    {statusLabels[lot.status] || lot.status}
-                  </span>
-                  <button onClick={() => setEditingLot(lot)} className="text-cream/40 hover:text-cream text-xs font-body">Ред.</button>
-                  <button onClick={() => deleteLot(lot.id)} className="text-cream/40 hover:text-destructive"><Trash2 size={14} /></button>
-                </div>
-              ))}
-              {lots.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Нет лотов</p>}
+              {(() => {
+                const filtered = lots.filter(l => lotsSubtab === "archive" ? l.status === "archived" : l.status !== "archived");
+                if (filtered.length === 0) return <p className="text-cream/30 text-sm font-body text-center py-8">Нет лотов</p>;
+                return filtered.map((lot) => {
+                  const thumb = lot.preview_image_url || lot.image_url;
+                  return (
+                    <div key={lot.id} className="bg-cream/5 border border-cream/10 p-3 flex items-center gap-4">
+                      {thumb ? (
+                        <img src={getImageUrl(thumb) || ""} alt="" className="w-20 h-20 object-cover rounded shrink-0" />
+                      ) : (
+                        <div className="w-20 h-20 bg-cream/5 border border-cream/10 rounded shrink-0 flex items-center justify-center text-cream/20 text-[10px] font-body">нет фото</div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <p className="font-body text-sm text-cream truncate">{lot.title}</p>
+                        <p className="text-cream/40 text-xs font-body mt-1">{lot.category || "–"} · {lot.starting_price.toLocaleString()} ₽ · шаг {lot.bid_step.toLocaleString()} ₽</p>
+                        {!lot.preview_image_url && lot.image_url && (
+                          <p className="text-yellow-400/60 text-[10px] font-body mt-1">⚠ Нет превью — карточка использует основное фото</p>
+                        )}
+                      </div>
+                      <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-1 ${
+                        lot.status === "active" ? "bg-green-500/20 text-green-400" :
+                        lot.status === "ended" ? "bg-yellow-500/20 text-yellow-400" :
+                        lot.status === "archived" ? "bg-cream/10 text-cream/40" :
+                        "bg-cream/10 text-cream/30"
+                      }`}>
+                        {statusLabels[lot.status] || lot.status}
+                      </span>
+                      <button onClick={() => setEditingLot(lot)} className="text-cream/40 hover:text-cream text-xs font-body">Ред.</button>
+                      <button onClick={() => deleteLot(lot.id)} className="text-cream/40 hover:text-destructive"><Trash2 size={14} /></button>
+                    </div>
+                  );
+                });
+              })()}
             </div>
           </div>
         )}
