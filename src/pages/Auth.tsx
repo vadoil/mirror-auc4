@@ -1,16 +1,14 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Gavel } from "lucide-react";
-import TicketRequestModal from "@/components/TicketRequestModal";
 
 const Auth = () => {
   const [mode, setMode] = useState<"login" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [ticketModal, setTicketModal] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,9 +54,9 @@ const Auth = () => {
         <h1 className="font-display text-3xl text-cream uppercase tracking-tight mb-1">
           {mode === "login" ? "Вход" : "Восстановление"}
         </h1>
-        <p className="text-cream/40 text-xs font-body mb-8">
+        <p className="text-cream/40 text-xs font-body mb-6 leading-relaxed">
           {mode === "login"
-            ? "Войдите, чтобы проявить интерес к лоту и показать свою цену. Платить не нужно — все ставки делаются во время аукциона."
+            ? "Личный кабинет — для участников прошлого аукциона. Чтобы участвовать в текущих торгах, регистрация не нужна — просто оставьте заявку на странице лота."
             : "Введите email для получения ссылки"}
         </p>
 
@@ -87,24 +85,19 @@ const Auth = () => {
             disabled={loading}
             className="w-full bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:opacity-90 transition-all disabled:opacity-50"
           >
-            {loading
-              ? "Загрузка..."
-              : mode === "login"
-              ? "Войти"
-              : "Отправить ссылку"}
+            {loading ? "Загрузка..." : mode === "login" ? "Войти" : "Отправить ссылку"}
           </button>
         </form>
 
         <div className="mt-6 text-center space-y-2">
-          {mode === "login" && (
+          {mode === "login" ? (
             <button
               onClick={() => setMode("forgot")}
               className="block w-full text-cream/40 text-xs font-body hover:text-cream/60 transition-colors"
             >
               Забыли пароль?
             </button>
-          )}
-          {mode === "forgot" && (
+          ) : (
             <button
               onClick={() => setMode("login")}
               className="text-cream/40 text-xs font-body hover:text-cream/60 transition-colors"
@@ -112,28 +105,35 @@ const Auth = () => {
               Вернуться к входу
             </button>
           )}
-          <button
-            onClick={() => setTicketModal(true)}
-            className="text-primary/80 text-xs font-body hover:text-primary transition-colors"
-          >
-            Нет аккаунта? Зарегистрироваться на аукцион
-          </button>
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-cream/10">
+          <p className="text-cream/50 text-xs font-body leading-relaxed text-center">
+            Регистрация новых участников — через куратора онлайн-торгов{" "}
+            <span className="text-cream/80">Александры Павловой</span>:
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center mt-2 text-xs font-body">
+            <a href="tel:+79623646646" className="text-primary/90 hover:text-primary transition-colors">
+              +7 (962) 364-66-46
+            </a>
+            <a
+              href="https://t.me/alexa_ah_alexa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary/90 hover:text-primary transition-colors"
+            >
+              @alexa_ah_alexa
+            </a>
+          </div>
         </div>
 
         <a
           href="/"
-          className="block text-center mt-4 text-cream/30 text-xs font-body hover:text-cream/60 transition-colors"
+          className="block text-center mt-6 text-cream/30 text-xs font-body hover:text-cream/60 transition-colors"
         >
           ← На главную
         </a>
       </div>
-
-      <TicketRequestModal
-        isOpen={ticketModal}
-        onClose={() => setTicketModal(false)}
-        ticketType="Участник аукциона"
-        ticketPrice="15 000 ₽"
-      />
     </div>
   );
 };
