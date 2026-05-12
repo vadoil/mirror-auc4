@@ -107,7 +107,9 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [editingLot, setEditingLot] = useState<Partial<Lot> | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [lotsSubtab, setLotsSubtab] = useState<"current" | "archive">("current");
   const fileRef = useRef<HTMLInputElement>(null);
+  const previewFileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => { checkAuth(); }, []);
   useEffect(() => {
