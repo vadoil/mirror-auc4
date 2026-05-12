@@ -177,9 +177,14 @@ const LotDetail = () => {
                 <div className="flex items-end justify-between mb-4">
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body mb-1">
-                      {bids.length > 0 ? "Текущая цена" : "Стартовая цена"}
+                      {bids.length > 0 ? "Текущая ставка" : "Стартовая цена"}
                     </p>
                     <p className="font-numbers text-4xl text-foreground font-light">{formatPrice(currentPrice)}</p>
+                    {bids.length > 0 && (
+                      <p className="text-[11px] text-muted-foreground font-body mt-1">
+                        Старт: <span className="font-numbers">{formatPrice(lot.starting_price)}</span>
+                      </p>
+                    )}
                   </div>
                   <div className="text-right">
                     <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body mb-1">Шаг</p>
