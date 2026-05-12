@@ -63,11 +63,8 @@ const LotsPreviewSection = () => {
             </p>
           </div>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/lots" className="btn-outline inline-flex items-center gap-2">
+            <Link to="/lots" className="btn-primary inline-flex items-center gap-2">
               Все лоты <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link to="/#tickets" className="btn-primary inline-flex items-center gap-2">
-              Регистрация
             </Link>
           </div>
         </motion.div>

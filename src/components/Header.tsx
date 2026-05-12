@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, LogIn, Home } from "lucide-react";
+import { Menu, X, Home } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import TicketRequestModal from "./TicketRequestModal";
 import logoOtrazhenie from "@/assets/logo-otrazhenie-final.png";
@@ -9,6 +9,7 @@ import logoOtrazhenieLight from "@/assets/logo-otrazhenie-light.png";
 
 const navItems = [
   { label: "Лоты", href: "/lots" },
+  { label: "Форум", href: "/forum" },
   { label: "Программа", href: "/program" },
   { label: "Галерея", href: "/gallery" },
   { label: "Как участвовать", href: "/how-it-works" },
@@ -119,20 +120,13 @@ const Header = () => {
             >
               Задать вопрос
             </button>
-            {user ? (
+            {user && (
               <button
                 onClick={() => signOut()}
                 className={`${secondaryText} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${secondaryHover} transition-colors duration-300 whitespace-nowrap`}
               >
                 Выйти
               </button>
-            ) : (
-              <Link
-                to="/auth"
-                className={`flex items-center gap-1.5 ${secondaryText} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${secondaryHover} transition-colors duration-300 whitespace-nowrap`}
-              >
-                <LogIn className="w-3.5 h-3.5" /> Войти
-              </Link>
             )}
           </nav>
 
@@ -175,14 +169,10 @@ const Header = () => {
                 >
                   Задать вопрос
                 </button>
-                {user ? (
+                {user && (
                   <button onClick={() => { setMenuOpen(false); signOut(); }} className="text-muted-foreground text-sm uppercase tracking-[0.2em] font-body">
                     Выйти
                   </button>
-                ) : (
-                  <Link to="/auth" onClick={() => setMenuOpen(false)} className="text-muted-foreground text-sm uppercase tracking-[0.2em] font-body">
-                    Войти
-                  </Link>
                 )}
               </nav>
             </motion.div>

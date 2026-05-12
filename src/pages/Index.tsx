@@ -10,7 +10,6 @@ import PrizesSection from "@/components/PrizesSection";
 import AuctioneerSection from "@/components/AuctioneerSection";
 import VenuePreviewSection from "@/components/VenuePreviewSection";
 import TransparencySection from "@/components/TransparencySection";
-import TicketsSection from "@/components/TicketsSection";
 import ForumBannerSection from "@/components/ForumBannerSection";
 import OrganizersSection from "@/components/OrganizersSection";
 
@@ -37,7 +36,6 @@ const Index = () => {
         <DressCodeSection />
         
         <TransparencySection />
-        <TicketsSection />
         <ForumBannerSection />
         <SponsorsSection />
         <ContactsSection />
