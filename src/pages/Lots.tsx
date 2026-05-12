@@ -57,7 +57,7 @@ const Lots = () => {
           const map: Record<string, number> = {};
           const [{ data: bidsData }, { data: resData }] = await Promise.all([
             supabase.from("bids").select("lot_id, amount").in("lot_id", ids),
-            supabase.from("lot_reservations" as any).select("lot_id, bid_amount").in("lot_id", ids).not("bid_amount", "is", null),
+            supabase.from("lot_reservation_bids" as any).select("lot_id, bid_amount").in("lot_id", ids).not("bid_amount", "is", null),
           ]);
           (bidsData ?? []).forEach((b: any) => {
             if (!map[b.lot_id] || b.amount > map[b.lot_id]) map[b.lot_id] = b.amount;
