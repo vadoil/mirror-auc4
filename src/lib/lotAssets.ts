@@ -16,7 +16,6 @@ import lotKarmalogicBook from "@/assets/lot-karmalogic-book.jpg";
 import lotSoloviy from "@/assets/lot-soloviy.jpg";
 import lotLevEdinorog from "@/assets/lot-lev-edinorog.jpg";
 import lotLevEdinorogDetail from "@/assets/lot-lev-edinorog-detail.jpg";
-import lotLevEdinorogDetail from "@/assets/lot-lev-edinorog-detail.jpg";
 
 import { supabase } from "@/integrations/supabase/client";
 
