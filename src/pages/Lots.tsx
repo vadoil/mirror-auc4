@@ -43,6 +43,24 @@ const Lots = () => {
   const [maxBids, setMaxBids] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<string>(
+    typeof window !== "undefined" && window.location.hash === "#reviews" ? "archive" : "active"
+  );
+
+  useEffect(() => {
+    const onHashChange = () => {
+      if (window.location.hash === "#reviews") {
+        setActiveTab("archive");
+        // позволяем вкладке отрендериться, потом скроллим
+        setTimeout(() => {
+          document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 80);
+      }
+    };
+    window.addEventListener("hashchange", onHashChange);
+    if (window.location.hash === "#reviews") onHashChange();
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -248,19 +266,28 @@ const Lots = () => {
             <p className="font-body text-muted-foreground text-base max-w-2xl">
               Все средства, вырученные с аукциона и продажи билетов, направляются в поддержку фонда «Не напрасно».
             </p>
-            <a
-              href="#reviews"
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab("archive");
+                if (typeof window !== "undefined") {
+                  history.replaceState(null, "", "#reviews");
+                }
+                setTimeout(() => {
+                  document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }, 80);
+              }}
               className="inline-flex items-center gap-2 mt-6 px-4 py-2 border border-primary/40 text-primary text-[11px] uppercase tracking-[0.2em] font-body rounded-full hover:bg-primary hover:text-primary-foreground transition-all"
             >
               <MessageCircle className="w-3.5 h-3.5" />
               Отзывы гостей
-            </a>
+            </button>
           </motion.div>
 
           {loading ? (
             <div className="text-muted-foreground font-body text-center py-20">Загрузка лотов…</div>
           ) : (
-            <Tabs defaultValue="active" className="w-full">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="mb-10 h-auto bg-transparent border-b border-border/60 rounded-none p-0 w-full justify-start gap-1">
                 <TabsTrigger
                   value="active"

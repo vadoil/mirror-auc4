@@ -11,7 +11,6 @@ type Review = {
   name: string;
   message: string;
   photo?: string;
-  caption?: string;
 };
 
 const STATIC_REVIEWS: Review[] = [
@@ -21,7 +20,6 @@ const STATIC_REVIEWS: Review[] = [
     message:
       "Посетил благотворительный аукцион «Отражение добра» фонда «Не напрасно». Интересные люди, хорошая организация, яркие ведущие — Александр Цыпкин и Юрий Омельченко создали весёлую и непринуждённую камерную атмосферу тёплого вечера. Неординарные лоты дали возможность не только быть вкладом в полезное и нужное дело — поддержку подготовки жизненно важных специалистов в сфере онкологии, но также прикоснуться к роскоши материального мира (колье YSL или часы Чугунова), попробовать прогрессивные технологии здорового образа жизни и встретиться с неординарными личностями (Хакамада, Ситников, Белов, Цыпкин). С большим удовольствием и пользой провёл вечер. Организаторам — большая благодарность!",
     photo: reviewNaumovPhoto,
-    caption: "Олег Наумов с командой организаторов",
   },
   {
     id: "static-naumov-2",
@@ -29,9 +27,38 @@ const STATIC_REVIEWS: Review[] = [
     message:
       "Ситников крут и обаятелен невероятно! За знакомство и возможность несколько часов разговаривать с умнейшим человеком нашего времени — Алексеем Петровичем Ситниковым — организаторам аукциона отдельная благодарность.",
     photo: reviewNaumovTg,
-    caption: "Отзыв в Telegram",
   },
 ];
+
+const ReviewCard = ({ review, index }: { review: Review; index: number }) => (
+  <motion.article
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: 0.05 * index }}
+    className="bg-card border border-border rounded-lg overflow-hidden flex flex-col h-full"
+  >
+    {review.photo && (
+      <div className="bg-muted/30 overflow-hidden flex items-center justify-center">
+        <img
+          src={review.photo}
+          alt={review.name}
+          loading="lazy"
+          className="w-full h-auto object-contain max-h-[520px]"
+        />
+      </div>
+    )}
+    <div className="p-5 flex-1 flex flex-col">
+      <Quote className="w-5 h-5 text-primary/40 mb-3 shrink-0" />
+      <p className="font-body text-sm text-foreground/85 leading-relaxed whitespace-pre-line flex-1">
+        {review.message}
+      </p>
+      <div className="mt-4 pt-4 border-t border-border/60">
+        <p className="font-display text-sm text-foreground uppercase tracking-[0.15em]">{review.name}</p>
+      </div>
+    </div>
+  </motion.article>
+);
 
 const AuctionReviewsSection = () => {
   const [dbReviews, setDbReviews] = useState<Review[]>([]);
@@ -97,41 +124,24 @@ const AuctionReviewsSection = () => {
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-6 mb-12">
-        {reviews.map((r, i) => (
-          <motion.article
-            key={r.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.05 * i }}
-            className="bg-card border border-border rounded-lg overflow-hidden flex flex-col"
-          >
-            {r.photo && (
-              <div className="aspect-[4/3] bg-muted/30 overflow-hidden">
-                <img
-                  src={r.photo}
-                  alt={r.caption ?? r.name}
-                  loading="lazy"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
-            <div className="p-6 flex-1 flex flex-col">
-              <Quote className="w-6 h-6 text-primary/40 mb-3 shrink-0" />
-              <p className="font-body text-sm text-foreground/85 leading-relaxed whitespace-pre-line flex-1">
-                {r.message}
-              </p>
-              <div className="mt-4 pt-4 border-t border-border/60">
-                <p className="font-display text-sm text-foreground uppercase tracking-[0.15em]">{r.name}</p>
-                {r.caption && (
-                  <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">
-                    {r.caption}
-                  </p>
-                )}
-              </div>
+      {/* Mobile: горизонтальная карусель со snap-scroll */}
+      <div className="md:hidden -mx-4 px-4 mb-12">
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-thin">
+          {reviews.map((r, i) => (
+            <div key={r.id} className="snap-start shrink-0 w-[85%] max-w-[360px]">
+              <ReviewCard review={r} index={i} />
             </div>
-          </motion.article>
+          ))}
+        </div>
+        <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground/60 font-body text-center mt-2">
+          ← листайте →
+        </p>
+      </div>
+
+      {/* Desktop: сетка до 4 колонок, фото в полную высоту */}
+      <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-12">
+        {reviews.map((r, i) => (
+          <ReviewCard key={r.id} review={r} index={i} />
         ))}
       </div>
 
