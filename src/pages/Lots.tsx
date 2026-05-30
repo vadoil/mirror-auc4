@@ -43,6 +43,24 @@ const Lots = () => {
   const [maxBids, setMaxBids] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<string>(
+    typeof window !== "undefined" && window.location.hash === "#reviews" ? "archive" : "active"
+  );
+
+  useEffect(() => {
+    const onHashChange = () => {
+      if (window.location.hash === "#reviews") {
+        setActiveTab("archive");
+        // позволяем вкладке отрендериться, потом скроллим
+        setTimeout(() => {
+          document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 80);
+      }
+    };
+    window.addEventListener("hashchange", onHashChange);
+    if (window.location.hash === "#reviews") onHashChange();
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
