@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowRight, Clock, Heart } from "lucide-react";
+import { ArrowRight, Clock, Heart, MessageCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { getLotImageUrl, fallbackLotImages, LOTS_TENTATIVE_TIMING } from "@/lib/lotAssets";
+import AuctionReviewsSection from "@/components/AuctionReviewsSection";
 
 type ArchiveResult = { paid: boolean; price: number };
 
