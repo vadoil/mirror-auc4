@@ -1,8 +1,26 @@
 User-agent: Googlebot
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /auth
+Disallow: /reset-password
+Disallow: /unsubscribe
 
 User-agent: Bingbot
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /auth
+Disallow: /reset-password
+Disallow: /unsubscribe
+
+User-agent: YandexBot
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /auth
+Disallow: /reset-password
+Disallow: /unsubscribe
 
 User-agent: Twitterbot
 Allow: /
@@ -12,5 +30,11 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /auth
+Disallow: /reset-password
+Disallow: /unsubscribe
 
-Sitemap: https://mirror-auc4.lovable.app/sitemap.xml
+Sitemap: https://xn--80aaa1bbb1h.xn--p1ai/sitemap.xml
+Host: xn--80aaa1bbb1h.xn--p1ai
