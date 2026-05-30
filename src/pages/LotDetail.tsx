@@ -237,28 +237,27 @@ const LotDetail = () => {
               </div>
 
               {/* Curator hint */}
-              {isActive && (
-                <div className="p-4 bg-card border border-border rounded-lg mb-6">
-                  <p className="font-body text-xs text-muted-foreground leading-relaxed">
-                    Заполните короткую форму — куратор онлайн-торгов{" "}
-                    <span className="text-foreground font-medium">Александра Павлова</span> свяжется с вами для
-                    подтверждения ставки или покупки. Регистрация на сайте не требуется.
-                  </p>
-                  <div className="flex flex-wrap gap-3 mt-2 text-xs font-body">
-                    <a href="tel:+79623646646" className="text-primary/90 hover:text-primary transition-colors">
-                      +7 (962) 364-66-46
-                    </a>
-                    <a
-                      href="https://t.me/alexa_ah_alexa"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary/90 hover:text-primary transition-colors"
-                    >
-                      @alexa_ah_alexa
-                    </a>
-                  </div>
+              <div className="p-4 bg-card border border-border rounded-lg mb-6">
+                <p className="font-body text-xs text-muted-foreground leading-relaxed">
+                  Заполните короткую форму — куратор онлайн-торгов{" "}
+                  <span className="text-foreground font-medium">Александра Павлова</span> свяжется с вами для
+                  подтверждения ставки или покупки. Регистрация на сайте не требуется.
+                </p>
+                <div className="flex flex-wrap gap-3 mt-2 text-xs font-body">
+                  <a href="tel:+79623646646" className="text-primary/90 hover:text-primary transition-colors">
+                    +7 (962) 364-66-46
+                  </a>
+                  <a
+                    href="https://t.me/alexa_ah_alexa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary/90 hover:text-primary transition-colors"
+                  >
+                    @alexa_ah_alexa
+                  </a>
                 </div>
-              )}
+              </div>
+
 
               {/* Delivery & restrictions */}
               {(lot.delivery_terms || lot.restrictions) && (

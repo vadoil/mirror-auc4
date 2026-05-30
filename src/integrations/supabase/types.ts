@@ -44,6 +44,39 @@ export type Database = {
         }
         Relationships: []
       }
+      auction_reviews: {
+        Row: {
+          contact: string | null
+          created_at: string
+          id: string
+          is_published: boolean
+          message: string
+          name: string
+          notified_telegram: boolean
+          status: string
+        }
+        Insert: {
+          contact?: string | null
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          message: string
+          name: string
+          notified_telegram?: boolean
+          status?: string
+        }
+        Update: {
+          contact?: string | null
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          message?: string
+          name?: string
+          notified_telegram?: boolean
+          status?: string
+        }
+        Relationships: []
+      }
       bids: {
         Row: {
           amount: number

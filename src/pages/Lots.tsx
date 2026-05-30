@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowRight, Clock, Heart } from "lucide-react";
+import { ArrowRight, Clock, Heart, MessageCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { getLotImageUrl, fallbackLotImages, LOTS_TENTATIVE_TIMING } from "@/lib/lotAssets";
+import AuctionReviewsSection from "@/components/AuctionReviewsSection";
 
 type ArchiveResult = { paid: boolean; price: number };
 
@@ -247,6 +248,13 @@ const Lots = () => {
             <p className="font-body text-muted-foreground text-base max-w-2xl">
               Все средства, вырученные с аукциона и продажи билетов, направляются в поддержку фонда «Не напрасно».
             </p>
+            <a
+              href="#reviews"
+              className="inline-flex items-center gap-2 mt-6 px-4 py-2 border border-primary/40 text-primary text-[11px] uppercase tracking-[0.2em] font-body rounded-full hover:bg-primary hover:text-primary-foreground transition-all"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              Отзывы гостей
+            </a>
           </motion.div>
 
           {loading ? (
@@ -367,6 +375,8 @@ const Lots = () => {
                     {filteredArchive.map(renderArchiveCard)}
                   </div>
                 )}
+
+                <AuctionReviewsSection />
               </TabsContent>
             </Tabs>
           )}
