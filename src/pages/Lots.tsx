@@ -375,6 +375,8 @@ const Lots = () => {
                     {filteredArchive.map(renderArchiveCard)}
                   </div>
                 )}
+
+                <AuctionReviewsSection />
               </TabsContent>
             </Tabs>
           )}
