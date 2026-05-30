@@ -8,6 +8,15 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BidRequestModal from "@/components/BidRequestModal";
 import { getLotImageUrl, LOTS_TENTATIVE_TIMING } from "@/lib/lotAssets";
+import lotLevLvovich from "@/assets/lot-lev-lvovich.jpg";
+
+const LOT_EXTRA_IMAGES: Record<string, { src: string; alt: string; caption?: string }> = {
+  "b0d74e5e-fc61-4b5d-84c6-5a3d34ec73f0": {
+    src: lotLevLvovich,
+    alt: "Лев Львович",
+    caption: "Лев Львович — архитектор личных брендов",
+  },
+};
 
 const formatPrice = (n: number) => n.toLocaleString("ru-RU") + " ₽";
 
@@ -159,6 +168,20 @@ const LotDetail = () => {
                 <p className="font-body text-sm text-muted-foreground leading-relaxed mb-6 whitespace-pre-line">
                   {lot.description}
                 </p>
+              )}
+              {LOT_EXTRA_IMAGES[lot.id] && (
+                <figure className="mb-6 overflow-hidden rounded-lg border border-border bg-muted/30">
+                  <img
+                    src={LOT_EXTRA_IMAGES[lot.id].src}
+                    alt={LOT_EXTRA_IMAGES[lot.id].alt}
+                    className="w-full h-auto object-cover"
+                  />
+                  {LOT_EXTRA_IMAGES[lot.id].caption && (
+                    <figcaption className="px-4 py-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body">
+                      {LOT_EXTRA_IMAGES[lot.id].caption}
+                    </figcaption>
+                  )}
+                </figure>
               )}
 
               {/* Timer */}
