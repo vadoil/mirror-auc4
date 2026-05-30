@@ -248,6 +248,13 @@ const Lots = () => {
             <p className="font-body text-muted-foreground text-base max-w-2xl">
               Все средства, вырученные с аукциона и продажи билетов, направляются в поддержку фонда «Не напрасно».
             </p>
+            <a
+              href="#reviews"
+              className="inline-flex items-center gap-2 mt-6 px-4 py-2 border border-primary/40 text-primary text-[11px] uppercase tracking-[0.2em] font-body rounded-full hover:bg-primary hover:text-primary-foreground transition-all"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              Отзывы гостей
+            </a>
           </motion.div>
 
           {loading ? (
