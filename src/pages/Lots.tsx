@@ -278,7 +278,7 @@ const Lots = () => {
           {loading ? (
             <div className="text-muted-foreground font-body text-center py-20">Загрузка лотов…</div>
           ) : (
-            <Tabs defaultValue="active" className="w-full">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="mb-10 h-auto bg-transparent border-b border-border/60 rounded-none p-0 w-full justify-start gap-1">
                 <TabsTrigger
                   value="active"
