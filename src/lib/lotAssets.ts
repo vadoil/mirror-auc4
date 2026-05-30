@@ -12,6 +12,7 @@ import lotTsypkin from "@/assets/lot-tsypkin.jpg";
 import lotHakamada from "@/assets/lot-hakamada.jpg";
 import lotVase from "@/assets/lot-vase.jpg";
 import lotBookSitnikov from "@/assets/lot-book-sitnikov.jpg";
+import lotKarmalogicBook from "@/assets/lot-karmalogic-book.jpg";
 import lotSoloviy from "@/assets/lot-soloviy.jpg";
 import lotLevEdinorog from "@/assets/lot-lev-edinorog.jpg";
 import lotLevEdinorogDetail from "@/assets/lot-lev-edinorog-detail.jpg";
@@ -35,6 +36,7 @@ export const localLotAssets: Record<string, string> = {
   "lot-hakamada.jpg": lotHakamada,
   "lot-vase.jpg": lotVase,
   "lot-book-sitnikov.jpg": lotBookSitnikov,
+  "lot-karmalogic-book.jpg": lotKarmalogicBook,
   "lot-soloviy.jpg": lotSoloviy,
   "lot-lev-edinorog.jpg": lotLevEdinorog,
   "lot-lev-edinorog-detail.jpg": lotLevEdinorogDetail,
