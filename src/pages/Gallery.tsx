@@ -71,7 +71,7 @@ const Gallery = () => {
             </p>
           </motion.div>
 
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {photos.map((photo, i) => (
               <motion.button
                 key={i}
@@ -81,13 +81,13 @@ const Gallery = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
-                className="group block w-full break-inside-avoid overflow-hidden rounded-sm bg-muted/20 focus:outline-none focus:ring-2 focus:ring-primary"
+                className="group block w-full aspect-[3/4] overflow-hidden rounded-sm bg-muted/20 focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <img
                   src={photo.src}
                   alt={photo.alt}
                   loading="lazy"
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />
               </motion.button>
             ))}
