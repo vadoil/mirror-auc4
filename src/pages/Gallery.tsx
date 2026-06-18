@@ -37,8 +37,30 @@ import photo31 from "@/assets/gallery/photo-31.jpg";
 import photo32 from "@/assets/gallery/photo-32.jpg";
 import photo33 from "@/assets/gallery/photo-33.jpg";
 import photo34 from "@/assets/gallery/photo-34.jpg";
+import event01 from "@/assets/gallery/event/event-01.webp";
+import event02 from "@/assets/gallery/event/event-02.webp";
+import event03 from "@/assets/gallery/event/event-03.webp";
+import event04 from "@/assets/gallery/event/event-04.webp";
+import event05 from "@/assets/gallery/event/event-05.webp";
+import event06 from "@/assets/gallery/event/event-06.webp";
+import event07 from "@/assets/gallery/event/event-07.webp";
+import event08 from "@/assets/gallery/event/event-08.webp";
+import event09 from "@/assets/gallery/event/event-09.webp";
+
+const eventPhotos = [
+  { src: event01, alt: "Иван Ситников и ведущий аукциона Александр Цыпкин с лотами «Башни»" },
+  { src: event02, alt: "Гости вечера «Отражение добра»" },
+  { src: event03, alt: "Гости на фотозоне «Отражение добра»" },
+  { src: event04, alt: "Гостьи вечера у инсталляции" },
+  { src: event05, alt: "Организаторы и гости проекта" },
+  { src: event06, alt: "Гостьи в фотозоне аукциона" },
+  { src: event07, alt: "Гостьи в чёрных образах" },
+  { src: event08, alt: "Гостьи с табличкой №7" },
+  { src: event09, alt: "Лоты — фарфоровые башни «Свод по крупицам»" },
+];
 
 const photos = [
+  ...eventPhotos,
   { src: photo07, alt: "Инсталляция «Отражение добра»" },
   { src: photo06, alt: "Зал перед началом аукциона" },
   { src: photo10, alt: "Лоты — фарфоровые башни" },
@@ -74,6 +96,7 @@ const photos = [
   { src: photo34, alt: "Гости у стенда SmartLife 365" },
   { src: photo30, alt: "Гость вечера в винтажном образе" },
 ];
+
 
 const Gallery = () => {
   const [active, setActive] = useState<number | null>(null);
