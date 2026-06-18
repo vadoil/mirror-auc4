@@ -3,40 +3,6 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { X } from "lucide-react";
-import photo01 from "@/assets/gallery/photo-01.jpg";
-import photo02 from "@/assets/gallery/photo-02.jpg";
-import photo03 from "@/assets/gallery/photo-03.jpg";
-import photo04 from "@/assets/gallery/photo-04.jpg";
-import photo05 from "@/assets/gallery/photo-05.jpg";
-import photo06 from "@/assets/gallery/photo-06.jpg";
-import photo07 from "@/assets/gallery/photo-07.jpg";
-import photo08 from "@/assets/gallery/photo-08.jpg";
-import photo09 from "@/assets/gallery/photo-09.jpg";
-import photo10 from "@/assets/gallery/photo-10.jpg";
-import photo11 from "@/assets/gallery/photo-11.jpg";
-import photo12 from "@/assets/gallery/photo-12.jpg";
-import photo13 from "@/assets/gallery/photo-13.jpg";
-import photo14 from "@/assets/gallery/photo-14.jpg";
-import photo15 from "@/assets/gallery/photo-15.jpg";
-import photo16 from "@/assets/gallery/photo-16.jpg";
-import photo17 from "@/assets/gallery/photo-17.jpg";
-import photo18 from "@/assets/gallery/photo-18.jpg";
-import photo19 from "@/assets/gallery/photo-19.jpg";
-import photo20 from "@/assets/gallery/photo-20.jpg";
-import photo21 from "@/assets/gallery/photo-21.jpg";
-import photo22 from "@/assets/gallery/photo-22.jpg";
-import photo23 from "@/assets/gallery/photo-23.jpg";
-import photo24 from "@/assets/gallery/photo-24.jpg";
-import photo25 from "@/assets/gallery/photo-25.jpg";
-import photo26 from "@/assets/gallery/photo-26.jpg";
-import photo27 from "@/assets/gallery/photo-27.jpg";
-import photo28 from "@/assets/gallery/photo-28.jpg";
-import photo29 from "@/assets/gallery/photo-29.jpg";
-import photo30 from "@/assets/gallery/photo-30.jpg";
-import photo31 from "@/assets/gallery/photo-31.jpg";
-import photo32 from "@/assets/gallery/photo-32.jpg";
-import photo33 from "@/assets/gallery/photo-33.jpg";
-import photo34 from "@/assets/gallery/photo-34.jpg";
 import event01 from "@/assets/gallery/event/event-01.webp";
 import event02 from "@/assets/gallery/event/event-02.webp";
 import event03 from "@/assets/gallery/event/event-03.webp";
@@ -46,8 +12,18 @@ import event06 from "@/assets/gallery/event/event-06.webp";
 import event07 from "@/assets/gallery/event/event-07.webp";
 import event08 from "@/assets/gallery/event/event-08.webp";
 import event09 from "@/assets/gallery/event/event-09.webp";
+import event10 from "@/assets/gallery/event/event-10.webp";
+import event11 from "@/assets/gallery/event/event-11.webp";
+import event12 from "@/assets/gallery/event/event-12.webp";
+import event13 from "@/assets/gallery/event/event-13.webp";
+import event14 from "@/assets/gallery/event/event-14.webp";
+import event15 from "@/assets/gallery/event/event-15.webp";
+import event16 from "@/assets/gallery/event/event-16.webp";
+import event17 from "@/assets/gallery/event/event-17.webp";
+import event18 from "@/assets/gallery/event/event-18.webp";
+import event19 from "@/assets/gallery/event/event-19.webp";
 
-const eventPhotos = [
+const photos = [
   { src: event01, alt: "Иван Ситников и ведущий аукциона Александр Цыпкин с лотами «Башни»" },
   { src: event02, alt: "Гости вечера «Отражение добра»" },
   { src: event03, alt: "Гости на фотозоне «Отражение добра»" },
@@ -57,46 +33,17 @@ const eventPhotos = [
   { src: event07, alt: "Гостьи в чёрных образах" },
   { src: event08, alt: "Гостьи с табличкой №7" },
   { src: event09, alt: "Лоты — фарфоровые башни «Свод по крупицам»" },
+  { src: event10, alt: "Спикеры на сцене аукциона" },
+  { src: event11, alt: "Зал перед началом аукциона" },
+  { src: event12, alt: "Витрина с винтажными украшениями" },
+  { src: event13, alt: "Бар Inspiro Blends" },
+  { src: event14, alt: "Стол с украшениями под розовой драпировкой" },
+  { src: event15, alt: "Гостья с бокалом и браслетом «Отражение добра»" },
+  { src: event16, alt: "Гостьи рассматривают наручные часы" },
+  { src: event17, alt: "Гостьи с табличкой №1" },
+  { src: event18, alt: "Золотое колье ручной работы" },
+  { src: event19, alt: "Гостья с табличкой «Отражение добра»" },
 ];
-
-const photos = [
-  ...eventPhotos,
-  { src: photo07, alt: "Инсталляция «Отражение добра»" },
-  { src: photo06, alt: "Зал перед началом аукциона" },
-  { src: photo10, alt: "Лоты — фарфоровые башни" },
-  { src: photo01, alt: "Гостья у лота «Башня Огненной Искры»" },
-  { src: photo04, alt: "Александр Цыпкин ведёт аукцион" },
-  { src: photo23, alt: "Ведущие открывают аукцион" },
-  { src: photo09, alt: "Витрина с украшениями" },
-  { src: photo16, alt: "Гости вечера" },
-  { src: photo02, alt: "Гостья вечера в зрительном зале" },
-  { src: photo20, alt: "Спикеры на сцене" },
-  { src: photo11, alt: "Гостьи в фойе" },
-  { src: photo08, alt: "Стенд SmartLife" },
-  { src: photo22, alt: "Ведущий аукциона" },
-  { src: photo13, alt: "Гости беседуют у лестницы" },
-  { src: photo18, alt: "Беседа у видеоинсталляции" },
-  { src: photo25, alt: "Александр Цыпкин с микрофоном" },
-  { src: photo21, alt: "Гости в зрительном зале" },
-  { src: photo03, alt: "Гость аукциона «Отражение добра»" },
-  { src: photo17, alt: "Гость в красных брюках" },
-  { src: photo12, alt: "Безалкогольные напитки Inspiro Blends" },
-  { src: photo19, alt: "Гостьи в первом ряду" },
-  { src: photo14, alt: "Диджей вечера" },
-  { src: photo24, alt: "Гостья с улыбкой" },
-  { src: photo15, alt: "Гостья в зелёной шляпке" },
-  { src: photo05, alt: "Участница с табличкой «не напрасно»" },
-  { src: photo26, alt: "Гостьи с табличкой №1" },
-  { src: photo31, alt: "Ведущие с лотами «Башня Огненной Искры»" },
-  { src: photo28, alt: "Золотое колье ручной работы" },
-  { src: photo33, alt: "Лот — наручные часы" },
-  { src: photo32, alt: "Ведущий показывает лот гостям" },
-  { src: photo29, alt: "Гостья вечера с букетом" },
-  { src: photo27, alt: "Гости в зрительном зале" },
-  { src: photo34, alt: "Гости у стенда SmartLife 365" },
-  { src: photo30, alt: "Гость вечера в винтажном образе" },
-];
-
 
 const Gallery = () => {
   const [active, setActive] = useState<number | null>(null);
@@ -118,20 +65,11 @@ const Gallery = () => {
             <h1 className="font-display text-5xl md:text-7xl text-foreground uppercase tracking-tight leading-[0.9] mb-6">
               Галерея <span className="text-primary italic">вечера</span>
             </h1>
-            <p className="font-body text-muted-foreground text-base max-w-2xl mb-8">
+            <p className="font-body text-muted-foreground text-base max-w-2xl">
               Фотохроника благотворительного аукциона «Отражение добра». Гости, лоты,
               атмосфера и моменты, которые сделали этот вечер особенным.
             </p>
-            <a
-              href="https://disk.yandex.ru/d/XuzuOPEwPIX2uA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-body uppercase tracking-[0.2em] text-sm px-7 py-4 rounded-sm hover:bg-primary/90 transition-colors"
-            >
-              Все фото с мероприятия →
-            </a>
           </motion.div>
-
 
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
             {photos.map((photo, i) => (
@@ -155,6 +93,16 @@ const Gallery = () => {
             ))}
           </div>
 
+          <div className="mt-16 flex justify-center">
+            <a
+              href="https://disk.yandex.ru/d/XuzuOPEwPIX2uA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-body uppercase tracking-[0.2em] text-sm px-7 py-4 rounded-sm hover:bg-primary/90 transition-colors"
+            >
+              Все фото с мероприятия →
+            </a>
+          </div>
         </div>
       </div>
 
