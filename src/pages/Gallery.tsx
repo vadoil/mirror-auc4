@@ -118,11 +118,20 @@ const Gallery = () => {
             <h1 className="font-display text-5xl md:text-7xl text-foreground uppercase tracking-tight leading-[0.9] mb-6">
               Галерея <span className="text-primary italic">вечера</span>
             </h1>
-            <p className="font-body text-muted-foreground text-base max-w-2xl">
+            <p className="font-body text-muted-foreground text-base max-w-2xl mb-8">
               Фотохроника благотворительного аукциона «Отражение добра». Гости, лоты,
               атмосфера и моменты, которые сделали этот вечер особенным.
             </p>
+            <a
+              href="https://disk.yandex.ru/d/XuzuOPEwPIX2uA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-body uppercase tracking-[0.2em] text-sm px-7 py-4 rounded-sm hover:bg-primary/90 transition-colors"
+            >
+              Все фото с мероприятия →
+            </a>
           </motion.div>
+
 
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
             {photos.map((photo, i) => (
