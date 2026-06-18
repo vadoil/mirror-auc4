@@ -37,8 +37,30 @@ import photo31 from "@/assets/gallery/photo-31.jpg";
 import photo32 from "@/assets/gallery/photo-32.jpg";
 import photo33 from "@/assets/gallery/photo-33.jpg";
 import photo34 from "@/assets/gallery/photo-34.jpg";
+import event01 from "@/assets/gallery/event/event-01.webp";
+import event02 from "@/assets/gallery/event/event-02.webp";
+import event03 from "@/assets/gallery/event/event-03.webp";
+import event04 from "@/assets/gallery/event/event-04.webp";
+import event05 from "@/assets/gallery/event/event-05.webp";
+import event06 from "@/assets/gallery/event/event-06.webp";
+import event07 from "@/assets/gallery/event/event-07.webp";
+import event08 from "@/assets/gallery/event/event-08.webp";
+import event09 from "@/assets/gallery/event/event-09.webp";
+
+const eventPhotos = [
+  { src: event01, alt: "Иван Ситников и ведущий аукциона Александр Цыпкин с лотами «Башни»" },
+  { src: event02, alt: "Гости вечера «Отражение добра»" },
+  { src: event03, alt: "Гости на фотозоне «Отражение добра»" },
+  { src: event04, alt: "Гостьи вечера у инсталляции" },
+  { src: event05, alt: "Организаторы и гости проекта" },
+  { src: event06, alt: "Гостьи в фотозоне аукциона" },
+  { src: event07, alt: "Гостьи в чёрных образах" },
+  { src: event08, alt: "Гостьи с табличкой №7" },
+  { src: event09, alt: "Лоты — фарфоровые башни «Свод по крупицам»" },
+];
 
 const photos = [
+  ...eventPhotos,
   { src: photo07, alt: "Инсталляция «Отражение добра»" },
   { src: photo06, alt: "Зал перед началом аукциона" },
   { src: photo10, alt: "Лоты — фарфоровые башни" },
@@ -75,6 +97,7 @@ const photos = [
   { src: photo30, alt: "Гость вечера в винтажном образе" },
 ];
 
+
 const Gallery = () => {
   const [active, setActive] = useState<number | null>(null);
 
@@ -95,11 +118,20 @@ const Gallery = () => {
             <h1 className="font-display text-5xl md:text-7xl text-foreground uppercase tracking-tight leading-[0.9] mb-6">
               Галерея <span className="text-primary italic">вечера</span>
             </h1>
-            <p className="font-body text-muted-foreground text-base max-w-2xl">
+            <p className="font-body text-muted-foreground text-base max-w-2xl mb-8">
               Фотохроника благотворительного аукциона «Отражение добра». Гости, лоты,
               атмосфера и моменты, которые сделали этот вечер особенным.
             </p>
+            <a
+              href="https://disk.yandex.ru/d/XuzuOPEwPIX2uA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-body uppercase tracking-[0.2em] text-sm px-7 py-4 rounded-sm hover:bg-primary/90 transition-colors"
+            >
+              Все фото с мероприятия →
+            </a>
           </motion.div>
+
 
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
             {photos.map((photo, i) => (
