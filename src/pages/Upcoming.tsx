@@ -91,17 +91,17 @@ const Upcoming = () => {
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-8 h-px bg-primary" />
-                  <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-foreground/70 font-body">
+                  <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/85 font-body drop-shadow-[0_1px_8px_rgba(0,0,0,0.5)]">
                     Ближайший аукцион · Санкт-Петербург
                   </p>
                 </div>
 
-                <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-foreground uppercase tracking-tight leading-[0.9] mb-8">
+                <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-white uppercase tracking-tight leading-[0.9] mb-8 drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)]">
                   Готовим <span className="text-primary italic">следующую</span>
                   <br /> встречу
                 </h1>
 
-                <p className="font-body text-foreground/80 text-base md:text-lg max-w-2xl leading-relaxed">
+                <p className="font-body text-white/90 text-base md:text-lg max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
                   Мы собираем программу, площадку и лоты нового аукциона в Петербурге.
                   Здесь появится всё самое главное — дата, место, расписание вечера и первые лоты.
                 </p>
