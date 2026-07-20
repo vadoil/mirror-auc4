@@ -78,8 +78,8 @@ const Upcoming = () => {
               width={1920}
               height={1280}
             />
-            {/* только мягкое затемнение снизу для читаемости текста, без осветления фото */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/25 to-transparent" />
+            {/* лёгкая виньетка снизу — только чтобы белый текст читался, фото не осветляется */}
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
           </div>
 
           <div className="relative z-10 section-padding pb-16 md:pb-24 pt-28 w-full">
@@ -91,14 +91,14 @@ const Upcoming = () => {
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-8 h-px bg-primary" />
-                  <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/85 font-body drop-shadow-[0_1px_8px_rgba(0,0,0,0.5)]">
+                  <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white font-body drop-shadow-[0_1px_8px_rgba(0,0,0,0.6)]">
                     Ближайший аукцион · Санкт-Петербург
                   </p>
                 </div>
 
-                <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-white uppercase tracking-tight leading-[0.9] mb-8 drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)]">
-                  Готовим <span className="text-primary italic">следующую</span>
-                  <br /> встречу
+                <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white uppercase tracking-tight leading-[0.95] mb-8 drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+                  Благотворительный аукцион
+                  <br /> в <span className="text-primary italic">Санкт-Петербурге</span>
                 </h1>
 
                 <p className="font-body text-white/90 text-base md:text-lg max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
