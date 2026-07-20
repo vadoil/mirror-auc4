@@ -98,7 +98,7 @@ const Upcoming = () => {
 
                 <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white uppercase tracking-tight leading-[0.95] mb-8 drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
                   Благотворительный аукцион
-                  <br /> в <span className="text-primary italic">Санкт-Петербурге</span>
+                  <br /> в <span className="italic">Санкт-Петербурге</span>
                 </h1>
 
                 <p className="font-body text-white/90 text-base md:text-lg max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
