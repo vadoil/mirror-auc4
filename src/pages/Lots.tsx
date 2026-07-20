@@ -264,7 +264,7 @@ const Lots = () => {
               Лоты <span className="text-primary italic">аукциона</span>
             </h1>
             <p className="font-body text-muted-foreground text-base max-w-2xl">
-              Все средства, вырученные с аукциона и продажи билетов, направляются в поддержку фонда «Не напрасно».
+              Средства от аукциона идут в фонд «Не напрасно» (часть средств получают художники — авторы лотов).
             </p>
             <button
               type="button"
