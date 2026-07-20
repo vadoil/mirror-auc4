@@ -82,26 +82,48 @@ const Upcoming = () => {
             <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/45 to-transparent" />
 
-            {/* световые софиты */}
+            {/* световое боке — конфетти из размытых огней */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden z-[5]">
-              <motion.div
-                className="absolute w-[70vw] h-[70vw] rounded-full blur-3xl"
-                style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.9), transparent 60%)" }}
-                animate={{ x: ["-20vw", "60vw", "10vw", "-20vw"], y: ["-10vh", "40vh", "20vh", "-10vh"] }}
-                transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute w-[60vw] h-[60vw] rounded-full blur-3xl"
-                style={{ background: "radial-gradient(circle, rgba(255,210,140,0.85), transparent 60%)" }}
-                animate={{ x: ["70vw", "10vw", "50vw", "70vw"], y: ["20vh", "50vh", "10vh", "20vh"] }}
-                transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute w-[55vw] h-[55vw] rounded-full blur-3xl"
-                style={{ background: "radial-gradient(circle, rgba(140,180,255,0.8), transparent 60%)" }}
-                animate={{ x: ["30vw", "-10vw", "60vw", "30vw"], y: ["60vh", "20vh", "40vh", "60vh"] }}
-                transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
-              />
+              {[
+                { size: 180, x: "8%",  y: "18%", color: "255,236,180", dur: 14, delay: 0,   blur: 8 },
+                { size: 120, x: "22%", y: "62%", color: "200,230,255", dur: 18, delay: 1.5, blur: 6 },
+                { size: 220, x: "38%", y: "30%", color: "255,220,200", dur: 22, delay: 0.8, blur: 12 },
+                { size: 90,  x: "55%", y: "70%", color: "255,250,220", dur: 16, delay: 2.2, blur: 5 },
+                { size: 260, x: "72%", y: "22%", color: "255,240,190", dur: 26, delay: 0.3, blur: 14 },
+                { size: 140, x: "85%", y: "58%", color: "220,235,255", dur: 20, delay: 1.1, blur: 7 },
+                { size: 70,  x: "48%", y: "12%", color: "255,255,240", dur: 12, delay: 2.8, blur: 4 },
+                { size: 110, x: "12%", y: "80%", color: "255,225,195", dur: 19, delay: 1.9, blur: 6 },
+                { size: 160, x: "63%", y: "48%", color: "210,230,250", dur: 24, delay: 0.6, blur: 9 },
+                { size: 80,  x: "30%", y: "88%", color: "255,245,215", dur: 15, delay: 2.4, blur: 5 },
+                { size: 200, x: "92%", y: "82%", color: "255,235,185", dur: 21, delay: 1.3, blur: 11 },
+                { size: 60,  x: "5%",  y: "45%", color: "240,250,255", dur: 13, delay: 0.9, blur: 4 },
+              ].map((b, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute rounded-full"
+                  style={{
+                    width: b.size,
+                    height: b.size,
+                    left: b.x,
+                    top: b.y,
+                    filter: `blur(${b.blur}px)`,
+                    background: `radial-gradient(circle, rgba(${b.color},0.75) 0%, rgba(${b.color},0.35) 40%, rgba(${b.color},0) 70%)`,
+                    mixBlendMode: "screen",
+                  }}
+                  animate={{
+                    x: [0, 30, -20, 0],
+                    y: [0, -25, 15, 0],
+                    opacity: [0.35, 0.9, 0.55, 0.35],
+                    scale: [1, 1.15, 0.95, 1],
+                  }}
+                  transition={{
+                    duration: b.dur,
+                    delay: b.delay,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
             </div>
           </div>
 
