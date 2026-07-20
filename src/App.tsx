@@ -23,6 +23,7 @@ import Oferta from "./pages/Oferta";
 import Gallery from "./pages/Gallery";
 import Partners from "./pages/Partners";
 import Forum from "./pages/Forum";
+import Upcoming from "./pages/Upcoming";
 
 const queryClient = new QueryClient();
 
