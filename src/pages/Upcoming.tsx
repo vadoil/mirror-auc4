@@ -78,8 +78,8 @@ const Upcoming = () => {
               width={1920}
               height={1280}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
+            {/* только мягкое затемнение снизу для читаемости текста, без осветления фото */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/25 to-transparent" />
           </div>
 
           <div className="relative z-10 section-padding pb-16 md:pb-24 pt-28 w-full">
