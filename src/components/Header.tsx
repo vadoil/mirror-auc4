@@ -8,12 +8,11 @@ import logoOtrazhenie from "@/assets/logo-otrazhenie-final.png";
 import logoOtrazhenieLight from "@/assets/logo-otrazhenie-light.png";
 
 const navItems = [
+  { label: "Ближайший аукцион", href: "/upcoming" },
   { label: "Лоты", href: "/lots" },
   { label: "Форум", href: "/forum" },
-  { label: "Программа", href: "/program" },
   { label: "Галерея", href: "/gallery" },
   { label: "Как участвовать", href: "/how-it-works" },
-  { label: "Место", href: "/venue" },
   { label: "Партнёры", href: "/#sponsors" },
   { label: "Контакты", href: "/#contacts" },
 ];

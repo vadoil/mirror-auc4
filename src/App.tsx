@@ -23,6 +23,7 @@ import Oferta from "./pages/Oferta";
 import Gallery from "./pages/Gallery";
 import Partners from "./pages/Partners";
 import Forum from "./pages/Forum";
+import Upcoming from "./pages/Upcoming";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => (
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/forum" element={<Forum />} />
+            <Route path="/upcoming" element={<Upcoming />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
