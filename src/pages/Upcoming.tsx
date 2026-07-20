@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Calendar, MapPin, Sparkles, Gavel, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import spbHero from "@/assets/upcoming-spb-hero.jpg";
 
 const Placeholder = ({
   icon: Icon,
@@ -66,55 +67,70 @@ const Upcoming = () => {
     <div className="min-h-screen bg-background">
       <Header />
 
-      <main className="pt-28 pb-24">
+      <main className="pb-24">
         {/* Hero */}
-        <section className="section-padding mb-16 md:mb-24">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-px bg-primary" />
-                <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-                  Ближайший аукцион
+        <section className="relative min-h-[80svh] md:min-h-[92svh] flex items-end overflow-hidden mb-16 md:mb-24">
+          <div className="absolute inset-0">
+            <img
+              src={spbHero}
+              alt="Санкт-Петербург на закате"
+              className="absolute inset-0 w-full h-full object-cover"
+              width={1920}
+              height={1280}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
+          </div>
+
+          <div className="relative z-10 section-padding pb-16 md:pb-24 pt-28 w-full">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-px bg-primary" />
+                  <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-foreground/70 font-body">
+                    Ближайший аукцион · Санкт-Петербург
+                  </p>
+                </div>
+
+                <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-foreground uppercase tracking-tight leading-[0.9] mb-8">
+                  Готовим <span className="text-primary italic">следующую</span>
+                  <br /> встречу
+                </h1>
+
+                <p className="font-body text-foreground/80 text-base md:text-lg max-w-2xl leading-relaxed">
+                  Мы собираем программу, площадку и лоты нового аукциона в Петербурге.
+                  Здесь появится всё самое главное — дата, место, расписание вечера и первые лоты.
                 </p>
-              </div>
 
-              <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-foreground uppercase tracking-tight leading-[0.9] mb-8">
-                Готовим <span className="text-primary italic">следующую</span>
-                <br /> встречу
-              </h1>
-
-              <p className="font-body text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">
-                Мы собираем программу, площадку и лоты нового аукциона.
-                Здесь появится всё самое главное — дата, место, расписание вечера и первые лоты.
-              </p>
-
-              {/* meta strip */}
-              <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden border border-border">
-                {[
-                  { icon: Calendar, label: "Дата", value: "уточняется" },
-                  { icon: MapPin, label: "Город", value: "уточняется" },
-                  { icon: Clock, label: "Формат", value: "офлайн + онлайн" },
-                ].map((m, i) => (
-                  <div key={i} className="bg-background p-5 flex items-center gap-4">
-                    <m.icon className="w-4 h-4 text-primary shrink-0" />
-                    <div>
-                      <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-1">
-                        {m.label}
-                      </p>
-                      <p className="font-display text-sm text-foreground uppercase tracking-wide">
-                        {m.value}
-                      </p>
+                {/* meta strip */}
+                <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-px bg-border/60 rounded-lg overflow-hidden border border-border/60 backdrop-blur-sm">
+                  {[
+                    { icon: Calendar, label: "Дата", value: "уточняется" },
+                    { icon: MapPin, label: "Город", value: "Санкт-Петербург" },
+                    { icon: Clock, label: "Формат", value: "офлайн + онлайн" },
+                  ].map((m, i) => (
+                    <div key={i} className="bg-background/80 backdrop-blur-sm p-5 flex items-center gap-4">
+                      <m.icon className="w-4 h-4 text-primary shrink-0" />
+                      <div>
+                        <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-1">
+                          {m.label}
+                        </p>
+                        <p className="font-display text-sm text-foreground uppercase tracking-wide">
+                          {m.value}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
+
 
         {/* Программа */}
         <section className="section-padding mb-16 md:mb-24">
