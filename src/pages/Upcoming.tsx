@@ -78,8 +78,9 @@ const Upcoming = () => {
               width={1920}
               height={1280}
             />
-            {/* лёгкая виньетка снизу — только чтобы белый текст читался, фото не осветляется */}
-            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
+            {/* затемнение для читаемости текста */}
+            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/45 to-transparent" />
           </div>
 
           <div className="relative z-10 section-padding pb-16 md:pb-24 pt-28 w-full">
