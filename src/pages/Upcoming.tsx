@@ -81,6 +81,28 @@ const Upcoming = () => {
             {/* затемнение для читаемости текста */}
             <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/45 to-transparent" />
+
+            {/* световые софиты */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden mix-blend-screen">
+              <motion.div
+                className="absolute -top-40 -left-40 w-[55vw] h-[55vw] rounded-full blur-3xl opacity-60"
+                style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.55), transparent 65%)" }}
+                animate={{ x: ["0vw", "60vw", "20vw", "0vw"], y: ["0vh", "30vh", "10vh", "0vh"] }}
+                transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.div
+                className="absolute -top-20 right-0 w-[45vw] h-[45vw] rounded-full blur-3xl opacity-50"
+                style={{ background: "radial-gradient(circle, rgba(255,225,180,0.55), transparent 65%)" }}
+                animate={{ x: ["0vw", "-40vw", "-10vw", "0vw"], y: ["10vh", "40vh", "20vh", "10vh"] }}
+                transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.div
+                className="absolute bottom-0 left-1/3 w-[40vw] h-[40vw] rounded-full blur-3xl opacity-45"
+                style={{ background: "radial-gradient(circle, rgba(180,200,255,0.5), transparent 65%)" }}
+                animate={{ x: ["0vw", "30vw", "-20vw", "0vw"], y: ["0vh", "-20vh", "10vh", "0vh"] }}
+                transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
           </div>
 
           <div className="relative z-10 section-padding pb-16 md:pb-24 pt-28 w-full">
