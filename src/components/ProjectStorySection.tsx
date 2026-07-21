@@ -263,13 +263,87 @@ const ProjectStorySection = () => {
                 </p>
 
                 {/* CTA to Upcoming page */}
-                <div className="flex flex-wrap gap-3 mt-2">
+                <div className="flex flex-wrap gap-3 mt-2 mb-8">
                   <Link
                     to="/upcoming"
                     className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
                   >
                     Подробнее о вечере в Петербурге <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
+                </div>
+
+                {/* Contact form */}
+                <div className="pt-8 border-t border-border">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-2">Свяжитесь с нами</p>
+                  <h4 className="font-display text-xl md:text-2xl text-foreground mb-4">
+                    Сотрудничество или <span className="italic">вопрос</span>
+                  </h4>
+                  <form onSubmit={handleSubmit} className="grid gap-3 max-w-2xl">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <input
+                        type="text"
+                        placeholder="Ваше имя"
+                        maxLength={100}
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        className="bg-background border border-border rounded px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                        required
+                      />
+                      <input
+                        type="text"
+                        placeholder="Email или телефон"
+                        maxLength={100}
+                        value={form.contact}
+                        onChange={(e) => setForm({ ...form, contact: e.target.value })}
+                        className="bg-background border border-border rounded px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                        required
+                      />
+                    </div>
+                    <div className="flex gap-4 text-sm font-body text-muted-foreground">
+                      <label className="inline-flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="topic"
+                          value="cooperation"
+                          checked={form.topic === "cooperation"}
+                          onChange={(e) => setForm({ ...form, topic: e.target.value })}
+                          className="accent-primary"
+                        />
+                        Сотрудничество
+                      </label>
+                      <label className="inline-flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="topic"
+                          value="question"
+                          checked={form.topic === "question"}
+                          onChange={(e) => setForm({ ...form, topic: e.target.value })}
+                          className="accent-primary"
+                        />
+                        Вопрос
+                      </label>
+                    </div>
+                    <textarea
+                      placeholder="Ваше сообщение"
+                      maxLength={1000}
+                      rows={4}
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      className="bg-background border border-border rounded px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center justify-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {submitting ? (
+                        <><Loader2 className="w-4 h-4 animate-spin" /> Отправляем…</>
+                      ) : (
+                        <>Оставить заявку <ArrowRight className="w-3.5 h-3.5" /></>
+                      )}
+                    </button>
+                  </form>
                 </div>
               </motion.div>
             )}
