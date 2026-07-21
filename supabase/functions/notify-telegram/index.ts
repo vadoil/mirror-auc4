@@ -92,6 +92,17 @@ function buildText(event: string, data: Record<string, unknown>): string {
         (data.message ? `\n💬 <i>${escapeHtml(String(data.message))}</i>` : "")
       );
     }
+    case "spb_inquiry": {
+      return (
+        `🎩 <b>Заявка · Санкт-Петербург</b>\n` +
+        `━━━━━━━━━━━━━━━━━━\n\n` +
+        `👤 <b>${escapeHtml(String(data.name ?? ""))}</b>\n` +
+        (data.phone ? `📞 <a href="tel:${escapeHtml(String(data.phone))}">${escapeHtml(String(data.phone))}</a>\n` : "") +
+        (data.email ? `✉️ ${escapeHtml(String(data.email))}\n` : "") +
+        (data.topic ? `\n🏷 <b>Тема:</b> ${escapeHtml(String(data.topic))}` : "") +
+        (data.message ? `\n\n💬 <i>${escapeHtml(String(data.message))}</i>` : "")
+      );
+    }
     default: {
       return `<b>📣 Событие: ${escapeHtml(event)}</b>\n\n<pre>${escapeHtml(JSON.stringify(data, null, 2))}</pre>`;
     }

@@ -1,7 +1,9 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Calendar, ArrowRight, Sparkles, HeartHandshake, MapPinned, Wand2 } from "lucide-react";
+import { MapPin, Calendar, ArrowRight, Sparkles, HeartHandshake, MapPinned, Wand2, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import sashaPhoto from "@/assets/organizer-sasha-clean.png";
 import gizaPhoto from "@/assets/organizer-giza-clean.png";
 
@@ -11,6 +13,38 @@ const ProjectStorySection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeCity, setActiveCity] = useState<City>("spb");
+  const [form, setForm] = useState({ name: "", contact: "", topic: "cooperation", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.contact.trim() || !form.message.trim()) {
+      toast.error("Заполните все поля");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const isEmail = form.contact.includes("@");
+      const topicLabel = form.topic === "cooperation" ? "Сотрудничество" : "Вопрос";
+      await supabase.functions.invoke("notify-telegram", {
+        body: {
+          event: "spb_inquiry",
+          data: {
+            name: form.name.trim(),
+            [isEmail ? "email" : "phone"]: form.contact.trim(),
+            topic: topicLabel,
+            message: form.message.trim(),
+          },
+        },
+      });
+      toast.success("Спасибо! Мы свяжемся с вами.");
+      setForm({ name: "", contact: "", topic: "cooperation", message: "" });
+    } catch {
+      toast.error("Не удалось отправить. Попробуйте позже.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <section className="py-12 md:py-16 section-padding bg-background">
@@ -229,13 +263,87 @@ const ProjectStorySection = () => {
                 </p>
 
                 {/* CTA to Upcoming page */}
-                <div className="flex flex-wrap gap-3 mt-2">
+                <div className="flex flex-wrap gap-3 mt-2 mb-8">
                   <Link
                     to="/upcoming"
                     className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
                   >
                     Подробнее о вечере в Петербурге <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
+                </div>
+
+                {/* Contact form */}
+                <div className="pt-8 border-t border-border">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-2">Свяжитесь с нами</p>
+                  <h4 className="font-display text-xl md:text-2xl text-foreground mb-4">
+                    Сотрудничество или <span className="italic">вопрос</span>
+                  </h4>
+                  <form onSubmit={handleSubmit} className="grid gap-3 max-w-2xl">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <input
+                        type="text"
+                        placeholder="Ваше имя"
+                        maxLength={100}
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        className="bg-background border border-border rounded px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                        required
+                      />
+                      <input
+                        type="text"
+                        placeholder="Email или телефон"
+                        maxLength={100}
+                        value={form.contact}
+                        onChange={(e) => setForm({ ...form, contact: e.target.value })}
+                        className="bg-background border border-border rounded px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                        required
+                      />
+                    </div>
+                    <div className="flex gap-4 text-sm font-body text-muted-foreground">
+                      <label className="inline-flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="topic"
+                          value="cooperation"
+                          checked={form.topic === "cooperation"}
+                          onChange={(e) => setForm({ ...form, topic: e.target.value })}
+                          className="accent-primary"
+                        />
+                        Сотрудничество
+                      </label>
+                      <label className="inline-flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="topic"
+                          value="question"
+                          checked={form.topic === "question"}
+                          onChange={(e) => setForm({ ...form, topic: e.target.value })}
+                          className="accent-primary"
+                        />
+                        Вопрос
+                      </label>
+                    </div>
+                    <textarea
+                      placeholder="Ваше сообщение"
+                      maxLength={1000}
+                      rows={4}
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      className="bg-background border border-border rounded px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center justify-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {submitting ? (
+                        <><Loader2 className="w-4 h-4 animate-spin" /> Отправляем…</>
+                      ) : (
+                        <>Оставить заявку <ArrowRight className="w-3.5 h-3.5" /></>
+                      )}
+                    </button>
+                  </form>
                 </div>
               </motion.div>
             )}
