@@ -7,12 +7,12 @@ import gizaPhoto from "@/assets/organizer-giza-clean.png";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-type City = "moscow" | "spb";
+type City = "spb" | "moscow";
 
 const ProjectStorySection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [activeCity, setActiveCity] = useState<City>("moscow");
+  const [activeCity, setActiveCity] = useState<City>("spb");
   const [spbOpen, setSpbOpen] = useState(false);
   const [moscowOpen, setMoscowOpen] = useState(false);
   const [spbForm, setSpbForm] = useState({ name: "", email: "", phone: "" });
