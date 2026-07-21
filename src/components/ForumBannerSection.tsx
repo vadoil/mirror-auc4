@@ -37,7 +37,7 @@ const ForumBannerSection = () => {
           <div className="max-w-3xl mx-auto mb-12">
             <img
               src={forumBanner}
-              alt="Форум для женщин «Отражение» — осень '26"
+              alt="Форум для женщин «Отражение» - осень '26"
               className="w-full h-auto rounded-sm"
             />
           </div>

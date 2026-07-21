@@ -38,7 +38,7 @@ const DressCodeSection = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-muted-foreground font-body text-sm md:text-base max-w-md mx-auto leading-relaxed"
           >
-            Элегантный и&nbsp;непринуждённый стиль — идеальный баланс между комфортом и&nbsp;утончённостью
+            Элегантный и&nbsp;непринуждённый стиль - идеальный баланс между комфортом и&nbsp;утончённостью
           </motion.p>
 
           <motion.div

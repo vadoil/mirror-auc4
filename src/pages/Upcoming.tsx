@@ -82,7 +82,7 @@ const Upcoming = () => {
             <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/45 to-transparent" />
 
-            {/* световое боке — конфетти из размытых огней */}
+            {/* световое боке - конфетти из размытых огней */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden z-[5]">
               {[
                 { size: 180, x: "8%",  y: "18%", color: "255,236,180", dur: 14, delay: 0,   blur: 8 },
@@ -148,7 +148,7 @@ const Upcoming = () => {
 
                 <p className="font-body text-white/90 text-base md:text-lg max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
                   Мы собираем программу, площадку и лоты нового аукциона в Петербурге.
-                  Здесь появится всё самое главное — дата, место, расписание вечера и первые лоты.
+                  Здесь появится всё самое главное - дата, место, расписание вечера и первые лоты.
                 </p>
 
                 {/* meta strip */}
@@ -185,7 +185,7 @@ const Upcoming = () => {
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-6 h-px bg-primary" />
                   <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
-                    01 — Программа
+                    01 - Программа
                   </p>
                 </div>
                 <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95]">
@@ -197,7 +197,7 @@ const Upcoming = () => {
             <div className="grid md:grid-cols-3 gap-6">
               <Placeholder icon={Clock} label="Сбор гостей" hint="Welcome-часть, знакомство, аперитив." delay={0} />
               <Placeholder icon={Sparkles} label="Public Talk" hint="Открытая беседа со спикерами вечера." delay={0.1} />
-              <Placeholder icon={Gavel} label="Аукцион" hint="Главное действие — торги с аукционистом." delay={0.2} />
+              <Placeholder icon={Gavel} label="Аукцион" hint="Главное действие - торги с аукционистом." delay={0.2} />
             </div>
           </div>
         </section>
@@ -209,7 +209,7 @@ const Upcoming = () => {
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-6 h-px bg-primary" />
                 <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
-                  02 — Место
+                  02 - Место
                 </p>
               </div>
               <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95]">
@@ -241,7 +241,7 @@ const Upcoming = () => {
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-6 h-px bg-primary" />
                 <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
-                  03 — Лоты
+                  03 - Лоты
                 </p>
               </div>
               <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95]">

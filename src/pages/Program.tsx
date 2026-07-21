@@ -285,7 +285,7 @@ const Program = () => {
               Хотите быть <span className="italic text-primary">на аукционе?</span>
             </p>
             <p className="font-body text-sm text-muted-foreground mb-6 max-w-md mx-auto">
-              Зарегистрируйтесь сейчас — взнос 15 000 ₽ вычитается из стоимости выигранного лота
+              Зарегистрируйтесь сейчас - взнос 15 000 ₽ вычитается из стоимости выигранного лота
             </p>
             <Link to="/#tickets" className="btn-primary">
               Зарегистрироваться

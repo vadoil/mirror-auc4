@@ -36,7 +36,7 @@ const Header = () => {
       if (el) el.scrollIntoView({ behavior: "smooth" });
       setMenuOpen(false);
     } else {
-      // Different page — let navigation happen, then ScrollToTop will scroll
+      // Different page - let navigation happen, then ScrollToTop will scroll
       setMenuOpen(false);
     }
   };
@@ -73,7 +73,7 @@ const Header = () => {
           <Link to="/" className="flex items-center gap-3 shrink-0">
             <img
               src={useDarkText ? logoOtrazhenie : logoOtrazhenieLight}
-              alt="Отражение — благотворительный аукцион"
+              alt="Отражение - благотворительный аукцион"
               className="h-10 md:h-12 w-auto shrink-0 transition-all duration-300"
             />
           </Link>

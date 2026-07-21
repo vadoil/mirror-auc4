@@ -33,7 +33,7 @@ const partners: Partner[] = [
     name: "Balance Hall «Место быть»",
     category: "Площадка",
     description:
-      "Камерное артистическое пространство в самом центре Москвы — Мясницкая 24/7. Главная сцена аукциона «Отражение добра».",
+      "Камерное артистическое пространство в самом центре Москвы - Мясницкая 24/7. Главная сцена аукциона «Отражение добра».",
     logo: logoMesto,
   },
   {
@@ -82,7 +82,7 @@ const partners: Partner[] = [
     name: "Клиника «Будь Здоров»",
     category: "Партнёр подарочного фонда",
     description:
-      "Сертификаты на медицинские услуги — главные подарки розыгрыша среди номеров, зарегистрированных на аукцион.",
+      "Сертификаты на медицинские услуги - главные подарки розыгрыша среди номеров, зарегистрированных на аукцион.",
   },
 ];
 
@@ -129,7 +129,7 @@ const Partners = () => {
         </div>
       </section>
 
-      {/* Featured banner — Лев и Единорог */}
+      {/* Featured banner - Лев и Единорог */}
       <section className="section-padding mb-16">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -141,7 +141,7 @@ const Partners = () => {
           >
             <img
               src={heroBanner}
-              alt="Лев и Единорог — генеральный партнёр"
+              alt="Лев и Единорог - генеральный партнёр"
               loading="lazy"
               className="w-full h-[420px] md:h-[520px] object-cover group-hover:scale-105 transition-transform duration-1000"
             />

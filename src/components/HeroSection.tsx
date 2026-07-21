@@ -100,7 +100,7 @@ const HeroSection = () => {
                     26 апреля 2026
                   </p>
                   <div className="font-display text-2xl sm:text-3xl md:text-4xl text-cream font-light leading-tight">
-                    Вечер прошёл — <br className="hidden sm:block" />
+                    Вечер прошёл - <br className="hidden sm:block" />
                     <span className="italic text-primary">добро продолжается</span>
                   </div>
                   <p className="font-body text-cream/50 text-sm md:text-base mt-3 max-w-sm lg:ml-auto">
