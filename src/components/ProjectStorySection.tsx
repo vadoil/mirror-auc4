@@ -170,7 +170,7 @@ const ProjectStorySection = () => {
                     animate={{ opacity: [0.6, 1, 0.6], color: ["hsl(var(--muted-foreground))", "hsl(var(--primary))", "hsl(var(--muted-foreground))"] }}
                     transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    Ноябрь 2026
+                    13 августа 2026
                   </motion.span>
                 </p>
               </div>
