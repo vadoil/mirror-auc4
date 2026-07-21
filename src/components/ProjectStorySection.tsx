@@ -257,34 +257,14 @@ const ProjectStorySection = () => {
                   В Питере – пить, носить black tie и кружиться на балах в особняках XVIII века. Наши гости и участники благотворительного аукциона получат возможность прикоснуться к культуре балов и светских парадов. В Петербурге мы представим к аукциону предметы искусства.
                 </p>
 
-                {/* Contact form for SPb */}
-                <div className="bg-muted/50 border border-border rounded-lg p-6 mt-4">
-                  <p className="font-display text-base text-foreground uppercase mb-1">Получить детали мероприятия</p>
-                  <p className="font-body text-xs text-muted-foreground mb-5">Оставьте контакты, и мы расскажем обо всём первыми</p>
-                  <form onSubmit={handleSpbSubmit} className="grid sm:grid-cols-3 gap-3">
-                    <input
-                      type="text"
-                      placeholder="Имя"
-                      value={spbForm.name}
-                      onChange={(e) => setSpbForm({ ...spbForm, name: e.target.value })}
-                      className="bg-background border border-border rounded px-4 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
-                    />
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      value={spbForm.email}
-                      onChange={(e) => setSpbForm({ ...spbForm, email: e.target.value })}
-                      className="bg-background border border-border rounded px-4 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
-                    />
-                    <button
-                      type="submit"
-                      disabled={sending}
-                      className="bg-primary text-primary-foreground px-5 py-2.5 rounded font-body text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
-                    >
-                      <Send className="w-3.5 h-3.5" />
-                      {sending ? "..." : "Отправить"}
-                    </button>
-                  </form>
+                {/* CTA to Upcoming page */}
+                <div className="flex flex-wrap gap-3 mt-2">
+                  <Link
+                    to="/upcoming"
+                    className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+                  >
+                    Подробнее о вечере в Петербурге <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
               </motion.div>
             )}
