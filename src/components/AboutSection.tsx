@@ -86,16 +86,16 @@ const AboutSection = () => {
                 className="relative"
               >
                 <div className="aspect-[4/5] overflow-hidden relative">
-                  <img src={aboutVenue} alt="Баланс-холл «Место быть» – площадка благотворительного аукциона" loading="lazy" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1280} />
-                  <div className="absolute inset-0 bg-warm-black/40" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-warm-black/70 via-transparent to-warm-black/20" />
-                  <div className="text-center p-8 relative z-10 flex flex-col items-center justify-center h-full">
-                    <p className="font-body text-cream/50 text-xs uppercase tracking-[0.3em] mb-4">Площадка</p>
-                    <p className="font-display text-5xl md:text-6xl font-light text-cream italic leading-none mb-2">Место</p>
-                    <p className="font-display text-5xl md:text-6xl font-light text-cream italic leading-none mb-4">быть</p>
+                  <img src={aboutVenue} alt="Санкт-Петербург на закате - место будущего аукциона" loading="lazy" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1280} />
+                  <div className="absolute inset-0 bg-warm-black/35" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-warm-black/10 to-transparent" />
+                  <div className="text-center p-8 relative z-10 flex flex-col items-center justify-end h-full pb-12">
+                    <p className="font-body text-cream/60 text-[10px] uppercase tracking-[0.35em] mb-4">Ближайший аукцион</p>
+                    <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-2">Санкт-</p>
+                    <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-5">Петербург</p>
                     <div className="w-12 h-px bg-primary mx-auto mb-4" />
-                    <p className="font-body text-cream/60 text-sm max-w-xs mx-auto">
-                      Баланс-холл · Мясницкая 24/7 · Москва
+                    <p className="font-body text-cream/70 text-sm max-w-xs mx-auto">
+                      Дата и место уточняются
                     </p>
                   </div>
                 </div>
