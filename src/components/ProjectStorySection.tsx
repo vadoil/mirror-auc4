@@ -170,7 +170,7 @@ const ProjectStorySection = () => {
                     animate={{ opacity: [0.6, 1, 0.6], color: ["hsl(var(--muted-foreground))", "hsl(var(--primary))", "hsl(var(--muted-foreground))"] }}
                     transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    Ноябрь 2026
+                    13 августа 2026
                   </motion.span>
                 </p>
               </div>
@@ -255,11 +255,25 @@ const ProjectStorySection = () => {
               >
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-2 h-2 rounded-full bg-primary" />
-                  <p className="font-body text-xs text-primary uppercase tracking-[0.2em]">Black Tie · Балы · Искусство</p>
+                  <p className="font-body text-xs text-primary uppercase tracking-[0.2em]">Искусство · Здоровье · Фонд «Не напрасно»</p>
                 </div>
 
-                <p className="font-body text-sm md:text-base text-foreground leading-relaxed mb-6">
-                  В Питере – пить, носить black tie и кружиться на балах в особняках XVIII века. Наши гости и участники благотворительного аукциона получат возможность прикоснуться к культуре балов и светских парадов. В Петербурге мы представим к аукциону предметы искусства.
+                <h4 className="font-display text-xl md:text-2xl text-foreground leading-tight mb-3">
+                  Искусство видеть <span className="italic">главное</span>
+                </h4>
+                <p className="font-body text-sm text-primary uppercase tracking-[0.15em] mb-4">
+                  13 августа 2026 · Центр «Зрение», Санкт-Петербург
+                </p>
+
+                <p className="font-body text-sm md:text-base text-foreground leading-relaxed mb-3">
+                  Благотворительный вечер в поддержку фонда «Не напрасно» в центре современной
+                  офтальмологии «Зрение». Разговор с онкологом Владиславом Евсеевым, аукцион работ
+                  Алексея Сергиенко, Андрея Бартенева и Дмитрия Абросимова, экспресс-диагностика зрения
+                  и лёгкие гастрономические сеты.
+                </p>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed mb-6">
+                  Стоимость билета — 7 000 ₽. Вся выручка направляется на помощь людям
+                  с онкологическими заболеваниями.
                 </p>
 
                 {/* CTA to Upcoming page */}
