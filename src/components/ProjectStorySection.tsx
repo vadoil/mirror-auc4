@@ -13,8 +13,38 @@ const ProjectStorySection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeCity, setActiveCity] = useState<City>("spb");
+  const [form, setForm] = useState({ name: "", contact: "", topic: "cooperation", message: "" });
+  const [submitting, setSubmitting] = useState(false);
 
-  return (
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.contact.trim() || !form.message.trim()) {
+      toast.error("Заполните все поля");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const isEmail = form.contact.includes("@");
+      const topicLabel = form.topic === "cooperation" ? "Сотрудничество" : "Вопрос";
+      await supabase.functions.invoke("notify-telegram", {
+        body: {
+          event: "spb_inquiry",
+          data: {
+            name: form.name.trim(),
+            [isEmail ? "email" : "phone"]: form.contact.trim(),
+            topic: topicLabel,
+            message: form.message.trim(),
+          },
+        },
+      });
+      toast.success("Спасибо! Мы свяжемся с вами.");
+      setForm({ name: "", contact: "", topic: "cooperation", message: "" });
+    } catch {
+      toast.error("Не удалось отправить. Попробуйте позже.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
     <section className="py-12 md:py-16 section-padding bg-background">
       <div ref={ref} className="max-w-6xl mx-auto">
         {/* Header */}
