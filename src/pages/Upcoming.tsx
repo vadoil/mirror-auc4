@@ -137,7 +137,7 @@ const Upcoming = () => {
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-8 h-px bg-primary" />
                   <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white font-body drop-shadow-[0_1px_8px_rgba(0,0,0,0.6)]">
-                    Ближайший аукцион · Санкт-Петербург
+                    Black Tie · Балы · Искусство
                   </p>
                 </div>
 
@@ -147,8 +147,10 @@ const Upcoming = () => {
                 </h1>
 
                 <p className="font-body text-white/90 text-base md:text-lg max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
-                  Мы собираем программу, площадку и лоты нового аукциона в Петербурге.
-                  Здесь появится всё самое главное - дата, место, расписание вечера и первые лоты.
+                  В Питере - пить, носить black tie и кружиться на балах в особняках XVIII века.
+                  Наши гости и участники благотворительного аукциона получат возможность
+                  прикоснуться к культуре балов и светских парадов. В Петербурге мы представим
+                  к аукциону предметы искусства.
                 </p>
 
                 {/* meta strip */}
