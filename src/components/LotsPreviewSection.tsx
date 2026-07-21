@@ -76,7 +76,7 @@ const LotsPreviewSection = () => {
               Лоты <span className="text-primary italic">аукциона</span>
             </h2>
             <p className="font-body text-sm text-muted-foreground max-w-2xl leading-relaxed">
-              Развитие и вдохновение, биохакинг и велнесс, искусство, хобби, ретриты —{" "}
+              Развитие и вдохновение, биохакинг и велнесс, искусство, хобби, ретриты -{" "}
               {dbLots.length} лотов, доступных к торгам сейчас.
             </p>
           </div>

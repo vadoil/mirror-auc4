@@ -211,7 +211,7 @@ const Forum = () => {
               Хочу <span className="italic text-primary">на форум</span>
             </h2>
             <p className="font-body text-sm text-muted-foreground">
-              Бесплатное участие по предварительной заявке. Места ограничены — мы напишем ближе к дате.
+              Бесплатное участие по предварительной заявке. Места ограничены - мы напишем ближе к дате.
             </p>
           </motion.div>
 

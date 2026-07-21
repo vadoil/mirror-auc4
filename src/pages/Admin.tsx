@@ -267,7 +267,7 @@ const Admin = () => {
   };
 
   const buildCredentialsEmail = (req: TicketRequest, password: string) => {
-    const subject = "Ваш доступ в личный кабинет — Аукцион «Отражение добра»";
+    const subject = "Ваш доступ в личный кабинет - Аукцион «Отражение добра»";
     const body = `Здравствуйте, ${req.name}!
 
 Для вас создан личный кабинет участника благотворительного аукциона «Отражение добра».
@@ -284,7 +284,7 @@ const Admin = () => {
 📍 Москва, Мясницкая 24/7, баланс-холл «Место быть»
 🕖 Сбор гостей: 19:00
 
-Аукционист вечера — Александр Цыпкин.
+Аукционист вечера - Александр Цыпкин.
 
 С уважением,
 Команда «Отражение добра»`;
@@ -333,7 +333,7 @@ const Admin = () => {
 
 
   const buildConfirmationEmail = (req: TicketRequest) => {
-    const subject = "Подтверждение регистрации — Аукцион «Отражение добра»";
+    const subject = "Подтверждение регистрации - Аукцион «Отражение добра»";
     const tierLabels: Record<string, string> = {
       friend: "Друг (по промокоду)",
       participant: "Участник аукциона",
@@ -351,7 +351,7 @@ const Admin = () => {
 📍 Место: Москва, Мясницкая 24/7, баланс-холл «Место быть»
 🕖 Сбор гостей: 19:00
 
-Аукционист вечера — Александр Цыпкин.
+Аукционист вечера - Александр Цыпкин.
 
 Все средства от продажи лотов направляются на поддержку благотворительных проектов наших партнёров.
 
@@ -542,7 +542,7 @@ const Admin = () => {
                         <p className="font-body text-sm text-cream truncate">{lot.title}</p>
                         <p className="text-cream/40 text-xs font-body mt-1">{lot.category || "–"} · {lot.starting_price.toLocaleString()} ₽ · шаг {lot.bid_step.toLocaleString()} ₽</p>
                         {!lot.preview_image_url && lot.image_url && (
-                          <p className="text-yellow-400/60 text-[10px] font-body mt-1">⚠ Нет превью — карточка использует основное фото</p>
+                          <p className="text-yellow-400/60 text-[10px] font-body mt-1">⚠ Нет превью - карточка использует основное фото</p>
                         )}
                       </div>
                       <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-1 ${
@@ -769,11 +769,11 @@ const Admin = () => {
                       <td className="py-2 pr-4 text-cream/40 whitespace-nowrap text-xs">
                         {new Date(v.created_at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
                       </td>
-                      <td className="py-2 pr-4 text-cream">{v.utm_source || "—"}</td>
-                      <td className="py-2 pr-4">{v.utm_medium || "—"}</td>
-                      <td className="py-2 pr-4">{v.utm_campaign || "—"}</td>
-                      <td className="py-2 pr-4 text-cream/60 truncate max-w-[200px]" title={v.landing_page || ""}>{v.landing_page || "—"}</td>
-                      <td className="py-2 text-cream/40 truncate max-w-[200px] text-xs" title={v.referrer || ""}>{v.referrer || "—"}</td>
+                      <td className="py-2 pr-4 text-cream">{v.utm_source || "-"}</td>
+                      <td className="py-2 pr-4">{v.utm_medium || "-"}</td>
+                      <td className="py-2 pr-4">{v.utm_campaign || "-"}</td>
+                      <td className="py-2 pr-4 text-cream/60 truncate max-w-[200px]" title={v.landing_page || ""}>{v.landing_page || "-"}</td>
+                      <td className="py-2 text-cream/40 truncate max-w-[200px] text-xs" title={v.referrer || ""}>{v.referrer || "-"}</td>
                     </tr>
                   ))}
                 </tbody>

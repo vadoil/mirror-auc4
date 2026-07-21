@@ -14,7 +14,7 @@ const LOT_EXTRA_IMAGES: Record<string, { src: string; alt: string; caption?: str
   "b0d74e5e-fc61-4b5d-84c6-5a3d34ec73f0": {
     src: lotLevLvovich,
     alt: "Лев Львович",
-    caption: "Лев Львович — архитектор личных брендов",
+    caption: "Лев Львович - архитектор личных брендов",
   },
 };
 
@@ -239,7 +239,7 @@ const LotDetail = () => {
               {/* Curator hint */}
               <div className="p-4 bg-card border border-border rounded-lg mb-6">
                 <p className="font-body text-xs text-muted-foreground leading-relaxed">
-                  Заполните короткую форму — куратор онлайн-торгов{" "}
+                  Заполните короткую форму - куратор онлайн-торгов{" "}
                   <span className="text-foreground font-medium">Александра Павлова</span> свяжется с вами для
                   подтверждения ставки или покупки. Регистрация на сайте не требуется.
                 </p>

@@ -56,7 +56,7 @@ const Auth = () => {
         </h1>
         <p className="text-cream/40 text-xs font-body mb-6 leading-relaxed">
           {mode === "login"
-            ? "Личный кабинет — для участников прошлого аукциона. Чтобы участвовать в текущих торгах, регистрация не нужна — просто оставьте заявку на странице лота."
+            ? "Личный кабинет - для участников прошлого аукциона. Чтобы участвовать в текущих торгах, регистрация не нужна - просто оставьте заявку на странице лота."
             : "Введите email для получения ссылки"}
         </p>
 
@@ -109,7 +109,7 @@ const Auth = () => {
 
         <div className="mt-8 pt-6 border-t border-cream/10">
           <p className="text-cream/50 text-xs font-body leading-relaxed text-center">
-            Регистрация новых участников — через куратора онлайн-торгов{" "}
+            Регистрация новых участников - через куратора онлайн-торгов{" "}
             <span className="text-cream/80">Александры Павловой</span>:
           </p>
           <div className="flex flex-wrap gap-3 justify-center mt-2 text-xs font-body">

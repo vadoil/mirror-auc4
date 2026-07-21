@@ -175,7 +175,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
     });
 
     toast.success(promoCode
-      ? "Заявка отправлена! Промокод применён — регистрация без оплаты. Данные для входа придут на почту."
+      ? "Заявка отправлена! Промокод применён - регистрация без оплаты. Данные для входа придут на почту."
       : "Заявка сохранена. Перейдите к оплате."
     );
 
@@ -313,7 +313,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
                   )}
                 </div>
                 {promoValid === true && (
-                  <p className="text-green-400 text-xs font-body mt-1">Промокод применён — регистрация без оплаты</p>
+                  <p className="text-green-400 text-xs font-body mt-1">Промокод применён - регистрация без оплаты</p>
                 )}
                 {promoValid === false && (
                   <p className="text-red-400/70 text-xs font-body mt-1">Промокод не найден или недействителен</p>

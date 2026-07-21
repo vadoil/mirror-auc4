@@ -35,7 +35,7 @@ const sponsors = [
   { name: "ШТАБ КУЛЬТУРЫ", logo: shtabLogo, url: "https://levik.ru/" },
   { name: "Marriott Imperial Plaza", logo: marriottLogo, url: "https://marriottimperialplaza.moscow/" },
   { name: "Лев & Единорог", logo: levEdinorogLogo, url: "https://levik.ru/" },
-  { name: "Соловьи — женская русская баня", logo: soloviyLogo, url: "https://soloviy.ru/" },
+  { name: "Соловьи - женская русская баня", logo: soloviyLogo, url: "https://soloviy.ru/" },
   { name: "Сказ по краю", logo: skazPoKrayuLogo, url: "https://skazpokrayu.ru", fill: true },
   { name: "SOROKA Moscow", logo: sorokaLogo, url: "https://t.me/sorokamoscow/" },
   { name: "Vintage Dream", logo: vintageDreamLogo, url: "https://vintagedream.ru/" },
@@ -113,7 +113,7 @@ const SponsorsSection = () => {
             Партнёры и <span className="italic text-primary">спонсоры</span>
           </h2>
           <p className="mt-6 max-w-2xl mx-auto font-body text-base md:text-lg text-muted-foreground leading-relaxed">
-            Мы благодарим партнёров за поддержку и вклад в организацию аукциона, объединившего людей вокруг главного — возможности помогать, быть рядом и делать добро вместе
+            Мы благодарим партнёров за поддержку и вклад в организацию аукциона, объединившего людей вокруг главного - возможности помогать, быть рядом и делать добро вместе
           </p>
         </motion.div>
 
