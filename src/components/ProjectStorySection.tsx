@@ -145,7 +145,35 @@ const ProjectStorySection = () => {
           </h3>
 
           {/* City tabs */}
-          <div className="flex justify-center gap-4 mb-8">
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <button
+              onClick={() => setActiveCity("spb")}
+              className={`relative flex items-center gap-3 px-6 py-4 border rounded-lg transition-all duration-300 ${
+                activeCity === "spb"
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:border-primary/30"
+              }`}
+            >
+              <MapPin className={`w-4 h-4 ${activeCity === "spb" ? "text-primary" : "text-muted-foreground"}`} />
+              <div className="text-left">
+                <p className={`font-display text-base uppercase ${activeCity === "spb" ? "text-foreground" : "text-muted-foreground"}`}>
+                  Санкт-Петербург
+                </p>
+                <p className="font-body text-xs text-muted-foreground flex items-center gap-1.5">
+                  <Calendar className="w-3 h-3" />
+                  <motion.span
+                    animate={{ opacity: [0.6, 1, 0.6], color: ["hsl(var(--muted-foreground))", "hsl(var(--primary))", "hsl(var(--muted-foreground))"] }}
+                    transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    Ноябрь 2026
+                  </motion.span>
+                </p>
+              </div>
+              <span className="pointer-events-none absolute -top-2 -right-2 text-[9px] uppercase tracking-[0.2em] bg-primary text-primary-foreground px-2 py-0.5 rounded-full font-body">
+                скоро
+              </span>
+            </button>
+
             <button
               onClick={() => setActiveCity("moscow")}
               className={`flex items-center gap-3 px-6 py-4 border rounded-lg transition-all duration-300 ${
@@ -161,25 +189,6 @@ const ProjectStorySection = () => {
                 </p>
                 <p className="font-body text-xs text-muted-foreground flex items-center gap-1.5">
                   <Calendar className="w-3 h-3" /> 26 апреля 2026
-                </p>
-              </div>
-            </button>
-
-            <button
-              onClick={() => setActiveCity("spb")}
-              className={`flex items-center gap-3 px-6 py-4 border rounded-lg transition-all duration-300 ${
-                activeCity === "spb"
-                  ? "border-primary bg-primary/5"
-                  : "border-border hover:border-primary/30"
-              }`}
-            >
-              <MapPin className={`w-4 h-4 ${activeCity === "spb" ? "text-primary" : "text-muted-foreground"}`} />
-              <div className="text-left">
-                <p className={`font-display text-base uppercase ${activeCity === "spb" ? "text-foreground" : "text-muted-foreground"}`}>
-                  Санкт-Петербург
-                </p>
-                <p className="font-body text-xs text-muted-foreground flex items-center gap-1.5">
-                  <Calendar className="w-3 h-3" /> Ноябрь 2026
                 </p>
               </div>
             </button>
