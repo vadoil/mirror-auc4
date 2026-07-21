@@ -1,68 +1,76 @@
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Sparkles, Gavel, Clock } from "lucide-react";
+import { useState } from "react";
+import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TicketRequestModal from "@/components/TicketRequestModal";
 import spbHero from "@/assets/upcoming-spb-hero.jpg";
 
-const Placeholder = ({
-  icon: Icon,
-  label,
-  hint,
-  aspect = "aspect-[4/3]",
-  delay = 0,
-}: {
-  icon: React.ElementType;
-  label: string;
-  hint: string;
-  aspect?: string;
-  delay?: number;
-}) => (
-  <motion.div
-    initial={{ opacity: 0, y: 24 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-80px" }}
-    transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-    className={`group relative ${aspect} overflow-hidden rounded-lg border border-border bg-muted/40 hover:border-primary/40 hover:shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.15)] transition-all duration-700`}
-  >
-    {/* subtle grid texture */}
-    <div
-      className="absolute inset-0 opacity-[0.05] group-hover:opacity-[0.08] transition-opacity duration-700"
-      style={{
-        backgroundImage:
-          "linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)",
-        backgroundSize: "40px 40px",
-      }}
-    />
-    {/* radial glow */}
-    <div className="absolute -inset-1/3 bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.08),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+const artists = [
+  {
+    name: "Алексей Сергиенко",
+    role: "художник-концептуалист, поп-арт",
+    text: "Российский художник-концептуалист, мастер жизнерадостного поп-арта, предприниматель и общественный деятель, основатель «Центра поддержки искусств Санкт-Петербурга». Представит холсты из своей знаковой серии.",
+  },
+  {
+    name: "Андрей Бартенев",
+    role: "художник, сценограф, перформер",
+    text: "Один из главных представителей российского перформанса и сюрреализма, педагог, ведущий популярного шоу «Модный приговор». Передаёт в благотворительную продажу свои объекты-инсталляции.",
+  },
+  {
+    name: "Дмитрий Абросимов",
+    role: "художник, графика",
+    text: "Исследует в своём творчестве мистические аспекты и многослойную атмосферу. Выставляет на торги минималистичную графику, исследующую хрупкость человеческого восприятия.",
+  },
+];
 
-    {/* corner ticks */}
-    <span className="absolute top-4 left-4 w-3 h-3 border-l border-t border-primary/40" />
-    <span className="absolute top-4 right-4 w-3 h-3 border-r border-t border-primary/40" />
-    <span className="absolute bottom-4 left-4 w-3 h-3 border-l border-b border-primary/40" />
-    <span className="absolute bottom-4 right-4 w-3 h-3 border-r border-b border-primary/40" />
-
-    <div className="relative h-full w-full flex flex-col items-center justify-center text-center p-6">
-      <div className="w-14 h-14 rounded-full border border-primary/30 flex items-center justify-center mb-5 group-hover:border-primary/60 group-hover:bg-primary/5 transition-all duration-700">
-        <Icon className="w-5 h-5 text-primary" />
-      </div>
-      <p className="font-display text-lg md:text-xl uppercase tracking-[0.2em] text-foreground/90 mb-2">
-        {label}
-      </p>
-      <p className="font-body text-xs md:text-sm text-muted-foreground max-w-xs leading-relaxed">
-        {hint}
-      </p>
-      <div className="mt-6 flex items-center gap-2">
-        <span className="w-1 h-1 rounded-full bg-primary/60 animate-pulse" />
-        <span className="text-[10px] uppercase tracking-[0.3em] text-primary/70 font-body">
-          скоро
-        </span>
-      </div>
-    </div>
-  </motion.div>
-);
+const programItems = [
+  {
+    icon: MessageCircle,
+    title: "Разговор с врачом",
+    lead: "Владислав Евсеев",
+    subtitle: "онколог-химиотерапевт, руководитель Медицинского совета фонда «Не напрасно»",
+    body: "«Здоровье как можно дольше: куда смотреть, чтобы не пропустить главное». Владислав объяснит разницу между грамотным скринингом по международным протоколам и коммерческими предложениями «сдай всё подряд», подскажет, какие популярные инструменты заботы о здоровье полезны, а какие — навредят. После лекции — открытая сессия вопросов и ответов.",
+  },
+  {
+    icon: Palette,
+    title: "Аукцион смыслов",
+    lead: "Когда искусство лечит",
+    subtitle: "три художника — одна тема",
+    body: "Специально для этого вечера три совершенно разных художника создали работы, объединённые общей темой. Торги пройдут в очном и онлайн-форматах, следить за ставками можно прямо со смартфона через QR-код на билете. Стоимость билета засчитывается в случае покупки одного из лотов.",
+  },
+  {
+    icon: Eye,
+    title: "Экспресс-диагностика зрения",
+    lead: "От врачей клиники «Зрение»",
+    subtitle: "15 минут · бесконтактно",
+    body: "Современное оборудование позволит за 15 минут бесконтактно измерить внутриглазное давление, проверить остроту зрения и сделать снимок сетчатки.",
+  },
+  {
+    icon: Utensils,
+    title: "Гастрономия и общение",
+    lead: "Лёгкие сеты",
+    subtitle: "финал вечера",
+    body: "В завершение — лёгкие гастрономические сеты и неспешное общение с гостями, художниками и командой фонда.",
+  },
+];
 
 const Upcoming = () => {
+  const [ticketOpen, setTicketOpen] = useState(false);
+  const [donateOpen, setDonateOpen] = useState(false);
+  const [donateAmount, setDonateAmount] = useState<number>(3000);
+  const [donateInput, setDonateInput] = useState<string>("3000");
+
+  const openDonate = () => {
+    const n = parseInt(donateInput.replace(/\D/g, ""), 10);
+    if (!Number.isFinite(n) || n < 100) {
+      setDonateAmount(3000);
+    } else {
+      setDonateAmount(n);
+    }
+    setDonateOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -78,11 +86,10 @@ const Upcoming = () => {
               width={1920}
               height={1280}
             />
-            {/* затемнение для читаемости текста */}
-            <div className="absolute inset-0 bg-black/30" />
-            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/45 to-transparent" />
+            <div className="absolute inset-0 bg-black/35" />
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/50 to-transparent" />
 
-            {/* световое боке - конфетти из размытых огней */}
+            {/* световое боке */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden z-[5]">
               {[
                 { size: 180, x: "8%",  y: "18%", color: "255,236,180", dur: 14, delay: 0,   blur: 8 },
@@ -116,12 +123,7 @@ const Upcoming = () => {
                     opacity: [0.35, 0.9, 0.55, 0.35],
                     scale: [1, 1.15, 0.95, 1],
                   }}
-                  transition={{
-                    duration: b.dur,
-                    delay: b.delay,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                  transition={{ duration: b.dur, delay: b.delay, repeat: Infinity, ease: "easeInOut" }}
                 />
               ))}
             </div>
@@ -137,30 +139,32 @@ const Upcoming = () => {
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-8 h-px bg-primary" />
                   <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white font-body drop-shadow-[0_1px_8px_rgba(0,0,0,0.6)]">
-                    Black Tie · Балы · Искусство
+                    13 августа 2026 · Санкт-Петербург
                   </p>
                 </div>
 
-                <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white uppercase tracking-tight leading-[0.95] mb-8 drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
-                  Благотворительный аукцион
-                  <br /> в <span className="italic">Санкт-Петербурге</span>
+                <h1 className="font-display text-3xl md:text-5xl lg:text-6xl text-white uppercase tracking-tight leading-[1.02] mb-6 drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+                  Искусство видеть <span className="italic">главное</span>
                 </h1>
 
+                <p className="font-body text-white/85 text-sm md:text-base max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] mb-4">
+                  Благотворительный вечер в поддержку фонда «Не напрасно».
+                </p>
+
                 <p className="font-body text-white/90 text-base md:text-lg max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
-                  В Питере - пить, носить black tie и кружиться на балах в особняках XVIII века.
-                  Наши гости и участники благотворительного аукциона получат возможность
-                  прикоснуться к культуре балов и светских парадов. В Петербурге мы представим
-                  к аукциону предметы искусства.
+                  В мире, где мы привыкли смотреть на поверхность вещей, есть те, кто смотрит вглубь.
+                  Мы собираемся в центре современной офтальмологии «Зрение», чтобы вместе
+                  сфокусироваться на главном — на будущем без страха перед раком.
                 </p>
 
                 {/* meta strip */}
                 <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-px bg-border/60 rounded-lg overflow-hidden border border-border/60 backdrop-blur-sm">
                   {[
-                    { icon: Calendar, label: "Дата", value: "уточняется" },
-                    { icon: MapPin, label: "Город", value: "Санкт-Петербург" },
+                    { icon: Calendar, label: "Дата", value: "13 августа 2026" },
+                    { icon: MapPin, label: "Место", value: "Центр «Зрение», СПб" },
                     { icon: Clock, label: "Формат", value: "офлайн + онлайн" },
                   ].map((m, i) => (
-                    <div key={i} className="bg-background/80 backdrop-blur-sm p-5 flex items-center gap-4">
+                    <div key={i} className="bg-background/85 backdrop-blur-sm p-5 flex items-center gap-4">
                       <m.icon className="w-4 h-4 text-primary shrink-0" />
                       <div>
                         <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-1">
@@ -173,33 +177,158 @@ const Upcoming = () => {
                     </div>
                   ))}
                 </div>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <button
+                    onClick={() => setTicketOpen(true)}
+                    className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+                  >
+                    <Ticket className="w-4 h-4" /> Купить билет · 7 000 ₽
+                  </button>
+                  <a
+                    href="#donation"
+                    className="border border-white/40 text-white px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:bg-white/10 transition-colors"
+                  >
+                    <HeartHandshake className="w-4 h-4" /> Сделать пожертвование
+                  </a>
+                </div>
               </motion.div>
             </div>
           </div>
         </section>
 
+        {/* Миссия */}
+        <section className="section-padding mb-16 md:mb-24">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-6 h-px bg-primary" />
+                <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
+                  О вечере
+                </p>
+              </div>
+              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-8">
+                Смотреть <span className="italic text-primary">вглубь</span>
+              </h2>
+              <div className="space-y-5 font-body text-base md:text-lg text-muted-foreground leading-relaxed">
+                <p>
+                  Миссия фонда «Не напрасно» — спасать жизни до того, как человек столкнётся с
+                  онкологическим заболеванием, и помогать ему не остаться один на один с диагнозом.
+                </p>
+                <p>
+                  Чтобы поддержать эту невидимую, но жизненно важную работу, центр современной
+                  офтальмологии «Зрение» открывает свои двери для особенного вечера. Мы собираемся
+                  там, где каждый день дарят людям возможность чётко видеть мир, чтобы вместе
+                  сфокусироваться на главном — на будущем без страха перед раком.
+                </p>
+                <p className="text-foreground">
+                  Присоединяйтесь к нам <span className="text-primary font-medium">13 августа 2026 года</span>.
+                  Вся выручка от билетов и аукциона будет направлена на помощь людям с
+                  онкологическими заболеваниями.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
         {/* Программа */}
         <section className="section-padding mb-16 md:mb-24">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-6 h-px bg-primary" />
-                  <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
-                    01 - Программа
-                  </p>
-                </div>
-                <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95]">
-                  Расписание <span className="italic text-primary">вечера</span>
-                </h2>
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-6 h-px bg-primary" />
+                <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
+                  01 - Программа вечера
+                </p>
               </div>
+              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95]">
+                Что нас <span className="italic text-primary">ждёт</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {programItems.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ duration: 0.6, delay: i * 0.08 }}
+                    className="group relative border border-border rounded-lg p-8 bg-muted/30 hover:border-primary/40 hover:bg-muted/50 transition-all duration-500"
+                  >
+                    <div className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center mb-5 group-hover:border-primary/60 group-hover:bg-primary/5 transition-all">
+                      <Icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-2">
+                      0{i + 1} · {item.subtitle}
+                    </p>
+                    <h3 className="font-display text-2xl md:text-3xl text-foreground uppercase tracking-tight leading-tight mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="font-display text-base italic text-primary/90 mb-4">
+                      {item.lead}
+                    </p>
+                    <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed">
+                      {item.body}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Художники */}
+        <section className="section-padding mb-16 md:mb-24">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-6 h-px bg-primary" />
+                <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
+                  02 - Художники аукциона
+                </p>
+              </div>
+              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95]">
+                Три взгляда, <span className="italic text-primary">одна тема</span>
+              </h2>
+              <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-2xl">
+                Специально для вечера три совершенно разных художника создали работы, объединённые
+                общей темой. Средства с продажи лотов направлены в фонд «Не напрасно».
+              </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-              <Placeholder icon={Clock} label="Сбор гостей" hint="Welcome-часть, знакомство, аперитив." delay={0} />
-              <Placeholder icon={Sparkles} label="Public Talk" hint="Открытая беседа со спикерами вечера." delay={0.1} />
-              <Placeholder icon={Gavel} label="Аукцион" hint="Главное действие - торги с аукционистом." delay={0.2} />
+              {artists.map((a, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  className="border border-border rounded-lg p-8 bg-card hover:border-primary/40 transition-all duration-500"
+                >
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="font-numbers text-2xl text-primary">0{i + 1}</span>
+                    <div className="flex-1 h-px bg-border" />
+                  </div>
+                  <h3 className="font-display text-xl md:text-2xl text-foreground uppercase tracking-tight leading-tight mb-2">
+                    {a.name}
+                  </h3>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-primary font-body mb-4">
+                    {a.role}
+                  </p>
+                  <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                    {a.text}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
@@ -211,66 +340,163 @@ const Upcoming = () => {
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-6 h-px bg-primary" />
                 <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
-                  02 - Место
+                  03 - Место проведения
                 </p>
               </div>
               <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95]">
-                Площадка <span className="italic text-primary">вечера</span>
+                Центр <span className="italic text-primary">«Зрение»</span>
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
-                <Placeholder
-                  icon={MapPin}
-                  label="Площадка"
-                  hint="Здесь появятся фотографии зала, адрес и панорама пространства."
-                  aspect="aspect-[16/10]"
-                />
+            <div className="grid lg:grid-cols-2 gap-8 items-start">
+              <div className="border border-border rounded-lg p-8 bg-muted/30">
+                <div className="flex items-center gap-3 mb-5">
+                  <MapPin className="w-5 h-5 text-primary" />
+                  <p className="font-display text-lg text-foreground uppercase tracking-wide">
+                    Санкт-Петербург, пр. Добролюбова, 20к1
+                  </p>
+                </div>
+                <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-4">
+                  Клиника высокоточной диагностики, оказавшая поддержку мероприятию.
+                  Пространство, где каждый день дарят людям возможность чётко видеть мир.
+                </p>
+                <p className="font-body text-sm text-muted-foreground/80 leading-relaxed">
+                  <span className="text-foreground font-medium">Дата и время:</span> 13 августа 2026,
+                  сбор гостей уточняется.
+                </p>
               </div>
-              <div className="grid grid-rows-2 gap-6">
-                <Placeholder icon={Sparkles} label="Атмосфера" hint="Настроение вечера." aspect="aspect-auto h-full" delay={0.1} />
-                <Placeholder icon={Calendar} label="Как добраться" hint="Метро, парковка, ориентиры." aspect="aspect-auto h-full" delay={0.2} />
+
+              <div className="border border-border rounded-lg p-8 bg-card">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">
+                  Фонд «Не напрасно»
+                </p>
+                <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed">
+                  Единственный в России фонд, который системно и комплексно занимается профилактикой
+                  онкологических и других заболеваний, снижая смертность от рака, обучает онкологов,
+                  качественно меняя медицину. Создан врачами, и по сей день все программы «Не напрасно»
+                  реализуются при участии медицинских специалистов.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Лоты */}
-        <section className="section-padding">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-10">
+        {/* Билеты */}
+        <section className="section-padding mb-16 md:mb-24">
+          <div className="max-w-4xl mx-auto">
+            <div className="border border-primary/30 rounded-lg p-8 md:p-12 bg-primary/5">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-6 h-px bg-primary" />
+                <p className="text-[10px] uppercase tracking-[0.4em] text-primary font-body">
+                  Благотворительность вместо пригласительных
+                </p>
+              </div>
+              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-6">
+                Ваш <span className="italic text-primary">вклад</span>
+              </h2>
+              <div className="space-y-4 font-body text-base text-muted-foreground leading-relaxed mb-8">
+                <p>
+                  На портале «Отражения добра» нет случайных прохожих. Если текст откликается в вас —
+                  значит, вы уже часть нашего сообщества. Участие в вечере — это ваш вклад
+                  в просветительские проекты «Не напрасно».
+                </p>
+                <p className="text-foreground">
+                  Стоимость билета:{" "}
+                  <span className="font-numbers text-2xl text-primary">7 000 ₽</span>.
+                  Количество мест ограничено. Стоимость билета засчитывается в случае покупки одного
+                  из лотов аукциона.
+                </p>
+              </div>
+              <button
+                onClick={() => setTicketOpen(true)}
+                className="bg-primary text-primary-foreground px-8 py-4 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+              >
+                <Ticket className="w-4 h-4" /> Купить билет <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Пожертвование */}
+        <section id="donation" className="section-padding scroll-mt-24">
+          <div className="max-w-4xl mx-auto">
+            <div className="border border-border rounded-lg p-8 md:p-12 bg-card">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-6 h-px bg-primary" />
                 <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
-                  03 - Лоты
+                  Пожертвование
                 </p>
               </div>
-              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95]">
-                Первые <span className="italic text-primary">лоты</span>
+              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-6">
+                Помощь людям с <span className="italic text-primary">онкозаболеваниями</span>
               </h2>
-              <p className="font-body text-sm text-muted-foreground mt-4 max-w-xl">
-                Кураторская подборка появится ближе к дате аукциона. Средства идут в фонд «Не напрасно».
+              <p className="font-body text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+                Если вы не сможете быть с нами лично, вы можете поддержать программы фонда
+                «Не напрасно» любой суммой. Все средства направляются на помощь людям
+                с онкологическими заболеваниями.
               </p>
-            </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {Array.from({ length: 8 }).map((_, i) => (
-                <Placeholder
-                  key={i}
-                  icon={Gavel}
-                  label={`Лот ${String(i + 1).padStart(2, "0")}`}
-                  hint="Скоро откроем."
-                  aspect="aspect-square"
-                  delay={i * 0.05}
-                />
-              ))}
+              <div className="flex flex-wrap gap-3 mb-4">
+                {[1000, 3000, 5000, 10000].map((v) => (
+                  <button
+                    key={v}
+                    onClick={() => setDonateInput(String(v))}
+                    className={`px-5 py-2.5 rounded border font-numbers text-base transition-colors ${
+                      donateInput === String(v)
+                        ? "border-primary bg-primary/10 text-primary"
+                        : "border-border text-foreground hover:border-primary/40"
+                    }`}
+                  >
+                    {v.toLocaleString("ru-RU")} ₽
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-3 items-stretch max-w-md">
+                <div className="flex items-center gap-2 flex-1 min-w-[180px] border border-border rounded px-4 bg-background">
+                  <input
+                    type="number"
+                    min={100}
+                    step={100}
+                    value={donateInput}
+                    onChange={(e) => setDonateInput(e.target.value)}
+                    placeholder="Своя сумма"
+                    className="flex-1 bg-transparent py-3 text-base font-numbers text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  />
+                  <span className="font-body text-sm text-muted-foreground">₽</span>
+                </div>
+                <button
+                  onClick={openDonate}
+                  className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+                >
+                  <HeartHandshake className="w-4 h-4" /> Поддержать
+                </button>
+              </div>
+              <p className="font-body text-xs text-muted-foreground/80 mt-4">
+                Минимальная сумма — 100 ₽. Оплата — через защищённый шлюз ЮKassa.
+              </p>
             </div>
           </div>
         </section>
       </main>
 
       <Footer />
+
+      <TicketRequestModal
+        isOpen={ticketOpen}
+        onClose={() => setTicketOpen(false)}
+        ticketType="Билет · Санкт-Петербург, 13 августа 2026"
+        ticketPrice="7 000 ₽"
+        showTrainingCheckbox={false}
+      />
+
+      <TicketRequestModal
+        isOpen={donateOpen}
+        onClose={() => setDonateOpen(false)}
+        ticketType="Пожертвование в фонд «Не напрасно»"
+        ticketPrice={`${donateAmount.toLocaleString("ru-RU")} ₽`}
+        showTrainingCheckbox={false}
+      />
     </div>
   );
 };
