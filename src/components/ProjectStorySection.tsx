@@ -1,45 +1,16 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Calendar, ArrowRight, Sparkles, Send, HeartHandshake, MapPinned, Wand2 } from "lucide-react";
+import { MapPin, Calendar, ArrowRight, Sparkles, HeartHandshake, MapPinned, Wand2 } from "lucide-react";
 import sashaPhoto from "@/assets/organizer-sasha-clean.png";
 import gizaPhoto from "@/assets/organizer-giza-clean.png";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
 
-type City = "moscow" | "spb";
+type City = "spb" | "moscow";
 
 const ProjectStorySection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [activeCity, setActiveCity] = useState<City>("moscow");
-  const [spbOpen, setSpbOpen] = useState(false);
-  const [moscowOpen, setMoscowOpen] = useState(false);
-  const [spbForm, setSpbForm] = useState({ name: "", email: "", phone: "" });
-  const [sending, setSending] = useState(false);
-
-  const handleSpbSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!spbForm.name || !spbForm.email) {
-      toast.error("Укажите имя и email");
-      return;
-    }
-    setSending(true);
-    const { error } = await supabase.from("ticket_requests").insert({
-      name: spbForm.name,
-      email: spbForm.email,
-      phone: spbForm.phone || null,
-      ticket_type: "СПб – ноябрь 2026",
-      message: "Запрос на детали мероприятия в Санкт-Петербурге",
-    });
-    setSending(false);
-    if (error) {
-      toast.error("Ошибка, попробуйте позже");
-    } else {
-      toast.success("Спасибо! Мы свяжемся с вами.");
-      setSpbForm({ name: "", email: "", phone: "" });
-    }
-  };
+  const [activeCity, setActiveCity] = useState<City>("spb");
 
   return (
     <section className="py-12 md:py-16 section-padding bg-background">
@@ -145,7 +116,35 @@ const ProjectStorySection = () => {
           </h3>
 
           {/* City tabs */}
-          <div className="flex justify-center gap-4 mb-8">
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <button
+              onClick={() => setActiveCity("spb")}
+              className={`relative flex items-center gap-3 px-6 py-4 border rounded-lg transition-all duration-300 ${
+                activeCity === "spb"
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:border-primary/30"
+              }`}
+            >
+              <MapPin className={`w-4 h-4 ${activeCity === "spb" ? "text-primary" : "text-muted-foreground"}`} />
+              <div className="text-left">
+                <p className={`font-display text-base uppercase ${activeCity === "spb" ? "text-foreground" : "text-muted-foreground"}`}>
+                  Санкт-Петербург
+                </p>
+                <p className="font-body text-xs text-muted-foreground flex items-center gap-1.5">
+                  <Calendar className="w-3 h-3" />
+                  <motion.span
+                    animate={{ opacity: [0.6, 1, 0.6], color: ["hsl(var(--muted-foreground))", "hsl(var(--primary))", "hsl(var(--muted-foreground))"] }}
+                    transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    Ноябрь 2026
+                  </motion.span>
+                </p>
+              </div>
+              <span className="pointer-events-none absolute -top-2 -right-2 text-[9px] uppercase tracking-[0.2em] bg-primary text-primary-foreground px-2 py-0.5 rounded-full font-body">
+                скоро
+              </span>
+            </button>
+
             <button
               onClick={() => setActiveCity("moscow")}
               className={`flex items-center gap-3 px-6 py-4 border rounded-lg transition-all duration-300 ${
@@ -161,25 +160,6 @@ const ProjectStorySection = () => {
                 </p>
                 <p className="font-body text-xs text-muted-foreground flex items-center gap-1.5">
                   <Calendar className="w-3 h-3" /> 26 апреля 2026
-                </p>
-              </div>
-            </button>
-
-            <button
-              onClick={() => setActiveCity("spb")}
-              className={`flex items-center gap-3 px-6 py-4 border rounded-lg transition-all duration-300 ${
-                activeCity === "spb"
-                  ? "border-primary bg-primary/5"
-                  : "border-border hover:border-primary/30"
-              }`}
-            >
-              <MapPin className={`w-4 h-4 ${activeCity === "spb" ? "text-primary" : "text-muted-foreground"}`} />
-              <div className="text-left">
-                <p className={`font-display text-base uppercase ${activeCity === "spb" ? "text-foreground" : "text-muted-foreground"}`}>
-                  Санкт-Петербург
-                </p>
-                <p className="font-body text-xs text-muted-foreground flex items-center gap-1.5">
-                  <Calendar className="w-3 h-3" /> Ноябрь 2026
                 </p>
               </div>
             </button>
@@ -248,34 +228,14 @@ const ProjectStorySection = () => {
                   В Питере – пить, носить black tie и кружиться на балах в особняках XVIII века. Наши гости и участники благотворительного аукциона получат возможность прикоснуться к культуре балов и светских парадов. В Петербурге мы представим к аукциону предметы искусства.
                 </p>
 
-                {/* Contact form for SPb */}
-                <div className="bg-muted/50 border border-border rounded-lg p-6 mt-4">
-                  <p className="font-display text-base text-foreground uppercase mb-1">Получить детали мероприятия</p>
-                  <p className="font-body text-xs text-muted-foreground mb-5">Оставьте контакты, и мы расскажем обо всём первыми</p>
-                  <form onSubmit={handleSpbSubmit} className="grid sm:grid-cols-3 gap-3">
-                    <input
-                      type="text"
-                      placeholder="Имя"
-                      value={spbForm.name}
-                      onChange={(e) => setSpbForm({ ...spbForm, name: e.target.value })}
-                      className="bg-background border border-border rounded px-4 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
-                    />
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      value={spbForm.email}
-                      onChange={(e) => setSpbForm({ ...spbForm, email: e.target.value })}
-                      className="bg-background border border-border rounded px-4 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
-                    />
-                    <button
-                      type="submit"
-                      disabled={sending}
-                      className="bg-primary text-primary-foreground px-5 py-2.5 rounded font-body text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
-                    >
-                      <Send className="w-3.5 h-3.5" />
-                      {sending ? "..." : "Отправить"}
-                    </button>
-                  </form>
+                {/* CTA to Upcoming page */}
+                <div className="flex flex-wrap gap-3 mt-2">
+                  <Link
+                    to="/upcoming"
+                    className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+                  >
+                    Подробнее о вечере в Петербурге <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
               </motion.div>
             )}
