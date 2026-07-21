@@ -45,6 +45,8 @@ const ProjectStorySection = () => {
       setSubmitting(false);
     }
   };
+
+  return (
     <section className="py-12 md:py-16 section-padding bg-background">
       <div ref={ref} className="max-w-6xl mx-auto">
         {/* Header */}
