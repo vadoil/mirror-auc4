@@ -225,7 +225,6 @@ const Upcoming = () => {
                   { icon: Sparkles, label: "Формат", value: "Офлайн + онлайн" },
                 ];
                 return (
-                  <>
                     <div className="grid lg:grid-cols-12 gap-8 items-stretch">
                       <div className="lg:col-span-4 flex flex-col gap-px bg-border rounded-lg overflow-hidden border border-border">
                         {aboutStats.map((s, i) => (
@@ -261,23 +260,6 @@ const Upcoming = () => {
                         </p>
                       </div>
                     </div>
-
-                    <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-lg overflow-hidden border border-border">
-                      {aboutStats.map((s, i) => (
-                        <div key={i} className="bg-card p-5 flex items-center gap-4">
-                          <s.icon className="w-5 h-5 text-primary shrink-0" />
-                          <div>
-                            <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-1">
-                              {s.label}
-                            </p>
-                            <p className="font-display text-base md:text-lg text-foreground uppercase tracking-tight leading-tight">
-                              {s.value}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </>
                 );
               })()}
             </motion.div>
