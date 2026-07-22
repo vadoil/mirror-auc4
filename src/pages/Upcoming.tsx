@@ -607,67 +607,6 @@ const Upcoming = () => {
           </div>
         </section>
 
-        {/* Пожертвование */}
-        <section id="donation" className="section-padding scroll-mt-24">
-          <div className="max-w-4xl mx-auto">
-            <div className="border border-border rounded-lg p-8 md:p-12 bg-card">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-6 h-px bg-primary" />
-                <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
-                  Пожертвование
-                </p>
-              </div>
-              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-6">
-                Помощь людям с <span className="italic text-primary">онкозаболеваниями</span>
-              </h2>
-              <p className="font-body text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-                Если вы не сможете быть с нами лично, вы можете поддержать программы фонда
-                «Не напрасно» любой суммой. Все средства направляются на помощь людям
-                с онкологическими заболеваниями.
-              </p>
-
-              <div className="flex flex-wrap gap-3 mb-4">
-                {[1000, 3000, 5000, 10000].map((v) => (
-                  <button
-                    key={v}
-                    onClick={() => setDonateInput(String(v))}
-                    className={`px-5 py-2.5 rounded border font-numbers text-base transition-colors ${
-                      donateInput === String(v)
-                        ? "border-primary bg-primary/10 text-primary"
-                        : "border-border text-foreground hover:border-primary/40"
-                    }`}
-                  >
-                    {v.toLocaleString("ru-RU")} ₽
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-3 items-stretch max-w-md">
-                <div className="flex items-center gap-2 flex-1 min-w-[180px] border border-border rounded px-4 bg-background">
-                  <input
-                    type="number"
-                    min={100}
-                    step={100}
-                    value={donateInput}
-                    onChange={(e) => setDonateInput(e.target.value)}
-                    placeholder="Своя сумма"
-                    className="flex-1 bg-transparent py-3 text-base font-numbers text-foreground placeholder:text-muted-foreground focus:outline-none"
-                  />
-                  <span className="font-body text-sm text-muted-foreground">₽</span>
-                </div>
-                <button
-                  onClick={openDonate}
-                  className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
-                >
-                  <HeartHandshake className="w-4 h-4" /> Поддержать
-                </button>
-              </div>
-              <p className="font-body text-xs text-muted-foreground/80 mt-4">
-                Минимальная сумма — 100 ₽. Оплата — через защищённый шлюз ЮKassa.
-              </p>
-            </div>
-          </div>
-        </section>
       </main>
 
       <Footer />
