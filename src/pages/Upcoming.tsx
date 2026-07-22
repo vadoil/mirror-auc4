@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight } from "lucide-react";
+import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
@@ -200,38 +200,62 @@ const Upcoming = () => {
 
         {/* Миссия */}
         <section className="section-padding mb-16 md:mb-24">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7 }}
             >
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mb-4">
                 <div className="w-6 h-px bg-primary" />
                 <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
                   О вечере
                 </p>
               </div>
-              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-8">
+              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-10">
                 Смотреть <span className="italic text-primary">вглубь</span>
               </h2>
-              <div className="space-y-5 font-body text-base md:text-lg text-muted-foreground leading-relaxed">
-                <p>
-                  Миссия фонда «Не напрасно» — спасать жизни до того, как человек столкнётся с
-                  онкологическим заболеванием, и помогать ему не остаться один на один с диагнозом.
-                </p>
-                <p>
-                  Чтобы поддержать эту невидимую, но жизненно важную работу, центр современной
-                  офтальмологии «Зрение» открывает свои двери для особенного вечера. Мы собираемся
-                  там, где каждый день дарят людям возможность чётко видеть мир, чтобы вместе
-                  сфокусироваться на главном — на будущем без страха перед раком.
-                </p>
-                <p className="text-foreground">
-                  Присоединяйтесь к нам <span className="text-primary font-medium">13 августа 2026 года</span>.
-                  Вся выручка от билетов и аукциона будет направлена на помощь людям с
-                  онкологическими заболеваниями.
-                </p>
+
+              <div className="grid lg:grid-cols-5 gap-8 items-start">
+                <div className="lg:col-span-3 space-y-5 font-body text-base md:text-lg text-muted-foreground leading-relaxed">
+                  <p>
+                    Миссия фонда «Не напрасно» - спасать жизни до того, как человек столкнётся с
+                    онкологическим заболеванием, и помогать ему не остаться один на один с диагнозом.
+                  </p>
+                  <p>
+                    Чтобы поддержать эту невидимую, но жизненно важную работу, центр современной
+                    офтальмологии «Зрение» открывает свои двери для особенного вечера. Мы собираемся
+                    там, где каждый день дарят людям возможность чётко видеть мир, чтобы вместе
+                    сфокусироваться на главном - на будущем без страха перед раком.
+                  </p>
+                  <p className="text-foreground">
+                    Присоединяйтесь к нам <span className="text-primary font-medium">13 августа 2026 года</span>.
+                    Вся выручка от билетов и аукциона будет направлена на помощь людям с
+                    онкологическими заболеваниями.
+                  </p>
+                </div>
+
+                <div className="lg:col-span-2 grid grid-cols-2 gap-px bg-border rounded-lg overflow-hidden border border-border">
+                  {[
+                    { icon: Eye, label: "Фокус вечера", value: "Онкоскрининг" },
+                    { icon: Palette, label: "Художников", value: "3 автора" },
+                    { icon: Heart, label: "Выручка", value: "100% в фонд" },
+                    { icon: Sparkles, label: "Формат", value: "Офлайн + онлайн" },
+                  ].map((s, i) => (
+                    <div key={i} className="bg-card p-6 flex flex-col gap-3">
+                      <s.icon className="w-5 h-5 text-primary" />
+                      <div>
+                        <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-1.5">
+                          {s.label}
+                        </p>
+                        <p className="font-display text-base md:text-lg text-foreground uppercase tracking-tight leading-tight">
+                          {s.value}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           </div>
@@ -404,36 +428,158 @@ const Upcoming = () => {
 
         {/* Билеты */}
         <section className="section-padding mb-16 md:mb-24">
-          <div className="max-w-4xl mx-auto">
-            <div className="border border-primary/30 rounded-lg p-8 md:p-12 bg-primary/5">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-6 h-px bg-primary" />
-                <p className="text-[10px] uppercase tracking-[0.4em] text-primary font-body">
-                  Благотворительность вместо пригласительных
-                </p>
+          <div className="max-w-7xl mx-auto">
+            <div className="border border-primary/30 rounded-lg overflow-hidden bg-primary/5">
+              <div className="grid lg:grid-cols-5 gap-0">
+                <div className="lg:col-span-3 p-8 md:p-12">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-6 h-px bg-primary" />
+                    <p className="text-[10px] uppercase tracking-[0.4em] text-primary font-body">
+                      Благотворительность вместо пригласительных
+                    </p>
+                  </div>
+                  <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-6">
+                    Ваш <span className="italic text-primary">вклад</span>
+                  </h2>
+                  <div className="space-y-4 font-body text-base text-muted-foreground leading-relaxed mb-8">
+                    <p>
+                      На портале «Отражения добра» нет случайных прохожих. Если текст откликается в вас -
+                      значит, вы уже часть нашего сообщества. Участие в вечере - это ваш вклад
+                      в просветительские проекты «Не напрасно».
+                    </p>
+                    <p className="text-foreground">
+                      Стоимость билета:{" "}
+                      <span className="font-numbers text-2xl text-primary">7 000 ₽</span>.
+                      Количество мест ограничено. Стоимость билета засчитывается в случае покупки одного
+                      из лотов аукциона.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setTicketOpen(true)}
+                    className="bg-primary text-primary-foreground px-8 py-4 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+                  >
+                    <Ticket className="w-4 h-4" /> Купить билет <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div className="lg:col-span-2 bg-card/50 border-t lg:border-t-0 lg:border-l border-primary/20 p-8 md:p-10 flex flex-col justify-center">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-5">
+                    Что входит в билет
+                  </p>
+                  <ul className="space-y-4">
+                    {[
+                      { icon: MessageCircle, text: "Разговор с онкологом-химиотерапевтом" },
+                      { icon: Palette, text: "Аукцион работ трёх художников" },
+                      { icon: Eye, text: "Экспресс-диагностика зрения" },
+                      { icon: Utensils, text: "Гастрономические сеты и общение" },
+                      { icon: Users, text: "Ограниченный круг гостей" },
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <div className="w-9 h-9 rounded-full border border-primary/30 flex items-center justify-center shrink-0">
+                          <item.icon className="w-4 h-4 text-primary" />
+                        </div>
+                        <p className="font-body text-sm text-foreground leading-snug pt-2">
+                          {item.text}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-6">
-                Ваш <span className="italic text-primary">вклад</span>
-              </h2>
-              <div className="space-y-4 font-body text-base text-muted-foreground leading-relaxed mb-8">
-                <p>
-                  На портале «Отражения добра» нет случайных прохожих. Если текст откликается в вас —
-                  значит, вы уже часть нашего сообщества. Участие в вечере — это ваш вклад
-                  в просветительские проекты «Не напрасно».
-                </p>
-                <p className="text-foreground">
-                  Стоимость билета:{" "}
-                  <span className="font-numbers text-2xl text-primary">7 000 ₽</span>.
-                  Количество мест ограничено. Стоимость билета засчитывается в случае покупки одного
-                  из лотов аукциона.
-                </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Пожертвование */}
+        <section id="donation" className="section-padding scroll-mt-24">
+          <div className="max-w-7xl mx-auto">
+            <div className="border border-border rounded-lg overflow-hidden bg-card">
+              <div className="grid lg:grid-cols-5 gap-0">
+                <div className="lg:col-span-3 p-8 md:p-12">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-6 h-px bg-primary" />
+                    <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
+                      Пожертвование
+                    </p>
+                  </div>
+                  <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-6">
+                    Помощь людям с <span className="italic text-primary">онкозаболеваниями</span>
+                  </h2>
+                  <p className="font-body text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+                    Если вы не сможете быть с нами лично, вы можете поддержать программы фонда
+                    «Не напрасно» любой суммой. Все средства направляются на помощь людям
+                    с онкологическими заболеваниями.
+                  </p>
+
+                  <div className="flex flex-wrap gap-3 mb-4">
+                    {[1000, 3000, 5000, 10000].map((v) => (
+                      <button
+                        key={v}
+                        onClick={() => setDonateInput(String(v))}
+                        className={`px-5 py-2.5 rounded border font-numbers text-base transition-colors ${
+                          donateInput === String(v)
+                            ? "border-primary bg-primary/10 text-primary"
+                            : "border-border text-foreground hover:border-primary/40"
+                        }`}
+                      >
+                        {v.toLocaleString("ru-RU")} ₽
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap gap-3 items-stretch max-w-md">
+                    <div className="flex items-center gap-2 flex-1 min-w-[180px] border border-border rounded px-4 bg-background">
+                      <input
+                        type="number"
+                        min={100}
+                        step={100}
+                        value={donateInput}
+                        onChange={(e) => setDonateInput(e.target.value)}
+                        placeholder="Своя сумма"
+                        className="flex-1 bg-transparent py-3 text-base font-numbers text-foreground placeholder:text-muted-foreground focus:outline-none"
+                      />
+                      <span className="font-body text-sm text-muted-foreground">₽</span>
+                    </div>
+                    <button
+                      onClick={openDonate}
+                      className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+                    >
+                      <HeartHandshake className="w-4 h-4" /> Поддержать
+                    </button>
+                  </div>
+                  <p className="font-body text-xs text-muted-foreground/80 mt-4">
+                    Минимальная сумма - 100 ₽. Оплата - через защищённый шлюз ЮKassa.
+                  </p>
+                </div>
+
+                <div className="lg:col-span-2 bg-muted/40 border-t lg:border-t-0 lg:border-l border-border p-8 md:p-10 flex flex-col justify-center">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-5">
+                    Куда идут средства
+                  </p>
+                  <ul className="space-y-5">
+                    {[
+                      { icon: Heart, title: "Поддержка пациентов", text: "Помощь тем, кто столкнулся с диагнозом" },
+                      { icon: Eye, title: "Ранняя диагностика", text: "Скрининги по международным протоколам" },
+                      { icon: Users, title: "Обучение врачей", text: "Программы для онкологов России" },
+                      { icon: Sparkles, title: "Просвещение", text: "Доступные знания о профилактике" },
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-full border border-primary/30 flex items-center justify-center shrink-0">
+                          <item.icon className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-display text-sm text-foreground uppercase tracking-wide mb-1">
+                            {item.title}
+                          </p>
+                          <p className="font-body text-xs text-muted-foreground leading-snug">
+                            {item.text}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <button
-                onClick={() => setTicketOpen(true)}
-                className="bg-primary text-primary-foreground px-8 py-4 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
-              >
-                <Ticket className="w-4 h-4" /> Купить билет <ArrowRight className="w-4 h-4" />
-              </button>
             </div>
           </div>
         </section>
