@@ -217,46 +217,69 @@ const Upcoming = () => {
                 Смотреть <span className="italic text-primary">вглубь</span>
               </h2>
 
-              <div className="grid lg:grid-cols-5 gap-8 items-start">
-                <div className="lg:col-span-3 space-y-5 font-body text-base md:text-lg text-muted-foreground leading-relaxed">
-                  <p>
-                    Миссия фонда «Не напрасно» - спасать жизни до того, как человек столкнётся с
-                    онкологическим заболеванием, и помогать ему не остаться один на один с диагнозом.
-                  </p>
-                  <p>
-                    Чтобы поддержать эту невидимую, но жизненно важную работу, центр современной
-                    офтальмологии «Зрение» открывает свои двери для особенного вечера. Мы собираемся
-                    там, где каждый день дарят людям возможность чётко видеть мир, чтобы вместе
-                    сфокусироваться на главном - на будущем без страха перед раком.
-                  </p>
-                  <p className="text-foreground">
-                    Присоединяйтесь к нам <span className="text-primary font-medium">13 августа 2026 года</span>.
-                    Вся выручка от билетов и аукциона будет направлена на помощь людям с
-                    онкологическими заболеваниями.
-                  </p>
-                </div>
+              {(() => {
+                const aboutStats = [
+                  { icon: Eye, label: "Фокус вечера", value: "Онкоскрининг" },
+                  { icon: Palette, label: "Художников", value: "3 автора" },
+                  { icon: Heart, label: "Выручка", value: "В фонд" },
+                  { icon: Sparkles, label: "Формат", value: "Офлайн + онлайн" },
+                ];
+                return (
+                  <>
+                    <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+                      <div className="lg:col-span-4 flex flex-col gap-px bg-border rounded-lg overflow-hidden border border-border">
+                        {aboutStats.map((s, i) => (
+                          <div key={i} className="bg-card p-5 flex items-center gap-4 flex-1">
+                            <s.icon className="w-5 h-5 text-primary shrink-0" />
+                            <div>
+                              <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-1">
+                                {s.label}
+                              </p>
+                              <p className="font-display text-base md:text-lg text-foreground uppercase tracking-tight leading-tight">
+                                {s.value}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
 
-                <div className="lg:col-span-2 grid grid-cols-2 gap-px bg-border rounded-lg overflow-hidden border border-border">
-                  {[
-                    { icon: Eye, label: "Фокус вечера", value: "Онкоскрининг" },
-                    { icon: Palette, label: "Художников", value: "3 автора" },
-                    { icon: Heart, label: "Выручка", value: "100% в фонд" },
-                    { icon: Sparkles, label: "Формат", value: "Офлайн + онлайн" },
-                  ].map((s, i) => (
-                    <div key={i} className="bg-card p-6 flex flex-col gap-3">
-                      <s.icon className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-1.5">
-                          {s.label}
+                      <div className="lg:col-span-8 space-y-5 font-body text-base md:text-lg text-muted-foreground leading-relaxed">
+                        <p>
+                          Миссия фонда «Не напрасно» - спасать жизни до того, как человек столкнётся с
+                          онкологическим заболеванием, и помогать ему не остаться один на один с диагнозом.
                         </p>
-                        <p className="font-display text-base md:text-lg text-foreground uppercase tracking-tight leading-tight">
-                          {s.value}
+                        <p>
+                          Чтобы поддержать эту невидимую, но жизненно важную работу, центр современной
+                          офтальмологии «Зрение» открывает свои двери для особенного вечера. Мы собираемся
+                          там, где каждый день дарят людям возможность чётко видеть мир, чтобы вместе
+                          сфокусироваться на главном - на будущем без страха перед раком.
+                        </p>
+                        <p className="text-foreground">
+                          Присоединяйтесь к нам <span className="text-primary font-medium">13 августа 2026 года</span>.
+                          Вся выручка от билетов и аукциона будет направлена на помощь людям с
+                          онкологическими заболеваниями.
                         </p>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
+
+                    <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-lg overflow-hidden border border-border">
+                      {aboutStats.map((s, i) => (
+                        <div key={i} className="bg-card p-5 flex items-center gap-4">
+                          <s.icon className="w-5 h-5 text-primary shrink-0" />
+                          <div>
+                            <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-1">
+                              {s.label}
+                            </p>
+                            <p className="font-display text-base md:text-lg text-foreground uppercase tracking-tight leading-tight">
+                              {s.value}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                );
+              })()}
             </motion.div>
           </div>
         </section>
