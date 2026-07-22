@@ -206,59 +206,10 @@ const Upcoming = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7 }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch"
             >
-              {/* Left: 2×2 stats grid */}
-              <div className="lg:col-span-5 order-2 lg:order-1">
-                <div className="grid grid-cols-2 gap-px bg-border border border-border overflow-hidden rounded-sm">
-                  {/* Фокус */}
-                  <div className="group bg-background p-6 md:p-8 flex flex-col justify-between aspect-square">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body">Фокус</span>
-                    <div className="relative">
-                      <p className="font-display text-lg md:text-xl text-foreground uppercase leading-tight tracking-tight">
-                        Онко<br />скрининг
-                      </p>
-                      <div className="absolute -bottom-2 left-0 w-8 h-px bg-primary transition-all duration-500 group-hover:w-full" />
-                    </div>
-                  </div>
-                  {/* Художников */}
-                  <div className="group bg-background p-6 md:p-8 flex flex-col justify-between aspect-square">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body">Художников</span>
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-display text-5xl md:text-6xl italic text-primary leading-none">3</span>
-                      <span className="text-xs uppercase tracking-wider text-muted-foreground font-body">автора</span>
-                    </div>
-                  </div>
-                  {/* Выручка */}
-                  <div className="group bg-background p-6 md:p-8 flex flex-col justify-between aspect-square">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body">Выручка</span>
-                    <div className="relative">
-                      <p className="font-display text-lg md:text-xl text-foreground uppercase leading-tight tracking-tight">
-                        В пользу<br />фонда
-                      </p>
-                      <div className="absolute -bottom-2 left-0 w-8 h-px bg-primary transition-all duration-500 group-hover:w-full" />
-                    </div>
-                  </div>
-                  {/* Формат */}
-                  <div className="group bg-background p-6 md:p-8 flex flex-col justify-between aspect-square">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body">Формат</span>
-                    <div className="space-y-1">
-                      <p className="text-xs md:text-sm uppercase tracking-widest text-foreground font-body">Офлайн</p>
-                      <p className="text-[10px] text-primary/70 font-body">+</p>
-                      <p className="text-xs md:text-sm uppercase tracking-widest text-foreground font-body">Онлайн</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-6 flex items-center gap-4">
-                  <div className="h-px flex-1 bg-border" />
-                  <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground/60 font-body">
-                    Санкт-Петербург · 2026
-                  </span>
-                </div>
-              </div>
-
-              {/* Right: eyebrow + heading + narrative */}
-              <div className="lg:col-span-7 order-1 lg:order-2">
+              {/* Left: eyebrow + heading + narrative */}
+              <div className="lg:col-span-6 flex flex-col">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-6 h-px bg-primary" />
                   <p className="text-[10px] uppercase tracking-[0.4em] text-primary font-body font-medium">
@@ -270,7 +221,7 @@ const Upcoming = () => {
                   <span className="italic text-primary font-normal">вглубь</span>
                 </h2>
 
-                <div className="space-y-6 font-body text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
+                <div className="space-y-6 font-body text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl flex-1">
                   <p>
                     Миссия фонда <span className="text-foreground font-medium">«Не напрасно»</span> - спасать
                     жизни до того, как человек столкнётся с онкологическим заболеванием, и помогать
@@ -288,15 +239,41 @@ const Upcoming = () => {
                     Вся выручка от билетов и аукциона будет направлена на помощь людям с
                     онкологическими заболеваниями.
                   </p>
+                </div>
+              </div>
 
-                  <div className="pt-4 flex items-center gap-5">
-                    <div className="w-11 h-11 rounded-full border border-primary flex items-center justify-center shrink-0">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+              {/* Right: 2×2 uniform cards */}
+              <div className="lg:col-span-6 flex flex-col">
+                <div className="grid grid-cols-2 gap-px bg-border border border-border overflow-hidden rounded-sm flex-1">
+                  {[
+                    { label: "Фокус", value: "Онко\nскрининг" },
+                    { label: "Художники", value: "Искусство\nсмыслов" },
+                    { label: "Выручка", value: "В пользу\nфонда" },
+                    { label: "Формат", value: "Офлайн\n+ онлайн" },
+                  ].map((card, i) => (
+                    <div
+                      key={i}
+                      className="group bg-background p-6 md:p-8 flex flex-col justify-between min-h-[180px] md:min-h-[220px]"
+                    >
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body">
+                        {card.label}
+                      </span>
+                      <div className="relative">
+                        <p className="font-display text-xl md:text-2xl uppercase leading-tight tracking-tight whitespace-pre-line">
+                          <span className="text-foreground">{card.value.split("\n")[0]}</span>
+                          <br />
+                          <span className="italic text-primary font-normal">{card.value.split("\n")[1]}</span>
+                        </p>
+                        <div className="absolute -bottom-2 left-0 w-8 h-px bg-primary transition-all duration-500 group-hover:w-full" />
+                      </div>
                     </div>
-                    <p className="text-xs uppercase tracking-[0.25em] text-foreground font-body">
-                      Ждём вас 13 августа 2026
-                    </p>
-                  </div>
+                  ))}
+                </div>
+                <div className="mt-6 flex items-center gap-4">
+                  <div className="h-px flex-1 bg-border" />
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground/60 font-body">
+                    Санкт-Петербург · 2026
+                  </span>
                 </div>
               </div>
             </motion.div>
