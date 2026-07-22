@@ -206,65 +206,103 @@ const Upcoming = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7 }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-6 h-px bg-primary" />
-                <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
-                  О вечере
-                </p>
-              </div>
-              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-10">
-                Смотреть <span className="italic text-primary">вглубь</span>
-              </h2>
-
-              {(() => {
-                const aboutStats = [
-                  { icon: Eye, label: "Фокус вечера", value: "Онкоскрининг" },
-                  { icon: Palette, label: "Художников", value: "3 автора" },
-                  { icon: Heart, label: "Выручка", value: "В фонд" },
-                  { icon: Sparkles, label: "Формат", value: "Офлайн + онлайн" },
-                ];
-                return (
-                    <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-                      <div className="lg:col-span-4 flex flex-col gap-px bg-border rounded-lg overflow-hidden border border-border">
-                        {aboutStats.map((s, i) => (
-                          <div key={i} className="bg-card p-5 flex items-center gap-4 flex-1">
-                            <s.icon className="w-5 h-5 text-primary shrink-0" />
-                            <div>
-                              <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground font-body mb-1">
-                                {s.label}
-                              </p>
-                              <p className="font-display text-base md:text-lg text-foreground uppercase tracking-tight leading-tight">
-                                {s.value}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="lg:col-span-8 space-y-5 font-body text-base md:text-lg text-muted-foreground leading-relaxed">
-                        <p>
-                          Миссия фонда «Не напрасно» - спасать жизни до того, как человек столкнётся с
-                          онкологическим заболеванием, и помогать ему не остаться один на один с диагнозом.
-                        </p>
-                        <p>
-                          Чтобы поддержать эту невидимую, но жизненно важную работу, центр современной
-                          офтальмологии «Зрение» открывает свои двери для особенного вечера. Мы собираемся
-                          там, где каждый день дарят людям возможность чётко видеть мир, чтобы вместе
-                          сфокусироваться на главном - на будущем без страха перед раком.
-                        </p>
-                        <p className="text-foreground">
-                          Присоединяйтесь к нам <span className="text-primary font-medium">13 августа 2026 года</span>.
-                          Вся выручка от билетов и аукциона будет направлена на помощь людям с
-                          онкологическими заболеваниями.
-                        </p>
-                      </div>
+              {/* Left: 2×2 stats grid */}
+              <div className="lg:col-span-5 order-2 lg:order-1">
+                <div className="grid grid-cols-2 gap-px bg-border border border-border overflow-hidden rounded-sm">
+                  {/* Фокус */}
+                  <div className="group bg-background p-6 md:p-8 flex flex-col justify-between aspect-square">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body">Фокус</span>
+                    <div className="relative">
+                      <p className="font-display text-lg md:text-xl text-foreground uppercase leading-tight tracking-tight">
+                        Онко<br />скрининг
+                      </p>
+                      <div className="absolute -bottom-2 left-0 w-8 h-px bg-primary transition-all duration-500 group-hover:w-full" />
                     </div>
-                );
-              })()}
+                  </div>
+                  {/* Художников */}
+                  <div className="group bg-background p-6 md:p-8 flex flex-col justify-between aspect-square">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body">Художников</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-display text-5xl md:text-6xl italic text-primary leading-none">3</span>
+                      <span className="text-xs uppercase tracking-wider text-muted-foreground font-body">автора</span>
+                    </div>
+                  </div>
+                  {/* Выручка */}
+                  <div className="group bg-background p-6 md:p-8 flex flex-col justify-between aspect-square">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body">Выручка</span>
+                    <div className="relative">
+                      <p className="font-display text-lg md:text-xl text-foreground uppercase leading-tight tracking-tight">
+                        В пользу<br />фонда
+                      </p>
+                      <div className="absolute -bottom-2 left-0 w-8 h-px bg-primary transition-all duration-500 group-hover:w-full" />
+                    </div>
+                  </div>
+                  {/* Формат */}
+                  <div className="group bg-background p-6 md:p-8 flex flex-col justify-between aspect-square">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-body">Формат</span>
+                    <div className="space-y-1">
+                      <p className="text-xs md:text-sm uppercase tracking-widest text-foreground font-body">Офлайн</p>
+                      <p className="text-[10px] text-primary/70 font-body">+</p>
+                      <p className="text-xs md:text-sm uppercase tracking-widest text-foreground font-body">Онлайн</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 flex items-center gap-4">
+                  <div className="h-px flex-1 bg-border" />
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground/60 font-body">
+                    Санкт-Петербург · 2026
+                  </span>
+                </div>
+              </div>
+
+              {/* Right: eyebrow + heading + narrative */}
+              <div className="lg:col-span-7 order-1 lg:order-2">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-6 h-px bg-primary" />
+                  <p className="text-[10px] uppercase tracking-[0.4em] text-primary font-body font-medium">
+                    О вечере
+                  </p>
+                </div>
+                <h2 className="font-display text-4xl md:text-6xl lg:text-7xl uppercase tracking-tight text-foreground leading-[0.9] mb-10">
+                  Смотреть <br />
+                  <span className="italic text-primary font-normal">вглубь</span>
+                </h2>
+
+                <div className="space-y-6 font-body text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
+                  <p>
+                    Миссия фонда <span className="text-foreground font-medium">«Не напрасно»</span> - спасать
+                    жизни до того, как человек столкнётся с онкологическим заболеванием, и помогать
+                    ему не остаться один на один с диагнозом.
+                  </p>
+                  <p>
+                    Чтобы поддержать эту невидимую, но жизненно важную работу, центр современной
+                    офтальмологии <span className="text-foreground font-medium italic">«Зрение»</span> открывает
+                    свои двери для особенного вечера. Мы собираемся там, где каждый день дарят людям
+                    возможность чётко видеть мир, чтобы вместе сфокусироваться на главном - на
+                    будущем без страха перед раком.
+                  </p>
+                  <p className="text-foreground">
+                    Присоединяйтесь к нам <span className="text-primary font-medium">13 августа 2026 года</span>.
+                    Вся выручка от билетов и аукциона будет направлена на помощь людям с
+                    онкологическими заболеваниями.
+                  </p>
+
+                  <div className="pt-4 flex items-center gap-5">
+                    <div className="w-11 h-11 rounded-full border border-primary flex items-center justify-center shrink-0">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    </div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-foreground font-body">
+                      Ждём вас 13 августа 2026
+                    </p>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
+
 
         {/* Программа */}
         <section className="section-padding mb-16 md:mb-24">
