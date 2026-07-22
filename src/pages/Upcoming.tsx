@@ -6,22 +6,28 @@ import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
 import spbHero from "@/assets/upcoming-spb-hero.jpg";
 import zrenieVenue from "@/assets/venue-zrenie-spb.jpg";
+import artist1 from "@/assets/artist-1-sergienko.jpg";
+import artist2 from "@/assets/artist-2-bartenev.jpg";
+import artist3 from "@/assets/artist-3-abrosimov.jpg";
 
 const artists = [
   {
     name: "Алексей Сергиенко",
     role: "художник-концептуалист, поп-арт",
     text: "Российский художник-концептуалист, мастер жизнерадостного поп-арта, предприниматель и общественный деятель, основатель «Центра поддержки искусств Санкт-Петербурга». Представит холсты из своей знаковой серии.",
+    photo: artist1,
   },
   {
     name: "Андрей Бартенев",
     role: "художник, сценограф, перформер",
     text: "Один из главных представителей российского перформанса и сюрреализма, педагог, ведущий популярного шоу «Модный приговор». Передаёт в благотворительную продажу свои объекты-инсталляции.",
+    photo: artist2,
   },
   {
     name: "Дмитрий Абросимов",
     role: "художник, графика",
     text: "Исследует в своём творчестве мистические аспекты и многослойную атмосферу. Выставляет на торги минималистичную графику, исследующую хрупкость человеческого восприятия.",
+    photo: artist3,
   },
 ];
 
@@ -357,21 +363,52 @@ const Upcoming = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="border border-border rounded-lg p-8 bg-card hover:border-primary/40 transition-all duration-500"
+                  className="group border border-border rounded-lg overflow-hidden bg-card hover:border-primary/40 transition-all duration-500 flex flex-col"
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="font-numbers text-2xl text-primary">0{i + 1}</span>
-                    <div className="flex-1 h-px bg-border" />
+                  {/* Photo - unified frame */}
+                  <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+                    <motion.img
+                      src={a.photo}
+                      alt={a.name}
+                      loading="lazy"
+                      width={768}
+                      height={960}
+                      className="absolute inset-0 w-full h-full object-cover object-top"
+                      animate={{
+                        scale: [1, 1.015, 1],
+                        rotate: [0, 0.3, 0],
+                      }}
+                      transition={{
+                        duration: 6 + i,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: i * 0.8,
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/10 to-transparent opacity-60" />
+                    <div className="absolute top-4 left-4">
+                      <span className="font-numbers text-3xl md:text-4xl text-primary drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+                        0{i + 1}
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="font-display text-xl md:text-2xl text-foreground uppercase tracking-tight leading-tight mb-2">
-                    {a.name}
-                  </h3>
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-primary font-body mb-4">
-                    {a.role}
-                  </p>
-                  <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                    {a.text}
-                  </p>
+
+                  {/* Content */}
+                  <div className="p-6 md:p-8 flex-1 flex flex-col">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="h-px w-8 bg-primary" />
+                      <div className="flex-1 h-px bg-border" />
+                    </div>
+                    <h3 className="font-display text-xl md:text-2xl text-foreground uppercase tracking-tight leading-tight mb-2">
+                      {a.name}
+                    </h3>
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-primary font-body mb-4">
+                      {a.role}
+                    </p>
+                    <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                      {a.text}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </div>
