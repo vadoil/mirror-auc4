@@ -61,11 +61,9 @@ const Footer = () => {
             <div>
               <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em] mb-4">Площадка</p>
               <div className="space-y-2">
-                <p className="font-body text-xs text-cream/30">«Место быть»</p>
-                <p className="font-body text-xs text-cream/30">ул. Мясницкая 24/7, стр. 1</p>
-                <a href="https://mestobe.ru/" target="_blank" rel="noopener noreferrer" className="block font-body text-xs text-primary/60 hover:text-primary transition-colors">
-                  mestobe.ru
-                </a>
+                <p className="font-body text-xs text-cream/30">Центр «Зрение»</p>
+                <p className="font-body text-xs text-cream/30">Санкт-Петербург, пр. Добролюбова, 20к1</p>
+                <p className="font-body text-xs text-primary/60">13 августа 2026</p>
                 <div className="flex items-center gap-1.5 pt-3 text-cream/20">
                   <span className="font-body text-[10px]">сделано с</span>
                   <span className="text-red-400 text-[10px]">♥</span>
