@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
 import spbHero from "@/assets/upcoming-spb-hero.jpg";
+import zrenieVenue from "@/assets/venue-zrenie-spb.jpg";
 
 const artists = [
   {
@@ -348,12 +349,32 @@ const Upcoming = () => {
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8 items-start">
-              <div className="border border-border rounded-lg p-8 bg-muted/30">
-                <div className="flex items-center gap-3 mb-5">
-                  <MapPin className="w-5 h-5 text-primary" />
-                  <p className="font-display text-lg text-foreground uppercase tracking-wide">
-                    Санкт-Петербург, пр. Добролюбова, 20к1
+            <div className="grid lg:grid-cols-2 gap-0 border border-border rounded-lg overflow-hidden mb-6">
+              <div className="relative aspect-[4/3] lg:aspect-auto min-h-[320px] overflow-hidden group">
+                <img
+                  src={zrenieVenue}
+                  alt="Центр «Зрение» - Санкт-Петербург, пр. Добролюбова 20к1"
+                  loading="lazy"
+                  width={1600}
+                  height={1200}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-warm-black/70 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-cream/70 font-body mb-2">
+                    Площадка вечера
+                  </p>
+                  <p className="font-display text-2xl md:text-3xl text-cream uppercase tracking-tight leading-tight">
+                    Центр <span className="italic text-primary">«Зрение»</span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-8 md:p-10 bg-muted/30 flex flex-col justify-center">
+                <div className="flex items-start gap-3 mb-5">
+                  <MapPin className="w-5 h-5 text-primary shrink-0 mt-1" />
+                  <p className="font-display text-base md:text-lg text-foreground uppercase tracking-wide leading-snug">
+                    Санкт-Петербург,<br />пр. Добролюбова, 20к1
                   </p>
                 </div>
                 <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-4">
@@ -365,18 +386,18 @@ const Upcoming = () => {
                   сбор гостей уточняется.
                 </p>
               </div>
+            </div>
 
-              <div className="border border-border rounded-lg p-8 bg-card">
-                <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">
-                  Фонд «Не напрасно»
-                </p>
-                <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed">
-                  Единственный в России фонд, который системно и комплексно занимается профилактикой
-                  онкологических и других заболеваний, снижая смертность от рака, обучает онкологов,
-                  качественно меняя медицину. Создан врачами, и по сей день все программы «Не напрасно»
-                  реализуются при участии медицинских специалистов.
-                </p>
-              </div>
+            <div className="border border-border rounded-lg p-8 bg-card">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">
+                Фонд «Не напрасно»
+              </p>
+              <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed">
+                Единственный в России фонд, который системно и комплексно занимается профилактикой
+                онкологических и других заболеваний, снижая смертность от рака, обучает онкологов,
+                качественно меняя медицину. Создан врачами, и по сей день все программы «Не напрасно»
+                реализуются при участии медицинских специалистов.
+              </p>
             </div>
           </div>
         </section>

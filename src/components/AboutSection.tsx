@@ -85,24 +85,32 @@ const AboutSection = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="relative"
               >
-                <div className="aspect-[4/5] overflow-hidden relative">
-                  <img src={aboutVenue} alt="Санкт-Петербург на закате - место будущего аукциона" loading="lazy" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1280} />
-                  <div className="absolute inset-0 bg-warm-black/35" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-warm-black/10 to-transparent" />
-                  <div className="text-center p-8 relative z-10 flex flex-col items-center justify-end h-full pb-12">
-                    <p className="font-body text-cream/60 text-[10px] uppercase tracking-[0.35em] mb-4">Ближайший аукцион</p>
-                    <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-2">Санкт-</p>
-                    <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-5">Петербург</p>
-                    <div className="w-12 h-px bg-primary mx-auto mb-4" />
-                    <p className="font-body text-cream/70 text-sm max-w-xs mx-auto">
-                      Дата и место уточняются
-                    </p>
+                <Link to="/upcoming" className="block group">
+                  <div className="aspect-[4/5] overflow-hidden relative">
+                    <img src={aboutVenue} alt="Санкт-Петербург - место ближайшего аукциона" loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out" width={1024} height={1280} />
+                    <div className="absolute inset-0 bg-warm-black/40" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-warm-black/85 via-warm-black/15 to-transparent" />
+                    <div className="text-center p-8 relative z-10 flex flex-col items-center justify-end h-full pb-12">
+                      <p className="font-body text-cream/60 text-[10px] uppercase tracking-[0.35em] mb-4">Ближайший аукцион</p>
+                      <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-2">Санкт-</p>
+                      <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-5">Петербург</p>
+                      <div className="w-12 h-px bg-primary mx-auto mb-4" />
+                      <p className="font-body text-cream text-sm max-w-xs mx-auto mb-1">
+                        13 августа 2026
+                      </p>
+                      <p className="font-body text-cream/70 text-xs max-w-xs mx-auto mb-5">
+                        Центр «Зрение» · пр. Добролюбова, 20к1
+                      </p>
+                      <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-cream border border-cream/30 px-4 py-2 group-hover:border-primary group-hover:text-primary transition-colors">
+                        Подробнее о вечере
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="absolute top-6 right-6 bg-primary text-primary-foreground px-6 py-5">
-                  <p className="font-numbers text-4xl font-light leading-none">100%</p>
-                  <p className="text-[10px] uppercase tracking-[0.2em] font-body mt-1.5">на благо</p>
-                </div>
+                  <div className="absolute top-6 right-6 bg-primary text-primary-foreground px-6 py-5">
+                    <p className="font-numbers text-4xl font-light leading-none">100%</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] font-body mt-1.5">на благо</p>
+                  </div>
+                </Link>
               </motion.div>
             </div>
           </div>
