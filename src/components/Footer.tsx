@@ -19,7 +19,7 @@ const Footer = () => {
                 увидимся <span className="italic text-primary">скоро</span>
               </h3>
               <p className="font-body text-sm text-cream/40">
-                Москва · Мясницкая 24/7 · Баланс-холл «Место быть»
+                13 августа 2026 · Санкт-Петербург · Центр «Зрение»
               </p>
             </div>
           </div>
