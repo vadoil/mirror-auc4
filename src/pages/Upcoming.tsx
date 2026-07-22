@@ -6,22 +6,28 @@ import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
 import spbHero from "@/assets/upcoming-spb-hero.jpg";
 import zrenieVenue from "@/assets/venue-zrenie-spb.jpg";
+import artist1 from "@/assets/artist-1-sergienko.jpg";
+import artist2 from "@/assets/artist-2-bartenev.jpg";
+import artist3 from "@/assets/artist-3-abrosimov.jpg";
 
 const artists = [
   {
     name: "Алексей Сергиенко",
     role: "художник-концептуалист, поп-арт",
     text: "Российский художник-концептуалист, мастер жизнерадостного поп-арта, предприниматель и общественный деятель, основатель «Центра поддержки искусств Санкт-Петербурга». Представит холсты из своей знаковой серии.",
+    photo: artist1,
   },
   {
     name: "Андрей Бартенев",
     role: "художник, сценограф, перформер",
     text: "Один из главных представителей российского перформанса и сюрреализма, педагог, ведущий популярного шоу «Модный приговор». Передаёт в благотворительную продажу свои объекты-инсталляции.",
+    photo: artist2,
   },
   {
     name: "Дмитрий Абросимов",
     role: "художник, графика",
     text: "Исследует в своём творчестве мистические аспекты и многослойную атмосферу. Выставляет на торги минималистичную графику, исследующую хрупкость человеческого восприятия.",
+    photo: artist3,
   },
 ];
 
