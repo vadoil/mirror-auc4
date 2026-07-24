@@ -687,7 +687,7 @@ const Admin = () => {
                         <div className="flex items-center gap-3 mb-1 flex-wrap">
                           <p className="font-body text-sm text-cream font-medium">{r.name}</p>
                           <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-0.5 no-underline ${isBuy ? "bg-primary/20 text-primary" : "bg-blue-500/20 text-blue-300"}`}>
-                            {isBuy ? "Купить" : "Ставка"}
+                            {isBuy ? "Депозит" : "Ставка"}
                           </span>
                           <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-0.5 no-underline ${isCancelled ? "bg-primary/30 text-primary" : "bg-cream/10 text-cream/60"}`}>
                             {isCancelled ? "отменена" : r.status}
