@@ -48,22 +48,20 @@ const Footer = () => {
               </div>
             </div>
             <div>
-              <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em] mb-4">Контакты</p>
+              <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em] mb-4">Фонд «Не напрасно»</p>
               <div className="space-y-2">
-                <p className="font-body text-xs text-cream/30">Гизела Тольц</p>
-                <p className="font-body text-xs text-cream/30">8 (985) 809-53-70</p>
-                <a href="https://t.me/Jiselle_Tolts" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-primary/60 hover:text-primary transition-colors">@Jiselle_Tolts</a>
-                <p className="font-body text-xs text-cream/30 mt-3">Александра Павлова</p>
-                <p className="font-body text-xs text-cream/30">8 (962) 364-66-46</p>
-                <a href="https://t.me/alexa_ah_alexa" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-primary/60 hover:text-primary transition-colors">@alexa_ah_alexa</a>
+                <p className="font-body text-xs text-cream/30">199004, Санкт-Петербург,</p>
+                <p className="font-body text-xs text-cream/30">2-ая линия В.О., д. 37, оф. 310</p>
+                <a href="tel:+78124685797" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">+7 (812) 468-57-97</a>
+                <a href="mailto:fond@nenaprasno.ru" className="block font-body text-xs text-primary/60 hover:text-primary transition-colors">fond@nenaprasno.ru</a>
               </div>
             </div>
             <div>
-              <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em] mb-4">Площадка</p>
+              <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em] mb-4">Документы фонда</p>
               <div className="space-y-2">
-                <p className="font-body text-xs text-cream/30">Центр «Зрение»</p>
-                <p className="font-body text-xs text-cream/30">Санкт-Петербург, пр. Добролюбова, 20к1</p>
-                <p className="font-body text-xs text-primary/60">13 августа 2026</p>
+                <a href="https://nenaprasno.ru/upload/iblock/508/50850e695095100e1f55ad077c57d5b5.pdf" target="_blank" rel="noopener noreferrer" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Устав Фонда</a>
+                <a href="https://nenaprasno.ru/upload/iblock/e91/e91057853a671ed0298e85cad548fc11.pdf" target="_blank" rel="noopener noreferrer" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Свидетельство о регистрации</a>
+                <a href="https://nenaprasno.ru/fund/reports/" target="_blank" rel="noopener noreferrer" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Отчёты фонда</a>
                 <div className="flex items-center gap-1.5 pt-3 text-cream/20">
                   <span className="font-body text-[10px]">сделано с</span>
                   <span className="text-red-400 text-[10px]">♥</span>
@@ -92,10 +90,10 @@ const Footer = () => {
             </div>
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-cream/20">
               <p className="font-body text-[10px]">
-                ООО «БАХИНИ» · ИНН 7716649945 · ОГРН 1097746600577
+                Благотворительный фонд «Не напрасно» · ИНН 7839018474 · ОГРН 1107800001870
               </p>
               <p className="font-body text-[10px]">
-                Все деньги, вырученные с продаж билетов и аукциона, направляются в поддержку фонда «Не напрасно».
+                Выручка от билетов и аукциона направляется в фонд «Не напрасно».
               </p>
             </div>
           </div>
