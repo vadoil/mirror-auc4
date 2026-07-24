@@ -225,7 +225,7 @@ const LotDetail = () => {
                       onClick={() => openModal("buy")}
                       className="border-2 border-primary text-primary py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:bg-primary hover:text-primary-foreground transition-all rounded"
                     >
-                      Купить сейчас
+                      Депозит
                     </button>
                   </div>
                 ) : (

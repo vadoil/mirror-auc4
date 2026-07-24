@@ -126,7 +126,7 @@ const BidRequestModal = ({
             <div className="flex items-start justify-between mb-6 gap-4">
               <div>
                 <h3 className="font-display text-2xl text-cream uppercase tracking-tight">
-                  {mode === "buy" ? "Купить лот" : "Сделать ставку"}
+                  {mode === "buy" ? "Депозит" : "Сделать ставку"}
                 </h3>
                 <p className="text-cream/40 text-xs font-body mt-1">«{lotTitle}»</p>
                 <p className="text-cream/30 text-[11px] font-body mt-1">
@@ -160,7 +160,7 @@ const BidRequestModal = ({
                     : "bg-cream/5 text-cream/50 hover:text-cream border border-cream/10"
                 }`}
               >
-                Купить
+                Депозит
               </button>
             </div>
 
