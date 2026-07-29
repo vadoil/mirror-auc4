@@ -469,7 +469,7 @@ const Upcoming = () => {
                 </p>
                 <p className="font-body text-sm text-muted-foreground/80 leading-relaxed">
                   <span className="text-foreground font-medium">Дата и время:</span> 13 августа 2026,
-                  сбор гостей уточняется.
+                  сбор гостей — <span className="text-foreground font-medium">17:30</span>.
                 </p>
               </div>
             </div>
@@ -510,10 +510,10 @@ const Upcoming = () => {
                       в просветительские проекты «Не напрасно».
                     </p>
                     <p className="text-foreground">
-                      Стоимость билета:{" "}
+                      Благотворительное пожертвование:{" "}
                       <span className="font-numbers text-2xl text-primary">7 000 ₽</span>.
-                      Количество мест ограничено. Стоимость билета засчитывается в случае покупки одного
-                      из лотов аукциона.
+                      Количество мест ограничено. Ваш взнос будет засчитан для активности
+                      «Искусство со смыслом».
                     </p>
                   </div>
                   <button
@@ -531,7 +531,7 @@ const Upcoming = () => {
                   <ul className="space-y-4">
                     {[
                       { icon: MessageCircle, text: "Разговор с онкологом-химиотерапевтом" },
-                      { icon: Palette, text: "Аукцион работ трёх художников" },
+                      { icon: Palette, text: "Акция «Искусство со смыслом» от трёх художников" },
                       { icon: Eye, text: "Экспресс-диагностика зрения" },
                       { icon: Utensils, text: "Гастрономические сеты и общение" },
                       { icon: Users, text: "Ограниченный круг гостей" },
