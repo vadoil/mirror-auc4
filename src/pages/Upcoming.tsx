@@ -502,6 +502,51 @@ const Upcoming = () => {
               </div>
             </div>
 
+            {/* Carousel — фото пространства «Зрение» */}
+            <div className="relative mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body">
+                  Пространство «Зрение» · галерея
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => scrollCarousel("prev")}
+                    aria-label="Предыдущее фото"
+                    className="w-10 h-10 rounded-full border border-border text-foreground hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollCarousel("next")}
+                    aria-label="Следующее фото"
+                    className="w-10 h-10 rounded-full border border-border text-foreground hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+              <div
+                ref={carouselRef}
+                className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              >
+                {[zrenie2, zrenie3, zrenie4, zrenieVenue].map((src, i) => (
+                  <div
+                    key={i}
+                    className="snap-start shrink-0 w-[85%] sm:w-[60%] md:w-[48%] lg:w-[38%] aspect-[3/2] overflow-hidden rounded-lg border border-border bg-muted"
+                  >
+                    <img
+                      src={src}
+                      alt={`Центр «Зрение» — интерьер ${i + 1}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-[1.2s] ease-out"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="border border-border rounded-lg p-8 bg-card">
               <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">
                 Фонд «Не напрасно»
