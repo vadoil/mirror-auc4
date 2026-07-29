@@ -1,11 +1,15 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart } from "lucide-react";
+import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
 import spbHero from "@/assets/upcoming-spb-hero.jpg";
 import zrenieVenue from "@/assets/venue-zrenie-spb.jpg";
+import zrenie2 from "@/assets/venue-zrenie-2.jpg";
+import zrenie3 from "@/assets/venue-zrenie-3.jpg";
+import zrenie4 from "@/assets/venue-zrenie-4.jpg";
 import artist1 from "@/assets/artist-1-sergienko.jpg";
 import artist2 from "@/assets/artist-2-bartenev.jpg";
 import artist3 from "@/assets/artist-3-abrosimov.jpg";
@@ -81,6 +85,13 @@ const Upcoming = () => {
       setDonateAmount(n);
     }
     setDonateOpen(true);
+  };
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const scrollCarousel = (dir: "prev" | "next") => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const delta = el.clientWidth * 0.85 * (dir === "next" ? 1 : -1);
+    el.scrollBy({ left: delta, behavior: "smooth" });
   };
 
   return (
@@ -257,28 +268,45 @@ const Upcoming = () => {
               <div className="lg:col-span-6 flex flex-col">
                 <div className="grid grid-cols-2 gap-px bg-border border border-border overflow-hidden rounded-sm flex-1">
                   {[
-                    { label: "Фокус", value: "Онко\nскрининг" },
-                    { label: "Художники", value: "Искусство\nсмыслов" },
-                    { label: "Выручка", value: "В пользу\nфонда" },
-                    { label: "Формат", value: "Офлайн\n+ онлайн" },
-                  ].map((card, i) => (
-                    <div
-                      key={i}
-                      className="group bg-background p-6 md:p-8 flex flex-col justify-between min-h-[180px] md:min-h-[220px]"
-                    >
-                      <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body">
-                        {card.label}
-                      </span>
-                      <div className="relative">
-                        <p className="font-display text-xl md:text-2xl uppercase leading-tight tracking-tight whitespace-pre-line">
-                          <span className="text-foreground">{card.value.split("\n")[0]}</span>
-                          <br />
-                          <span className="italic text-primary font-normal">{card.value.split("\n")[1]}</span>
-                        </p>
-                        <div className="absolute -bottom-2 left-0 w-8 h-px bg-primary transition-all duration-500 group-hover:w-full" />
+                    { label: "Фокус", value: "Онко\nскрининг", Icon: Target, anim: { rotate: [0, 8, -8, 0] } },
+                    { label: "Художники", value: "Искусство\nсмыслов", Icon: Brush, anim: { rotate: [-6, 6, -6], y: [0, -2, 0] } },
+                    { label: "Выручка", value: "В пользу\nфонда", Icon: Heart, anim: { scale: [1, 1.18, 1] } },
+                    { label: "Формат", value: "Офлайн\n+ онлайн", Icon: Globe, anim: { rotate: [0, 360] } },
+                  ].map((card, i) => {
+                    const Icon = card.Icon;
+                    return (
+                      <div
+                        key={i}
+                        className="group bg-background p-6 md:p-8 flex flex-col justify-between min-h-[180px] md:min-h-[220px] relative overflow-hidden"
+                      >
+                        <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body relative z-10">
+                          {card.label}
+                        </span>
+
+                        {/* Animated red icon */}
+                        <motion.div
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/15 group-hover:text-primary/35 transition-colors duration-500 pointer-events-none"
+                          animate={card.anim}
+                          transition={{
+                            duration: card.Icon === Globe ? 24 : 4 + i * 0.6,
+                            repeat: Infinity,
+                            ease: card.Icon === Globe ? "linear" : "easeInOut",
+                          }}
+                        >
+                          <Icon className="w-24 h-24 md:w-28 md:h-28" strokeWidth={1.2} />
+                        </motion.div>
+
+                        <div className="relative z-10">
+                          <p className="font-display text-xl md:text-2xl uppercase leading-tight tracking-tight whitespace-pre-line">
+                            <span className="text-foreground">{card.value.split("\n")[0]}</span>
+                            <br />
+                            <span className="italic text-primary font-normal">{card.value.split("\n")[1]}</span>
+                          </p>
+                          <div className="absolute -bottom-2 left-0 w-8 h-px bg-primary transition-all duration-500 group-hover:w-full" />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 <div className="mt-6 flex items-center gap-4">
                   <div className="h-px flex-1 bg-border" />
@@ -471,6 +499,51 @@ const Upcoming = () => {
                   <span className="text-foreground font-medium">Дата и время:</span> 13 августа 2026,
                   сбор гостей — <span className="text-foreground font-medium">17:30</span>.
                 </p>
+              </div>
+            </div>
+
+            {/* Carousel — фото пространства «Зрение» */}
+            <div className="relative mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body">
+                  Пространство «Зрение» · галерея
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => scrollCarousel("prev")}
+                    aria-label="Предыдущее фото"
+                    className="w-10 h-10 rounded-full border border-border text-foreground hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollCarousel("next")}
+                    aria-label="Следующее фото"
+                    className="w-10 h-10 rounded-full border border-border text-foreground hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+              <div
+                ref={carouselRef}
+                className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              >
+                {[zrenie2, zrenie3, zrenie4, zrenieVenue].map((src, i) => (
+                  <div
+                    key={i}
+                    className="snap-start shrink-0 w-[85%] sm:w-[60%] md:w-[48%] lg:w-[38%] aspect-[3/2] overflow-hidden rounded-lg border border-border bg-muted"
+                  >
+                    <img
+                      src={src}
+                      alt={`Центр «Зрение» — интерьер ${i + 1}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-[1.2s] ease-out"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 
