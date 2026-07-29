@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart } from "lucide-react";
+import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
@@ -260,28 +261,45 @@ const Upcoming = () => {
               <div className="lg:col-span-6 flex flex-col">
                 <div className="grid grid-cols-2 gap-px bg-border border border-border overflow-hidden rounded-sm flex-1">
                   {[
-                    { label: "Фокус", value: "Онко\nскрининг" },
-                    { label: "Художники", value: "Искусство\nсмыслов" },
-                    { label: "Выручка", value: "В пользу\nфонда" },
-                    { label: "Формат", value: "Офлайн\n+ онлайн" },
-                  ].map((card, i) => (
-                    <div
-                      key={i}
-                      className="group bg-background p-6 md:p-8 flex flex-col justify-between min-h-[180px] md:min-h-[220px]"
-                    >
-                      <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body">
-                        {card.label}
-                      </span>
-                      <div className="relative">
-                        <p className="font-display text-xl md:text-2xl uppercase leading-tight tracking-tight whitespace-pre-line">
-                          <span className="text-foreground">{card.value.split("\n")[0]}</span>
-                          <br />
-                          <span className="italic text-primary font-normal">{card.value.split("\n")[1]}</span>
-                        </p>
-                        <div className="absolute -bottom-2 left-0 w-8 h-px bg-primary transition-all duration-500 group-hover:w-full" />
+                    { label: "Фокус", value: "Онко\nскрининг", Icon: Target, anim: { rotate: [0, 8, -8, 0] } },
+                    { label: "Художники", value: "Искусство\nсмыслов", Icon: Brush, anim: { rotate: [-6, 6, -6], y: [0, -2, 0] } },
+                    { label: "Выручка", value: "В пользу\nфонда", Icon: Heart, anim: { scale: [1, 1.18, 1] } },
+                    { label: "Формат", value: "Офлайн\n+ онлайн", Icon: Globe, anim: { rotate: [0, 360] } },
+                  ].map((card, i) => {
+                    const Icon = card.Icon;
+                    return (
+                      <div
+                        key={i}
+                        className="group bg-background p-6 md:p-8 flex flex-col justify-between min-h-[180px] md:min-h-[220px] relative overflow-hidden"
+                      >
+                        <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body relative z-10">
+                          {card.label}
+                        </span>
+
+                        {/* Animated red icon */}
+                        <motion.div
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/15 group-hover:text-primary/35 transition-colors duration-500 pointer-events-none"
+                          animate={card.anim}
+                          transition={{
+                            duration: card.Icon === Globe ? 24 : 4 + i * 0.6,
+                            repeat: Infinity,
+                            ease: card.Icon === Globe ? "linear" : "easeInOut",
+                          }}
+                        >
+                          <Icon className="w-24 h-24 md:w-28 md:h-28" strokeWidth={1.2} />
+                        </motion.div>
+
+                        <div className="relative z-10">
+                          <p className="font-display text-xl md:text-2xl uppercase leading-tight tracking-tight whitespace-pre-line">
+                            <span className="text-foreground">{card.value.split("\n")[0]}</span>
+                            <br />
+                            <span className="italic text-primary font-normal">{card.value.split("\n")[1]}</span>
+                          </p>
+                          <div className="absolute -bottom-2 left-0 w-8 h-px bg-primary transition-all duration-500 group-hover:w-full" />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 <div className="mt-6 flex items-center gap-4">
                   <div className="h-px flex-1 bg-border" />
