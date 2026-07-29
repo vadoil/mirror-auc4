@@ -86,6 +86,13 @@ const Upcoming = () => {
     }
     setDonateOpen(true);
   };
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const scrollCarousel = (dir: "prev" | "next") => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const delta = el.clientWidth * 0.85 * (dir === "next" ? 1 : -1);
+    el.scrollBy({ left: delta, behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen bg-background">
