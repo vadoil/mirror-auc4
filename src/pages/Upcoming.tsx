@@ -447,6 +447,18 @@ const Upcoming = () => {
                         0{i + 1}
                       </span>
                     </div>
+                    {a.details && (
+                      <motion.button
+                        type="button"
+                        onClick={() => setArtistInfo(a)}
+                        aria-label={`Подробнее о художнике ${a.name}`}
+                        animate={{ scale: [1, 1.08, 1] }}
+                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute top-4 right-4 w-9 h-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity"
+                      >
+                        <Info className="w-4 h-4" />
+                      </motion.button>
+                    )}
                   </div>
 
                   {/* Content */}
@@ -464,7 +476,17 @@ const Upcoming = () => {
                     <p className="font-body text-sm text-muted-foreground leading-relaxed">
                       {a.text}
                     </p>
+                    {a.details && (
+                      <button
+                        type="button"
+                        onClick={() => setArtistInfo(a)}
+                        className="mt-5 self-start inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.2em] text-primary border-b border-primary/40 hover:border-primary pb-1 transition-colors"
+                      >
+                        Подробнее о художнике <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    )}
                   </div>
+
                 </motion.div>
               ))}
             </div>
