@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight, Info } from "lucide-react";
 import { useRef } from "react";
+import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
