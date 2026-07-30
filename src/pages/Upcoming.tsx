@@ -94,6 +94,8 @@ const programItems = [
 
 const Upcoming = () => {
   const [ticketOpen, setTicketOpen] = useState(false);
+  const [artistInfo, setArtistInfo] = useState<(typeof artists)[number] | null>(null);
+
   const [donateOpen, setDonateOpen] = useState(false);
   const [donateAmount, setDonateAmount] = useState<number>(3000);
   const [donateInput, setDonateInput] = useState<string>("3000");
