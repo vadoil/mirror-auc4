@@ -729,7 +729,7 @@ const Upcoming = () => {
                     </button>
                   </div>
                   <p className="font-body text-xs text-muted-foreground/80 mt-4">
-                    Минимальная сумма - 100 ₽. Оплата - через защищённый шлюз CloudPayments.
+                    Минимальная сумма - 10 ₽. Оплата - через защищённый шлюз CloudPayments.
                   </p>
                 </div>
 
