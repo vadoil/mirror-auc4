@@ -157,8 +157,13 @@ Deno.serve(async (req) => {
               },
             })
           ),
-          supabase.functions.invoke("notify-telegram", {
-            body: {
+          fetch(`${SUPABASE_URL}/functions/v1/notify-telegram`, {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${SERVICE_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
               event: "payment_succeeded",
               data: {
                 name: tr.name,
@@ -167,8 +172,9 @@ Deno.serve(async (req) => {
                 amount,
                 yookassa_payment_id: String(transactionId),
               },
-            },
+            }),
           }),
+
         ];
 
         const results = await Promise.allSettled(tasks);
