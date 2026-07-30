@@ -783,7 +783,49 @@ const Upcoming = () => {
         ticketPrice={`${donateAmount.toLocaleString("ru-RU")} ₽`}
         showTrainingCheckbox={false}
       />
+
+      <Dialog open={!!artistInfo} onOpenChange={(o) => !o && setArtistInfo(null)}>
+        <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto">
+          {artistInfo?.details && (
+            <>
+              <DialogHeader>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-2">
+                  {artistInfo.role}
+                </p>
+                <DialogTitle className="font-display text-2xl md:text-3xl uppercase tracking-tight leading-tight">
+                  {artistInfo.name}
+                </DialogTitle>
+                <DialogDescription className="font-body text-sm text-muted-foreground">
+                  {artistInfo.details.title} · {artistInfo.details.subtitle}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="grid grid-cols-3 gap-3 my-4">
+                {artistInfo.details.works.map((w, wi) => (
+                  <div key={wi} className="aspect-square overflow-hidden rounded-md bg-warm-black">
+                    <img
+                      src={w.src}
+                      alt={w.alt}
+                      loading="lazy"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-4">
+                {artistInfo.details.paragraphs.map((p, pi) => (
+                  <p key={pi} className="font-body text-sm text-muted-foreground leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
+
   );
 };
 
