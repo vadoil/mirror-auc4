@@ -206,13 +206,13 @@ const Upcoming = () => {
                     onClick={() => setTicketOpen(true)}
                     className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
                   >
-                    <Ticket className="w-4 h-4" /> Купить билет · 7 000 ₽
+                    <Ticket className="w-4 h-4" /> Сделать пожертвование · 7 000 ₽
                   </button>
                   <a
                     href="#donation"
                     className="border border-white/40 text-white px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:bg-white/10 transition-colors"
                   >
-                    <HeartHandshake className="w-4 h-4" /> Сделать пожертвование
+                    <HeartHandshake className="w-4 h-4" /> Поддержать фонд
                   </a>
                 </div>
               </motion.div>
@@ -593,7 +593,7 @@ const Upcoming = () => {
                     onClick={() => setTicketOpen(true)}
                     className="bg-primary text-primary-foreground px-8 py-4 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
                   >
-                    <Ticket className="w-4 h-4" /> Купить билет <ArrowRight className="w-4 h-4" />
+                    <Ticket className="w-4 h-4" /> Сделать пожертвование <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
 
@@ -679,11 +679,11 @@ const Upcoming = () => {
                       onClick={openDonate}
                       className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
                     >
-                      <HeartHandshake className="w-4 h-4" /> Поддержать
+                      <HeartHandshake className="w-4 h-4" /> Поддержать фонд
                     </button>
                   </div>
                   <p className="font-body text-xs text-muted-foreground/80 mt-4">
-                    Минимальная сумма - 100 ₽. Оплата - через защищённый шлюз ЮKassa.
+                    Минимальная сумма - 100 ₽. Оплата - через защищённый шлюз CloudPayments.
                   </p>
                 </div>
 
