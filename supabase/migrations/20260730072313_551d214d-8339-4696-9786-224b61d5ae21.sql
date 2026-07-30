@@ -1,0 +1,1 @@
+DELETE FROM public.payments WHERE yookassa_payment_id = '999000111';
