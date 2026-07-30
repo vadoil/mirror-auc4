@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Tag } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import YooKassaPaymentForm from "./YooKassaPaymentForm";
+import CloudPaymentsForm from "./CloudPaymentsForm";
 
 interface TicketRequestModalProps {
   isOpen: boolean;
@@ -186,7 +186,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
       setPromoValid(null);
       onClose();
     } else {
-      // Paid → show YooKassa payment form
+      // Paid → show CloudPayments form
       setSubmittedName(form.name.trim());
       setSubmittedEmail(form.email.trim());
       setSubmittedRequestId(requestId);
@@ -246,7 +246,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
             </div>
 
             {showPayment ? (
-              <YooKassaPaymentForm
+              <CloudPaymentsForm
                 ticketRequestId={submittedRequestId}
                 name={submittedName}
                 email={submittedEmail}

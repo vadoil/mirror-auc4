@@ -74,7 +74,7 @@ const HowItWorks = () => {
               onClick={() => setTicketModalOpen(true)}
               className="btn-outline text-center"
             >
-              Купить билет
+              Сделать пожертвование
             </button>
           </div>
 
