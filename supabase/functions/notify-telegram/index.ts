@@ -149,9 +149,11 @@ Deno.serve(async (req) => {
       });
     }
 
+    console.log("[notify-telegram] sent", event, "to", chatId);
     return new Response(JSON.stringify({ ok: true }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
+
   } catch (e) {
     console.error("[notify-telegram] error", e);
     return new Response(JSON.stringify({ ok: false, error: String(e) }), {
