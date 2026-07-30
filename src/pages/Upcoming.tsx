@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight } from "lucide-react";
+import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight, Info } from "lucide-react";
 import { useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import spbHero from "@/assets/upcoming-spb-hero.jpg";
 import zrenieVenue from "@/assets/venue-zrenie-spb.jpg";
 import zrenie2 from "@/assets/venue-zrenie-2.jpg";
@@ -13,6 +14,9 @@ import zrenie4 from "@/assets/venue-zrenie-4.jpg";
 import artist1 from "@/assets/artist-1-sergienko.jpg";
 import artist2 from "@/assets/artist-2-bartenev.jpg";
 import artist3 from "@/assets/artist-3-abrosimov.jpg";
+import abrosimovWork1 from "@/assets/abrosimov-work-1.jpg";
+import abrosimovWork2 from "@/assets/abrosimov-work-2.jpg";
+import abrosimovWork3 from "@/assets/abrosimov-work-3.jpg";
 
 const artists = [
   {
@@ -29,11 +33,28 @@ const artists = [
   },
   {
     name: "Дмитрий Абросимов",
-    role: "художник, графика",
-    text: "Исследует в своём творчестве мистические аспекты и многослойную атмосферу. Выставляет на торги минималистичную графику, исследующую хрупкость человеческого восприятия.",
+    role: "художник, glowing-art",
+    text: "Автор флуоресцентной живописи: его мистические полотна «оживают» в темноте, стирая границу между сном и явью. Более 20 лет практики, свыше 40 выставок и 150 работ в частных и музейных коллекциях.",
     photo: artist3,
+    details: {
+      title: "Инверсия цвета. Тёмная сторона искусства",
+      subtitle: "Выход из мерности: свет в темноте",
+      paragraphs: [
+        "Дмитрий Абросимов - художник, чьё искусство создано для познания абстрактных образов в темноте. Мистические полотна словно преодолевают понятие мерности и поглощают зрителя в живую многослойную НЕреальность. Источник вдохновения - личные впечатления автора от многочисленных путешествий, где истории случайных попутчиков переплетаются с энергетикой и многообразием культур.",
+        "Сделав флуоресцентную живопись основным медиумом, художник относит своё творчество к направлению glowing-art. Его картины предназначены для тёмных помещений: они «оживают», приобретают глубину и многомерность при специальном освещении. Вдохновением в начале пути стала история Куинджи и его «Лунной ночи на Днепре», показанной в тёмном зале в Санкт-Петербурге.",
+        "Каждая работа - это история о путешествии. «Амстердам» создан под впечатлением от первого посещения города, «Explosive Ice» родилась в Лапландии как осмысление травмы, а больше всего полотен написано на Пангане, где художник живёт и работает несколько месяцев в году.",
+        "Создание работы автор разбивает на четыре этапа: непредсказуемый подмалёвок в духе Поллока, выбор композиции из визуального «лабиринта», прорисовка чёрного фона и проявление «света в темноте». «Если задуматься, чёрный - самый главный цвет из всех. Только он может раскрыть глубину других красок», - говорит Дмитрий.",
+        "Художественная практика Дмитрия насчитывает более 20 лет. Он работает в России, Таиланде и Индии, участвовал более чем в 40 выставках, в том числе в крупных государственных институциях. Сооснователь портала о современном искусстве Artifex.ru и продюсер одноимённого YouTube-канала.",
+      ],
+      works: [
+        { src: abrosimovWork1, alt: "Флуоресцентная работа Дмитрия Абросимова - вихрь неоновых мазков" },
+        { src: abrosimovWork2, alt: "Флуоресцентная работа Дмитрия Абросимова - светящаяся сфера" },
+        { src: abrosimovWork3, alt: "Флуоресцентная работа Дмитрия Абросимова - золотой круг на синем" },
+      ],
+    },
   },
 ];
+
 
 const programItems = [
   {
@@ -73,6 +94,8 @@ const programItems = [
 
 const Upcoming = () => {
   const [ticketOpen, setTicketOpen] = useState(false);
+  const [artistInfo, setArtistInfo] = useState<(typeof artists)[number] | null>(null);
+
   const [donateOpen, setDonateOpen] = useState(false);
   const [donateAmount, setDonateAmount] = useState<number>(3000);
   const [donateInput, setDonateInput] = useState<string>("3000");
@@ -424,6 +447,18 @@ const Upcoming = () => {
                         0{i + 1}
                       </span>
                     </div>
+                    {a.details && (
+                      <motion.button
+                        type="button"
+                        onClick={() => setArtistInfo(a)}
+                        aria-label={`Подробнее о художнике ${a.name}`}
+                        animate={{ scale: [1, 1.08, 1] }}
+                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute top-4 right-4 w-9 h-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity"
+                      >
+                        <Info className="w-4 h-4" />
+                      </motion.button>
+                    )}
                   </div>
 
                   {/* Content */}
@@ -441,7 +476,17 @@ const Upcoming = () => {
                     <p className="font-body text-sm text-muted-foreground leading-relaxed">
                       {a.text}
                     </p>
+                    {a.details && (
+                      <button
+                        type="button"
+                        onClick={() => setArtistInfo(a)}
+                        className="mt-5 self-start inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.2em] text-primary border-b border-primary/40 hover:border-primary pb-1 transition-colors"
+                      >
+                        Подробнее о художнике <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    )}
                   </div>
+
                 </motion.div>
               ))}
             </div>
@@ -738,7 +783,49 @@ const Upcoming = () => {
         ticketPrice={`${donateAmount.toLocaleString("ru-RU")} ₽`}
         showTrainingCheckbox={false}
       />
+
+      <Dialog open={!!artistInfo} onOpenChange={(o) => !o && setArtistInfo(null)}>
+        <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto">
+          {artistInfo?.details && (
+            <>
+              <DialogHeader>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-2">
+                  {artistInfo.role}
+                </p>
+                <DialogTitle className="font-display text-2xl md:text-3xl uppercase tracking-tight leading-tight">
+                  {artistInfo.name}
+                </DialogTitle>
+                <DialogDescription className="font-body text-sm text-muted-foreground">
+                  {artistInfo.details.title} · {artistInfo.details.subtitle}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="grid grid-cols-3 gap-3 my-4">
+                {artistInfo.details.works.map((w, wi) => (
+                  <div key={wi} className="aspect-square overflow-hidden rounded-md bg-warm-black">
+                    <img
+                      src={w.src}
+                      alt={w.alt}
+                      loading="lazy"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-4">
+                {artistInfo.details.paragraphs.map((p, pi) => (
+                  <p key={pi} className="font-body text-sm text-muted-foreground leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
+
   );
 };
 
