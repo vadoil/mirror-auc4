@@ -712,7 +712,7 @@ const Upcoming = () => {
                     <div className="flex items-center gap-2 flex-1 min-w-[180px] border border-border rounded px-4 bg-background">
                       <input
                         type="number"
-                        min={100}
+                        min={10}
                         step={100}
                         value={donateInput}
                         onChange={(e) => setDonateInput(e.target.value)}
