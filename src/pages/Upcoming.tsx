@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight, Info } from "lucide-react";
 import { useRef } from "react";
+import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
@@ -102,11 +103,11 @@ const Upcoming = () => {
 
   const openDonate = () => {
     const n = parseInt(donateInput.replace(/\D/g, ""), 10);
-    if (!Number.isFinite(n) || n < 100) {
-      setDonateAmount(3000);
-    } else {
-      setDonateAmount(n);
+    if (!Number.isFinite(n) || n < 10) {
+      toast.error("Минимальная сумма пожертвования - 10 ₽");
+      return;
     }
+    setDonateAmount(n);
     setDonateOpen(true);
   };
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -711,7 +712,7 @@ const Upcoming = () => {
                     <div className="flex items-center gap-2 flex-1 min-w-[180px] border border-border rounded px-4 bg-background">
                       <input
                         type="number"
-                        min={100}
+                        min={10}
                         step={100}
                         value={donateInput}
                         onChange={(e) => setDonateInput(e.target.value)}
@@ -728,7 +729,7 @@ const Upcoming = () => {
                     </button>
                   </div>
                   <p className="font-body text-xs text-muted-foreground/80 mt-4">
-                    Минимальная сумма - 100 ₽. Оплата - через защищённый шлюз CloudPayments.
+                    Минимальная сумма - 10 ₽. Оплата - через защищённый шлюз CloudPayments.
                   </p>
                 </div>
 
