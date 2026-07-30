@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 interface CloudPaymentsFormProps {
@@ -46,42 +45,37 @@ const CloudPaymentsForm = ({ ticketRequestId, name, email, ticketType, amount }:
     try {
       await loadWidget();
       const widget = new window.cp.CloudPayments({ language: "ru-RU" });
-      widget.pay(
-        "charge",
-        {
-          publicId: PUBLIC_ID,
-          description: `Пожертвование · «Отражение добра» · ${ticketType}`,
-          amount,
-          currency: "RUB",
-          accountId: email,
-          invoiceId: ticketRequestId,
+      const origin = window.location.origin;
+
+      await widget.start({
+        publicTerminalId: PUBLIC_ID,
+        amount,
+        currency: "RUB",
+        culture: "ru-RU",
+        paymentSchema: "Single",
+        description: `Пожертвование · «Отражение добра» · ${ticketType}`,
+        externalId: ticketRequestId,
+        receiptEmail: email,
+        userInfo: {
+          fullName: name,
           email,
-          skin: "mini",
-          data: {
-            ticket_request_id: ticketRequestId,
-            ticket_type: ticketType,
-            name,
-          },
         },
-        {
-          onSuccess: async () => {
-            toast.success("Спасибо! Пожертвование принято. Подтверждение придёт на почту.");
-            setLoading(false);
-            await supabase
-              .from("ticket_requests")
-              .update({ status: "paid" })
-              .eq("id", ticketRequestId);
-          },
-          onFail: () => {
-            toast.error("Платёж не прошёл. Попробуйте ещё раз.");
-            setLoading(false);
-          },
-          onComplete: () => setLoading(false),
+        metadata: {
+          ticket_request_id: ticketRequestId,
+          ticket_type: ticketType,
+          name,
         },
-      );
+        successRedirectUrl: `${origin}/?payment=success`,
+        failRedirectUrl: `${origin}/?payment=fail`,
+        retryPayment: true,
+      });
+
+      // Виджет закрыт; финальный статус приходит через webhook.
+      toast.info("Форма оплаты закрыта. Если платёж прошёл, подтверждение придёт на почту.");
     } catch (e) {
       console.error(e);
-      toast.error("Не удалось открыть форму оплаты. Попробуйте позже.");
+      toast.error("Платёж не прошёл. Попробуйте ещё раз.");
+    } finally {
       setLoading(false);
     }
   };
