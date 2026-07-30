@@ -102,11 +102,11 @@ const Upcoming = () => {
 
   const openDonate = () => {
     const n = parseInt(donateInput.replace(/\D/g, ""), 10);
-    if (!Number.isFinite(n) || n < 100) {
-      setDonateAmount(3000);
-    } else {
-      setDonateAmount(n);
+    if (!Number.isFinite(n) || n < 10) {
+      toast.error("Минимальная сумма пожертвования - 10 ₽");
+      return;
     }
+    setDonateAmount(n);
     setDonateOpen(true);
   };
   const carouselRef = useRef<HTMLDivElement>(null);
