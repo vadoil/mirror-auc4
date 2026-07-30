@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight } from "lucide-react";
+import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight, Info } from "lucide-react";
 import { useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import spbHero from "@/assets/upcoming-spb-hero.jpg";
 import zrenieVenue from "@/assets/venue-zrenie-spb.jpg";
 import zrenie2 from "@/assets/venue-zrenie-2.jpg";
@@ -13,6 +14,9 @@ import zrenie4 from "@/assets/venue-zrenie-4.jpg";
 import artist1 from "@/assets/artist-1-sergienko.jpg";
 import artist2 from "@/assets/artist-2-bartenev.jpg";
 import artist3 from "@/assets/artist-3-abrosimov.jpg";
+import abrosimovWork1 from "@/assets/abrosimov-work-1.jpg";
+import abrosimovWork2 from "@/assets/abrosimov-work-2.jpg";
+import abrosimovWork3 from "@/assets/abrosimov-work-3.jpg";
 
 const artists = [
   {
@@ -29,11 +33,28 @@ const artists = [
   },
   {
     name: "Дмитрий Абросимов",
-    role: "художник, графика",
-    text: "Исследует в своём творчестве мистические аспекты и многослойную атмосферу. Выставляет на торги минималистичную графику, исследующую хрупкость человеческого восприятия.",
+    role: "художник, glowing-art",
+    text: "Автор флуоресцентной живописи: его мистические полотна «оживают» в темноте, стирая границу между сном и явью. Более 20 лет практики, свыше 40 выставок и 150 работ в частных и музейных коллекциях.",
     photo: artist3,
+    details: {
+      title: "Инверсия цвета. Тёмная сторона искусства",
+      subtitle: "Выход из мерности: свет в темноте",
+      paragraphs: [
+        "Дмитрий Абросимов - художник, чьё искусство создано для познания абстрактных образов в темноте. Мистические полотна словно преодолевают понятие мерности и поглощают зрителя в живую многослойную НЕреальность. Источник вдохновения - личные впечатления автора от многочисленных путешествий, где истории случайных попутчиков переплетаются с энергетикой и многообразием культур.",
+        "Сделав флуоресцентную живопись основным медиумом, художник относит своё творчество к направлению glowing-art. Его картины предназначены для тёмных помещений: они «оживают», приобретают глубину и многомерность при специальном освещении. Вдохновением в начале пути стала история Куинджи и его «Лунной ночи на Днепре», показанной в тёмном зале в Санкт-Петербурге.",
+        "Каждая работа - это история о путешествии. «Амстердам» создан под впечатлением от первого посещения города, «Explosive Ice» родилась в Лапландии как осмысление травмы, а больше всего полотен написано на Пангане, где художник живёт и работает несколько месяцев в году.",
+        "Создание работы автор разбивает на четыре этапа: непредсказуемый подмалёвок в духе Поллока, выбор композиции из визуального «лабиринта», прорисовка чёрного фона и проявление «света в темноте». «Если задуматься, чёрный - самый главный цвет из всех. Только он может раскрыть глубину других красок», - говорит Дмитрий.",
+        "Художественная практика Дмитрия насчитывает более 20 лет. Он работает в России, Таиланде и Индии, участвовал более чем в 40 выставках, в том числе в крупных государственных институциях. Сооснователь портала о современном искусстве Artifex.ru и продюсер одноимённого YouTube-канала.",
+      ],
+      works: [
+        { src: abrosimovWork1, alt: "Флуоресцентная работа Дмитрия Абросимова - вихрь неоновых мазков" },
+        { src: abrosimovWork2, alt: "Флуоресцентная работа Дмитрия Абросимова - светящаяся сфера" },
+        { src: abrosimovWork3, alt: "Флуоресцентная работа Дмитрия Абросимова - золотой круг на синем" },
+      ],
+    },
   },
 ];
+
 
 const programItems = [
   {
