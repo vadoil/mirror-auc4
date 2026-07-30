@@ -95,16 +95,19 @@ const Header = () => {
             >
               О проекте
             </Link>
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                onClick={(e) => handleAnchorClick(e, item.href)}
-                className={`${textColor} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300 whitespace-nowrap`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const highlight = item.href === "/upcoming";
+              return (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  onClick={(e) => handleAnchorClick(e, item.href)}
+                  className={`${highlight ? "text-primary font-semibold hover:text-primary/80" : `${textColor} font-light ${textHover}`} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body transition-colors duration-300 whitespace-nowrap`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             {isAdmin && (
               <Link
                 to="/admin"
@@ -153,7 +156,7 @@ const Header = () => {
                   О проекте
                 </Link>
                 {navItems.map((item) => (
-                  <Link key={item.href} to={item.href} onClick={(e) => { handleAnchorClick(e, item.href); setMenuOpen(false); }} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
+                  <Link key={item.href} to={item.href} onClick={(e) => { handleAnchorClick(e, item.href); setMenuOpen(false); }} className={`text-sm uppercase tracking-[0.2em] font-body ${item.href === "/upcoming" ? "text-primary font-semibold" : "text-foreground/80 font-light"}`}>
                     {item.label}
                   </Link>
                 ))}
