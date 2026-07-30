@@ -44,5 +44,5 @@ bash /var/www/mirror/deploy/update.sh
 ## Замечания
 
 - `.env.production` берётся из `deploy/.env.vps` — там `VITE_SUPABASE_URL` указывает на `api.отразись.рф`. Сборка в Lovable Published этот файл не использует — там работает обычный `.env` с прямым адресом supabase.co.
-- ЮKassa webhook прилетает напрямую на `mmuwfeiunaqjljnplpgh.supabase.co/functions/v1/yookassa-webhook` — менять не нужно.
+- Webhook CloudPayments настроен на `https://api.отразись.рф/functions/v1/cloudpayments-webhook` (проксируется на Supabase). Прямой адрес supabase.co тоже работает как резерв.
 - В Supabase Dashboard → Authentication → URL Configuration добавить в **Redirect URLs**: `https://отразись.рф/*` и `https://api.отразись.рф/*`. Это нужно для подтверждения почты и сброса пароля.
