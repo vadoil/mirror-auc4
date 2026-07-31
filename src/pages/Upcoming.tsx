@@ -374,9 +374,10 @@ const Upcoming = () => {
                     <div className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center mb-5 group-hover:border-primary/60 group-hover:bg-primary/5 transition-all">
                       <Icon className="w-5 h-5 text-primary" />
                     </div>
-                    <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-2">
+                    <p className="font-display text-sm md:text-base italic text-primary/90 mb-2">
                       0{i + 1} · {item.subtitle}
                     </p>
+
                     <h3 className="font-display text-2xl md:text-3xl text-foreground uppercase tracking-tight leading-tight mb-1">
                       {item.title}
                     </h3>
