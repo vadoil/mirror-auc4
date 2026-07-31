@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight, Info } from "lucide-react";
+import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight, Info, ScanEye, PenTool, HandHeart, Radio } from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
 import Header from "@/components/Header";
@@ -292,10 +292,10 @@ const Upcoming = () => {
               <div className="lg:col-span-6 flex flex-col">
                 <div className="grid grid-cols-2 gap-px bg-border border border-border overflow-hidden rounded-sm flex-1">
                   {[
-                    { label: "Фокус", value: "Онко\nскрининг", Icon: Target, anim: { rotate: [0, 8, -8, 0] } },
-                    { label: "Художники", value: "Искусство\nсмыслов", Icon: Brush, anim: { rotate: [-6, 6, -6], y: [0, -2, 0] } },
-                    { label: "Выручка", value: "В пользу\nфонда", Icon: Heart, anim: { scale: [1, 1.18, 1] } },
-                    { label: "Формат", value: "Офлайн\n+ онлайн", Icon: Globe, anim: { rotate: [0, 360] } },
+                    { label: "Фокус", value: "Онко\nскрининг", Icon: ScanEye, anim: { scale: [1, 1.12, 1], rotate: [0, -4, 4, 0] }, dur: 5 },
+                    { label: "Художники", value: "Искусство\nсмыслов", Icon: PenTool, anim: { rotate: [-10, 10, -10], y: [0, -4, 0] }, dur: 6 },
+                    { label: "Выручка", value: "В пользу\nфонда", Icon: HandHeart, anim: { scale: [1, 1.22, 0.98, 1] }, dur: 2.4 },
+                    { label: "Формат", value: "Офлайн\n+ онлайн", Icon: Radio, anim: { scale: [1, 1.08, 1], opacity: [1, 0.6, 1] }, dur: 3 },
                   ].map((card, i) => {
                     const Icon = card.Icon;
                     return (
@@ -308,17 +308,21 @@ const Upcoming = () => {
                         </span>
 
                         {/* Animated red icon */}
-                        <motion.div
-                          className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/15 group-hover:text-primary/35 transition-colors duration-500 pointer-events-none"
-                          animate={card.anim}
-                          transition={{
-                            duration: card.Icon === Globe ? 24 : 4 + i * 0.6,
-                            repeat: Infinity,
-                            ease: card.Icon === Globe ? "linear" : "easeInOut",
-                          }}
-                        >
-                          <Icon className="w-24 h-24 md:w-28 md:h-28" strokeWidth={1.2} />
-                        </motion.div>
+                        <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
+                          <motion.span
+                            className="absolute inset-0 -m-3 rounded-full border border-primary/25"
+                            animate={{ scale: [1, 1.35, 1], opacity: [0.5, 0, 0.5] }}
+                            transition={{ duration: card.dur * 1.4, repeat: Infinity, ease: "easeOut" }}
+                          />
+                          <motion.div
+                            className="text-primary/55 group-hover:text-primary transition-colors duration-500"
+                            animate={card.anim}
+                            transition={{ duration: card.dur, repeat: Infinity, ease: "easeInOut" }}
+                          >
+                            <Icon className="w-12 h-12 md:w-16 md:h-16" strokeWidth={1.4} />
+                          </motion.div>
+                        </div>
+
 
                         <div className="relative z-10">
                           <p className="font-display text-xl md:text-2xl uppercase leading-tight tracking-tight whitespace-pre-line">
@@ -374,9 +378,10 @@ const Upcoming = () => {
                     <div className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center mb-5 group-hover:border-primary/60 group-hover:bg-primary/5 transition-all">
                       <Icon className="w-5 h-5 text-primary" />
                     </div>
-                    <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-2">
+                    <p className="font-display text-sm md:text-base italic text-primary/90 mb-2">
                       0{i + 1} · {item.subtitle}
                     </p>
+
                     <h3 className="font-display text-2xl md:text-3xl text-foreground uppercase tracking-tight leading-tight mb-1">
                       {item.title}
                     </h3>
