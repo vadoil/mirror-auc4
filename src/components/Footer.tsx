@@ -23,8 +23,9 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <Link to="/forum#registration" className="btn-primary">
-            Регистрация на форум
+          <Link to="/upcoming#donation" className="btn-primary inline-flex flex-col items-center gap-0.5 text-center">
+            <span className="text-xs tracking-[0.25em] opacity-90">Регистрация на аукцион</span>
+            <span className="text-[11px] tracking-[0.2em] font-normal opacity-80">Сделать пожертвование</span>
           </Link>
         </div>
       </div>
