@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check, Tag } from "lucide-react";
+import { X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import CloudPaymentsForm from "./CloudPaymentsForm";
@@ -14,13 +14,10 @@ interface TicketRequestModalProps {
   showTrainingCheckbox?: boolean;
 }
 
-const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrainingCheckbox = true }: TicketRequestModalProps) => {
+const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: TicketRequestModalProps) => {
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "", promoCode: "" });
-  
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [privacyConsent, setPrivacyConsent] = useState(false);
-  const [promoValid, setPromoValid] = useState<boolean | null>(null);
-  const [promoChecking, setPromoChecking] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
   const [submittedName, setSubmittedName] = useState("");
   const [submittedEmail, setSubmittedEmail] = useState("");
@@ -33,31 +30,10 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
     return Number.isFinite(n) && n > 0 ? n : 15000;
   })();
 
-  const checkPromoCode = async (code: string) => {
-    if (!code.trim()) {
-      setPromoValid(null);
-      return;
-    }
-    setPromoChecking(true);
-    const { data } = await supabase
-      .from("promo_codes")
-      .select("id, code, is_active, max_uses, current_uses")
-      .ilike("code", code.trim())
-      .eq("is_active", true)
-      .maybeSingle();
-
-    if (data && (!data.max_uses || data.current_uses < data.max_uses)) {
-      setPromoValid(true);
-    } else {
-      setPromoValid(false);
-    }
-    setPromoChecking(false);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.trim()) {
-      toast.error("Заполните имя и email");
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
+      toast.error("Заполните имя, email и телефон");
       return;
     }
     if (!privacyConsent) {
@@ -66,47 +42,21 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
     }
     setLoading(true);
 
-    // Force-validate promo code if entered but not yet validated
-    let effectivePromoValid = promoValid;
-    if (form.promoCode.trim() && promoValid !== true) {
-      const { data } = await supabase
-        .from("promo_codes")
-        .select("id, code, is_active, max_uses, current_uses")
-        .ilike("code", form.promoCode.trim())
-        .eq("is_active", true)
-        .maybeSingle();
-      if (data && (!data.max_uses || data.current_uses < data.max_uses)) {
-        effectivePromoValid = true;
-        setPromoValid(true);
-      } else {
-        effectivePromoValid = false;
-        setPromoValid(false);
-      }
-    }
-
     const message = form.message.trim() || null;
-
-    const promoCode = effectivePromoValid ? form.promoCode.trim().toUpperCase() : null;
-
     const requestId = crypto.randomUUID();
     const { error } = await supabase.from("ticket_requests").insert({
       id: requestId,
       name: form.name.trim(),
       email: form.email.trim(),
-      phone: form.phone.trim() || null,
+      phone: form.phone.trim(),
       ticket_type: ticketType,
       message,
-      promo_code: promoCode,
+      promo_code: null,
     });
     setLoading(false);
     if (error) {
       toast.error("Ошибка отправки. Попробуйте позже.");
       return;
-    }
-
-    // Increment promo code usage
-    if (promoCode) {
-      supabase.rpc("increment_promo_usage" as any, { promo_code_value: promoCode });
     }
 
     // Send notification emails to organizers
@@ -118,10 +68,10 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
     const templateData = {
       name: form.name.trim(),
       email: form.email.trim(),
-      phone: form.phone.trim() || undefined,
+      phone: form.phone.trim(),
       ticketType,
       message: message || undefined,
-      promoCode: promoCode || undefined,
+      promoCode: undefined,
     };
     for (const recipientEmail of recipients) {
       supabase.functions.invoke("send-transactional-email", {
@@ -143,73 +93,43 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
         templateData: {
           name: form.name.trim(),
           ticketType,
-          promoCode: promoCode || undefined,
+          promoCode: undefined,
         },
       },
     });
 
-    // If promo code used → auto-provision account (sends email with login + password)
-    if (promoCode) {
-      supabase.functions.invoke("provision-account", {
-        body: {
-          email: form.email.trim(),
-          name: form.name.trim(),
-          promo_code: promoCode,
-        },
-      });
-    }
-
     // Telegram notification
     supabase.functions.invoke("notify-telegram", {
       body: {
-        event: promoCode ? "promo_registration" : "ticket_request",
+        event: "ticket_request",
         data: {
           ticket_type: ticketType,
           name: form.name.trim(),
           email: form.email.trim(),
-          phone: form.phone.trim() || undefined,
-          promo_code: promoCode || undefined,
+          phone: form.phone.trim(),
           message: message || undefined,
         },
       },
     });
 
-    toast.success(promoCode
-      ? "Заявка отправлена! Промокод применён - регистрация без оплаты. Данные для входа придут на почту."
-      : "Заявка сохранена. Перейдите к оплате."
-    );
+    toast.success("Заявка сохранена. Перейдите к оплате.");
 
-    if (promoCode) {
-      // Free registration → close modal
-      setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
-      setPrivacyConsent(false);
-      setPromoValid(null);
-      onClose();
-    } else {
-      // Paid → show CloudPayments form
-      setSubmittedName(form.name.trim());
-      setSubmittedEmail(form.email.trim());
-      setSubmittedRequestId(requestId);
-      setShowPayment(true);
-    }
+    // Paid → show CloudPayments form
+    setSubmittedName(form.name.trim());
+    setSubmittedEmail(form.email.trim());
+    setSubmittedRequestId(requestId);
+    setShowPayment(true);
   };
 
   const handleClosePayment = () => {
     setShowPayment(false);
-    setForm({ name: "", email: "", phone: "", message: "", promoCode: "" });
-    
+    setForm({ name: "", email: "", phone: "", message: "" });
     setPrivacyConsent(false);
-    setPromoValid(null);
     setSubmittedName("");
     setSubmittedEmail("");
     setSubmittedRequestId("");
     onClose();
   };
-
-  const displayPrice = promoValid ? "Бесплатно" : ticketPrice;
-  const nonTicketTypes = ["Задать вопрос", "Узнать о форуме", "Участие в форуме", "Тренировка «Либидо фитнес» 18.04"];
-  const isTicketRegistration = !nonTicketTypes.includes(ticketType);
-  const needsPromo = false;
 
   return (
     <AnimatePresence>
@@ -235,9 +155,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
                   {showPayment ? "Оплата" : "Заявка"}
                 </h3>
                 <p className="text-cream/40 text-xs font-body mt-1">
-                  {ticketType} · {promoValid ? (
-                    <span className="text-green-400 font-medium">Бесплатно по промокоду</span>
-                  ) : displayPrice}
+                  {ticketType} · {ticketPrice}
                 </p>
               </div>
               <button onClick={handleClosePayment} className="text-cream/40 hover:text-cream transition-colors">
@@ -254,113 +172,67 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice, showTrai
                 amount={parsedAmount}
               />
             ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="text"
-                placeholder="Ваше имя *"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
-                required
-                maxLength={100}
-              />
-              <input
-                type="email"
-                placeholder="Email *"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
-                required
-                maxLength={255}
-              />
-              <input
-                type="tel"
-                placeholder="Телефон"
-                value={form.phone}
-                onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
-                maxLength={20}
-              />
-
-              {/* Promo code field */}
-              <div className="relative">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <Tag className="w-3 h-3 text-cream/40" />
-                  <span className="text-cream/40 text-[10px] uppercase tracking-[0.2em] font-body">Промокод</span>
-                </div>
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Введите промокод"
-                    value={form.promoCode}
-                    onChange={(e) => {
-                      setForm({ ...form, promoCode: e.target.value });
-                      setPromoValid(null);
-                    }}
-                    onBlur={() => checkPromoCode(form.promoCode)}
-                    className={`w-full bg-cream/5 border text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none transition-colors ${
-                      promoValid === true ? "border-green-400/50" : promoValid === false ? "border-red-400/50" : "border-cream/10 focus:border-primary"
-                    }`}
-                    maxLength={50}
-                  />
-                  {promoChecking && (
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-cream/30 text-xs font-body">
-                      проверка...
-                    </span>
-                  )}
-                  {promoValid === true && !promoChecking && (
-                    <Check className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-green-400" />
-                  )}
-                </div>
-                {promoValid === true && (
-                  <p className="text-green-400 text-xs font-body mt-1">Промокод применён - регистрация без оплаты</p>
-                )}
-                {promoValid === false && (
-                  <p className="text-red-400/70 text-xs font-body mt-1">Промокод не найден или недействителен</p>
-                )}
-              </div>
-
-              <textarea
-                placeholder="Комментарий"
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors resize-none h-20"
-                maxLength={500}
-              />
-
-
-              <label className="flex items-start gap-3 cursor-pointer group">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <input
-                  type="checkbox"
-                  checked={privacyConsent}
-                  onChange={(e) => setPrivacyConsent(e.target.checked)}
-                  className="mt-1 w-4 h-4 accent-primary"
+                  type="text"
+                  placeholder="Ваше имя *"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
+                  required
+                  maxLength={100}
                 />
-                <span className="text-cream/60 text-xs font-body leading-relaxed group-hover:text-cream/80 transition-colors">
-                  Я ознакомлен(а) с{" "}
-                  <Link to="/privacy" target="_blank" className="text-primary/80 hover:text-primary underline transition-colors">
-                    политикой конфиденциальности
-                  </Link>{" "}
-                  и даю согласие на обработку персональных данных
-                </span>
-              </label>
+                <input
+                  type="email"
+                  placeholder="Email *"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
+                  required
+                  maxLength={255}
+                />
+                <input
+                  type="tel"
+                  placeholder="Телефон *"
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors"
+                  required
+                  maxLength={20}
+                />
 
-              {needsPromo && (
-                <div className="bg-cream/5 border border-cream/10 px-4 py-3 text-center">
-                  <p className="text-cream/50 text-xs font-body leading-relaxed">
-                    Введите промокод для бесплатной регистрации или дождитесь подключения платёжной системы
-                  </p>
-                </div>
-              )}
+                <textarea
+                  placeholder="Комментарий"
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors resize-none h-20"
+                  maxLength={500}
+                />
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:opacity-90 transition-all disabled:opacity-50"
-              >
-                {loading ? "Отправка..." : promoValid ? "Зарегистрироваться бесплатно" : "Перейти к оплате"}
-              </button>
-            </form>
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={privacyConsent}
+                    onChange={(e) => setPrivacyConsent(e.target.checked)}
+                    className="mt-1 w-4 h-4 accent-primary"
+                  />
+                  <span className="text-cream/60 text-xs font-body leading-relaxed group-hover:text-cream/80 transition-colors">
+                    Я ознакомлен(а) с{" "}
+                    <Link to="/privacy" target="_blank" className="text-primary/80 hover:text-primary underline transition-colors">
+                      политикой конфиденциальности
+                    </Link>{" "}
+                    и даю согласие на обработку персональных данных
+                  </span>
+                </label>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:opacity-90 transition-all disabled:opacity-50"
+                >
+                  {loading ? "Отправка..." : "Перейти к оплате"}
+                </button>
+              </form>
             )}
           </motion.div>
         </motion.div>
