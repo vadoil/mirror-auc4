@@ -294,7 +294,7 @@ const Upcoming = () => {
                   {[
                     { label: "Фокус", value: "Онко\nскрининг", Icon: ScanEye, anim: { scale: [1, 1.12, 1], rotate: [0, -4, 4, 0] }, dur: 5 },
                     { label: "Художники", value: "Искусство\nсмыслов", Icon: PenTool, anim: { rotate: [-10, 10, -10], y: [0, -4, 0] }, dur: 6 },
-                    { label: "Выручка", value: "В пользу\nфонда", Icon: HandHeart, anim: { scale: [1, 1.22, 0.98, 1] }, dur: 2.4 },
+                    { label: "Собранные средства", value: "В пользу\nфонда", Icon: HandHeart, anim: { scale: [1, 1.22, 0.98, 1] }, dur: 2.4 },
                     { label: "Формат", value: "Офлайн\n+ онлайн", Icon: Radio, anim: { scale: [1, 1.08, 1], opacity: [1, 0.6, 1] }, dur: 3 },
                   ].map((card, i) => {
                     const Icon = card.Icon;
