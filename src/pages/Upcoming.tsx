@@ -636,8 +636,7 @@ const Upcoming = () => {
                     <p className="text-foreground">
                       Благотворительное пожертвование:{" "}
                       <span className="font-numbers text-2xl text-primary whitespace-nowrap">7 000 ₽</span>.
-                      Количество мест ограничено. Ваш взнос будет засчитан для активности
-                      «Искусство со смыслом».
+                      Количество мест ограничено. Каждый уйдет с события с картиной.
                     </p>
                   </div>
                   <button
