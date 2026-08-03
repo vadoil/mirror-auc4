@@ -81,11 +81,12 @@ const Footer = () => {
               </p>
               <div className="flex items-center gap-4">
                 <Link to="/privacy" className="font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">
-                  Политика конфиденциальности
+                  Обработка персональных данных
                 </Link>
                 <Link to="/oferta" className="font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">
-                  Оферта
+                  Договор о пожертвовании
                 </Link>
+
               </div>
             </div>
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-cream/20">
