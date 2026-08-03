@@ -230,7 +230,7 @@ const Upcoming = () => {
                     onClick={() => setTicketOpen(true)}
                     className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
                   >
-                    <Ticket className="w-4 h-4" /> Сделать пожертвование · 7 000 ₽
+                    <Ticket className="w-4 h-4" /> Сделать пожертвование · <span className="whitespace-nowrap">7 000 ₽</span>
                   </button>
                   <a
                     href="#donation"
@@ -635,7 +635,7 @@ const Upcoming = () => {
                     </p>
                     <p className="text-foreground">
                       Благотворительное пожертвование:{" "}
-                      <span className="font-numbers text-2xl text-primary">7 000 ₽</span>.
+                      <span className="font-numbers text-2xl text-primary whitespace-nowrap">7 000 ₽</span>.
                       Количество мест ограничено. Ваш взнос будет засчитан для активности
                       «Искусство со смыслом».
                     </p>
@@ -650,7 +650,7 @@ const Upcoming = () => {
 
                 <div className="lg:col-span-2 bg-card/50 border-t lg:border-t-0 lg:border-l border-primary/20 p-8 md:p-10 flex flex-col justify-center">
                   <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-5">
-                    Что входит в билет
+                    Что ждем на событии
                   </p>
                   <ul className="space-y-4">
                     {[
