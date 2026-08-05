@@ -83,7 +83,7 @@ Deno.serve(async (req) => {
           .eq("id", ticketRequestId);
 
         // Send confirmation email to client
-        await supabase.functions.invoke("send-transactional-email", {
+        await supabase.functions.invoke("send-email-smtp", {
           body: {
             templateName: "ticket-paid-confirmation",
             recipientEmail: tr.email,
@@ -99,7 +99,7 @@ Deno.serve(async (req) => {
         // Notify organizers
         const recipients = ["gizelatolts@gmail.com", "alexa-ref@list.ru", "vvm1976@gmail.com"];
         for (const recipientEmail of recipients) {
-          await supabase.functions.invoke("send-transactional-email", {
+          await supabase.functions.invoke("send-email-smtp", {
             body: {
               templateName: "ticket-paid-notification",
               recipientEmail,

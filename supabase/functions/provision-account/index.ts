@@ -130,7 +130,7 @@ Deno.serve(async (req) => {
 
     // Send credentials email
     const { error: mailErr } = await admin.functions.invoke(
-      "send-transactional-email",
+      "send-email-smtp",
       {
         body: {
           templateName: "account-credentials",
