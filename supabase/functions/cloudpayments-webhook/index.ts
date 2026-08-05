@@ -133,7 +133,7 @@ Deno.serve(async (req) => {
           .eq("id", ticketRequestId);
 
         const tasks = [
-          supabase.functions.invoke("send-transactional-email", {
+          supabase.functions.invoke("send-email-smtp", {
             body: {
               templateName: "ticket-paid-confirmation",
               recipientEmail: tr.email,
@@ -142,7 +142,7 @@ Deno.serve(async (req) => {
             },
           }),
           ...["gizelatolts@gmail.com", "alexa-ref@list.ru", "vvm1976@gmail.com"].map((recipientEmail) =>
-            supabase.functions.invoke("send-transactional-email", {
+            supabase.functions.invoke("send-email-smtp", {
               body: {
                 templateName: "ticket-paid-notification",
                 recipientEmail,
