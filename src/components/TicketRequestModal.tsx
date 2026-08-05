@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import CloudPaymentsForm from "./CloudPaymentsForm";
@@ -16,9 +16,10 @@ interface TicketRequestModalProps {
 
 const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: TicketRequestModalProps) => {
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "", promo: "" });
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
+  const [freeSuccess, setFreeSuccess] = useState(false);
   const [submittedName, setSubmittedName] = useState("");
   const [submittedEmail, setSubmittedEmail] = useState("");
   const [submittedRequestId, setSubmittedRequestId] = useState("");
@@ -29,6 +30,37 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
     const n = parseInt(digits, 10);
     return Number.isFinite(n) && n > 0 ? n : 15000;
   })();
+
+  const sendEmails = (
+    requestId: string,
+    templateData: Record<string, unknown>,
+    clientEmail: string,
+    promoCode?: string,
+  ) => {
+    const recipients = ["gizelatolts@gmail.com", "alexa-ref@list.ru", "vvm1976@gmail.com"];
+    for (const recipientEmail of recipients) {
+      supabase.functions.invoke("send-email-smtp", {
+        body: {
+          templateName: "ticket-request-notification",
+          recipientEmail,
+          idempotencyKey: `ticket-notify-${requestId}-${recipientEmail}`,
+          templateData,
+        },
+      });
+    }
+    supabase.functions.invoke("send-email-smtp", {
+      body: {
+        templateName: "ticket-request-confirmation",
+        recipientEmail: clientEmail,
+        idempotencyKey: `ticket-confirm-${requestId}`,
+        templateData: {
+          name: templateData.name,
+          ticketType,
+          promoCode,
+        },
+      },
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,6 +74,24 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
     }
     setLoading(true);
 
+    // Validate promo code (optional) — a valid active code means free registration
+    let validPromo: string | null = null;
+    const promoInput = form.promo.trim();
+    if (promoInput) {
+      const { data: promo } = await supabase
+        .from("promo_codes")
+        .select("code, is_active, max_uses, current_uses")
+        .ilike("code", promoInput)
+        .eq("is_active", true)
+        .maybeSingle();
+      if (!promo || (promo.max_uses != null && promo.current_uses >= promo.max_uses)) {
+        setLoading(false);
+        toast.error("Промокод не найден или больше не действует");
+        return;
+      }
+      validPromo = promo.code;
+    }
+
     const message = form.message.trim() || null;
     const requestId = crypto.randomUUID();
     const { error } = await supabase.from("ticket_requests").insert({
@@ -51,7 +101,8 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
       phone: form.phone.trim(),
       ticket_type: ticketType,
       message,
-      promo_code: null,
+      promo_code: validPromo,
+      ...(validPromo ? { status: "free", paid_at: new Date().toISOString() } : {}),
     });
     setLoading(false);
     if (error) {
@@ -59,44 +110,15 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
       return;
     }
 
-    // Send notification emails to organizers
-    const recipients = [
-      "gizelatolts@gmail.com",
-      "alexa-ref@list.ru",
-      "vvm1976@gmail.com",
-    ];
     const templateData = {
       name: form.name.trim(),
       email: form.email.trim(),
       phone: form.phone.trim(),
       ticketType,
       message: message || undefined,
-      promoCode: undefined,
+      promoCode: validPromo || undefined,
     };
-    for (const recipientEmail of recipients) {
-      supabase.functions.invoke("send-transactional-email", {
-        body: {
-          templateName: "ticket-request-notification",
-          recipientEmail,
-          idempotencyKey: `ticket-notify-${requestId}-${recipientEmail}`,
-          templateData,
-        },
-      });
-    }
-
-    // Send confirmation email to the client
-    supabase.functions.invoke("send-transactional-email", {
-      body: {
-        templateName: "ticket-request-confirmation",
-        recipientEmail: form.email.trim(),
-        idempotencyKey: `ticket-confirm-${requestId}`,
-        templateData: {
-          name: form.name.trim(),
-          ticketType,
-          promoCode: undefined,
-        },
-      },
-    });
+    sendEmails(requestId, templateData, form.email.trim(), validPromo || undefined);
 
     // Telegram notification
     supabase.functions.invoke("notify-telegram", {
@@ -108,22 +130,29 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
           email: form.email.trim(),
           phone: form.phone.trim(),
           message: message || undefined,
+          promo_code: validPromo || undefined,
         },
       },
     });
 
-    toast.success("Заявка сохранена. Перейдите к оплате.");
-
-    // Paid → show CloudPayments form
     setSubmittedName(form.name.trim());
     setSubmittedEmail(form.email.trim());
     setSubmittedRequestId(requestId);
+
+    if (validPromo) {
+      toast.success("Регистрация по промокоду подтверждена");
+      setFreeSuccess(true);
+      return;
+    }
+
+    toast.success("Заявка сохранена. Перейдите к оплате.");
     setShowPayment(true);
   };
 
   const handleClosePayment = () => {
     setShowPayment(false);
-    setForm({ name: "", email: "", phone: "", message: "" });
+    setFreeSuccess(false);
+    setForm({ name: "", email: "", phone: "", message: "", promo: "" });
     setPrivacyConsent(false);
     setSubmittedName("");
     setSubmittedEmail("");
@@ -152,10 +181,10 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="font-display text-2xl text-cream uppercase tracking-tight">
-                  {showPayment ? "Оплата" : "Заявка"}
+                  {freeSuccess ? "Готово" : showPayment ? "Оплата" : "Заявка"}
                 </h3>
                 <p className="text-cream/40 text-xs font-body mt-1">
-                  {ticketType} · {ticketPrice}
+                  {ticketType} · {freeSuccess ? "по промокоду" : ticketPrice}
                 </p>
               </div>
               <button onClick={handleClosePayment} className="text-cream/40 hover:text-cream transition-colors">
@@ -163,7 +192,25 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
               </button>
             </div>
 
-            {showPayment ? (
+            {freeSuccess ? (
+              <div className="text-center py-4">
+                <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center">
+                  <Check className="text-primary" size={24} />
+                </div>
+                <p className="text-cream font-body text-sm leading-relaxed mb-2">
+                  {submittedName}, вы зарегистрированы по промокоду - без пожертвования.
+                </p>
+                <p className="text-cream/50 font-body text-xs leading-relaxed mb-6">
+                  Подтверждение отправлено на {submittedEmail}. Мы свяжемся с вами перед событием.
+                </p>
+                <button
+                  onClick={handleClosePayment}
+                  className="w-full bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:opacity-90 transition-all"
+                >
+                  Закрыть
+                </button>
+              </div>
+            ) : showPayment ? (
               <CloudPaymentsForm
                 ticketRequestId={submittedRequestId}
                 name={submittedName}
@@ -209,6 +256,20 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
                   maxLength={500}
                 />
 
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Промокод (если есть)"
+                    value={form.promo}
+                    onChange={(e) => setForm({ ...form, promo: e.target.value })}
+                    className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/30 focus:outline-none focus:border-primary transition-colors uppercase"
+                    maxLength={40}
+                  />
+                  <p className="text-cream/35 text-[11px] font-body mt-2 leading-relaxed">
+                    С действующим промокодом регистрация бесплатная - оплата не потребуется.
+                  </p>
+                </div>
+
                 <label className="flex items-start gap-3 cursor-pointer group">
                   <input
                     type="checkbox"
@@ -230,7 +291,7 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
                   disabled={loading}
                   className="w-full bg-primary text-primary-foreground py-4 text-xs uppercase tracking-[0.2em] font-body font-medium hover:opacity-90 transition-all disabled:opacity-50"
                 >
-                  {loading ? "Отправка..." : "Перейти к оплате"}
+                  {loading ? "Отправка..." : form.promo.trim() ? "Зарегистрироваться" : "Перейти к оплате"}
                 </button>
               </form>
             )}
