@@ -1,6 +1,6 @@
 import * as React from 'npm:react@18.3.1'
 import { renderAsync } from 'npm:@react-email/components@0.0.22'
-import { SMTPClient } from 'https://deno.land/x/denomailer@1.6.0/mod.ts'
+import nodemailer from 'npm:nodemailer@6.9.14'
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { TEMPLATES } from '../_shared/transactional-email-templates/registry.ts'
 
@@ -14,6 +14,20 @@ const SMTP_PORT = Number(Deno.env.get('SMTP_PORT') ?? '465')
 const SMTP_USER = Deno.env.get('SMTP_USER')!
 const SMTP_PASSWORD = Deno.env.get('SMTP_PASSWORD')!
 const SMTP_FROM_NAME = Deno.env.get('SMTP_FROM_NAME') ?? 'Отражение добра'
+
+function htmlToText(html: string): string {
+  return html
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div|tr|h1|h2|h3|td)>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&laquo;/g, '«')
+    .replace(/&raquo;/g, '»')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders })
@@ -52,23 +66,21 @@ Deno.serve(async (req) => {
     if (!to) return json({ error: 'recipientEmail is required' }, 400)
     if (!html) return json({ error: 'html or templateName is required' }, 400)
 
-    const client = new SMTPClient({
-      connection: {
-        hostname: SMTP_HOST,
-        port: SMTP_PORT,
-        tls: SMTP_PORT === 465,
-        auth: { username: SMTP_USER, password: SMTP_PASSWORD },
-      },
+    const transporter = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: SMTP_PORT === 465,
+      auth: { user: SMTP_USER, pass: SMTP_PASSWORD },
     })
 
-    await client.send({
-      from: `${SMTP_FROM_NAME} <${SMTP_USER}>`,
+    const info = await transporter.sendMail({
+      from: { name: SMTP_FROM_NAME, address: SMTP_USER },
       to,
       replyTo: SMTP_USER,
       subject: subject || 'Отражение добра',
       html,
+      text: htmlToText(html),
     })
-    await client.close()
 
     // Best-effort logging
     try {
@@ -77,11 +89,11 @@ Deno.serve(async (req) => {
         Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
       )
       await supabase.from('email_send_log').insert({
-        message_id: body.idempotencyKey || crypto.randomUUID(),
+        message_id: body.idempotencyKey || info?.messageId || crypto.randomUUID(),
         template_name: templateName ?? 'raw-html',
         recipient_email: to,
         status: 'sent',
-        metadata: { transport: 'smtp' },
+        metadata: { transport: 'smtp-nodemailer' },
       })
     } catch (_) {
       // ignore logging failures
