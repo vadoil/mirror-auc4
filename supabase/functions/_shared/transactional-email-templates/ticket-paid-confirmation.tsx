@@ -28,12 +28,11 @@ const TicketPaidConfirmationEmail = ({ name, ticketType, amount }: Props) => (
 
         <Section style={content}>
           <Heading style={h1}>
-            {name ? `${name}, спасибо за вашу поддержку!` : 'Спасибо за вашу поддержку!'}
+            {name ? `${name}, благодарим вас за пожертвование!` : 'Дорогие друзья, благодарим вас за пожертвование!'}
           </Heading>
 
           <Text style={text}>
-            Мы получили ваше пожертвование. Собранные средства направляются на помощь людям
-            с онкологическими заболеваниями - в фонд «Не напрасно».
+            Благодарим вас за поддержку нашего события! Все собранные средства будут направлены на работу фонда «Не напрасно», который поддерживает людей с онкологическими заболеваниями по всей стране.
           </Text>
 
           <Section style={dataCard}>
@@ -56,20 +55,16 @@ const TicketPaidConfirmationEmail = ({ name, ticketType, amount }: Props) => (
           </Section>
 
           <Text style={text}>
-            Ваше место на вечере забронировано. Мы ждём вас на аукционе работ художников
-            и акции «Искусство со смыслом» - каждый уйдёт с события с картиной.
+            Накануне события мы ещё раз свяжемся с вами для напоминания и уточнения деталей.
           </Text>
 
           <Text style={text}>
-            Подробности о программе и дресс-коде пришлём ближе к дате. Если у вас есть вопросы -
-            просто ответьте на это письмо.
+            До встречи!
           </Text>
 
-          <Section style={{ textAlign: 'center' as const, margin: '24px 0 8px' }}>
-            <Button style={ctaButton} href="https://xn--80aaengbcp.xn--p1ai/upcoming">
-              Программа вечера
-            </Button>
-          </Section>
+          <Text style={signOff}>
+            С теплом, команда «{SITE_NAME}»
+          </Text>
         </Section>
 
         <Section style={footer}>
