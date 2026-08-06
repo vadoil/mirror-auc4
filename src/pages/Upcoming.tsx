@@ -18,6 +18,7 @@ import artist3 from "@/assets/artist-3-abrosimov.jpg";
 import abrosimovWork1 from "@/assets/abrosimov-work-1.jpg";
 import abrosimovWork2 from "@/assets/abrosimov-work-2.jpg";
 import abrosimovWork3 from "@/assets/abrosimov-work-3.jpg";
+import ilyaNedolyaAsset from "@/assets/ilya-nedolya.jpg.asset.json";
 
 const artists = [
   {
@@ -395,7 +396,39 @@ const Upcoming = () => {
                 );
               })}
             </div>
+
+            {/* Модератор */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6 }}
+              className="mt-6 border border-border rounded-lg bg-muted/30 overflow-hidden hover:border-primary/40 transition-colors duration-500"
+            >
+              <div className="grid sm:grid-cols-[220px_1fr] gap-0">
+                <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-[240px] overflow-hidden">
+                  <img
+                    src={ilyaNedolyaAsset.url}
+                    alt="Илья Недоля - модератор вечера"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="p-8 flex flex-col justify-center">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-4">
+                    Модератор вечера
+                  </p>
+                  <h3 className="font-display text-2xl md:text-3xl text-foreground uppercase tracking-tight leading-tight mb-1">
+                    Илья Недоля
+                  </h3>
+                  <p className="font-display text-base italic text-primary/90">
+                    эксперт по коммуникациям, амбассадор фонда «Не напрасно»
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
+
         </section>
 
         {/* Художники */}
