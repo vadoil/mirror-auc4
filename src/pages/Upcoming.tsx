@@ -18,6 +18,7 @@ import artist3 from "@/assets/artist-3-abrosimov.jpg";
 import abrosimovWork1 from "@/assets/abrosimov-work-1.jpg";
 import abrosimovWork2 from "@/assets/abrosimov-work-2.jpg";
 import abrosimovWork3 from "@/assets/abrosimov-work-3.jpg";
+import ilyaNedolyaAsset from "@/assets/ilya-nedolya.jpg.asset.json";
 
 const artists = [
   {
