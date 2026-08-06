@@ -123,10 +123,7 @@ const detailLabel = {
   letterSpacing: '0.12em', margin: '8px 0 2px', lineHeight: '1.2',
 }
 const detailValue = { fontSize: '14px', color: DARK_BG, margin: '0 0 4px', lineHeight: '1.5' }
-const ctaButton = {
-  backgroundColor: PRIMARY_COLOR, color: '#ffffff', padding: '14px 32px', fontSize: '12px',
-  fontWeight: '600' as const, letterSpacing: '0.1em', textTransform: 'uppercase' as const,
-  textDecoration: 'none', display: 'inline-block', borderRadius: '2px',
-}
+const signOff = { fontSize: '14px', color: '#555', margin: '24px 0 0', lineHeight: '1.7', fontStyle: 'italic' as const }
 const footer = { backgroundColor: '#FAFAF8', padding: '20px 32px', textAlign: 'center' as const }
 const footerText = { fontSize: '11px', color: '#888', margin: '0', lineHeight: '1.6' }
+
