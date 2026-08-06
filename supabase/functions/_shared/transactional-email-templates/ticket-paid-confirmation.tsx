@@ -1,6 +1,7 @@
 import * as React from 'npm:react@18.3.1'
 import {
-  Body, Container, Head, Heading, Html, Preview, Section, Text, Hr, Button,
+  Body, Container, Head, Heading, Html, Preview, Section, Text, Hr,
+
 } from 'npm:@react-email/components@0.0.22'
 import type { TemplateEntry } from './registry.ts'
 
@@ -28,12 +29,11 @@ const TicketPaidConfirmationEmail = ({ name, ticketType, amount }: Props) => (
 
         <Section style={content}>
           <Heading style={h1}>
-            {name ? `${name}, спасибо за вашу поддержку!` : 'Спасибо за вашу поддержку!'}
+            {name ? `${name}, благодарим вас за пожертвование!` : 'Дорогие друзья, благодарим вас за пожертвование!'}
           </Heading>
 
           <Text style={text}>
-            Мы получили ваше пожертвование. Собранные средства направляются на помощь людям
-            с онкологическими заболеваниями - в фонд «Не напрасно».
+            Благодарим вас за поддержку нашего события! Все собранные средства будут направлены на работу фонда «Не напрасно», который поддерживает людей с онкологическими заболеваниями по всей стране.
           </Text>
 
           <Section style={dataCard}>
@@ -56,20 +56,16 @@ const TicketPaidConfirmationEmail = ({ name, ticketType, amount }: Props) => (
           </Section>
 
           <Text style={text}>
-            Ваше место на вечере забронировано. Мы ждём вас на аукционе работ художников
-            и акции «Искусство со смыслом» - каждый уйдёт с события с картиной.
+            Накануне события мы ещё раз свяжемся с вами для напоминания и уточнения деталей.
           </Text>
 
           <Text style={text}>
-            Подробности о программе и дресс-коде пришлём ближе к дате. Если у вас есть вопросы -
-            просто ответьте на это письмо.
+            До встречи!
           </Text>
 
-          <Section style={{ textAlign: 'center' as const, margin: '24px 0 8px' }}>
-            <Button style={ctaButton} href="https://xn--80aaengbcp.xn--p1ai/upcoming">
-              Программа вечера
-            </Button>
-          </Section>
+          <Text style={signOff}>
+            С теплом, команда «{SITE_NAME}»
+          </Text>
         </Section>
 
         <Section style={footer}>
@@ -127,10 +123,7 @@ const detailLabel = {
   letterSpacing: '0.12em', margin: '8px 0 2px', lineHeight: '1.2',
 }
 const detailValue = { fontSize: '14px', color: DARK_BG, margin: '0 0 4px', lineHeight: '1.5' }
-const ctaButton = {
-  backgroundColor: PRIMARY_COLOR, color: '#ffffff', padding: '14px 32px', fontSize: '12px',
-  fontWeight: '600' as const, letterSpacing: '0.1em', textTransform: 'uppercase' as const,
-  textDecoration: 'none', display: 'inline-block', borderRadius: '2px',
-}
+const signOff = { fontSize: '14px', color: '#555', margin: '24px 0 0', lineHeight: '1.7', fontStyle: 'italic' as const }
 const footer = { backgroundColor: '#FAFAF8', padding: '20px 32px', textAlign: 'center' as const }
 const footerText = { fontSize: '11px', color: '#888', margin: '0', lineHeight: '1.6' }
+
