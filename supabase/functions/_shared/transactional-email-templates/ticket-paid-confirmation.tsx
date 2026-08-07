@@ -73,9 +73,6 @@ const TicketPaidConfirmationEmail = ({ name, ticketType, amount }: Props) => (
             Собранные средства направляются в фонд «Не напрасно» на помощь людям
             с онкологическими заболеваниями
           </Text>
-          <Text style={{ ...footerText, marginTop: '8px' }}>
-            С теплом, команда «{SITE_NAME}»
-          </Text>
         </Section>
       </Container>
     </Body>
@@ -124,6 +121,6 @@ const detailLabel = {
 }
 const detailValue = { fontSize: '14px', color: DARK_BG, margin: '0 0 4px', lineHeight: '1.5' }
 const signOff = { fontSize: '14px', color: '#555', margin: '24px 0 0', lineHeight: '1.7', fontStyle: 'italic' as const }
-const footer = { backgroundColor: '#FAFAF8', padding: '20px 32px', textAlign: 'center' as const }
-const footerText = { fontSize: '11px', color: '#888', margin: '0', lineHeight: '1.6' }
+const footer = { backgroundColor: DARK_BG, padding: '20px 32px', textAlign: 'center' as const }
+const footerText = { fontSize: '11px', color: 'rgba(245,245,240,0.45)', margin: '0', lineHeight: '1.6' }
 

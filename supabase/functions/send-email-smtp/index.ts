@@ -80,6 +80,13 @@ Deno.serve(async (req) => {
       subject: subject || 'Отражение добра',
       html,
       text: htmlToText(html),
+      // base64 keeps multi-byte Cyrillic intact (quoted-printable line wraps
+      // could split a UTF-8 sequence and produce "??" glyphs)
+      encoding: 'base64',
+      textEncoding: 'base64',
+      headers: {
+        'Content-Language': 'ru',
+      },
     })
 
     // Best-effort logging
