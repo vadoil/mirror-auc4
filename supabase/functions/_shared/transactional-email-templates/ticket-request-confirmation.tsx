@@ -75,15 +75,15 @@ function getContent(ticketType?: string) {
     }
   }
 
-  // Default: auction ticket registration
+  // Default: charity evening registration
   return {
-    preview: 'Ваша заявка на аукцион принята — Отражение добра',
+    preview: 'Ваша заявка принята - «Отражение добра»',
     heading: (name?: string) => name ? `${name}, спасибо за заявку!` : 'Спасибо за заявку!',
-    body: 'Мы получили вашу заявку на участие в благотворительном аукционе «Отражение добра». Наш организатор свяжется с вами для подтверждения участия.',
+    body: 'Мы получили вашу заявку на участие в благотворительном вечере «Отражение добра». Наш организатор свяжется с вами для подтверждения участия.',
     showEvent: true,
-    eventDate: '26 апреля 2026, суббота',
-    eventPlace: 'Баланс-холл «Место быть», Мясницкая 24/7с1',
-    subject: 'Заявка на аукцион принята — Отражение добра',
+    eventDate: '13 августа 2026, сбор гостей в 17:30',
+    eventPlace: 'Санкт-Петербург, центр «Зрение», пр. Добролюбова, 20к1',
+    subject: 'Заявка принята - «Отражение добра»',
   }
 }
 
@@ -99,7 +99,7 @@ const TicketRequestConfirmationEmail = ({ name, ticketType, promoCode }: TicketR
           {/* Header */}
           <Section style={headerBar}>
             <Text style={headerTitle}>ОТРАЖЕНИЕ ДОБРА</Text>
-            <Text style={headerSubtitle}>Благотворительный аукцион · 26 апреля 2026</Text>
+            <Text style={headerSubtitle}>Благотворительный вечер · 13 августа 2026 · Санкт-Петербург</Text>
           </Section>
 
           <Section style={content}>
@@ -109,13 +109,13 @@ const TicketRequestConfirmationEmail = ({ name, ticketType, promoCode }: TicketR
 
             <Section style={dataCard}>
               <Text style={label}>ТИП ЗАЯВКИ</Text>
-              <Text style={value}>{ticketType || 'Участник аукциона'}</Text>
+              <Text style={value}>{ticketType || 'Участник благотворительного вечера'}</Text>
 
               {promoCode && (
                 <>
                   <Hr style={divider} />
                   <Text style={label}>ПРОМОКОД</Text>
-                  <Text style={{ ...value, color: '#16a34a' }}>✓ {promoCode} — регистрация без оплаты</Text>
+                  <Text style={{ ...value, color: '#16a34a' }}>✓ {promoCode} - регистрация без оплаты</Text>
                 </>
               )}
             </Section>
@@ -130,7 +130,7 @@ const TicketRequestConfirmationEmail = ({ name, ticketType, promoCode }: TicketR
             )}
 
             <Section style={{ textAlign: 'center' as const, margin: '24px 0 8px' }}>
-              <Button style={ctaButton} href="https://mirror-auc4.lovable.app">
+              <Button style={ctaButton} href="https://xn--80apfhhr.xn--p1ai/upcoming">
                 Подробнее о мероприятии
               </Button>
             </Section>
@@ -138,10 +138,11 @@ const TicketRequestConfirmationEmail = ({ name, ticketType, promoCode }: TicketR
 
           <Section style={footer}>
             <Text style={footerText}>
-              Все деньги, вырученные с продаж билетов и аукциона, направляются в поддержку фонда «Не напрасно»
+              Собранные средства направляются в фонд «Не напрасно» на помощь людям
+              с онкологическими заболеваниями
             </Text>
             <Text style={{ ...footerText, marginTop: '8px' }}>
-              {SITE_NAME} · Благотворительный аукцион
+              С теплом, команда «{SITE_NAME}»
             </Text>
           </Section>
         </Container>
@@ -159,8 +160,8 @@ export const template = {
   displayName: 'Подтверждение заявки (клиенту)',
   previewData: {
     name: 'Мария',
-    ticketType: 'Участник аукциона',
-    promoCode: 'MIRROR2025',
+    ticketType: 'Участник благотворительного вечера',
+    promoCode: 'ДРУГ',
   },
 } satisfies TemplateEntry
 
