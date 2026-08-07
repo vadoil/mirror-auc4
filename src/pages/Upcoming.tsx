@@ -18,7 +18,7 @@ import artist3 from "@/assets/artist-3-abrosimov.jpg";
 import abrosimovWork1 from "@/assets/abrosimov-work-1.jpg";
 import abrosimovWork2 from "@/assets/abrosimov-work-2.jpg";
 import abrosimovWork3 from "@/assets/abrosimov-work-3.jpg";
-import ilyaNedolyaAsset from "@/assets/ilya-nedolya.jpg.asset.json";
+import ilyaNedolyaImg from "@/assets/ilya-nedolya.jpg";
 
 const artists = [
   {
@@ -408,7 +408,7 @@ const Upcoming = () => {
               <div className="grid sm:grid-cols-[220px_1fr] gap-0">
                 <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-[240px] overflow-hidden">
                   <img
-                    src={ilyaNedolyaAsset.url}
+                    src={ilyaNedolyaImg}
                     alt="Илья Недоля - модератор вечера"
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover object-top"
