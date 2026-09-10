@@ -57,7 +57,7 @@ cat /home/deploy/.ssh/github_actions
 
 ## Шаг 3. Запуск
 
-- Любой push в `main` (Lovable пушит автоматически) → деплой стартует.
+- Любой push в `main` → деплой стартует.
 - Можно запустить вручную: вкладка **Actions** → `Deploy to VPS` → **Run workflow**.
 
 Проверить статус: https://github.com/vadoil/mirror-auc4/actions
@@ -75,7 +75,7 @@ cat /home/deploy/.ssh/github_actions
 ## Что НЕ меняется этим деплоем
 
 - nginx-конфиги других сайтов на сервере;
-- база Supabase, Edge Functions, секреты;
+- self-hosted Supabase в `/opt/supabase` (база, Edge Functions, секреты);
 - SSL-сертификаты Let's Encrypt;
 - сам файл nginx-конфига `mirror-otrazis.conf` (его при необходимости
   правит `deploy/setup-vps.sh` вручную).

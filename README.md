@@ -1,73 +1,30 @@
-# Welcome to your Lovable project
+# Отражение добра — отразись.рф
 
-## Project info
+Благотворительный аукцион. Vite + React + TypeScript + shadcn/ui, бэкенд — self-hosted Supabase.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Инфраструктура
 
-## How can I edit this code?
+- Сервер `159.194.222.73`, nginx.
+- Фронт: `/var/www/mirror/dist`, домен `отразись.рф` (`xn--80aodvkjc9f.xn--p1ai`).
+- API: `api.отразись.рф` → локальный Supabase (`/opt/supabase`, docker compose): Postgres, Auth, REST, Storage, Edge Functions.
+- Подробности и рабочие команды — в `/var/www/mirror/CLAUDE.md` на сервере и в `deploy/`.
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Разработка
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Переменные окружения: `.env` (dev) и `deploy/.env.vps` (prod, копируется в `.env.production` при деплое).
+Анонимный ключ и URL указывают на self-hosted API.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Деплой
 
-**Use GitHub Codespaces**
+Push в `main` → GitHub Actions (`.github/workflows/deploy.yml`) собирает `dist/` и заливает его на сервер по rsync.
+См. `deploy/GITHUB-ACTIONS.md`.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Edge-функции
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Лежат в `supabase/functions/`, на сервере — `/opt/supabase/volumes/functions/`. Секреты — `volumes/functions/secrets.env`.
+Письма отправляются через `send-email-smtp` (SMTP Beget), Telegram — через `notify-telegram`.

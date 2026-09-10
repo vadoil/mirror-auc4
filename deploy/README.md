@@ -1,11 +1,11 @@
 # Деплой на VPS отразись.рф
 
 Сервер: `159.194.222.73`
-Домены: `отразись.рф` (фронт), `api.отразись.рф` (прокси к Supabase)
+Домены: `отразись.рф` (фронт), `api.отразись.рф` (прокси к self-hosted Supabase на `127.0.0.1:8000`)
 
 ## Архитектура
 
-Браузер пользователя → nginx на VPS → или статика React, или прокси на `mmuwfeiunaqjljnplpgh.supabase.co`. База данных, Auth, Storage и Edge Functions остаются на Supabase — переезжает только точка входа.
+Браузер пользователя → nginx на VPS → или статика React, или прокси на локальный Supabase (`/opt/supabase`, docker compose). База данных, Auth, Storage и Edge Functions работают на этом же сервере.
 
 ## Шаг 1. DNS
 
@@ -34,15 +34,15 @@ bash setup-vps.sh
 
 Скрипт ставит nginx, Node.js 20, certbot, клонирует репозиторий, собирает фронт, настраивает nginx и оформляет SSL.
 
-## Шаг 3. Обновление при новых изменениях в Lovable
+## Шаг 3. Обновление
 
-Lovable пушит в GitHub автоматически. На сервере:
+Push в `main` деплоится через GitHub Actions автоматически. Вручную на сервере:
 ```bash
 bash /var/www/mirror/deploy/update.sh
 ```
 
 ## Замечания
 
-- `.env.production` берётся из `deploy/.env.vps` — там `VITE_SUPABASE_URL` указывает на `api.отразись.рф`. Сборка в Lovable Published этот файл не использует — там работает обычный `.env` с прямым адресом supabase.co.
-- Webhook CloudPayments настроен на `https://api.отразись.рф/functions/v1/cloudpayments-webhook` (проксируется на Supabase). Прямой адрес supabase.co тоже работает как резерв.
-- В Supabase Dashboard → Authentication → URL Configuration добавить в **Redirect URLs**: `https://отразись.рф/*` и `https://api.отразись.рф/*`. Это нужно для подтверждения почты и сброса пароля.
+- `.env.production` берётся из `deploy/.env.vps` — там `VITE_SUPABASE_URL` и анонимный ключ указывают на self-hosted API `api.отразись.рф`.
+- Webhook CloudPayments настроен на `https://api.отразись.рф/functions/v1/cloudpayments-webhook` (локальный Supabase).
+- Redirect URLs для Auth задаются в `/opt/supabase/.env` (`ADDITIONAL_REDIRECT_URLS`), SMTP для писем Auth — там же (`SMTP_*`).

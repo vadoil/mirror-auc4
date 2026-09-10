@@ -30,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         # npm ci требует синхронности package.json и lock-файла.
-        # Lovable не всегда обновляет package-lock.json, поэтому используем npm install.
+        # package-lock.json может отставать от package.json, поэтому используем npm install.
         run: npm install --no-audit --no-fund
 
       - name: Prepare production env

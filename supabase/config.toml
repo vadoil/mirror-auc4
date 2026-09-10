@@ -1,4 +1,4 @@
-project_id = "mmuwfeiunaqjljnplpgh"
+project_id = "mirror-selfhosted"
 
 [functions.admin-bulk-provision]
 verify_jwt = false
