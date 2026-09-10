@@ -718,15 +718,10 @@ const Upcoming = () => {
                       height={1280}
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-[1.2s] ease-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-warm-black/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
-                      <p className="font-body text-[11px] uppercase tracking-[0.2em] text-cream/85 leading-snug">
-                        {photo.caption}
-                      </p>
-                      <span className="font-numbers text-xs text-cream/50 shrink-0">
-                        {String(i + 1).padStart(2, "0")}/{String(eveningGallery.length).padStart(2, "0")}
-                      </span>
-                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-warm-black/50 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+                    <span className="absolute bottom-4 right-5 font-numbers text-xs text-cream/60">
+                      {String(i + 1).padStart(2, "0")}/{String(eveningGallery.length).padStart(2, "0")}
+                    </span>
                   </motion.button>
                 ))}
               </div>
@@ -924,10 +919,7 @@ const Upcoming = () => {
                 height={1280}
                 className="w-full max-h-[78vh] object-contain bg-warm-black"
               />
-              <div className="flex items-center justify-between gap-4 px-5 py-4 border-t border-cream/10">
-                <p className="font-body text-[11px] uppercase tracking-[0.2em] text-cream/80 leading-snug">
-                  {eveningGallery[galleryIdx].caption}
-                </p>
+              <div className="flex items-center justify-end gap-4 px-5 py-4 border-t border-cream/10">
                 <div className="flex items-center gap-2 shrink-0">
                   <span className="font-numbers text-xs text-cream/50 mr-1">
                     {galleryIdx + 1}/{eveningGallery.length}
