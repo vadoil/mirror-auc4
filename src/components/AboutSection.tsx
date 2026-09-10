@@ -59,7 +59,7 @@ const AboutSection = () => {
                 </p>
                 <div className="flex flex-wrap md:flex-nowrap gap-4 mb-8">
                   <Link to="/upcoming" className="btn-outline inline-flex items-center justify-center flex-1 min-w-[140px] text-center">
-                    Ближайший аукцион
+                    Питер 2026
                   </Link>
                   <Link to="/lots" className="btn-outline inline-flex items-center justify-center flex-1 min-w-[140px] text-center">
                     Смотреть лоты
@@ -87,11 +87,11 @@ const AboutSection = () => {
               >
                 <Link to="/upcoming" className="block group">
                   <div className="aspect-[4/5] overflow-hidden relative">
-                    <img src={aboutVenue} alt="Санкт-Петербург - место ближайшего аукциона" loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out" width={1024} height={1280} />
+                    <img src={aboutVenue} alt="Санкт-Петербург - аукцион 2026" loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out" width={1024} height={1280} />
                     <div className="absolute inset-0 bg-warm-black/40" />
                     <div className="absolute inset-0 bg-gradient-to-t from-warm-black/85 via-warm-black/15 to-transparent" />
                     <div className="text-center p-8 relative z-10 flex flex-col items-center justify-end h-full pb-12">
-                      <p className="font-body text-cream/60 text-[10px] uppercase tracking-[0.35em] mb-4">Ближайший аукцион</p>
+                      <p className="font-body text-cream/60 text-[10px] uppercase tracking-[0.35em] mb-4">Питер 2026 · состоялся</p>
                       <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-2">Санкт-</p>
                       <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-5">Петербург</p>
                       <div className="w-12 h-px bg-primary mx-auto mb-4" />

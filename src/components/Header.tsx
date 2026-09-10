@@ -8,7 +8,7 @@ import logoOtrazhenie from "@/assets/logo-otrazhenie-final.png";
 import logoOtrazhenieLight from "@/assets/logo-otrazhenie-light.png";
 
 const navItems = [
-  { label: "Ближайший аукцион", href: "/upcoming" },
+  { label: "Питер 2026", href: "/upcoming" },
   { label: "Лоты", href: "/lots" },
   { label: "Форум", href: "/forum" },
   { label: "Галерея", href: "/gallery" },

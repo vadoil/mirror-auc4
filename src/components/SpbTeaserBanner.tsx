@@ -14,7 +14,7 @@ const SpbTeaserBanner = () => {
           <div className="absolute inset-0">
             <img
               src={spbHero}
-              alt="Санкт-Петербург - ближайший аукцион"
+              alt="Санкт-Петербург - аукцион 2026"
               loading="lazy"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
             />
@@ -30,7 +30,7 @@ const SpbTeaserBanner = () => {
                   transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                   className="text-[10px] uppercase tracking-[0.4em] text-primary font-body"
                 >
-                  Ближайший аукцион · скоро
+                  Питер 2026 · вечер состоялся
                 </motion.p>
               </div>
               <h3 className="font-display text-2xl md:text-4xl text-cream uppercase tracking-tight leading-[1.05] mb-4">
@@ -46,7 +46,7 @@ const SpbTeaserBanner = () => {
               </div>
             </div>
             <span className="inline-flex items-center gap-2 self-start md:self-auto shrink-0 bg-primary text-primary-foreground px-5 py-3 rounded text-xs uppercase tracking-[0.2em] group-hover:opacity-90 transition-opacity">
-              Программа вечера <ArrowRight className="w-4 h-4" />
+              Как это было <ArrowRight className="w-4 h-4" />
             </span>
           </div>
         </Link>
