@@ -16,15 +16,15 @@ const Footer = () => {
             />
             <div>
               <h3 className="font-display text-3xl md:text-4xl font-light text-cream mb-2">
-                увидимся <span className="italic text-primary">скоро</span>
+                добрые дела <span className="italic text-primary">остаются</span>
               </h3>
               <p className="font-body text-sm text-cream/40">
-                13 августа 2026 · Санкт-Петербург · Центр «Зрение»
+                Аукцион 13 августа 2026 · Санкт-Петербург · Центр «Зрение» · состоялся
               </p>
             </div>
           </div>
           <Link to="/upcoming#donation" className="btn-primary inline-flex flex-col items-center gap-0.5 text-center">
-            <span className="text-xs tracking-[0.25em] opacity-90">Регистрация на аукцион</span>
+            <span className="text-xs tracking-[0.25em] opacity-90">Поддержать фонд</span>
             <span className="text-[11px] tracking-[0.2em] font-normal opacity-80">Сделать пожертвование</span>
           </Link>
         </div>

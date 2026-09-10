@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Mic } from "lucide-react";
-import tsipkinPhoto from "@/assets/tsipkin.png";
+import tsipkinPhoto from "@/assets/tsipkin.webp";
 
 const AuctioneerSection = () => {
   const ref = useRef(null);

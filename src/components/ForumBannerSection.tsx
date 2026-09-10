@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, MapPin, Download, ArrowRight } from "lucide-react";
-import forumBanner from "@/assets/forum-women-banner.png";
+import forumBanner from "@/assets/forum-women-banner.webp";
 
 const ForumBannerSection = () => {
   const ref = useRef(null);

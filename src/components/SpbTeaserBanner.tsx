@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
-import spbHero from "@/assets/upcoming-spb-hero.jpg";
+import spbHero from "@/assets/upcoming-spb-hero.webp";
 
 const SpbTeaserBanner = () => {
   return (

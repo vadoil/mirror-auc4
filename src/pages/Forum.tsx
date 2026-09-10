@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import forumBanner from "@/assets/forum-women-banner.png";
+import forumBanner from "@/assets/forum-women-banner.webp";
 
 const themes = [
   { icon: Sparkles, title: "Велнес и красота", text: "Лучшие практики ухода за собой, здоровье, биохакинг." },

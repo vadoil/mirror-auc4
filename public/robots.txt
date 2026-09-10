@@ -36,5 +36,5 @@ Disallow: /auth
 Disallow: /reset-password
 Disallow: /unsubscribe
 
-Sitemap: https://xn--80aaa1bbb1h.xn--p1ai/sitemap.xml
-Host: xn--80aaa1bbb1h.xn--p1ai
+Sitemap: https://xn--80aodvkjc9f.xn--p1ai/sitemap.xml
+Host: xn--80aodvkjc9f.xn--p1ai

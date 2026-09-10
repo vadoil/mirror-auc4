@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Quote, Send } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import reviewNaumovPhoto from "@/assets/review-naumov-photo.jpg";
+import reviewNaumovPhoto from "@/assets/review-naumov-photo.webp";
 import reviewNaumovTg from "@/assets/review-naumov-tg.jpg";
 
 type Review = {

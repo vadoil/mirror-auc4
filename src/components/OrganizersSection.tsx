@@ -1,8 +1,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Heart, Users, Sparkles } from "lucide-react";
-import gizaPhoto from "@/assets/organizer-giza-clean.png";
-import sashaPhoto from "@/assets/organizer-sasha-clean.png";
+import gizaPhoto from "@/assets/organizer-giza-clean.webp";
+import sashaPhoto from "@/assets/organizer-sasha-clean.webp";
 
 const organizers = [
   {

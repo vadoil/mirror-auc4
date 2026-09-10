@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-import heroBanner from "@/assets/sponsors/lev-edinorog-banner.jpg";
+import heroBanner from "@/assets/sponsors/lev-edinorog-banner.webp";
 import logoMesto from "@/assets/sponsors/mesto-byt.svg";
 import logoOne from "@/assets/sponsors/one.svg";
 import logoPL from "@/assets/sponsors/pervaya-liniya.svg";

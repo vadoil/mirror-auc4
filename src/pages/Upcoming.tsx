@@ -1,23 +1,23 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, Ticket, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight, Info, ScanEye, PenTool, HandHeart, Radio } from "lucide-react";
+import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, HeartHandshake, ArrowRight, Sparkles, Check, Users, Heart, Target, Brush, Globe, ChevronLeft, ChevronRight, Info, ScanEye, PenTool, HandHeart, Radio } from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import spbHero from "@/assets/upcoming-spb-hero.jpg";
+import spbHero from "@/assets/upcoming-spb-hero.webp";
 import zrenieVenue from "@/assets/venue-zrenie-spb.jpg";
-import zrenie2 from "@/assets/venue-zrenie-2.jpg";
+import zrenie2 from "@/assets/venue-zrenie-2.webp";
 import zrenie3 from "@/assets/venue-zrenie-3.jpg";
 import zrenie4 from "@/assets/venue-zrenie-4.jpg";
-import artist1 from "@/assets/artist-1-sergienko.jpg";
-import artist2 from "@/assets/artist-2-bartenev.jpg";
-import artist3 from "@/assets/artist-3-abrosimov.jpg";
+import artist1 from "@/assets/artist-1-sergienko.webp";
+import artist2 from "@/assets/artist-2-bartenev.webp";
+import artist3 from "@/assets/artist-3-abrosimov.webp";
 import abrosimovWork1 from "@/assets/abrosimov-work-1.jpg";
-import abrosimovWork2 from "@/assets/abrosimov-work-2.jpg";
-import abrosimovWork3 from "@/assets/abrosimov-work-3.jpg";
+import abrosimovWork2 from "@/assets/abrosimov-work-2.webp";
+import abrosimovWork3 from "@/assets/abrosimov-work-3.webp";
 import ilyaNedolyaImg from "@/assets/ilya-nedolya.jpg";
 import evening1 from "@/assets/evening-1.jpg";
 import evening2 from "@/assets/evening-2.jpg";
@@ -110,7 +110,6 @@ const programItems = [
 ];
 
 const Upcoming = () => {
-  const [ticketOpen, setTicketOpen] = useState(false);
   const [artistInfo, setArtistInfo] = useState<(typeof artists)[number] | null>(null);
 
   const [galleryIdx, setGalleryIdx] = useState<number | null>(null);
@@ -206,22 +205,21 @@ const Upcoming = () => {
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-8 h-px bg-primary" />
                   <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white font-body drop-shadow-[0_1px_8px_rgba(0,0,0,0.6)]">
-                    13 августа 2026 · Санкт-Петербург
+                    13 августа 2026 · Санкт-Петербург · вечер состоялся
                   </p>
                 </div>
 
                 <h1 className="font-display text-3xl md:text-5xl lg:text-6xl text-white uppercase tracking-tight leading-[1.02] mb-6 drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
-                  Искусство видеть <span className="italic">главное</span>
+                  Аукцион завершён, <span className="italic">добрые дела остаются</span>
                 </h1>
 
                 <p className="font-body text-white/85 text-sm md:text-base max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] mb-4">
-                  Благотворительный вечер в поддержку фонда «Не напрасно».
+                  Благотворительный вечер в поддержку фонда «Не напрасно» прошёл в центре «Зрение». Спасибо всем, кто был с нами.
                 </p>
 
                 <p className="font-body text-white/90 text-base md:text-lg max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
-                  В мире, где мы привыкли смотреть на поверхность вещей, есть те, кто смотрит вглубь.
-                  Мы собираемся в центре современной офтальмологии «Зрение», чтобы вместе
-                  сфокусироваться на главном — на будущем без страха перед раком.
+                  Поддержать фонд можно и сейчас: любое пожертвование идёт на помощь людям
+                  с онкологическими заболеваниями, раннюю диагностику и обучение врачей.
                 </p>
 
                 {/* meta strip */}
@@ -246,17 +244,11 @@ const Upcoming = () => {
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <button
-                    onClick={() => setTicketOpen(true)}
-                    className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
-                  >
-                    <Ticket className="w-4 h-4" /> Сделать пожертвование · <span className="whitespace-nowrap">7 000 ₽</span>
-                  </button>
                   <a
                     href="#donation"
-                    className="border border-white/40 text-white px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:bg-white/10 transition-colors"
+                    className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
                   >
-                    <HeartHandshake className="w-4 h-4" /> Поддержать фонд
+                    <HeartHandshake className="w-4 h-4" /> Сделать пожертвование <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
               </motion.div>
@@ -729,69 +721,6 @@ const Upcoming = () => {
           </div>
         </section>
 
-        {/* Билеты */}
-        <section className="section-padding mb-16 md:mb-24">
-          <div className="max-w-7xl mx-auto">
-            <div className="border border-primary/30 rounded-lg overflow-hidden bg-primary/5">
-              <div className="grid lg:grid-cols-5 gap-0">
-                <div className="lg:col-span-3 p-8 md:p-12">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-6 h-px bg-primary" />
-                    <p className="text-[10px] uppercase tracking-[0.4em] text-primary font-body">
-                      Благотворительность вместо пригласительных
-                    </p>
-                  </div>
-                  <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95] mb-6">
-                    Ваш <span className="italic text-primary">вклад</span>
-                  </h2>
-                  <div className="space-y-4 font-body text-base text-muted-foreground leading-relaxed mb-8">
-                    <p>
-                      На портале «Отражения добра» нет случайных прохожих. Если текст откликается в вас -
-                      значит, вы уже часть нашего сообщества. Участие в вечере - это ваш вклад
-                      в просветительские проекты «Не напрасно».
-                    </p>
-                    <p className="text-foreground">
-                      Благотворительное пожертвование:{" "}
-                      <span className="font-numbers text-2xl text-primary whitespace-nowrap">7 000 ₽</span>.
-                      Количество мест ограничено. Каждый уйдет с события с картиной.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setTicketOpen(true)}
-                    className="bg-primary text-primary-foreground px-8 py-4 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
-                  >
-                    <Ticket className="w-4 h-4" /> Сделать пожертвование <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-
-                <div className="lg:col-span-2 bg-card/50 border-t lg:border-t-0 lg:border-l border-primary/20 p-8 md:p-10 flex flex-col justify-center">
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-5">
-                    Что ждем на событии
-                  </p>
-                  <ul className="space-y-4">
-                    {[
-                      { icon: MessageCircle, text: "Разговор с онкологом-химиотерапевтом" },
-                      { icon: Palette, text: "Акция «Искусство со смыслом» от трёх художников" },
-                      { icon: Eye, text: "Экспресс-диагностика зрения" },
-                      { icon: Utensils, text: "Гастрономические сеты и общение" },
-                      { icon: Users, text: "Ограниченный круг гостей" },
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <div className="w-9 h-9 rounded-full border border-primary/30 flex items-center justify-center shrink-0">
-                          <item.icon className="w-4 h-4 text-primary" />
-                        </div>
-                        <p className="font-body text-sm text-foreground leading-snug pt-2">
-                          {item.text}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Пожертвование */}
         <section id="donation" className="section-padding scroll-mt-24">
           <div className="max-w-7xl mx-auto">
@@ -808,9 +737,9 @@ const Upcoming = () => {
                     Помощь людям с <span className="italic text-primary">онкозаболеваниями</span>
                   </h2>
                   <p className="font-body text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-                    Если вы не сможете быть с нами лично, вы можете поддержать программы фонда
-                    «Не напрасно» любой суммой. Собранные средства направляются на помощь людям
-                    с онкологическими заболеваниями.
+                    Аукцион завершён, но добрые дела остаются. Поддержать программы фонда
+                    «Не напрасно» можно любой суммой: собранные средства направляются на помощь
+                    людям с онкологическими заболеваниями.
                   </p>
 
                   <div className="flex flex-wrap gap-3 mb-4">
@@ -889,14 +818,6 @@ const Upcoming = () => {
       </main>
 
       <Footer />
-
-      <TicketRequestModal
-        isOpen={ticketOpen}
-        onClose={() => setTicketOpen(false)}
-        ticketType="Билет · Санкт-Петербург, 13 августа 2026"
-        ticketPrice="7 000 ₽"
-        showTrainingCheckbox={false}
-      />
 
       <TicketRequestModal
         isOpen={donateOpen}

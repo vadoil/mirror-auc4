@@ -5,17 +5,17 @@ import lotHockey from "@/assets/lot-hockey-belov.jpg";
 import lotBallet from "@/assets/lot-ballet-lopatkina.jpg";
 import lotEmelianenko from "@/assets/lot-emelianenko.jpg";
 import lotSmartlife from "@/assets/lot-smartlife.jpg";
-import lotBurunov from "@/assets/lot-burunov-tea.jpg";
-import lotShnurov from "@/assets/lot-shnurov.jpg";
+import lotBurunov from "@/assets/lot-burunov-tea.webp";
+import lotShnurov from "@/assets/lot-shnurov.webp";
 import lotListovets from "@/assets/lot-listovets.jpg";
 import lotTsypkin from "@/assets/lot-tsypkin.jpg";
 import lotHakamada from "@/assets/lot-hakamada.jpg";
 import lotVase from "@/assets/lot-vase.jpg";
-import lotBookSitnikov from "@/assets/lot-book-sitnikov.jpg";
-import lotKarmalogicBook from "@/assets/lot-karmalogic-book.jpg";
+import lotBookSitnikov from "@/assets/lot-book-sitnikov.webp";
+import lotKarmalogicBook from "@/assets/lot-karmalogic-book.webp";
 import lotSoloviy from "@/assets/lot-soloviy.jpg";
-import lotLevEdinorog from "@/assets/lot-lev-edinorog.jpg";
-import lotLevEdinorogDetail from "@/assets/lot-lev-edinorog-detail.jpg";
+import lotLevEdinorog from "@/assets/lot-lev-edinorog.webp";
+import lotLevEdinorogDetail from "@/assets/lot-lev-edinorog-detail.webp";
 
 import { supabase } from "@/integrations/supabase/client";
 

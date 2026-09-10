@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { MapPin, Calendar, ArrowRight, Sparkles, HeartHandshake, MapPinned, Wand2, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import sashaPhoto from "@/assets/organizer-sasha-clean.png";
-import gizaPhoto from "@/assets/organizer-giza-clean.png";
+import sashaPhoto from "@/assets/organizer-sasha-clean.webp";
+import gizaPhoto from "@/assets/organizer-giza-clean.webp";
 
 type City = "spb" | "moscow";
 

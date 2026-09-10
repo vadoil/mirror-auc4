@@ -5,10 +5,10 @@ import { ArrowLeft, Mic, User } from "lucide-react";
 import Header from "@/components/Header";
 import DressCodeSection from "@/components/DressCodeSection";
 import Footer from "@/components/Footer";
-import stupinPhoto from "@/assets/speaker-stupin.jpg";
-import pavlovPhoto from "@/assets/speaker-pavlov.png";
-import gunderinaPhoto from "@/assets/speaker-gunderina.png";
-import evnichPhoto from "@/assets/speaker-evnich.png";
+import stupinPhoto from "@/assets/speaker-stupin.webp";
+import pavlovPhoto from "@/assets/speaker-pavlov.webp";
+import gunderinaPhoto from "@/assets/speaker-gunderina.webp";
+import evnichPhoto from "@/assets/speaker-evnich.webp";
 
 const program = [
   { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
