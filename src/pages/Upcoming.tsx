@@ -19,6 +19,21 @@ import abrosimovWork1 from "@/assets/abrosimov-work-1.jpg";
 import abrosimovWork2 from "@/assets/abrosimov-work-2.jpg";
 import abrosimovWork3 from "@/assets/abrosimov-work-3.jpg";
 import ilyaNedolyaImg from "@/assets/ilya-nedolya.jpg";
+import evening1 from "@/assets/evening-1.jpg";
+import evening2 from "@/assets/evening-2.jpg";
+import evening3 from "@/assets/evening-3.jpg";
+import evening4 from "@/assets/evening-4.jpg";
+import evening5 from "@/assets/evening-5.jpg";
+import evening6 from "@/assets/evening-6.jpg";
+
+const eveningGallery = [
+  { src: evening1, caption: "Гости вечера у неоновой надписи «Отражение добра»" },
+  { src: evening2, caption: "Зал перед началом: таблички участников и светящиеся работы" },
+  { src: evening3, caption: "Табличка № 5 готова к торгам" },
+  { src: evening4, caption: "Лекция «Скрининг рака: что правда имеет смысл»" },
+  { src: evening5, caption: "Разговор с врачом: о здоровье без лишнего" },
+  { src: evening6, caption: "Работы художников выходят на торги" },
+];
 
 const artists = [
   {
@@ -97,6 +112,10 @@ const programItems = [
 const Upcoming = () => {
   const [ticketOpen, setTicketOpen] = useState(false);
   const [artistInfo, setArtistInfo] = useState<(typeof artists)[number] | null>(null);
+
+  const [galleryIdx, setGalleryIdx] = useState<number | null>(null);
+  const galleryStep = (d: 1 | -1) =>
+    setGalleryIdx((i) => (i === null ? null : (i + d + eveningGallery.length) % eveningGallery.length));
 
   const [donateOpen, setDonateOpen] = useState(false);
   const [donateAmount, setDonateAmount] = useState<number>(3000);
@@ -645,6 +664,76 @@ const Upcoming = () => {
           </div>
         </section>
 
+        {/* Как это было — галерея вечера */}
+        <section className="bg-warm-black text-cream py-16 md:py-24 mb-16 md:mb-24 overflow-hidden">
+          <div className="section-padding">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.7 }}
+                className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-end mb-12 md:mb-16"
+              >
+                <div className="lg:col-span-7">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-6 h-px bg-primary" />
+                    <p className="text-[10px] uppercase tracking-[0.4em] text-cream/60 font-body">
+                      04 - Галерея вечера
+                    </p>
+                  </div>
+                  <h2 className="font-display text-4xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-[0.9]">
+                    Как это <span className="italic text-primary">было</span>
+                  </h2>
+                </div>
+                <div className="lg:col-span-5 lg:pb-2">
+                  <p className="font-body text-sm md:text-base text-cream/70 leading-relaxed">
+                    13 августа в центре «Зрение» на Добролюбова: разговор с врачом о скрининге,
+                    работы трёх художников на мольбертах, таблички в руках гостей и торги,
+                    каждый шаг которых - вклад в фонд «Не напрасно».
+                  </p>
+                </div>
+              </motion.div>
+
+              <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:items-start md:overflow-visible md:pb-0 md:mx-0 md:px-0">
+                {eveningGallery.map((photo, i) => (
+                  <motion.button
+                    key={i}
+                    type="button"
+                    onClick={() => setGalleryIdx(i)}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.6, delay: (i % 3) * 0.12 }}
+                    aria-label={`Открыть фото: ${photo.caption}`}
+                    className={`group relative snap-start shrink-0 w-[72%] sm:w-[48%] md:w-auto aspect-[3/4] overflow-hidden rounded-lg bg-warm-black/60 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                      i % 3 === 1 ? "md:mt-12" : ""
+                    }`}
+                  >
+                    <img
+                      src={photo.src}
+                      alt={photo.caption}
+                      loading="lazy"
+                      width={720}
+                      height={1280}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-[1.2s] ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-warm-black/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
+                      <p className="font-body text-[11px] uppercase tracking-[0.2em] text-cream/85 leading-snug">
+                        {photo.caption}
+                      </p>
+                      <span className="font-numbers text-xs text-cream/50 shrink-0">
+                        {String(i + 1).padStart(2, "0")}/{String(eveningGallery.length).padStart(2, "0")}
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Билеты */}
         <section className="section-padding mb-16 md:mb-24">
           <div className="max-w-7xl mx-auto">
@@ -821,6 +910,50 @@ const Upcoming = () => {
         ticketPrice={`${donateAmount.toLocaleString("ru-RU")} ₽`}
         showTrainingCheckbox={false}
       />
+
+      <Dialog open={galleryIdx !== null} onOpenChange={(o) => !o && setGalleryIdx(null)}>
+        <DialogContent className="max-w-[min(92vw,560px)] p-0 bg-warm-black border-cream/10 overflow-hidden [&>button]:text-cream">
+          {galleryIdx !== null && (
+            <div className="relative">
+              <DialogTitle className="sr-only">{eveningGallery[galleryIdx].caption}</DialogTitle>
+              <DialogDescription className="sr-only">Фото с вечера аукциона, {galleryIdx + 1} из {eveningGallery.length}</DialogDescription>
+              <img
+                src={eveningGallery[galleryIdx].src}
+                alt={eveningGallery[galleryIdx].caption}
+                width={720}
+                height={1280}
+                className="w-full max-h-[78vh] object-contain bg-warm-black"
+              />
+              <div className="flex items-center justify-between gap-4 px-5 py-4 border-t border-cream/10">
+                <p className="font-body text-[11px] uppercase tracking-[0.2em] text-cream/80 leading-snug">
+                  {eveningGallery[galleryIdx].caption}
+                </p>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="font-numbers text-xs text-cream/50 mr-1">
+                    {galleryIdx + 1}/{eveningGallery.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => galleryStep(-1)}
+                    aria-label="Предыдущее фото"
+                    className="w-9 h-9 rounded-full border border-cream/20 text-cream hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => galleryStep(1)}
+                    aria-label="Следующее фото"
+                    className="w-9 h-9 rounded-full border border-cream/20 text-cream hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={!!artistInfo} onOpenChange={(o) => !o && setArtistInfo(null)}>
         <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto">
