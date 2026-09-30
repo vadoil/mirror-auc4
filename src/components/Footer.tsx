@@ -75,6 +75,13 @@ const Footer = () => {
             </div>
           </div>
 
+          <div className="pb-8 flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em]">Стратегические партнёры</p>
+            <a href="/docs/aktkom-portfolio-2026.pdf" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-primary/60 hover:text-primary transition-colors">
+              АктКом — портфолио
+            </a>
+          </div>
+
           <div className="pt-8 border-t border-cream/10 space-y-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="font-body text-xs text-cream/30">
