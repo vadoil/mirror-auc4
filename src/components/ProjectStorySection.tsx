@@ -174,9 +174,6 @@ const ProjectStorySection = () => {
                   </motion.span>
                 </p>
               </div>
-              <span className="pointer-events-none absolute -top-2 -right-2 text-[9px] uppercase tracking-[0.2em] bg-primary text-primary-foreground px-2 py-0.5 rounded-full font-body">
-                скоро
-              </span>
             </button>
 
             <button
@@ -279,7 +276,7 @@ const ProjectStorySection = () => {
                 {/* CTA to Upcoming page */}
                 <div className="flex flex-wrap gap-3 mt-2 mb-8">
                   <Link
-                    to="/upcoming"
+                    to="/archive/spb"
                     className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
                   >
                     Подробнее о вечере в Петербурге <ArrowRight className="w-3.5 h-3.5" />

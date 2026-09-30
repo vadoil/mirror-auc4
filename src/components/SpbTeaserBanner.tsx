@@ -8,7 +8,7 @@ const SpbTeaserBanner = () => {
     <section className="section-padding py-10 md:py-14 bg-warm-black">
       <div className="max-w-7xl mx-auto">
         <Link
-          to="/upcoming"
+          to="/archive/spb"
           className="group relative block overflow-hidden rounded-lg border border-cream/10 hover:border-primary/40 transition-colors"
         >
           <div className="absolute inset-0">

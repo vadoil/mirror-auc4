@@ -8,7 +8,8 @@ import logoOtrazhenie from "@/assets/logo-otrazhenie-final.png";
 import logoOtrazhenieLight from "@/assets/logo-otrazhenie-light.png";
 
 const navItems = [
-  { label: "Питер 2026", href: "/upcoming" },
+  { label: "Велнес-девичник", href: "/wellness" },
+  { label: "Архив", href: "/archive" },
   { label: "Лоты", href: "/lots" },
   { label: "Форум", href: "/forum" },
   { label: "Галерея", href: "/gallery" },
@@ -96,7 +97,7 @@ const Header = () => {
               О проекте
             </Link>
             {navItems.map((item) => {
-              const highlight = item.href === "/upcoming";
+              const highlight = item.href === "/wellness";
               return (
                 <Link
                   key={item.href}
@@ -156,7 +157,7 @@ const Header = () => {
                   О проекте
                 </Link>
                 {navItems.map((item) => (
-                  <Link key={item.href} to={item.href} onClick={(e) => { handleAnchorClick(e, item.href); setMenuOpen(false); }} className={`text-sm uppercase tracking-[0.2em] font-body ${item.href === "/upcoming" ? "text-primary font-semibold" : "text-foreground/80 font-light"}`}>
+                  <Link key={item.href} to={item.href} onClick={(e) => { handleAnchorClick(e, item.href); setMenuOpen(false); }} className={`text-sm uppercase tracking-[0.2em] font-body ${item.href === "/wellness" ? "text-primary font-semibold" : "text-foreground/80 font-light"}`}>
                     {item.label}
                   </Link>
                 ))}

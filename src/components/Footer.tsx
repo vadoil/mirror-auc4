@@ -23,7 +23,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <Link to="/upcoming#donation" className="btn-primary inline-flex flex-col items-center gap-0.5 text-center">
+          <Link to="/archive/spb#donation" className="btn-primary inline-flex flex-col items-center gap-0.5 text-center">
             <span className="text-xs tracking-[0.25em] opacity-90">Поддержать фонд</span>
             <span className="text-[11px] tracking-[0.2em] font-normal opacity-80">Сделать пожертвование</span>
           </Link>

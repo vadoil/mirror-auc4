@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import ScrollToTop from "./components/ScrollToTop";
 import UtmTracker from "./components/UtmTracker";
@@ -25,6 +25,9 @@ const Gallery = lazy(() => import("./pages/Gallery"));
 const Partners = lazy(() => import("./pages/Partners"));
 const Forum = lazy(() => import("./pages/Forum"));
 const Upcoming = lazy(() => import("./pages/Upcoming"));
+const Archive = lazy(() => import("./pages/Archive"));
+const ArchiveMoscow = lazy(() => import("./pages/ArchiveMoscow"));
+const Wellness = lazy(() => import("./pages/Wellness"));
 
 const queryClient = new QueryClient();
 
@@ -55,7 +58,11 @@ const App = () => (
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/forum" element={<Forum />} />
-            <Route path="/upcoming" element={<Upcoming />} />
+            <Route path="/wellness" element={<Wellness />} />
+            <Route path="/archive" element={<Archive />} />
+            <Route path="/archive/spb" element={<Upcoming />} />
+            <Route path="/archive/moscow" element={<ArchiveMoscow />} />
+            <Route path="/upcoming" element={<Navigate to="/archive/spb" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           </Suspense>
