@@ -8,6 +8,8 @@ import TicketRequestModal from "@/components/TicketRequestModal";
 import heroImg from "@/assets/wellness/wellness-hero.webp";
 import lectureImg from "@/assets/wellness/wellness-lecture.webp";
 import hallImg from "@/assets/wellness/wellness-hall.webp";
+import sashaPhoto from "@/assets/organizer-sasha-clean.webp";
+import gizaPhoto from "@/assets/organizer-giza-clean.webp";
 
 const venueFeatures = ["Лекторий", "Тренировки", "Зона бьюти-шоппинга", "Фудспот", "Кофе и протеиновые шейки"];
 
@@ -28,6 +30,50 @@ const program = [
   { tag: "Наедине с врачом", title: "Консультация маммолога", text: "Бесплатная личная консультация — спокойно, приватно, для каждой гостьи." },
 ];
 
+// Тонкие линейные иллюстрации к пунктам программы
+const LineArt = ({ children }: { children: React.ReactNode }) => (
+  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+    {children}
+  </svg>
+);
+
+const programArt = [
+  // микрофон
+  <LineArt key="mic">
+    <rect x="25" y="8" width="14" height="26" rx="7" />
+    <path d="M30 16h4M30 21h4M30 26h4" />
+    <path d="M18 28a14 14 0 0 0 28 0" />
+    <path d="M32 42v12M24 54h16" />
+    <path d="M50 12v6M47 15h6M12 38v4M10 40h4" />
+  </LineArt>,
+  // лотос
+  <LineArt key="lotus">
+    <path d="M32 14c6 7 7 19 0 30c-7-11-6-23 0-30z" />
+    <path d="M32 44c-9-1-17-9-18-20c9 1 15 8 18 20z" />
+    <path d="M32 44c9-1 17-9 18-20c-9 1-15 8-18 20z" />
+    <path d="M14 50c8 4 28 4 36 0" />
+  </LineArt>,
+  // зеркальце и искры
+  <LineArt key="mirror">
+    <ellipse cx="27" cy="25" rx="13" ry="15" />
+    <ellipse cx="27" cy="25" rx="9" ry="11" opacity={0.5} />
+    <path d="M27 40v14M23 54h8" />
+    <path d="M49 10v8M45 14h8M52 30v6M49 33h6" />
+  </LineArt>,
+  // розовая лента
+  <LineArt key="ribbon">
+    <path d="M19 55L35 27C41 17 39 8 32 8S23 17 29 27l16 28" />
+    <path d="M19 55l5-1 1 4M45 55l-5-1-1 4" />
+  </LineArt>,
+  // стетоскоп
+  <LineArt key="stethoscope">
+    <path d="M18 10v14a10 10 0 0 0 20 0V10" />
+    <path d="M15 10h6M35 10h6" />
+    <path d="M28 34v6a11 11 0 0 0 22 0v-6" />
+    <circle cx="50" cy="30" r="4" />
+  </LineArt>,
+];
+
 const zones = [
   { icon: Sparkles, title: "Бьюти-девайсы и уход", text: "Домашние гаджеты: LED, микротоки, гуаша, лимфодренаж" },
   { icon: ScanFace, title: "Диагностика кожи, волос и тела", text: "Анализаторы, трихоскопия, состав тела, биовозраст" },
@@ -43,6 +89,7 @@ const organizers = [
   {
     name: "Александра Павлова",
     text: "Автор книги по поддержке женщин с раком щитовидной железы. Продюсер медицинских конференций. Предприниматель и попечитель фонда «Не напрасно».",
+    photo: sashaPhoto,
     handle: "alexa_ah_alexa",
     phone: "+79623646646",
     phoneLabel: "8 (962) 364-66-46",
@@ -50,7 +97,8 @@ const organizers = [
   {
     name: "Гизела Тольц",
     text: "Организатор медицинских, коммерческих, корпоративных и частных мероприятий. 10 лет работы с лучшими врачами и экспертами России и Европы. Победитель в номинации «Лучшее международное медицинское мероприятие года».",
-    handle: "jiselle_tolts",
+    photo: gizaPhoto,
+    handle: "Jiselle_Tolts",
     phone: "+79858095370",
     phoneLabel: "8 (985) 809-53-70",
   },
@@ -230,15 +278,45 @@ const Wellness = () => {
                 key={p.title}
                 {...fadeUp}
                 transition={{ duration: 0.5, delay: 0.06 * i }}
-                className="border border-cream/10 rounded-lg p-6 hover:border-primary/40 transition-colors"
+                className="group relative border border-cream/10 rounded-lg p-6 md:p-8 hover:border-primary/40 hover:bg-cream/[0.03] transition-colors"
               >
-                <p className="font-body text-[10px] uppercase tracking-[0.2em] text-primary mb-4">
-                  {num(i)} · {p.tag}
-                </p>
+                <div className="flex items-start justify-between gap-4 mb-6">
+                  <p className="font-body text-[10px] uppercase tracking-[0.2em] text-primary pt-1">
+                    {num(i)} · {p.tag}
+                  </p>
+                  <div className="w-14 h-14 shrink-0 text-primary/80 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                    {programArt[i]}
+                  </div>
+                </div>
                 <h3 className="font-display text-2xl text-cream leading-tight mb-3">{p.title}</h3>
                 <p className="font-body text-sm text-cream/60 leading-relaxed">{p.text}</p>
               </motion.div>
             ))}
+            <motion.a
+              href="/docs/wellness-devichnik.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              {...fadeUp}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="group relative flex flex-col bg-primary/15 border border-primary/40 rounded-lg p-6 md:p-8 hover:bg-primary/25 hover:border-primary transition-colors"
+            >
+              <div className="flex items-start justify-between gap-4 mb-6">
+                <p className="font-body text-[10px] uppercase tracking-[0.2em] text-primary pt-1">06 · PDF · 7 страниц</p>
+                <div className="w-14 h-14 shrink-0 text-primary transition-transform duration-500 group-hover:translate-y-1">
+                  <LineArt>
+                    <path d="M16 8h22l10 10v38H16z" />
+                    <path d="M38 8v10h10" />
+                    <path d="M32 26v18M25 37l7 7 7-7" />
+                    <path d="M24 50h16" />
+                  </LineArt>
+                </div>
+              </div>
+              <h3 className="font-display text-2xl text-cream leading-tight mb-3">Скачать презентацию</h3>
+              <p className="font-body text-sm text-cream/60 leading-relaxed mb-6">Вся программа, пространство и зоны девичника — в одном файле.</p>
+              <span className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary font-body">
+                <Download className="w-3.5 h-3.5" /> Скачать
+              </span>
+            </motion.a>
           </div>
         </div>
       </section>
@@ -287,12 +365,17 @@ const Wellness = () => {
           </motion.div>
           <div className="grid md:grid-cols-2 gap-6 mb-12">
             {organizers.map((o) => (
-              <motion.div key={o.name} {...fadeUp} className="bg-background border border-border rounded-lg p-6 md:p-8">
+              <motion.div key={o.name} {...fadeUp} className="bg-background border border-border rounded-lg overflow-hidden grid sm:grid-cols-[0.8fr_1.2fr]">
+                <div className="aspect-square sm:aspect-auto overflow-hidden bg-muted/20">
+                  <img src={o.photo} alt={o.name} loading="lazy" className="w-full h-full object-cover object-top" />
+                </div>
+                <div className="p-6 md:p-8 flex flex-col">
                 <h3 className="font-display text-2xl text-foreground mb-3">{o.name}</h3>
-                <p className="font-body text-sm text-muted-foreground leading-relaxed mb-6">{o.text}</p>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed mb-6 flex-1">{o.text}</p>
                 <div className="flex flex-wrap gap-x-6 gap-y-2 font-body text-sm">
-                  <span className="text-primary">@{o.handle}</span>
+                  <a href={`https://t.me/${o.handle}`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@{o.handle}</a>
                   <a href={`tel:${o.phone}`} className="text-foreground hover:text-primary transition-colors">{o.phoneLabel}</a>
+                </div>
                 </div>
               </motion.div>
             ))}
