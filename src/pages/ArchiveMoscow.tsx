@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, MapPin, Mic } from "lucide-react";
+import { ArrowRight, Calendar, MapPin, Mic, Quote } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuctionResultsSection from "@/components/AuctionResultsSection";
-import AuctionReviewsSection from "@/components/AuctionReviewsSection";
 import heroPhoto from "@/assets/gallery/event/event-01.webp";
+import reviewPhoto from "@/assets/review-naumov-photo.webp";
 import event02 from "@/assets/gallery/event/event-02.webp";
 import event09 from "@/assets/gallery/event/event-09.webp";
 import event10 from "@/assets/gallery/event/event-10.webp";
@@ -62,7 +62,10 @@ const ArchiveMoscow = () => {
 
       {/* Hero */}
       <section className="relative min-h-[70svh] md:min-h-[85svh] flex items-end overflow-hidden">
-        <img src={heroPhoto} alt="Александр Цыпкин и гости аукциона «Отражение добра»" className="absolute inset-0 w-full h-full object-cover" />
+        <picture>
+          <source media="(min-width: 768px)" srcSet={event10} />
+          <img src={heroPhoto} alt="Александр Цыпкин и гости аукциона «Отражение добра»" className="absolute inset-0 w-full h-full object-cover md:object-[center_35%]" />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-t from-warm-black/90 via-warm-black/40 to-warm-black/10" />
         <div className="relative z-10 section-padding pb-16 md:pb-24 pt-28 w-full">
           <motion.div
@@ -218,8 +221,33 @@ const ArchiveMoscow = () => {
         </motion.div>
       </section>
 
-      {/* Отзывы */}
-      <AuctionReviewsSection />
+      {/* Отзыв */}
+      <section className="bg-card/50 py-20 md:py-28 section-padding">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16 items-center">
+          <motion.div {...fadeUp} className="aspect-[4/5] overflow-hidden rounded-sm max-w-sm md:max-w-none mx-auto w-full">
+            <img src={reviewPhoto} alt="Олег Наумов, гость аукциона" loading="lazy" className="w-full h-full object-cover" />
+          </motion.div>
+          <motion.div {...fadeUp}>
+            <SectionLabel>Отзывы гостей</SectionLabel>
+            <Quote className="w-8 h-8 text-primary/40 mb-4" />
+            <p className="font-display text-xl md:text-2xl text-foreground leading-snug mb-6">
+              Интересные люди, хорошая организация, яркие ведущие — Александр Цыпкин и Юрий Омельченко
+              создали весёлую и непринуждённую камерную атмосферу тёплого вечера.
+            </p>
+            <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
+              Неординарные лоты дали возможность не только быть вкладом в полезное и нужное дело —
+              поддержку подготовки специалистов в сфере онкологии, но и прикоснуться к роскоши
+              материального мира, попробовать прогрессивные технологии здорового образа жизни
+              и встретиться с неординарными личностями. С большим удовольствием и пользой провёл вечер.
+              Организаторам — большая благодарность!
+            </p>
+            <p className="font-display text-sm uppercase tracking-[0.15em] text-foreground mb-8">Олег Наумов</p>
+            <Link to="/lots#reviews" className="btn-outline inline-flex items-center gap-2 text-sm">
+              Оставить свой отзыв <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
 
       <Footer />
     </div>

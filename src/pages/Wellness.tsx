@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, Download, MapPin, Ribbon } from "lucide-react";
+import { ArrowRight, Calendar, CupSoda, Download, HeartPulse, MapPin, Pill, Ribbon, ScanFace, Sparkles, Users, Wind } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
@@ -29,14 +29,14 @@ const program = [
 ];
 
 const zones = [
-  { title: "Бьюти-девайсы и уход", text: "Домашние гаджеты: LED, микротоки, гуаша, лимфодренаж" },
-  { title: "Диагностика кожи, волос и тела", text: "Анализаторы, трихоскопия, состав тела, биовозраст" },
-  { title: "Лонгевити- и превентивные клиники", text: "Чек-апы и персональные рекомендации" },
-  { title: "Нутрицевтика и функциональные продукты", text: "Добавки, адаптогены, коллаген — бережно и без хайпа" },
-  { title: "Функциональные напитки и еда", text: "Матча, комбуча, коллаген-шоты, healthy-бар" },
-  { title: "Практики и восстановление", text: "Дыхание, саунд, велбинг, рекавери-зона" },
-  { title: "Женское здоровье и профилактика", text: "Маммология и профильный фонд — смысловой партнёр" },
-  { title: "Медиа и комьюнити", text: "Женские медиа и wellness-сообщества" },
+  { icon: Sparkles, title: "Бьюти-девайсы и уход", text: "Домашние гаджеты: LED, микротоки, гуаша, лимфодренаж" },
+  { icon: ScanFace, title: "Диагностика кожи, волос и тела", text: "Анализаторы, трихоскопия, состав тела, биовозраст" },
+  { icon: HeartPulse, title: "Лонгевити- и превентивные клиники", text: "Чек-апы и персональные рекомендации" },
+  { icon: Pill, title: "Нутрицевтика и функциональные продукты", text: "Добавки, адаптогены, коллаген — бережно и без хайпа" },
+  { icon: CupSoda, title: "Функциональные напитки и еда", text: "Матча, комбуча, коллаген-шоты, healthy-бар" },
+  { icon: Wind, title: "Практики и восстановление", text: "Дыхание, саунд, велбинг, рекавери-зона" },
+  { icon: Ribbon, title: "Женское здоровье и профилактика", text: "Маммология и профильный фонд — смысловой партнёр" },
+  { icon: Users, title: "Медиа и комьюнити", text: "Женские медиа и wellness-сообщества" },
 ];
 
 const organizers = [
@@ -252,12 +252,26 @@ const Wellness = () => {
               Восемь направлений <span className="italic text-primary">заботы.</span>
             </h2>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {zones.map((z, i) => (
-              <motion.div key={z.title} {...fadeUp} transition={{ duration: 0.5, delay: 0.05 * (i % 4) }} className="border-t border-primary/40 pt-4">
-                <p className="font-numbers text-sm text-primary mb-3">{num(i)}</p>
-                <h3 className="font-display text-lg uppercase tracking-tight text-foreground leading-tight mb-2">{z.title}</h3>
-                <p className="font-body text-sm text-muted-foreground leading-relaxed">{z.text}</p>
+              <motion.div
+                key={z.title}
+                {...fadeUp}
+                transition={{ duration: 0.5, delay: 0.06 * (i % 4) }}
+                className={`group relative overflow-hidden rounded-lg border p-6 flex flex-col sm:aspect-square transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:border-primary/50 ${
+                  (i + Math.floor(i / 4)) % 2 === 0 ? "bg-primary/[0.06] border-primary/20" : "bg-card border-border"
+                }`}
+              >
+                <span className="pointer-events-none absolute -right-2 -top-4 font-display text-[7rem] leading-none text-primary/[0.07] select-none transition-colors duration-500 group-hover:text-primary/[0.14]">
+                  {num(i)}
+                </span>
+                <div className="relative w-12 h-12 rounded-full bg-background border border-primary/20 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-primary group-hover:border-primary">
+                  <z.icon className="w-5 h-5 text-primary transition-colors duration-500 group-hover:text-primary-foreground" />
+                </div>
+                <div className="relative mt-auto">
+                  <h3 className="font-display text-lg md:text-xl uppercase tracking-tight text-foreground leading-tight mb-2">{z.title}</h3>
+                  <p className="font-body text-sm text-muted-foreground leading-relaxed">{z.text}</p>
+                </div>
               </motion.div>
             ))}
           </div>
