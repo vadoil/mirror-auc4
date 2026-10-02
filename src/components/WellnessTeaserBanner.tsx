@@ -21,7 +21,7 @@ const WellnessTeaserBanner = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-warm-black/90 via-warm-black/60 to-warm-black/30" />
           </div>
 
-          <div className="relative z-10 p-8 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="relative z-10 p-8 md:p-12 min-h-[440px] md:min-h-[520px] flex flex-col justify-end md:flex-row md:items-end md:justify-between gap-6">
             <div className="max-w-2xl">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-6 h-px bg-primary" />
@@ -33,7 +33,7 @@ const WellnessTeaserBanner = () => {
                   Москва · 25 октября · вход свободный
                 </motion.p>
               </div>
-              <h3 className="font-display text-2xl md:text-4xl text-cream uppercase tracking-tight leading-[1.05] mb-4">
+              <h3 className="font-display text-3xl md:text-6xl text-cream uppercase tracking-tight leading-[1.05] mb-4">
                 Велнес-девичник: <span className="italic text-primary">новая роскошь — забота о себе</span>
               </h3>
               <div className="flex flex-wrap gap-x-6 gap-y-2 font-body text-sm text-cream/80">
