@@ -81,7 +81,7 @@ const Gallery = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
-                className="group block w-full aspect-[3/4] overflow-hidden rounded-sm bg-muted/20 focus:outline-none focus:ring-2 focus:ring-primary"
+                className="group block w-full aspect-[3/4] overflow-hidden rounded-2xl bg-muted/20 focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <img
                   src={photo.src}
@@ -124,7 +124,7 @@ const Gallery = () => {
           <img
             src={photos[active].src}
             alt={photos[active].alt}
-            className="max-w-full max-h-[90vh] object-contain rounded-sm"
+            className="max-w-full max-h-[90vh] object-contain rounded-2xl"
             onClick={(e) => e.stopPropagation()}
           />
         </div>

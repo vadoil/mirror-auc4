@@ -75,7 +75,7 @@ const AboutSection = () => {
                 className="relative"
               >
                 <Link to="/archive/spb" className="block group">
-                  <div className="aspect-[4/5] overflow-hidden relative">
+                  <div className="aspect-[4/5] overflow-hidden relative rounded-2xl">
                     <img src={aboutVenue} alt="Санкт-Петербург - аукцион 2026" loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out" width={1024} height={1280} />
                     <div className="absolute inset-0 bg-warm-black/40" />
                     <div className="absolute inset-0 bg-gradient-to-t from-warm-black/85 via-warm-black/15 to-transparent" />

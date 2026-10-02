@@ -133,7 +133,7 @@ const ArchiveMoscow = () => {
       <section className="bg-warm-black text-cream py-20 md:py-28 section-padding">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16 items-center mb-16">
-            <motion.div {...fadeUp} className="relative aspect-[4/5] overflow-hidden rounded-sm">
+            <motion.div {...fadeUp} className="relative aspect-[4/5] overflow-hidden rounded-2xl">
               <img src={tsipkinPhoto} alt="Александр Цыпкин" loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top" />
             </motion.div>
             <motion.div {...fadeUp}>
@@ -156,7 +156,7 @@ const ArchiveMoscow = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {people.map((p, i) => (
               <motion.div key={p.name} {...fadeUp} transition={{ duration: 0.5, delay: 0.08 * i }}>
-                <div className="aspect-square overflow-hidden rounded-sm mb-4 bg-cream/5">
+                <div className="aspect-square overflow-hidden rounded-2xl mb-4 bg-cream/5">
                   <img src={p.photo} alt={p.name} loading="lazy" className="w-full h-full object-cover object-top" />
                 </div>
                 <h3 className="font-display text-base md:text-lg uppercase tracking-tight text-cream mb-1">{p.name}</h3>
@@ -184,7 +184,7 @@ const ArchiveMoscow = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
             {galleryPreview.map((p, i) => (
               <motion.div key={p.src} {...fadeUp} transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}>
-                <Link to="/gallery" className="group block aspect-[3/4] overflow-hidden rounded-sm bg-muted/20">
+                <Link to="/gallery" className="group block aspect-[3/4] overflow-hidden rounded-2xl bg-muted/20">
                   <img src={p.src} alt={p.alt} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
                 </Link>
               </motion.div>
@@ -224,7 +224,7 @@ const ArchiveMoscow = () => {
       {/* Отзыв */}
       <section className="bg-card/50 py-20 md:py-28 section-padding">
         <div className="max-w-6xl mx-auto grid md:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16 items-center">
-          <motion.div {...fadeUp} className="aspect-[4/5] overflow-hidden rounded-sm max-w-sm md:max-w-none mx-auto w-full">
+          <motion.div {...fadeUp} className="aspect-[4/5] overflow-hidden rounded-2xl max-w-sm md:max-w-none mx-auto w-full">
             <img src={reviewPhoto} alt="Олег Наумов, гость аукциона" loading="lazy" className="w-full h-full object-cover" />
           </motion.div>
           <motion.div {...fadeUp}>

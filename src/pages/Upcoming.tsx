@@ -629,7 +629,7 @@ const Upcoming = () => {
                 {[zrenie2, zrenie3, zrenie4, zrenieVenue].map((src, i) => (
                   <div
                     key={i}
-                    className="snap-start shrink-0 w-[85%] sm:w-[60%] md:w-[48%] lg:w-[38%] aspect-[3/2] overflow-hidden rounded-lg border border-border bg-muted"
+                    className="snap-start shrink-0 w-[85%] sm:w-[60%] md:w-[48%] lg:w-[38%] aspect-[3/2] overflow-hidden rounded-2xl border border-border bg-muted"
                   >
                     <img
                       src={src}
@@ -886,7 +886,7 @@ const Upcoming = () => {
 
               <div className="grid grid-cols-3 gap-3 my-4">
                 {artistInfo.details.works.map((w, wi) => (
-                  <div key={wi} className="aspect-square overflow-hidden rounded-md bg-warm-black">
+                  <div key={wi} className="aspect-square overflow-hidden rounded-2xl bg-warm-black">
                     <img
                       src={w.src}
                       alt={w.alt}

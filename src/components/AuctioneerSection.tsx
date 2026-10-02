@@ -15,7 +15,7 @@ const AuctioneerSection = () => {
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="relative aspect-[3/4] bg-charcoal overflow-hidden group rounded-lg"
+            className="relative aspect-[3/4] bg-charcoal overflow-hidden group rounded-2xl"
           >
             <img src={tsipkinPhoto} alt="Александр Цыпкин" className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
             <div className="absolute inset-0 bg-gradient-to-t from-warm-black/90 via-warm-black/20 to-transparent" />

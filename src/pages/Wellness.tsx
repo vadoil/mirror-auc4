@@ -215,7 +215,7 @@ const Wellness = () => {
       <section className="section-padding pb-20 md:pb-28">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div {...fadeUp} className="order-2 lg:order-1">
-            <div className="aspect-[3/2] overflow-hidden rounded-sm mb-4">
+            <div className="aspect-[3/2] overflow-hidden rounded-2xl mb-4">
               <img src={lectureImg} alt="Лекторий велнес-девичника" loading="lazy" className="w-full h-full object-cover" />
             </div>
             <p className="font-display text-xl italic text-primary leading-snug">
@@ -283,7 +283,7 @@ const Wellness = () => {
               <MapPin className="w-3.5 h-3.5 text-primary" /> Москва · Мясницкая, 24/7, стр. 1
             </p>
           </motion.div>
-          <motion.div {...fadeUp} className="aspect-[3/2] overflow-hidden rounded-sm">
+          <motion.div {...fadeUp} className="aspect-[3/2] overflow-hidden rounded-2xl">
             <img src={hallImg} alt="Баланс-холл «Место быть»" loading="lazy" className="w-full h-full object-cover" />
           </motion.div>
         </div>

@@ -31,7 +31,7 @@ const VenuePreviewSection = () => {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative aspect-[4/3] lg:aspect-auto min-h-[350px] overflow-hidden group"
+            className="relative aspect-[4/3] lg:aspect-auto min-h-[350px] overflow-hidden group rounded-2xl"
           >
             <img src={venueImage} alt="Место быть – баланс-холл" loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
           </motion.div>
