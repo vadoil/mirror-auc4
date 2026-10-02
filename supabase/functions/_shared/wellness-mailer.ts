@@ -1,7 +1,12 @@
 import * as React from 'npm:react@18.3.1'
-import { renderAsync } from 'npm:@react-email/components@0.0.22'
+// renderAsync из @react-email 0.0.22 режет UTF-8 на границах чанков потока (кириллица → «��»),
+// поэтому рендерим синхронно через react-dom.
+import { renderToStaticMarkup } from 'npm:react-dom@18.3.1/server'
 import nodemailer from 'npm:nodemailer@6.9.14'
 import { TEMPLATES } from './transactional-email-templates/registry.ts'
+
+const XHTML_DOCTYPE =
+  '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
 
 const SMTP_HOST = Deno.env.get('SMTP_HOST') ?? 'smtp.beget.com'
 const SMTP_PORT = Number(Deno.env.get('SMTP_PORT') ?? '465')
@@ -33,7 +38,7 @@ export async function sendTemplate(templateName: string, to: string, data: Recor
   const template = TEMPLATES[templateName]
   if (!template) throw new Error(`Template '${templateName}' not found`)
   const subject = typeof template.subject === 'function' ? template.subject(data as Record<string, any>) : template.subject
-  const html = await renderAsync(React.createElement(template.component, data as any))
+  const html = XHTML_DOCTYPE + renderToStaticMarkup(React.createElement(template.component, data as any))
   await transporter.sendMail({
     from: { name: SMTP_FROM_NAME, address: SMTP_USER },
     to,

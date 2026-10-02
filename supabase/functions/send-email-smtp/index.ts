@@ -1,8 +1,13 @@
 import * as React from 'npm:react@18.3.1'
-import { renderAsync } from 'npm:@react-email/components@0.0.22'
+// renderAsync из @react-email 0.0.22 режет UTF-8 на границах чанков потока (кириллица → «��»),
+// поэтому рендерим синхронно через react-dom.
+import { renderToStaticMarkup } from 'npm:react-dom@18.3.1/server'
 import nodemailer from 'npm:nodemailer@6.9.14'
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { TEMPLATES } from '../_shared/transactional-email-templates/registry.ts'
+
+const XHTML_DOCTYPE =
+  '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -59,7 +64,7 @@ Deno.serve(async (req) => {
         typeof template.subject === 'function'
           ? template.subject(templateData as Record<string, any>)
           : template.subject
-      html = await renderAsync(React.createElement(template.component, templateData as any))
+      html = XHTML_DOCTYPE + renderToStaticMarkup(React.createElement(template.component, templateData as any))
     }
 
     const to = TEMPLATES[templateName ?? '']?.to || recipientEmail
