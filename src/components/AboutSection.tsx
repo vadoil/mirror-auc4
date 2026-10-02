@@ -54,18 +54,9 @@ const AboutSection = () => {
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
                   Мы верим, что забота о себе и забота о других – не противоположности, а отражение друг друга. Поэтому перед началом аукциона мы организуем для вас открытую лекцию о современных возможностях поддержать свой организм и баланс внутри.
                 </p>
-                <p className="editorial-body text-muted-foreground mb-8 max-w-lg">
+                <p className="editorial-body text-muted-foreground max-w-lg">
                   «Отражение добра» – это аукцион, где каждый лот несёт смысл. Уникальные оздоровительные программы, ретриты, эксклюзивный опыт, а все деньги, вырученные с продаж билетов и аукциона, направляются в поддержку фонда «Не напрасно».
                 </p>
-                <div className="flex flex-wrap md:flex-nowrap gap-4">
-                  <Link to="/archive/spb" className="btn-outline inline-flex items-center justify-center flex-1 min-w-[140px] text-center">
-                    Питер 2026
-                  </Link>
-                  <Link to="/lots" className="btn-outline inline-flex items-center justify-center flex-1 min-w-[140px] text-center">
-                    Смотреть лоты
-                  </Link>
-                </div>
-
               </motion.div>
 
               <motion.div
