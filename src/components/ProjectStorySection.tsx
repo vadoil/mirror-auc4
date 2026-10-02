@@ -1,7 +1,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Calendar, ArrowRight, Sparkles, HeartHandshake, MapPinned, Wand2, Loader2 } from "lucide-react";
+import { MapPin, Calendar, ArrowRight, Sparkles, HeartHandshake, MapPinned, Wand2, Loader2, ChevronDown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import sashaPhoto from "@/assets/organizer-sasha-clean.webp";
@@ -13,6 +13,11 @@ const ProjectStorySection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeCity, setActiveCity] = useState<City>("spb");
+  const [expanded, setExpanded] = useState(false);
+  const openCity = (c: City) => {
+    setActiveCity(c);
+    setExpanded(true);
+  };
   const [form, setForm] = useState({ name: "", contact: "", topic: "cooperation", message: "" });
   const [submitting, setSubmitting] = useState(false);
 
@@ -152,16 +157,16 @@ const ProjectStorySection = () => {
           {/* City tabs */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <button
-              onClick={() => setActiveCity("spb")}
+              onClick={() => openCity("spb")}
               className={`relative flex items-center gap-3 px-6 py-4 border rounded-lg transition-all duration-300 ${
-                activeCity === "spb"
+                expanded && activeCity === "spb"
                   ? "border-primary bg-primary/5"
                   : "border-border hover:border-primary/30"
               }`}
             >
-              <MapPin className={`w-4 h-4 ${activeCity === "spb" ? "text-primary" : "text-muted-foreground"}`} />
+              <MapPin className={`w-4 h-4 ${expanded && activeCity === "spb" ? "text-primary" : "text-muted-foreground"}`} />
               <div className="text-left">
-                <p className={`font-display text-base uppercase ${activeCity === "spb" ? "text-foreground" : "text-muted-foreground"}`}>
+                <p className={`font-display text-base uppercase ${expanded && activeCity === "spb" ? "text-foreground" : "text-muted-foreground"}`}>
                   Санкт-Петербург
                 </p>
                 <p className="font-body text-xs text-muted-foreground flex items-center gap-1.5">
@@ -177,16 +182,16 @@ const ProjectStorySection = () => {
             </button>
 
             <button
-              onClick={() => setActiveCity("moscow")}
+              onClick={() => openCity("moscow")}
               className={`flex items-center gap-3 px-6 py-4 border rounded-lg transition-all duration-300 ${
-                activeCity === "moscow"
+                expanded && activeCity === "moscow"
                   ? "border-primary bg-primary/5"
                   : "border-border hover:border-primary/30"
               }`}
             >
-              <MapPin className={`w-4 h-4 ${activeCity === "moscow" ? "text-primary" : "text-muted-foreground"}`} />
+              <MapPin className={`w-4 h-4 ${expanded && activeCity === "moscow" ? "text-primary" : "text-muted-foreground"}`} />
               <div className="text-left">
-                <p className={`font-display text-base uppercase ${activeCity === "moscow" ? "text-foreground" : "text-muted-foreground"}`}>
+                <p className={`font-display text-base uppercase ${expanded && activeCity === "moscow" ? "text-foreground" : "text-muted-foreground"}`}>
                   Москва
                 </p>
                 <p className="font-body text-xs text-muted-foreground flex items-center gap-1.5">
@@ -194,11 +199,22 @@ const ProjectStorySection = () => {
                 </p>
               </div>
             </button>
+
+            <button
+              onClick={() => setExpanded((v) => !v)}
+              aria-expanded={expanded}
+              className={`flex items-center gap-3 px-6 py-4 border rounded-lg transition-all duration-300 ${
+                expanded ? "border-border hover:border-primary/30" : "border-primary bg-primary text-primary-foreground hover:opacity-90"
+              }`}
+            >
+              <span className="font-display text-base uppercase">{expanded ? "Свернуть" : "Подробнее"}</span>
+              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${expanded ? "rotate-180" : ""}`} />
+            </button>
           </div>
 
           {/* City content */}
           <AnimatePresence mode="wait">
-            {activeCity === "moscow" && (
+            {expanded && activeCity === "moscow" && (
               <motion.div
                 key="moscow"
                 initial={{ opacity: 0, y: 15 }}
@@ -241,7 +257,7 @@ const ProjectStorySection = () => {
               </motion.div>
             )}
 
-            {activeCity === "spb" && (
+            {expanded && activeCity === "spb" && (
               <motion.div
                 key="spb"
                 initial={{ opacity: 0, y: 15 }}
