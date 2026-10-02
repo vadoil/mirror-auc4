@@ -39,7 +39,7 @@ const OrganizersSection = () => {
 
   return (
     <section className="py-12 md:py-16 section-padding bg-background overflow-hidden">
-      <div ref={ref} className="max-w-6xl mx-auto">
+      <div ref={ref} className="max-w-7xl mx-auto">
         {/* Intro text */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}

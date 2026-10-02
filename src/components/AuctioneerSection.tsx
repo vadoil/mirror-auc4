@@ -9,7 +9,7 @@ const AuctioneerSection = () => {
 
   return (
     <section className="py-12 md:py-16 section-padding bg-background">
-      <div ref={ref} className="max-w-6xl mx-auto">
+      <div ref={ref} className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}

@@ -10,7 +10,7 @@ const ForumBannerSection = () => {
 
   return (
     <section className="py-12 md:py-16 section-padding bg-charcoal relative overflow-hidden">
-      <div ref={ref} className="max-w-6xl mx-auto relative z-10">
+      <div ref={ref} className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
