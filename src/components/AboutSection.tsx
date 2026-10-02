@@ -57,7 +57,7 @@ const AboutSection = () => {
                 <p className="editorial-body text-muted-foreground mb-8 max-w-lg">
                   «Отражение добра» – это аукцион, где каждый лот несёт смысл. Уникальные оздоровительные программы, ретриты, эксклюзивный опыт, а все деньги, вырученные с продаж билетов и аукциона, направляются в поддержку фонда «Не напрасно».
                 </p>
-                <div className="flex flex-wrap md:flex-nowrap gap-4 mb-8">
+                <div className="flex flex-wrap md:flex-nowrap gap-4">
                   <Link to="/archive/spb" className="btn-outline inline-flex items-center justify-center flex-1 min-w-[140px] text-center">
                     Питер 2026
                   </Link>
@@ -66,17 +66,6 @@ const AboutSection = () => {
                   </Link>
                 </div>
 
-                <div className="border-t border-border pt-6 space-y-3 max-w-lg">
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-3">Контакты</p>
-                  <div className="space-y-2">
-                    <p className="font-body text-sm text-muted-foreground">
-                      <span className="text-foreground font-medium">Организатор:</span> Гизела Тольц · 8 (985) 809-53-70 · <a href="https://t.me/Jiselle_Tolts" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@Jiselle_Tolts</a>
-                    </p>
-                    <p className="font-body text-sm text-muted-foreground">
-                      <span className="text-foreground font-medium">Партнер:</span> Александра Павлова · 8 (962) 364-66-46 · <a href="https://t.me/alexa_ah_alexa" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@alexa_ah_alexa</a>
-                    </p>
-                  </div>
-                </div>
               </motion.div>
 
               <motion.div
