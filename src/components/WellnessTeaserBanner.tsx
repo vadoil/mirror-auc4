@@ -5,11 +5,10 @@ import heroImg from "@/assets/wellness/wellness-hero.webp";
 
 const WellnessTeaserBanner = () => {
   return (
-    <section className="section-padding py-10 md:py-14 bg-warm-black">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative bg-warm-black">
         <Link
           to="/wellness"
-          className="group relative block overflow-hidden rounded-lg border border-cream/10 hover:border-primary/40 transition-colors"
+          className="group relative flex items-end min-h-[100svh] overflow-hidden"
         >
           <div className="absolute inset-0">
             <img
@@ -18,10 +17,12 @@ const WellnessTeaserBanner = () => {
               loading="lazy"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-warm-black/90 via-warm-black/60 to-warm-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-warm-black/95 via-warm-black/40 to-warm-black/10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-warm-black/60 to-transparent" />
           </div>
 
-          <div className="relative z-10 p-8 md:p-12 min-h-[440px] md:min-h-[520px] flex flex-col justify-end md:flex-row md:items-end md:justify-between gap-6">
+          <div className="relative z-10 w-full section-padding pb-16 md:pb-24 pt-28">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <div className="max-w-2xl">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-6 h-px bg-primary" />
@@ -33,7 +34,7 @@ const WellnessTeaserBanner = () => {
                   Москва · 25 октября · вход свободный
                 </motion.p>
               </div>
-              <h3 className="font-display text-3xl md:text-6xl text-cream uppercase tracking-tight leading-[1.05] mb-4">
+              <h3 className="font-display text-4xl md:text-7xl text-cream uppercase tracking-tight leading-[1.05] mb-4">
                 Велнес-девичник: <span className="italic text-primary">новая роскошь — забота о себе</span>
               </h3>
               <div className="flex flex-wrap gap-x-6 gap-y-2 font-body text-sm text-cream/80">
@@ -49,8 +50,8 @@ const WellnessTeaserBanner = () => {
               Зарегистрироваться <ArrowRight className="w-4 h-4" />
             </span>
           </div>
+          </div>
         </Link>
-      </div>
     </section>
   );
 };
