@@ -107,14 +107,15 @@ const AboutSection = () => {
 
         {/* Marquee */}
         <div className="bg-primary py-4 overflow-hidden">
+          {/* Две одинаковые половины: сдвиг на -50% даёт бесшовный цикл */}
           <motion.div
-            animate={{ x: [0, -1000] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="flex gap-12 whitespace-nowrap"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+            className="flex w-max whitespace-nowrap"
           >
-            {Array.from({ length: 10 }).map((_, i) => (
+            {Array.from({ length: 8 }).map((_, i) => (
               <span key={i} className="font-display text-lg md:text-xl text-primary-foreground/80 font-light italic tracking-wide">
-                Благотворительность · Забота о здоровье · Осознанность · Ретриты · Здоровье · Баланс · Добро ·
+                Благотворительность · Забота о здоровье · Осознанность · Ретриты · Здоровье · Баланс · Добро ·&nbsp;
               </span>
             ))}
           </motion.div>
