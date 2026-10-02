@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, CupSoda, Download, HeartPulse, MapPin, Pill, Ribbon, ScanFace, Sparkles, Users, Wind } from "lucide-react";
+import { ArrowRight, Calendar, Play, CupSoda, Download, HeartPulse, MapPin, Pill, Ribbon, ScanFace, Sparkles, Users, Wind } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WellnessRegistration from "@/components/WellnessRegistration";
@@ -154,6 +155,9 @@ const SectionLabel = ({ children }: { children: React.ReactNode }) => (
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
 const Wellness = () => {
+  // ключ перезапускает анимацию «отражения» заголовка
+  const [mirrorKey, setMirrorKey] = useState(0);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -167,7 +171,27 @@ const Wellness = () => {
               <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> Москва</span>
             </div>
             <p className="font-body text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">Велнес-девичник для женщин</p>
-            <h1 className="font-display text-6xl md:text-8xl text-foreground tracking-tight leading-[0.9] mb-6">Отражение</h1>
+            <div className="flex items-center gap-4 mb-6">
+              <motion.h1
+                key={mirrorKey}
+                initial={{ rotateY: 180, opacity: 0.3, filter: "blur(3px)" }}
+                animate={{ rotateY: 0, opacity: 1, filter: "blur(0px)" }}
+                transition={{ duration: 1.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                style={{ transformPerspective: 900 }}
+                className="font-display text-6xl md:text-8xl text-foreground tracking-tight leading-[0.9] origin-center"
+              >
+                Отражение
+              </motion.h1>
+              <button
+                type="button"
+                onClick={() => setMirrorKey((k) => k + 1)}
+                aria-label="Повторить отражение"
+                title="Повторить"
+                className="w-9 h-9 shrink-0 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary/50 flex items-center justify-center transition-colors"
+              >
+                <Play className="w-3.5 h-3.5 ml-0.5" />
+              </button>
+            </div>
             <p className="font-display text-3xl md:text-4xl text-foreground leading-tight mb-2">Новая роскошь —</p>
             <p className="font-display text-3xl md:text-4xl italic text-primary leading-tight mb-6">забота о себе.</p>
             <p className="font-body text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Красота · лонгевити · велбинг</p>
@@ -188,7 +212,6 @@ const Wellness = () => {
             <div className="aspect-[4/3] overflow-hidden rounded-2xl">
               <img src={heroImg} alt="Пространство велнес-девичника «Отражение»" className="w-full h-full object-cover" />
             </div>
-            <p className="mt-2 font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60">Эскиз оформления события · визуализация</p>
           </motion.div>
         </div>
       </section>
