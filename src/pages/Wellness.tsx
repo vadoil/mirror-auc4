@@ -10,6 +10,9 @@ import lectureImg from "@/assets/wellness/wellness-lecture.webp";
 import hallImg from "@/assets/wellness/wellness-hall.webp";
 import sashaPhoto from "@/assets/organizer-sasha-clean.webp";
 import gizaPhoto from "@/assets/organizer-giza-clean.webp";
+import nenaprasnoLogo from "@/assets/sponsors/nenaprasno.png";
+import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
+import actcomLogo from "@/assets/sponsors/actcom.svg";
 
 const venueFeatures = ["Лекторий", "Тренировки", "Зона бьюти-шоппинга", "Фудспот", "Кофе и протеиновые шейки"];
 
@@ -136,6 +139,12 @@ const organizers = [
     phone: "+79858095370",
     phoneLabel: "8 (985) 809-53-70",
   },
+];
+
+const partners = [
+  { name: "Фонд «Не напрасно»", role: "Смысловой партнёр", logo: nenaprasnoLogo, url: "https://nenaprasno.ru/", logoClass: "h-10 md:h-12" },
+  { name: "Баланс-холл «Место быть»", role: "Площадка", logo: mestoBytLogo, url: "https://mestobe.ru/", logoClass: "h-16 md:h-20" },
+  { name: "Актуальные коммуникации", role: "Стратегический партнёр", logo: actcomLogo, url: "https://act-com.ru/", logoClass: "h-9 md:h-11" },
 ];
 
 const fadeUp = {
@@ -473,30 +482,22 @@ const Wellness = () => {
             </h2>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <motion.a
-              href="https://nenaprasno.ru"
-              target="_blank"
-              rel="noopener noreferrer"
-              {...fadeUp}
-              className="aspect-[3/2] border border-border rounded-lg flex flex-col items-center justify-center text-center p-4 hover:border-primary/40 transition-colors"
-            >
-              <p className="font-display text-xl text-foreground">«Не напрасно»</p>
-              <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">Смысловой партнёр</p>
-            </motion.a>
-            <motion.div {...fadeUp} className="aspect-[3/2] border border-border rounded-lg flex flex-col items-center justify-center text-center p-4">
-              <p className="font-display text-xl text-foreground">«Место быть»</p>
-              <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">Площадка</p>
-            </motion.div>
-            <motion.a
-              href="/docs/aktkom-portfolio-2026.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              {...fadeUp}
-              className="aspect-[3/2] border border-border rounded-lg flex flex-col items-center justify-center text-center p-4 hover:border-primary/40 transition-colors"
-            >
-              <p className="font-display text-xl text-foreground">АктКом</p>
-              <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">Стратегический партнёр</p>
-            </motion.a>
+            {partners.map((pt) => (
+              <motion.a
+                key={pt.name}
+                href={pt.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={pt.name}
+                {...fadeUp}
+                className="group aspect-[3/2] bg-background border border-border rounded-lg flex flex-col items-center justify-center text-center p-5 hover:border-primary/40 transition-colors"
+              >
+                <div className="flex-1 w-full flex items-center justify-center">
+                  <img src={pt.logo} alt={pt.name} loading="lazy" className={`${pt.logoClass} w-auto max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity`} />
+                </div>
+                <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-3">{pt.role}</p>
+              </motion.a>
+            ))}
             <motion.a
               href={`https://t.me/${organizers[1].handle}`}
               target="_blank"
