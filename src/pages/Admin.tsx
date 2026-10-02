@@ -70,6 +70,45 @@ type ForumRegistration = {
   created_at: string;
 };
 
+type WellnessRegistration = {
+  id: string;
+  created_at: string;
+  full_name: string;
+  telegram: string | null;
+  email: string;
+  age: number | null;
+  phone: string;
+  training: string | null;
+  consent_ads: boolean;
+  confirmation_sent_at: string | null;
+};
+
+const wellnessTrainings: Record<string, string> = {
+  libido: "Либидо-фитнес (Марго)",
+  abs: "Плоский живот (Георгий)",
+  bowls: "Поющие чаши",
+};
+
+const downloadWellnessCsv = (rows: WellnessRegistration[]) => {
+  const head = ["№", "Дата", "Имя и фамилия", "Почта", "Телефон", "Telegram", "Возраст", "Тренировка", "Реклама"];
+  const ordered = [...rows].reverse();
+  const lines = ordered.map((r, i) => [
+    i + 1,
+    new Date(r.created_at).toLocaleString("ru-RU"),
+    r.full_name, r.email, r.phone, r.telegram ? `@${r.telegram}` : "", r.age ?? "",
+    r.training ? wellnessTrainings[r.training] ?? r.training : "", r.consent_ads ? "да" : "нет",
+  ]);
+  const csv = [head, ...lines]
+    .map((l) => l.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";"))
+    .join("\r\n");
+  const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `devichnik-registracii-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
 type UtmVisit = {
   id: string;
   utm_source: string | null;
@@ -97,12 +136,13 @@ const getImageUrl = (url: string | null) => {
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState<"lots" | "bids" | "lot_requests" | "forum" | "requests" | "utm">("lots");
+  const [tab, setTab] = useState<"lots" | "bids" | "lot_requests" | "forum" | "wellness" | "requests" | "utm">("lots");
   const [lots, setLots] = useState<Lot[]>([]);
   const [bids, setBids] = useState<Bid[]>([]);
   const [requests, setRequests] = useState<TicketRequest[]>([]);
   const [lotReservations, setLotReservations] = useState<LotReservation[]>([]);
   const [forumRegs, setForumRegs] = useState<ForumRegistration[]>([]);
+  const [wellnessRegs, setWellnessRegs] = useState<WellnessRegistration[]>([]);
   const [utmVisits, setUtmVisits] = useState<UtmVisit[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingLot, setEditingLot] = useState<Partial<Lot> | null>(null);
@@ -118,6 +158,7 @@ const Admin = () => {
     if (tab === "requests") fetchRequests();
     if (tab === "lot_requests") fetchLotReservations();
     if (tab === "forum") fetchForumRegs();
+    if (tab === "wellness") fetchWellnessRegs();
     if (tab === "utm") fetchUtmVisits();
   }, [tab]);
 
@@ -133,6 +174,11 @@ const Admin = () => {
   const fetchForumRegs = async () => {
     const { data } = await supabase.from("forum_registrations" as any).select("*").order("created_at", { ascending: false });
     if (data) setForumRegs(data as any);
+  };
+
+  const fetchWellnessRegs = async () => {
+    const { data } = await supabase.from("wellness_registrations" as any).select("*").order("created_at", { ascending: false });
+    if (data) setWellnessRegs(data as any);
   };
 
   const fetchUtmVisits = async () => {
@@ -394,6 +440,7 @@ const Admin = () => {
     { key: "bids" as const, label: "Ставки" },
     { key: "lot_requests" as const, label: "Заявки на лоты" },
     { key: "forum" as const, label: "Форум" },
+    { key: "wellness" as const, label: "Девичник" },
     { key: "requests" as const, label: "Билеты" },
     { key: "utm" as const, label: "UTM" },
   ];
@@ -741,6 +788,56 @@ const Admin = () => {
                 </div>
               ))}
               {forumRegs.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Нет заявок на форум</p>}
+            </div>
+          </div>
+        )}
+
+        {tab === "wellness" && (
+          <div>
+            <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
+              <h2 className="font-display text-2xl uppercase">Девичник 25.10 · {wellnessRegs.length}</h2>
+              <button
+                onClick={() => downloadWellnessCsv(wellnessRegs)}
+                disabled={!wellnessRegs.length}
+                className="text-xs uppercase tracking-wider font-body px-4 py-2 border border-cream/20 hover:border-primary disabled:opacity-40"
+              >
+                Скачать CSV
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {Object.entries(wellnessTrainings).map(([k, label]) => (
+                <span key={k} className="text-[11px] font-body px-3 py-1 bg-cream/5 border border-cream/10 text-cream/70">
+                  {label}: {wellnessRegs.filter((r) => r.training === k).length}
+                </span>
+              ))}
+              <span className="text-[11px] font-body px-3 py-1 bg-cream/5 border border-cream/10 text-cream/70">
+                Согласны на рекламу: {wellnessRegs.filter((r) => r.consent_ads).length}
+              </span>
+            </div>
+            <div className="space-y-2">
+              {wellnessRegs.map((r, i) => {
+                const n = wellnessRegs.length - i;
+                return (
+                  <div key={r.id} className="bg-cream/5 border border-cream/10 p-4">
+                    <div className="flex items-start justify-between gap-4 flex-wrap">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-1 flex-wrap">
+                          <span className={`text-[10px] font-body px-2 py-0.5 ${n <= 60 ? "bg-primary/20 text-primary" : "bg-cream/10 text-cream/50"}`}>№{n}</span>
+                          <p className="font-body text-sm text-cream font-medium">{r.full_name}{r.age ? `, ${r.age}` : ""}</p>
+                          {r.training && <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-cream/10 text-cream/60">{wellnessTrainings[r.training] ?? r.training}</span>}
+                        </div>
+                        <p className="text-cream/40 text-xs font-body">
+                          {r.email} · {r.phone}{r.telegram ? ` · @${r.telegram}` : ""}
+                          {r.consent_ads ? " · реклама ✓" : ""}
+                          {!r.confirmation_sent_at ? " · письмо не ушло" : ""}
+                        </p>
+                      </div>
+                      <p className="text-cream/30 text-xs font-body whitespace-nowrap">{new Date(r.created_at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</p>
+                    </div>
+                  </div>
+                );
+              })}
+              {wellnessRegs.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Пока нет регистраций</p>}
             </div>
           </div>
         )}

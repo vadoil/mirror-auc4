@@ -14,6 +14,8 @@ import { template as ticketRequestConfirmation } from './ticket-request-confirma
 import { template as ticketPaidConfirmation } from './ticket-paid-confirmation.tsx'
 import { template as ticketPaidNotification } from './ticket-paid-notification.tsx'
 import { template as accountCredentials } from './account-credentials.tsx'
+import { template as wellnessRegistration } from './wellness-registration.tsx'
+import { template as wellnessReminder } from './wellness-reminder.tsx'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'ticket-request-notification': ticketRequestNotification,
@@ -21,4 +23,6 @@ export const TEMPLATES: Record<string, TemplateEntry> = {
   'ticket-paid-confirmation': ticketPaidConfirmation,
   'ticket-paid-notification': ticketPaidNotification,
   'account-credentials': accountCredentials,
+  'wellness-registration': wellnessRegistration,
+  'wellness-reminder': wellnessReminder,
 }

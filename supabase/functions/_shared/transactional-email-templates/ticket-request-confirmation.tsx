@@ -30,7 +30,7 @@ function getContent(ticketType?: string) {
       heading: hi('спасибо за поддержку!'),
       body: 'Мы получили вашу заявку на пожертвование в фонд «Не напрасно». Если оплата ещё не завершена, организатор свяжется с вами и поможет.',
       rowLabel: 'Назначение',
-      cta: { href: `${SITE_URL}/upcoming#donation`, text: 'Поддержать фонд' },
+      cta: { href: `${SITE_URL}/archive/spb#donation`, text: 'Поддержать фонд' },
     }
   }
   if (t.includes('форум')) {

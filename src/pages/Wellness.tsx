@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, CupSoda, Download, HeartPulse, MapPin, Pill, Ribbon, ScanFace, Sparkles, Users, Wind } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import TicketRequestModal from "@/components/TicketRequestModal";
+import WellnessRegistration from "@/components/WellnessRegistration";
 import heroImg from "@/assets/wellness/wellness-hero.webp";
 import lectureImg from "@/assets/wellness/wellness-lecture.webp";
 import hallImg from "@/assets/wellness/wellness-hall.webp";
@@ -74,6 +73,40 @@ const programArt = [
   </LineArt>,
 ];
 
+const trainings = [
+  {
+    title: "Либидо-фитнес",
+    coach: "с Марго",
+    art: (
+      <LineArt>
+        <path d="M32 52S12 40 12 26a10 10 0 0 1 20-4a10 10 0 0 1 20 4c0 14-20 26-20 26z" />
+        <path d="M48 8v6M45 11h6" />
+      </LineArt>
+    ),
+  },
+  {
+    title: "Плоский живот",
+    coach: "с Георгием",
+    art: (
+      <LineArt>
+        <path d="M14 32h36M18 24v16M46 24v16M10 28v8M54 28v8" />
+      </LineArt>
+    ),
+  },
+  {
+    title: "Медитация",
+    coach: "с поющими чашами",
+    art: (
+      <LineArt>
+        <path d="M12 34h40c0 11-9 18-20 18S12 45 12 34z" />
+        <path d="M24 56h16" />
+        <path d="M42 26l12-14" />
+        <path d="M22 26c2-3 2-6 0-9M30 24c2-3 2-6 0-9" />
+      </LineArt>
+    ),
+  },
+];
+
 const zones = [
   { icon: Sparkles, title: "Бьюти-девайсы и уход", text: "Домашние гаджеты: LED, микротоки, гуаша, лимфодренаж" },
   { icon: ScanFace, title: "Диагностика кожи, волос и тела", text: "Анализаторы, трихоскопия, состав тела, биовозраст" },
@@ -121,8 +154,6 @@ const SectionLabel = ({ children }: { children: React.ReactNode }) => (
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
 const Wellness = () => {
-  const [modal, setModal] = useState(false);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -139,14 +170,15 @@ const Wellness = () => {
             <h1 className="font-display text-6xl md:text-8xl text-foreground tracking-tight leading-[0.9] mb-6">Отражение</h1>
             <p className="font-display text-3xl md:text-4xl text-foreground leading-tight mb-2">Новая роскошь —</p>
             <p className="font-display text-3xl md:text-4xl italic text-primary leading-tight mb-6">забота о себе.</p>
-            <p className="font-body text-sm uppercase tracking-[0.2em] text-muted-foreground mb-10">Красота · лонгевити · велбинг</p>
+            <p className="font-body text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Красота · лонгевити · велбинг</p>
+            <p className="font-body text-sm text-foreground mb-10">Вход бесплатный, по регистрации.</p>
             <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => setModal(true)}
+              <a
+                href="#registration"
                 className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
               >
-                Хочу прийти <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+                Зарегистрироваться <ArrowRight className="w-3.5 h-3.5" />
+              </a>
               <a href="/docs/wellness-devichnik.pdf" target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2 text-sm">
                 <Download className="w-3.5 h-3.5" /> Презентация
               </a>
@@ -203,6 +235,29 @@ const Wellness = () => {
               </p>
               <p>Красота перестаёт быть отдельной задачей — она становится следствием того, как мы живём, спим и дышим.</p>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Регистрация */}
+      <section id="registration" className="section-padding pb-20 md:pb-28 scroll-mt-24">
+        <div className="max-w-5xl mx-auto">
+          <motion.div {...fadeUp} className="text-center mb-10">
+            <div className="flex items-center gap-3 justify-center mb-6">
+              <div className="w-8 h-px bg-primary" />
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">Регистрация</p>
+              <div className="w-8 h-px bg-primary" />
+            </div>
+            <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-foreground leading-[0.95] mb-6">
+              Приходите — <span className="italic text-primary">это бесплатно</span>
+            </h2>
+            <div className="inline-flex items-center gap-4 bg-primary/10 border border-primary/30 rounded-full pl-2 pr-6 py-2">
+              <span className="font-numbers text-2xl text-primary-foreground bg-primary rounded-full w-12 h-12 flex items-center justify-center">60</span>
+              <span className="font-body text-sm text-foreground text-left">первых регистраций гарантированно<br className="hidden sm:block" /> получают место в лектории</span>
+            </div>
+          </motion.div>
+          <motion.div {...fadeUp}>
+            <WellnessRegistration />
           </motion.div>
         </div>
       </section>
@@ -318,6 +373,35 @@ const Wellness = () => {
               </span>
             </motion.a>
           </div>
+
+          <motion.div {...fadeUp} className="mt-16 md:mt-20">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-px bg-primary" />
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">Участники · тренировки</p>
+            </div>
+            <h3 className="font-display text-3xl md:text-5xl font-light tracking-tight leading-[0.95] mb-10">
+              Выберите <span className="italic text-primary">свою практику</span>
+            </h3>
+          </motion.div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {trainings.map((t, i) => (
+              <motion.a
+                key={t.title}
+                href="#registration"
+                {...fadeUp}
+                transition={{ duration: 0.5, delay: 0.08 * i }}
+                className="group flex items-center gap-5 border border-cream/10 rounded-lg p-6 hover:border-primary/40 hover:bg-cream/[0.03] transition-colors"
+              >
+                <div className="w-16 h-16 shrink-0 text-primary/80 transition-transform duration-500 group-hover:scale-110">{t.art}</div>
+                <div>
+                  <p className="font-body text-[10px] uppercase tracking-[0.2em] text-primary mb-1">Тренировка {num(i)}</p>
+                  <h4 className="font-display text-xl text-cream leading-tight">{t.title}</h4>
+                  <p className="font-body text-sm text-cream/60">{t.coach}</p>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+          <p className="mt-6 font-body text-xs text-cream/40">Записаться на тренировку можно при регистрации. Имена спикеров объявим ближе к дате.</p>
         </div>
       </section>
 
@@ -356,6 +440,54 @@ const Wellness = () => {
         </div>
       </section>
 
+      {/* Партнёры */}
+      <section className="py-20 md:py-28 section-padding">
+        <div className="max-w-7xl mx-auto">
+          <motion.div {...fadeUp} className="mb-10">
+            <SectionLabel>Партнёры</SectionLabel>
+            <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-foreground leading-[0.95]">
+              Вместе с <span className="italic text-primary">нами</span>
+            </h2>
+          </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <motion.a
+              href="https://nenaprasno.ru"
+              target="_blank"
+              rel="noopener noreferrer"
+              {...fadeUp}
+              className="aspect-[3/2] border border-border rounded-lg flex flex-col items-center justify-center text-center p-4 hover:border-primary/40 transition-colors"
+            >
+              <p className="font-display text-xl text-foreground">«Не напрасно»</p>
+              <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">Смысловой партнёр</p>
+            </motion.a>
+            <motion.div {...fadeUp} className="aspect-[3/2] border border-border rounded-lg flex flex-col items-center justify-center text-center p-4">
+              <p className="font-display text-xl text-foreground">«Место быть»</p>
+              <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">Площадка</p>
+            </motion.div>
+            <motion.a
+              href="/docs/aktkom-portfolio-2026.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              {...fadeUp}
+              className="aspect-[3/2] border border-border rounded-lg flex flex-col items-center justify-center text-center p-4 hover:border-primary/40 transition-colors"
+            >
+              <p className="font-display text-xl text-foreground">АктКом</p>
+              <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">Стратегический партнёр</p>
+            </motion.a>
+            <motion.a
+              href={`https://t.me/${organizers[1].handle}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              {...fadeUp}
+              className="aspect-[3/2] border border-dashed border-primary/40 bg-primary/5 rounded-lg flex flex-col items-center justify-center text-center p-4 hover:bg-primary/10 transition-colors"
+            >
+              <p className="font-display text-xl text-primary">Стать партнёром</p>
+              <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">Напишите организаторам</p>
+            </motion.a>
+          </div>
+        </div>
+      </section>
+
       {/* Организаторы */}
       <section className="bg-card/50 py-20 md:py-28 section-padding">
         <div className="max-w-7xl mx-auto">
@@ -389,25 +521,17 @@ const Wellness = () => {
                 АктКом — портфолио
               </a>
             </div>
-            <button
-              onClick={() => setModal(true)}
+            <a
+              href="#registration"
               className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center justify-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
             >
-              Хочу прийти <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+              Зарегистрироваться <ArrowRight className="w-3.5 h-3.5" />
+            </a>
           </motion.div>
         </div>
       </section>
 
       <Footer />
-
-      <TicketRequestModal
-        isOpen={modal}
-        onClose={() => setModal(false)}
-        ticketType="Велнес-девичник 25 октября"
-        ticketPrice=""
-        showTrainingCheckbox={false}
-      />
     </div>
   );
 };
