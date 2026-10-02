@@ -29,7 +29,7 @@ const WellnessTeaserBanner = () => {
                 <motion.p
                   animate={{ opacity: [0.6, 1, 0.6] }}
                   transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-[10px] uppercase tracking-[0.4em] text-primary font-body"
+                  className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream font-body font-medium"
                 >
                   Москва · 25 октября · вход свободный
                 </motion.p>

@@ -185,7 +185,7 @@ const Wellness = () => {
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}>
-            <div className="aspect-[4/3] overflow-hidden rounded-sm">
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl">
               <img src={heroImg} alt="Пространство велнес-девичника «Отражение»" className="w-full h-full object-cover" />
             </div>
             <p className="mt-2 font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60">Эскиз оформления события · визуализация</p>
