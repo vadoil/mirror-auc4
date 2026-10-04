@@ -8,6 +8,7 @@ interface Props {
   name?: string
   training?: string | null
   position?: number
+  amount?: number
 }
 
 export const eventRows = (training?: string | null) => {
@@ -19,11 +20,11 @@ export const eventRows = (training?: string | null) => {
   return rows
 }
 
-const WellnessRegistrationEmail = ({ name, training, position }: Props) => (
+const WellnessRegistrationEmail = ({ name, training, position, amount }: Props) => (
   <EmailLayout preview="Вы зарегистрированы на велнес-девичник «Отражение» 25 октября">
     <Heading style={h1}>{name ? `${name}, вы в списке гостей!` : 'Вы в списке гостей!'}</Heading>
     <Text style={p}>
-      Спасибо за регистрацию на велнес-девичник «Отражение» — день, полностью посвящённый заботе о себе:
+      Спасибо за регистрацию и оплату участия в велнес-девичнике «Отражение» — день, полностью посвящённый заботе о себе:
       public talk, консультации врачей, beauty-девайсы, практики и тёплое женское комьюнити.
     </Text>
     {position !== undefined && position <= 60 && (
@@ -31,9 +32,9 @@ const WellnessRegistrationEmail = ({ name, training, position }: Props) => (
         <b>Вы среди первых 60 гостей — место в лектории за вами гарантировано.</b>
       </Text>
     )}
-    <InfoCard rows={eventRows(training)} />
+    <InfoCard rows={[...eventRows(training), ...(amount ? [{ label: 'Оплачено', value: `${amount} ₽` }] : [])]} />
     <Text style={p}>
-      Мы напомним о событии за неделю и накануне. Вход по регистрации — бесплатный.
+      Мы напомним о событии за неделю и накануне. Чек об оплате CloudPayments пришлёт отдельным письмом.
     </Text>
     <Cta href={WELLNESS_EVENT.pageUrl}>Программа девичника</Cta>
     <Text style={signOff}>До встречи 25 октября! Команда «Отражения»</Text>
@@ -44,5 +45,5 @@ export const template = {
   component: WellnessRegistrationEmail,
   subject: 'Вы зарегистрированы — велнес-девичник «Отражение», 25 октября',
   displayName: 'Велнес-девичник: подтверждение регистрации',
-  previewData: { name: 'Мария', training: 'bowls', position: 12 },
+  previewData: { name: 'Мария', training: 'bowls', position: 12, amount: 440 },
 } satisfies TemplateEntry

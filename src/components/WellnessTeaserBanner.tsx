@@ -31,7 +31,7 @@ const WellnessTeaserBanner = () => {
                   transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                   className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream font-body font-medium"
                 >
-                  Москва · 25 октября · вход свободный
+                  Москва · 25 октября · участие 440 ₽
                 </motion.p>
               </div>
               <h3 className="font-display text-4xl md:text-7xl text-cream uppercase tracking-tight leading-[1.05] mb-4">

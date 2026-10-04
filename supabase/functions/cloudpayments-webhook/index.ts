@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { confirmWellnessPayment, wellnessIdFromInvoice } from "../_shared/wellness-payment.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -86,6 +87,28 @@ Deno.serve(async (req) => {
       data = payload.Data ? JSON.parse(payload.Data) : {};
     } catch (_) {
       data = {};
+    }
+
+    // Велнес-девичник: InvoiceId «wellness-<id>» — отдельная ветка, заявки на билеты не трогаем
+    const wellnessId = wellnessIdFromInvoice(payload.InvoiceId) || (data.wellness_registration_id as string | undefined);
+    if (wellnessId) {
+      const supabase = createClient(SUPABASE_URL, SERVICE_KEY);
+      await supabase.from("payments").upsert(
+        {
+          ticket_request_id: null,
+          yookassa_payment_id: String(transactionId),
+          amount,
+          provider: "cloudpayments",
+          status,
+          metadata: payload,
+        },
+        { onConflict: "yookassa_payment_id" },
+      ).then(({ error }) => error && console.error("[cloudpayments-webhook] payments upsert", error));
+      if (status === "completed" || status === "authorized") {
+        const res = await confirmWellnessPayment(supabase, wellnessId, { amount, transactionId: String(transactionId) });
+        console.log("[cloudpayments-webhook] wellness", wellnessId, res);
+      }
+      return ok();
     }
 
     const ticketRequestId = (data.ticket_request_id as string | undefined) || payload.InvoiceId || undefined;

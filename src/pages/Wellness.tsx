@@ -204,7 +204,7 @@ const Wellness = () => {
             <p className="font-display text-3xl md:text-4xl text-foreground leading-tight mb-2">Новая роскошь —</p>
             <p className="font-display text-3xl md:text-4xl italic text-primary leading-tight mb-6">забота о себе.</p>
             <p className="font-body text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Красота · лонгевити · велбинг</p>
-            <p className="font-body text-sm text-foreground mb-10">Вход бесплатный, по регистрации.</p>
+            <p className="font-body text-sm text-foreground mb-10">Участие — 440 ₽, по регистрации.</p>
             <div className="flex flex-wrap gap-3">
               <a
                 href="#registration"
@@ -281,11 +281,11 @@ const Wellness = () => {
               <div className="w-8 h-px bg-primary" />
             </div>
             <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-foreground leading-[0.95] mb-6">
-              Приходите — <span className="italic text-primary">это бесплатно</span>
+              Участие — <span className="italic text-primary">440 ₽</span>
             </h2>
             <div className="inline-flex items-center gap-4 bg-primary/10 border border-primary/30 rounded-full pl-2 pr-6 py-2">
               <span className="font-numbers text-2xl text-primary-foreground bg-primary rounded-full w-12 h-12 flex items-center justify-center">60</span>
-              <span className="font-body text-sm text-foreground text-left">первых регистраций гарантированно<br className="hidden sm:block" /> получают место в лектории</span>
+              <span className="font-body text-sm text-foreground text-left">первых оплаченных регистраций гарантированно<br className="hidden sm:block" /> получают место в лектории</span>
             </div>
           </motion.div>
           <motion.div {...fadeUp}>

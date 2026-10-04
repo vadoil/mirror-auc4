@@ -1,6 +1,10 @@
+// Регистрация на велнес-девичник (платная, 440 ₽).
+//   POST {анкета}                 → создаёт регистрацию «ждёт оплаты», возвращает id для виджета CloudPayments
+//   POST {action:"status", id}    → статус оплаты (сайт опрашивает после закрытия виджета)
+// Письмо гостье и сообщение организаторам уходят после оплаты — из cloudpayments-webhook.
 import { createClient } from 'npm:@supabase/supabase-js@2'
-import { sendTemplate, notifyOrganizers, escapeHtml } from '../_shared/wellness-mailer.ts'
 import { TRAININGS } from '../_shared/transactional-email-templates/wellness-event.ts'
+import { WELLNESS_PRICE } from '../_shared/wellness-payment.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -12,15 +16,38 @@ const json = (body: unknown, status = 200) =>
 
 const str = (v: unknown, max: number) => String(v ?? '').trim().slice(0, max)
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders })
   if (req.method !== 'POST') return json({ error: 'method not allowed' }, 405)
 
   const body = await req.json().catch(() => ({} as Record<string, unknown>))
+  const supabase = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
+
+  if (body.action === 'status') {
+    const id = str(body.id, 36)
+    if (!UUID_RE.test(id)) return json({ error: 'bad id' }, 400)
+    const { data: row } = await supabase
+      .from('wellness_registrations')
+      .select('payment_status, paid_at')
+      .eq('id', id)
+      .maybeSingle()
+    if (!row) return json({ error: 'not found' }, 404)
+    let position: number | undefined
+    if (row.payment_status === 'paid') {
+      const { count } = await supabase
+        .from('wellness_registrations')
+        .select('id', { count: 'exact', head: true })
+        .in('payment_status', ['paid', 'free'])
+        .lte('paid_at', row.paid_at)
+      position = count ?? undefined
+    }
+    return json({ ok: true, status: row.payment_status, position })
+  }
 
   // Ловушка для ботов: скрытое поле, человек его не заполняет
-  if (str(body.website, 100)) return json({ ok: true })
+  if (str(body.website, 100)) return json({ ok: true, duplicate: true })
 
   const full_name = str(body.full_name, 120)
   const email = str(body.email, 200).toLowerCase()
@@ -38,46 +65,38 @@ Deno.serve(async (req) => {
   if (body.age !== undefined && body.age !== '' && age === null) return json({ error: 'Проверьте возраст' }, 400)
   if (!consent_pd) return json({ error: 'Нужно согласие на обработку персональных данных' }, 400)
 
-  const supabase = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
+  const fields = {
+    full_name, email, phone, telegram, age, training, consent_pd, consent_ads,
+    utm: typeof body.utm === 'object' && body.utm ? body.utm : null,
+  }
+
+  // Уже есть регистрация с этой почтой: оплаченная — повторно не берём; неоплаченная — обновляем и даём оплатить
+  const { data: existing } = await supabase
+    .from('wellness_registrations')
+    .select('id, payment_status')
+    .eq('email', email)
+    .maybeSingle()
+
+  if (existing && existing.payment_status !== 'pending') return json({ ok: true, duplicate: true })
+
+  if (existing) {
+    const { error } = await supabase.from('wellness_registrations').update(fields).eq('id', existing.id)
+    if (error) {
+      console.error('[wellness-register] update failed', error)
+      return json({ error: 'Не удалось сохранить регистрацию, попробуйте ещё раз' }, 500)
+    }
+    return json({ ok: true, id: existing.id, amount: WELLNESS_PRICE })
+  }
 
   const { data: row, error } = await supabase
     .from('wellness_registrations')
-    .insert({
-      full_name, email, phone, telegram, age, training, consent_pd, consent_ads,
-      utm: typeof body.utm === 'object' && body.utm ? body.utm : null,
-    })
-    .select('id, created_at')
+    .insert({ ...fields, payment_status: 'pending' })
+    .select('id')
     .single()
 
   if (error) {
-    if (error.code === '23505') return json({ ok: true, duplicate: true })
     console.error('[wellness-register] insert failed', error)
     return json({ error: 'Не удалось сохранить регистрацию, попробуйте ещё раз' }, 500)
   }
-
-  const { count } = await supabase
-    .from('wellness_registrations')
-    .select('id', { count: 'exact', head: true })
-    .lte('created_at', row.created_at)
-  const position = count ?? undefined
-
-  const firstName = full_name.split(/\s+/)[0]
-  try {
-    await sendTemplate('wellness-registration', email, { name: firstName, training, position })
-    await supabase.from('wellness_registrations').update({ confirmation_sent_at: new Date().toISOString() }).eq('id', row.id)
-  } catch (e) {
-    console.error('[wellness-register] email failed', e)
-  }
-
-  await notifyOrganizers(
-    `🌸 <b>Регистрация на велнес-девичник</b> · №${position ?? '?'}\n` +
-    `━━━━━━━━━━━━━━━━━━\n\n` +
-    `👤 <b>${escapeHtml(full_name)}</b>${age ? `, ${age}` : ''}\n` +
-    `📞 ${escapeHtml(phone)}\n✉️ ${escapeHtml(email)}\n` +
-    (telegram ? `💬 @${escapeHtml(telegram)}\n` : '') +
-    (training ? `\n🏃‍♀️ ${escapeHtml(TRAININGS[training])}` : '') +
-    (consent_ads ? `\n📨 согласна на рассылку` : ''),
-  )
-
-  return json({ ok: true, position })
+  return json({ ok: true, id: row.id, amount: WELLNESS_PRICE })
 })

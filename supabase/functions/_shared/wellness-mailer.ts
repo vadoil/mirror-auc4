@@ -56,11 +56,23 @@ export async function notifyOrganizers(text: string) {
   const token = Deno.env.get('TELEGRAM_BOT_TOKEN')
   const chatId = Deno.env.get('TELEGRAM_CHAT_ID')
   if (!token || !chatId) return
-  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML', disable_web_page_preview: true }),
-  }).catch((e) => console.error('[wellness] telegram failed', e))
+  // Соединение с api.telegram.org с сервера иногда рвётся (connection reset) — пробуем до 3 раз
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML', disable_web_page_preview: true }),
+        signal: AbortSignal.timeout(8000),
+      })
+      if (res.ok) return
+      console.error('[wellness] telegram status', res.status)
+    } catch (e) {
+      // без URL в логе — в нём токен бота
+      console.error(`[wellness] telegram attempt ${attempt} failed:`, (e as Error).name)
+    }
+    if (attempt < 3) await new Promise((r) => setTimeout(r, 1500 * attempt))
+  }
 }
 
 export const escapeHtml = (s: unknown) =>

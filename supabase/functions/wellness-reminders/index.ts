@@ -21,6 +21,7 @@ Deno.serve(async (req) => {
     .from('wellness_registrations')
     .select('id, full_name, email, training')
     .is(column, null)
+    .in('payment_status', ['paid', 'free'])
     .order('created_at')
   if (error) return json({ error: error.message }, 500)
 

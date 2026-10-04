@@ -81,7 +81,12 @@ type WellnessRegistration = {
   training: string | null;
   consent_ads: boolean;
   confirmation_sent_at: string | null;
+  payment_status: "pending" | "paid" | "free";
+  amount: number | null;
+  paid_at: string | null;
 };
+
+const wellnessPayLabels: Record<string, string> = { paid: "оплачено", free: "бесплатно", pending: "не оплачено" };
 
 const wellnessTrainings: Record<string, string> = {
   libido: "Либидо-фитнес (Марго)",
@@ -90,10 +95,12 @@ const wellnessTrainings: Record<string, string> = {
 };
 
 const downloadWellnessCsv = (rows: WellnessRegistration[]) => {
-  const head = ["№", "Дата", "Имя и фамилия", "Почта", "Телефон", "Telegram", "Возраст", "Тренировка", "Реклама"];
+  const head = ["№", "Оплата", "Сумма", "Дата", "Имя и фамилия", "Почта", "Телефон", "Telegram", "Возраст", "Тренировка", "Реклама"];
   const ordered = [...rows].reverse();
   const lines = ordered.map((r, i) => [
     i + 1,
+    wellnessPayLabels[r.payment_status] ?? r.payment_status,
+    r.amount ?? "",
     new Date(r.created_at).toLocaleString("ru-RU"),
     r.full_name, r.email, r.phone, r.telegram ? `@${r.telegram}` : "", r.age ?? "",
     r.training ? wellnessTrainings[r.training] ?? r.training : "", r.consent_ads ? "да" : "нет",
@@ -795,7 +802,10 @@ const Admin = () => {
         {tab === "wellness" && (
           <div>
             <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
-              <h2 className="font-display text-2xl uppercase">Девичник 25.10 · {wellnessRegs.length}</h2>
+              <h2 className="font-display text-2xl uppercase">
+                Девичник 25.10 · оплачено {wellnessRegs.filter((r) => r.payment_status !== "pending").length}
+                <span className="text-cream/40 text-base normal-case"> · всего анкет {wellnessRegs.length}</span>
+              </h2>
               <button
                 onClick={() => downloadWellnessCsv(wellnessRegs)}
                 disabled={!wellnessRegs.length}
@@ -815,14 +825,21 @@ const Admin = () => {
               </span>
             </div>
             <div className="space-y-2">
-              {wellnessRegs.map((r, i) => {
-                const n = wellnessRegs.length - i;
+              {wellnessRegs.map((r) => {
+                const confirmed = wellnessRegs
+                  .filter((x) => x.payment_status !== "pending")
+                  .sort((a, b) => (a.paid_at ?? "").localeCompare(b.paid_at ?? ""));
+                const idx = confirmed.findIndex((x) => x.id === r.id);
+                const n = idx >= 0 ? idx + 1 : null;
                 return (
                   <div key={r.id} className="bg-cream/5 border border-cream/10 p-4">
                     <div className="flex items-start justify-between gap-4 flex-wrap">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-3 mb-1 flex-wrap">
-                          <span className={`text-[10px] font-body px-2 py-0.5 ${n <= 60 ? "bg-primary/20 text-primary" : "bg-cream/10 text-cream/50"}`}>№{n}</span>
+                          {n !== null && <span className={`text-[10px] font-body px-2 py-0.5 ${n <= 60 ? "bg-primary/20 text-primary" : "bg-cream/10 text-cream/50"}`}>№{n}</span>}
+                          <span className={`text-[10px] uppercase tracking-wider font-body px-2 py-0.5 ${r.payment_status === "pending" ? "bg-cream/5 text-cream/40" : "bg-green-500/15 text-green-400"}`}>
+                            {wellnessPayLabels[r.payment_status]}{r.amount ? ` ${r.amount} ₽` : ""}
+                          </span>
                           <p className="font-body text-sm text-cream font-medium">{r.full_name}{r.age ? `, ${r.age}` : ""}</p>
                           {r.training && <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-cream/10 text-cream/60">{wellnessTrainings[r.training] ?? r.training}</span>}
                         </div>
