@@ -13,6 +13,7 @@ import gizaPhoto from "@/assets/organizer-giza-clean.webp";
 import nenaprasnoLogo from "@/assets/sponsors/nenaprasno.png";
 import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
 import actcomLogo from "@/assets/sponsors/actcom.svg";
+import mortadaPhoto from "@/assets/speaker-mortada.webp";
 
 const venueFeatures = ["Лекторий", "Тренировки", "Зона бьюти-шоппинга", "Фудспот", "Кофе и протеиновые шейки"];
 
@@ -72,7 +73,7 @@ const lectures = [
 ];
 
 const speakers: { name: string; role: string; details?: string[]; photo?: string; initials: string }[] = [
-  { name: "Виктория Мортада", role: "Маммолог, хирург-онколог", initials: "ВМ" },
+  { name: "Виктория Мортада", role: "Маммолог, хирург-онколог", photo: mortadaPhoto, initials: "ВМ" },
   {
     name: "Анна Борисова",
     role: "Врач-гастроэнтеролог, врач превентивной медицины, beauty-нутрициолог",
