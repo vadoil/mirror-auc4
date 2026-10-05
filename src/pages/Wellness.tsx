@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, Play, CupSoda, Download, HeartPulse, MapPin, Pill, Ribbon, ScanFace, Sparkles, Users, Wind } from "lucide-react";
+import { ArrowRight, Calendar, Play, CupSoda, HeartPulse, MapPin, Pill, Ribbon, ScanFace, Sparkles, Users, Wind } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WellnessRegistration from "@/components/WellnessRegistration";
@@ -25,14 +25,6 @@ const experience = [
   { title: "Красивый контент", text: "атмосфера, которую хочется сохранить" },
 ];
 
-const program = [
-  { tag: "Public talk", title: "Героини нового велнеса", text: "Женщины, которые честно рассказывают, как заботятся о себе: от бьюти-рутины до умного биохакинга." },
-  { tag: "Public talk с пластическим хирургом", title: "Маммопластика", text: "Всё, что ты должна знать, чтобы принять решение." },
-  { tag: "Весь день · открытая зона", title: "Beauty-девайсы и диагностика", text: "Гаджеты для красоты, сна и энергии; диагностика кожи, волос и тела, восстановление и бар." },
-  { tag: "Лекция", title: "«Я в безопасности»", text: "Рак груди: мифы и достоверная диагностика — что реально работает в профилактике." },
-  { tag: "Наедине с врачом", title: "Консультация маммолога", text: "Бесплатная личная консультация — спокойно, приватно, для каждой гостьи." },
-];
-
 // Тонкие линейные иллюстрации к пунктам программы
 const LineArt = ({ children }: { children: React.ReactNode }) => (
   <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
@@ -40,42 +32,61 @@ const LineArt = ({ children }: { children: React.ReactNode }) => (
   </svg>
 );
 
-const programArt = [
-  // микрофон
-  <LineArt key="mic">
-    <rect x="25" y="8" width="14" height="26" rx="7" />
-    <path d="M30 16h4M30 21h4M30 26h4" />
-    <path d="M18 28a14 14 0 0 0 28 0" />
-    <path d="M32 42v12M24 54h16" />
-    <path d="M50 12v6M47 15h6M12 38v4M10 40h4" />
-  </LineArt>,
-  // лотос
-  <LineArt key="lotus">
-    <path d="M32 14c6 7 7 19 0 30c-7-11-6-23 0-30z" />
-    <path d="M32 44c-9-1-17-9-18-20c9 1 15 8 18 20z" />
-    <path d="M32 44c9-1 17-9 18-20c-9 1-15 8-18 20z" />
-    <path d="M14 50c8 4 28 4 36 0" />
-  </LineArt>,
-  // зеркальце и искры
-  <LineArt key="mirror">
-    <ellipse cx="27" cy="25" rx="13" ry="15" />
-    <ellipse cx="27" cy="25" rx="9" ry="11" opacity={0.5} />
-    <path d="M27 40v14M23 54h8" />
-    <path d="M49 10v8M45 14h8M52 30v6M49 33h6" />
-  </LineArt>,
-  // розовая лента
-  <LineArt key="ribbon">
-    <path d="M19 55L35 27C41 17 39 8 32 8S23 17 29 27l16 28" />
-    <path d="M19 55l5-1 1 4M45 55l-5-1-1 4" />
-  </LineArt>,
-  // стетоскоп
-  <LineArt key="stethoscope">
-    <path d="M18 10v14a10 10 0 0 0 20 0V10" />
-    <path d="M15 10h6M35 10h6" />
-    <path d="M28 34v6a11 11 0 0 0 22 0v-6" />
-    <circle cx="50" cy="30" r="4" />
-  </LineArt>,
+// Лекторий: выступления врачей (порядок — как в программе)
+const lectures = [
+  {
+    tag: "Маммология · пластическая хирургия",
+    title: "Диагностика и профилактика",
+    text: "Что важно знать о здоровье груди: обследования, профилактика и ответы на вопросы о пластике.",
+    art: (
+      <LineArt key="ribbon">
+        <path d="M19 55L35 27C41 17 39 8 32 8S23 17 29 27l16 28" />
+        <path d="M19 55l5-1 1 4M45 55l-5-1-1 4" />
+      </LineArt>
+    ),
+  },
+  {
+    tag: "Гастроэнтерология",
+    title: "Микробиота и женское здоровье",
+    text: "Как состояние микробиоты влияет на самочувствие, кожу, энергию и гормональный баланс.",
+    art: (
+      <LineArt key="leaf">
+        <path d="M14 50C14 26 30 12 52 12c0 24-14 40-38 38z" />
+        <path d="M14 50L40 24M26 38h8M33 31v-8" />
+      </LineArt>
+    ),
+  },
+  {
+    tag: "Чек-ап",
+    title: "Что проверять, чтобы быть спокойной",
+    text: "Какие обследования действительно нужны женщине и как часто их проходить — без лишнего.",
+    art: (
+      <LineArt key="stethoscope">
+        <path d="M18 10v14a10 10 0 0 0 20 0V10" />
+        <path d="M15 10h6M35 10h6" />
+        <path d="M28 34v6a11 11 0 0 0 22 0v-6" />
+        <circle cx="50" cy="30" r="4" />
+      </LineArt>
+    ),
+  },
 ];
+
+const speakers: { name: string; role: string; details?: string[]; photo?: string; initials: string }[] = [
+  { name: "Виктория Мортада", role: "Маммолог, хирург-онколог", initials: "ВМ" },
+  {
+    name: "Анна Борисова",
+    role: "Врач-гастроэнтеролог, врач превентивной медицины, beauty-нутрициолог",
+    details: [
+      "Российская гастроэнтерологическая ассоциация (РГА)",
+      "Научное общество по содействию изучению микробиома человека (НСОИМ)",
+      "European Society of Neurogastroenterology and Motility (ESNM)",
+    ],
+    initials: "АБ",
+  },
+];
+
+const expoBrands = ["«Абрау» лимонад", "Natura Siberica", "Smart Life", "Vita Strada", "Deep", "Refeel", "СберЗдоровье"];
+const expoCategories = ["бельё", "шёлковые пижамы", "тренажёры для тазового дна", "гаджеты для детей"];
 
 const trainings = [
   {
@@ -212,8 +223,8 @@ const Wellness = () => {
               >
                 Зарегистрироваться <ArrowRight className="w-3.5 h-3.5" />
               </a>
-              <a href="/docs/wellness-devichnik.pdf" target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2 text-sm">
-                <Download className="w-3.5 h-3.5" /> Презентация
+              <a href="#program" className="btn-outline inline-flex items-center gap-2 text-sm">
+                Программа
               </a>
             </div>
           </motion.div>
@@ -348,74 +359,78 @@ const Wellness = () => {
       </section>
 
       {/* Программа */}
-      <section className="bg-warm-black text-cream py-20 md:py-28 section-padding">
+      <section id="program" className="bg-warm-black text-cream py-20 md:py-28 section-padding scroll-mt-16">
         <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp} className="mb-12">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-px bg-primary" />
-              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">Программа</p>
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">Программа · участники</p>
             </div>
             <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight leading-[0.95]">
               Главное <span className="italic text-primary">за один день.</span>
             </h2>
           </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {program.map((p, i) => (
+
+          {/* Лекторий */}
+          <p className="font-body text-xs uppercase tracking-[0.3em] text-primary mb-5">Лекторий · выступления врачей</p>
+          <div className="grid md:grid-cols-3 gap-4 mb-16 md:mb-20">
+            {lectures.map((l, i) => (
               <motion.div
-                key={p.title}
+                key={l.tag}
                 {...fadeUp}
                 transition={{ duration: 0.5, delay: 0.06 * i }}
                 className="group relative border border-cream/10 rounded-lg p-6 md:p-8 hover:border-primary/40 hover:bg-cream/[0.03] transition-colors"
               >
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <p className="font-body text-[10px] uppercase tracking-[0.2em] text-primary pt-1">
-                    {num(i)} · {p.tag}
+                    {num(i)} · {l.tag}
                   </p>
                   <div className="w-14 h-14 shrink-0 text-primary/80 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
-                    {programArt[i]}
+                    {l.art}
                   </div>
                 </div>
-                <h3 className="font-display text-2xl text-cream leading-tight mb-3">{p.title}</h3>
-                <p className="font-body text-sm text-cream/60 leading-relaxed">{p.text}</p>
+                <h3 className="font-display text-2xl text-cream leading-tight mb-3">{l.title}</h3>
+                <p className="font-body text-sm text-cream/60 leading-relaxed">{l.text}</p>
               </motion.div>
             ))}
-            <motion.a
-              href="/docs/wellness-devichnik.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              {...fadeUp}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="group relative flex flex-col bg-primary/15 border border-primary/40 rounded-lg p-6 md:p-8 hover:bg-primary/25 hover:border-primary transition-colors"
-            >
-              <div className="flex items-start justify-between gap-4 mb-6">
-                <p className="font-body text-[10px] uppercase tracking-[0.2em] text-primary pt-1">06 · PDF · 7 страниц</p>
-                <div className="w-14 h-14 shrink-0 text-primary transition-transform duration-500 group-hover:translate-y-1">
-                  <LineArt>
-                    <path d="M16 8h22l10 10v38H16z" />
-                    <path d="M38 8v10h10" />
-                    <path d="M32 26v18M25 37l7 7 7-7" />
-                    <path d="M24 50h16" />
-                  </LineArt>
-                </div>
-              </div>
-              <h3 className="font-display text-2xl text-cream leading-tight mb-3">Скачать презентацию</h3>
-              <p className="font-body text-sm text-cream/60 leading-relaxed mb-6">Вся программа, пространство и зоны девичника — в одном файле.</p>
-              <span className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary font-body">
-                <Download className="w-3.5 h-3.5" /> Скачать
-              </span>
-            </motion.a>
           </div>
 
-          <motion.div {...fadeUp} className="mt-16 md:mt-20">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-px bg-primary" />
-              <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream/40 font-body">Участники · тренировки</p>
-            </div>
-            <h3 className="font-display text-3xl md:text-5xl font-light tracking-tight leading-[0.95] mb-10">
-              Выберите <span className="italic text-primary">свою практику</span>
-            </h3>
-          </motion.div>
-          <div className="grid md:grid-cols-3 gap-4">
+          {/* Спикеры */}
+          <p className="font-body text-xs uppercase tracking-[0.3em] text-primary mb-5">Спикеры</p>
+          <div className="grid md:grid-cols-2 gap-4 mb-16 md:mb-20">
+            {speakers.map((sp) => (
+              <motion.div key={sp.name} {...fadeUp} className="flex gap-5 md:gap-6 border border-cream/10 rounded-lg p-5 md:p-6">
+                <div className="w-24 h-24 md:w-32 md:h-32 shrink-0 rounded-2xl overflow-hidden bg-cream/5 flex items-center justify-center">
+                  {sp.photo ? (
+                    <img src={sp.photo} alt={sp.name} loading="lazy" className="w-full h-full object-cover object-top" />
+                  ) : (
+                    <span className="font-display text-3xl text-primary/70">{sp.initials}</span>
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <h3 className="font-display text-2xl text-cream leading-tight mb-2">{sp.name}</h3>
+                  <p className="font-body text-sm text-cream/70 leading-relaxed">{sp.role}</p>
+                  {sp.details && (
+                    <>
+                      <p className="font-body text-[10px] uppercase tracking-[0.2em] text-cream/40 mt-4 mb-2">Действующий член</p>
+                      <ul className="space-y-1">
+                        {sp.details.map((d) => (
+                          <li key={d} className="flex items-start gap-2 font-body text-xs text-cream/60">
+                            <span className="w-1 h-1 rounded-full bg-primary mt-1.5 shrink-0" />
+                            {d}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Тренировки */}
+          <p className="font-body text-xs uppercase tracking-[0.3em] text-primary mb-5">Тренировки · выберите при регистрации</p>
+          <div className="grid md:grid-cols-3 gap-4 mb-16 md:mb-20">
             {trainings.map((t, i) => (
               <motion.a
                 key={t.title}
@@ -433,7 +448,34 @@ const Wellness = () => {
               </motion.a>
             ))}
           </div>
-          <p className="mt-6 font-body text-xs text-cream/40">Записаться на тренировку можно при регистрации. Имена спикеров объявим ближе к дате.</p>
+
+          {/* Экспо и игристое */}
+          <div className="grid lg:grid-cols-[1.6fr_1fr] gap-4">
+            <motion.div {...fadeUp} className="border border-cream/10 rounded-lg p-6 md:p-8">
+              <p className="font-body text-[10px] uppercase tracking-[0.2em] text-primary mb-4">Весь день · экспо-зона</p>
+              <h3 className="font-display text-2xl md:text-3xl text-cream leading-tight mb-6">Бренды и сервисы заботы о себе</h3>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {expoBrands.map((b) => (
+                  <span key={b} className="font-body text-sm text-cream border border-cream/20 rounded-full px-4 py-1.5">{b}</span>
+                ))}
+              </div>
+              <p className="font-body text-sm text-cream/50">А ещё: {expoCategories.join(", ")}.</p>
+            </motion.div>
+            <motion.div {...fadeUp} className="relative overflow-hidden bg-primary/15 border border-primary/40 rounded-lg p-6 md:p-8 flex flex-col">
+              <p className="font-body text-[10px] uppercase tracking-[0.2em] text-primary mb-4">Финал дня</p>
+              <div className="w-16 h-16 text-primary mb-4">
+                <LineArt>
+                  <path d="M20 8h12l-1 16a5 5 0 0 1-10 0z" />
+                  <path d="M26 29v20M20 49h12" />
+                  <path d="M38 14h12l-1 16a5 5 0 0 1-10 0z" />
+                  <path d="M44 35v14M38 49h12" />
+                  <path d="M35 6v4M33 8h4" />
+                </LineArt>
+              </div>
+              <h3 className="font-display text-2xl md:text-3xl text-cream leading-tight mb-3">Игристое со стилистом</h3>
+              <p className="font-body text-sm text-cream/60 leading-relaxed">Бокал игристого, разговор о стиле и образах — красивое завершение дня.</p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
