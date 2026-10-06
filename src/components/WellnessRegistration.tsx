@@ -6,7 +6,7 @@ import { CLOUDPAYMENTS_PUBLIC_ID, loadCloudPaymentsWidget } from "@/lib/cloudpay
 
 export const TRAININGS = [
   { id: "libido", title: "Либидо-фитнес", coach: "с Маргаритой Дмитриевой" },
-  { id: "abs", title: "Плоский живот", coach: "с Георгием Какуновым" },
+  { id: "abs", title: "Плоский живот", coach: "с Георгием Какуниным" },
   { id: "bowls", title: "Медитация", coach: "с поющими чашами" },
 ] as const;
 

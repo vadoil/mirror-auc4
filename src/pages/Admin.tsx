@@ -90,7 +90,7 @@ const wellnessPayLabels: Record<string, string> = { paid: "оплачено", fr
 
 const wellnessTrainings: Record<string, string> = {
   libido: "Либидо-фитнес (Маргарита Дмитриева)",
-  abs: "Плоский живот (Георгий Какунов)",
+  abs: "Плоский живот (Георгий Какунин)",
   bowls: "Поющие чаши",
 };
 
