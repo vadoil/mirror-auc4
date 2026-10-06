@@ -63,6 +63,9 @@ import zone8 from "@/assets/wellness/zones/zone-8.webp";
 import nenaprasnoLogo from "@/assets/sponsors/nenaprasno.png";
 import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
 import actcomLogo from "@/assets/sponsors/actcom.svg";
+import sberHealthLogo from "@/assets/brands/sberhealth.svg";
+import naturaSibericaLogo from "@/assets/brands/natura-siberica.png";
+import refeelLogo from "@/assets/brands/refeel.png";
 
 // Тексты — из презентации «Отражение_25_октября_программа_и_участники_v2».
 
@@ -160,7 +163,17 @@ const experts: Expert[] = [
   },
 ];
 
-const brands = ["Абрау-Дюрсо", "Natura Siberica", "Smartlife", "Vita Strada", "DEEP", "refeel", "Сбер Здоровье"]; // «Сбер Здоровье» — на всю ширину
+// Логотипы: Natura Siberica и refeel — из презентации v2, СберЗдоровье — Wikimedia Commons (SberHealth.svg).
+// Для остальных официальный логотип не нашёлся — аккуратный вордмарк. «Сбер Здоровье» — на всю ширину.
+const brands: { name: string; logo?: string; logoClass?: string }[] = [
+  { name: "Абрау-Дюрсо" },
+  { name: "Natura Siberica", logo: naturaSibericaLogo, logoClass: "h-9 md:h-11" },
+  { name: "Smartlife" },
+  { name: "Vita Strada" },
+  { name: "DEEP" },
+  { name: "refeel", logo: refeelLogo, logoClass: "h-8 md:h-10" },
+  { name: "Сбер Здоровье", logo: sberHealthLogo },
+];
 const brandCategories = [
   { icon: Shirt, label: "Бренд белья" },
   { icon: Moon, label: "Шёлковые пижамы" },
@@ -554,24 +567,27 @@ const Wellness = () => {
               </motion.div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
                 {brands.map((b, i) =>
-                  b === "Сбер Здоровье" ? (
+                  b.name === "Сбер Здоровье" ? (
                     <motion.div
-                      key={b}
+                      key={b.name}
                       {...fadeUp}
                       transition={{ duration: 0.4, delay: 0.04 * i }}
-                      className="col-span-full rounded-xl flex items-center justify-center gap-3 py-6 md:py-7 text-white"
-                      style={{ background: "linear-gradient(90deg, #21A038 0%, #1DA0C9 100%)" }}
+                      className="col-span-full bg-white border border-border rounded-xl flex items-center justify-center py-6 md:py-8 px-6"
                     >
-                      <span className="font-body font-semibold text-xl md:text-2xl tracking-wide">СберЗдоровье</span>
+                      <img src={b.logo} alt="СберЗдоровье" loading="lazy" className="h-6 md:h-8 w-auto max-w-full" />
                     </motion.div>
                   ) : (
                     <motion.div
-                      key={b}
+                      key={b.name}
                       {...fadeUp}
                       transition={{ duration: 0.4, delay: 0.04 * i }}
                       className="aspect-[3/2] bg-card border border-border rounded-xl flex items-center justify-center text-center px-3 hover:border-primary/40 transition-colors"
                     >
-                      <span className="font-display text-lg md:text-xl text-foreground tracking-wide">{b}</span>
+                      {b.logo ? (
+                        <img src={b.logo} alt={b.name} loading="lazy" className={`${b.logoClass} w-auto max-w-full object-contain`} />
+                      ) : (
+                        <span className="font-display text-lg md:text-xl text-foreground tracking-wide">{b.name}</span>
+                      )}
                     </motion.div>
                   ),
                 )}
