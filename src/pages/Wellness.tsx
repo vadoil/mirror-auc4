@@ -97,10 +97,10 @@ const lectures = [
 ];
 
 const otherFormats = [
-  { title: "Тренировки", note: "Либидо-фитнес, сильное тело, медитация с поющими чашами", href: "#experts" },
-  { title: "Экспо", note: "Бренды и сервисы заботы о себе", href: "#brands" },
-  { title: "Игристое со стилистом", note: "24 октября, накануне девичника", href: "#october-24" },
-  { title: "Public talk", note: "«Героини нового велнеса»", href: undefined },
+  { icon: Dumbbell, title: "Тренировки", note: "Либидо-фитнес, сильное тело, медитация с поющими чашами", href: "#experts" },
+  { icon: ShoppingBag, title: "Экспо", note: "Бренды и сервисы заботы о себе", href: "#brands" },
+  { icon: Wine, title: "Игристое со стилистом", note: "24 октября, накануне девичника", href: "#october-24" },
+  { icon: Mic, title: "Public talk", note: "«Героини нового велнеса»", href: undefined },
 ];
 
 type Expert = {
@@ -167,11 +167,11 @@ const experts: Expert[] = [
 // Для остальных официальный логотип не нашёлся — аккуратный вордмарк. «Сбер Здоровье» — на всю ширину.
 const brands: { name: string; logo?: string; logoClass?: string }[] = [
   { name: "Абрау-Дюрсо" },
-  { name: "Natura Siberica", logo: naturaSibericaLogo, logoClass: "h-9 md:h-11" },
+  { name: "Natura Siberica", logo: naturaSibericaLogo, logoClass: "h-6 sm:h-9 md:h-11" },
   { name: "Smartlife" },
   { name: "Vita Strada" },
   { name: "DEEP" },
-  { name: "refeel", logo: refeelLogo, logoClass: "h-8 md:h-10" },
+  { name: "refeel", logo: refeelLogo, logoClass: "h-6 sm:h-8 md:h-10" },
   { name: "Сбер Здоровье", logo: sberHealthLogo },
 ];
 const brandCategories = [
@@ -465,26 +465,30 @@ const Wellness = () => {
                 ))}
               </div>
             </div>
-            {/* Другие форматы */}
-            <div>
+            {/* Другие форматы: плитки 2×2, по высоте вровень с лекторием */}
+            <div className="flex flex-col">
               <p className="font-body text-xs uppercase tracking-[0.3em] text-primary mb-4">Другие форматы</p>
-              <div className="divide-y divide-border border-y border-border">
+              <div className="grid grid-cols-2 lg:grid-rows-2 gap-3 flex-1">
                 {otherFormats.map((f, i) => {
                   const inner = (
                     <>
-                      <span>
-                        <span className="block font-display text-2xl text-foreground leading-tight">{f.title}</span>
-                        <span className="block font-body text-sm text-muted-foreground mt-1">{f.note}</span>
+                      <span className="flex items-start justify-between gap-2 mb-auto">
+                        <IconCircle icon={f.icon} />
+                        {f.href && <ArrowRight className="w-4 h-4 text-primary mt-1 transition-transform group-hover:translate-x-1" />}
                       </span>
-                      {f.href && <ArrowRight className="w-4 h-4 text-primary shrink-0 transition-transform group-hover:translate-x-1" />}
+                      <span className="block mt-5">
+                        <span className="block font-display text-lg md:text-xl text-foreground leading-tight">{f.title}</span>
+                        <span className="block font-body text-xs md:text-sm text-muted-foreground mt-1 leading-snug">{f.note}</span>
+                      </span>
                     </>
                   );
+                  const cls = "group h-full flex flex-col bg-card border border-border rounded-2xl p-4 md:p-5 transition-colors";
                   return (
-                    <motion.div key={f.title} {...fadeUp} transition={{ duration: 0.5, delay: 0.06 * i }}>
+                    <motion.div key={f.title} {...fadeUp} transition={{ duration: 0.5, delay: 0.06 * i }} className="h-full">
                       {f.href ? (
-                        <a href={f.href} className="group flex items-center justify-between gap-4 py-5 md:py-6">{inner}</a>
+                        <a href={f.href} className={`${cls} hover:border-primary/40`}>{inner}</a>
                       ) : (
-                        <div className="flex items-center justify-between gap-4 py-5 md:py-6">{inner}</div>
+                        <div className={cls}>{inner}</div>
                       )}
                     </motion.div>
                   );
@@ -504,7 +508,7 @@ const Wellness = () => {
                 <motion.div key={e.surname} {...fadeUp}>
                   {/* Телефон: плитка 2×2, описание — по нажатию */}
                   <button type="button" onClick={() => setOpenExpert(e)} className="sm:hidden block w-full text-left">
-                    <span className="relative block aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
+                    <span className="relative block aspect-[3/5] rounded-2xl overflow-hidden bg-muted">
                       <img src={e.photo} alt={`${e.name} ${e.surname}`} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top" />
                       <span className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-transparent to-transparent" />
                       <span className="absolute left-3 right-3 bottom-3">
@@ -543,8 +547,8 @@ const Wellness = () => {
               <DialogContent className="max-w-md w-[calc(100%-2rem)] max-h-[88vh] overflow-y-auto p-0 gap-0 rounded-2xl">
                 {openExpert && (
                   <>
-                    <div className="relative aspect-[4/5]">
-                      <img src={openExpert.photo} alt={`${openExpert.name} ${openExpert.surname}`} className="absolute inset-0 w-full h-full object-cover object-top" />
+                    <div className="relative">
+                      <img src={openExpert.photo} alt={`${openExpert.name} ${openExpert.surname}`} className="block w-full h-auto" />
                       <div className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-transparent to-transparent" />
                       <div className="absolute left-5 bottom-5">
                         <span className="inline-block font-body text-[10px] uppercase tracking-[0.2em] text-primary-foreground bg-primary rounded-full px-3 py-1 mb-3">Спикер</span>
@@ -578,7 +582,7 @@ const Wellness = () => {
                   (предварительный состав)
                 </p>
               </motion.div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
+              <div className="grid grid-cols-3 gap-2 md:gap-3 mb-3">
                 {brands.map((b, i) =>
                   b.name === "Сбер Здоровье" ? (
                     <motion.div
@@ -594,12 +598,12 @@ const Wellness = () => {
                       key={b.name}
                       {...fadeUp}
                       transition={{ duration: 0.4, delay: 0.04 * i }}
-                      className="aspect-[3/2] bg-card border border-border rounded-xl flex items-center justify-center text-center px-3 hover:border-primary/40 transition-colors"
+                      className="aspect-[3/2] bg-card border border-border rounded-xl flex items-center justify-center text-center px-2 md:px-3 hover:border-primary/40 transition-colors"
                     >
                       {b.logo ? (
                         <img src={b.logo} alt={b.name} loading="lazy" className={`${b.logoClass} w-auto max-w-full object-contain`} />
                       ) : (
-                        <span className="font-display text-lg md:text-xl text-foreground tracking-wide">{b.name}</span>
+                        <span className="font-display text-sm sm:text-lg md:text-xl text-foreground tracking-wide leading-tight">{b.name}</span>
                       )}
                     </motion.div>
                   ),

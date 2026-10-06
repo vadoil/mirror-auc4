@@ -8,12 +8,12 @@ import soundImg from "@/assets/wellness/venue/sound.webp";
 import marketImg from "@/assets/wellness/venue/market.webp";
 import cafeImg from "@/assets/wellness/venue/cafe.webp";
 
-// Фото — с сайта площадки mestobe.ru
-const spots = [
+// Фото — с сайта площадки mestobe.ru; pos — точка кадрирования, чтобы в квадрате было видно лицо
+const spots: { icon: typeof LayoutGrid; title: string; text: string; img: string; pos?: string }[] = [
   { icon: LayoutGrid, title: "Пространство", text: "3 000 м² для отдыха и восстановления", img: spaceImg },
   { icon: Presentation, title: "Лекторий", text: "Выступления врачей и public talk", img: lectoriumImg },
-  { icon: Dumbbell, title: "Тренировки", text: "Либидо-фитнес и сильное тело", img: fitnessImg },
-  { icon: Waves, title: "Практики", text: "Саунд-медитация с поющими чашами", img: soundImg },
+  { icon: Dumbbell, title: "Тренировки", text: "Либидо-фитнес и сильное тело", img: fitnessImg, pos: "50% 15%" },
+  { icon: Waves, title: "Практики", text: "Саунд-медитация с поющими чашами", img: soundImg, pos: "50% 75%" },
   { icon: ShoppingBag, title: "Бьюти-шоппинг", text: "Бренды, beauty-девайсы и экспо", img: marketImg },
   { icon: Coffee, title: "Фудспот и кофе", text: "Кофе, протеиновые шейки, healthy-бар", img: cafeImg },
 ];
@@ -37,12 +37,12 @@ const VenueCarousel = () => {
 
   return (
     <div
-      className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-14 items-center"
+      className="grid lg:grid-cols-2 gap-8 lg:gap-14 lg:items-stretch"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       {/* Пункты: активный подсвечен, клик переключает фото */}
-      <ul className="order-2 lg:order-1 grid grid-cols-3 lg:grid-cols-1 gap-2 lg:gap-1">
+      <ul className="order-2 lg:order-1 grid grid-cols-3 lg:flex lg:flex-col lg:justify-between gap-2 lg:gap-2">
         {spots.map((s, i) => {
           const on = i === active;
           return (
@@ -51,22 +51,22 @@ const VenueCarousel = () => {
                 type="button"
                 onClick={() => go(i)}
                 aria-current={on}
-                className={`relative w-full h-full flex flex-col items-center text-center gap-2 lg:flex-row lg:text-left lg:gap-4 rounded-xl px-2 py-3 lg:px-4 lg:py-4 transition-colors ${
+                className={`relative w-full h-full flex flex-col items-center text-center gap-2 lg:flex-row lg:text-left lg:gap-4 rounded-xl px-2 py-3 lg:px-5 lg:py-5 transition-colors ${
                   on ? "bg-primary/10" : "hover:bg-muted/60"
                 }`}
               >
                 <span
-                  className={`w-10 h-10 lg:w-12 lg:h-12 shrink-0 rounded-full flex items-center justify-center transition-colors duration-500 ${
+                  className={`w-10 h-10 lg:w-14 lg:h-14 shrink-0 rounded-full flex items-center justify-center transition-colors duration-500 ${
                     on ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"
                   }`}
                 >
-                  <s.icon className="w-4 h-4 lg:w-5 lg:h-5" />
+                  <s.icon className="w-4 h-4 lg:w-6 lg:h-6" />
                 </span>
                 <span className="min-w-0">
-                  <span className={`block font-display text-sm lg:text-xl leading-tight transition-colors ${on ? "text-foreground" : "text-foreground/70"}`}>
+                  <span className={`block font-display text-sm lg:text-2xl leading-tight transition-colors ${on ? "text-foreground" : "text-foreground/70"}`}>
                     {s.title}
                   </span>
-                  <span className="hidden lg:block font-body text-xs text-muted-foreground mt-0.5">{s.text}</span>
+                  <span className="hidden lg:block font-body text-sm text-muted-foreground mt-1">{s.text}</span>
                 </span>
                 {/* полоска прогресса автопрокрутки */}
                 {on && (
@@ -86,7 +86,7 @@ const VenueCarousel = () => {
 
       {/* Фото */}
       <div
-        className="order-1 lg:order-2 relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5] rounded-2xl overflow-hidden bg-muted"
+        className="order-1 lg:order-2 relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-square rounded-2xl overflow-hidden bg-muted"
         onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
         onTouchEnd={(e) => {
           if (touchX.current === null) return;
@@ -101,6 +101,7 @@ const VenueCarousel = () => {
             src={spot.img}
             alt={`«Место быть» — ${spot.title.toLowerCase()}`}
             className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: spot.pos ?? "50% 50%" }}
             initial={{ opacity: 0, scale: 1.06 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
