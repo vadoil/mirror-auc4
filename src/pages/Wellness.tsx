@@ -335,6 +335,10 @@ const Wellness = () => {
                 <Play className="w-3.5 h-3.5 ml-0.5" />
               </button>
             </div>
+            {/* Телефон: картинка сразу под заголовком */}
+            <div className="lg:hidden aspect-[4/3] overflow-hidden rounded-2xl mb-6">
+              <img src={heroImg} alt="Пространство велнес-девичника «Отражение»" className="w-full h-full object-cover" />
+            </div>
             <p className="font-display text-3xl md:text-4xl text-foreground leading-tight mb-2">Новая роскошь —</p>
             <p className="font-display text-3xl md:text-4xl italic text-primary leading-tight mb-6">забота о себе.</p>
             <p className="font-body text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Красота · лонгевити · велбинг</p>
@@ -351,7 +355,7 @@ const Wellness = () => {
               </a>
             </div>
           </motion.div>
-          <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}>
+          <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }} className="hidden lg:block">
             <div className="aspect-[4/3] overflow-hidden rounded-2xl">
               <img src={heroImg} alt="Пространство велнес-девичника «Отражение»" className="w-full h-full object-cover" />
             </div>

@@ -84,7 +84,7 @@ const FundraisingWidget = () => {
   const left = Math.max(data.goal - data.raised, 0);
 
   return (
-    <div className="fixed left-3 bottom-3 md:left-6 md:bottom-6 z-40 print:hidden">
+    <div className="fixed right-3 bottom-3 md:right-auto md:left-6 md:bottom-6 z-40 print:hidden">
       <AnimatePresence mode="wait" initial={false}>
         {collapsed ? (
           <motion.button
