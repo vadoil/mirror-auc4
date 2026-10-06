@@ -384,7 +384,7 @@ const Wellness = () => {
       {/* О чём этот день */}
       <section className="section-padding pb-20 md:pb-28">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <motion.div {...fadeUp} className="order-2 lg:order-1">
+          <motion.div {...fadeUp} className="hidden lg:block lg:order-1">
             <div className="aspect-[3/2] overflow-hidden rounded-2xl mb-4">
               <img src={lectureImg} alt="Лекторий велнес-девичника" loading="lazy" className="w-full h-full object-cover" />
             </div>
@@ -397,6 +397,15 @@ const Wellness = () => {
             <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-foreground leading-[0.95] mb-8">
               Забота о себе — <span className="italic text-primary">это и есть роскошь.</span>
             </h2>
+            {/* Телефон: фото сразу под заголовком */}
+            <div className="lg:hidden mb-8">
+              <div className="aspect-[3/2] overflow-hidden rounded-2xl mb-4">
+                <img src={lectureImg} alt="Лекторий велнес-девичника" loading="lazy" className="w-full h-full object-cover" />
+              </div>
+              <p className="font-display text-lg italic text-primary leading-snug">
+                Один день, чтобы замедлиться, услышать своё тело и уйти не с тревогой, а с ясностью.
+              </p>
+            </div>
             <div className="space-y-4 font-body text-base text-muted-foreground leading-relaxed">
               <p className="text-foreground">Мы больше не верим в жёсткие протоколы и подвиги с понедельника.</p>
               <p>
