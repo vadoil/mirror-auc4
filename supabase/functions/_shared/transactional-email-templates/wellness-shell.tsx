@@ -100,13 +100,14 @@ export const Paragraph = ({ children }: { children: React.ReactNode }) => (
 )
 
 /** «Билет»: перфорация пунктиром, номер гостьи, детали */
-export const Ticket = ({ name, position, training, amount }: { name?: string; position?: number; training?: string | null; amount?: number }) => {
+export const Ticket = ({ name, position, trainings, amount }: { name?: string; position?: number; trainings?: string[] | null; amount?: number }) => {
   const rows: [string, string][] = [
     ['Дата', WELLNESS_EVENT.timeLabel ? `${WELLNESS_EVENT.dateLabel}, ${WELLNESS_EVENT.timeLabel}` : WELLNESS_EVENT.dateLabel],
     ['Место', WELLNESS_EVENT.place],
     ['Адрес', WELLNESS_EVENT.address],
   ]
-  if (training && TRAININGS[training]) rows.push(['Тренировка', TRAININGS[training]])
+  const picked = (trainings ?? []).filter((t) => TRAININGS[t]).map((t) => TRAININGS[t])
+  if (picked.length) rows.push([picked.length > 1 ? 'Тренировки' : 'Тренировка', picked.join(', ')])
   if (amount) rows.push(['Оплачено', `${amount} ₽`])
   return (
     <tr>

@@ -4,19 +4,19 @@ import { Shell, Hero, Paragraph, Ticket, Actions, ProgramTeaser, Gallery, SignOf
 
 interface Props {
   name?: string
-  training?: string | null
+  trainings?: string[] | null
   position?: number
   amount?: number
 }
 
 // Приглашение после оплаты регистрации
-const WellnessRegistrationEmail = ({ name, training, position, amount }: Props) => (
+const WellnessRegistrationEmail = ({ name, trainings, position, amount }: Props) => (
   <Shell preview="Вы в списке гостей велнес-девичника «Отражение» — 25 октября, Москва">
     <Hero kicker="Велнес-девичник для женщин" title={name ? `${name}, вы в списке` : 'Вы в списке'} accent="гостей «Отражения»." />
     <Paragraph>
       {'Спасибо за регистрацию! 25 октября — день, полностью посвящённый заботе о себе: лекции врачей, тренировки, beauty-девайсы, практики, healthy-бар и тёплое женское комьюнити.'}
     </Paragraph>
-    <Ticket name={name} position={position} training={training} amount={amount} />
+    <Ticket name={name} position={position} trainings={trainings} amount={amount} />
     <Actions />
     <ProgramTeaser />
     <Gallery />
@@ -31,5 +31,5 @@ export const template = {
   component: WellnessRegistrationEmail,
   subject: 'Вы приглашены ✦ велнес-девичник «Отражение», 25 октября',
   displayName: 'Велнес-девичник: приглашение после оплаты',
-  previewData: { name: 'Мария', training: 'bowls', position: 12, amount: 440 },
+  previewData: { name: 'Мария', trainings: ['libido', 'bowls'], position: 12, amount: 440 },
 } satisfies TemplateEntry

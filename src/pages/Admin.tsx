@@ -78,7 +78,7 @@ type WellnessRegistration = {
   email: string;
   age: number | null;
   phone: string;
-  training: string | null;
+  trainings: string[];
   consent_ads: boolean;
   confirmation_sent_at: string | null;
   payment_status: "pending" | "paid" | "free";
@@ -103,7 +103,7 @@ const downloadWellnessCsv = (rows: WellnessRegistration[]) => {
     r.amount ?? "",
     new Date(r.created_at).toLocaleString("ru-RU"),
     r.full_name, r.email, r.phone, r.telegram ? `@${r.telegram}` : "", r.age ?? "",
-    r.training ? wellnessTrainings[r.training] ?? r.training : "", r.consent_ads ? "да" : "нет",
+    (r.trainings ?? []).map((t) => wellnessTrainings[t] ?? t).join(", "), r.consent_ads ? "да" : "нет",
   ]);
   const csv = [head, ...lines]
     .map((l) => l.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";"))
@@ -817,7 +817,7 @@ const Admin = () => {
             <div className="flex flex-wrap gap-2 mb-6">
               {Object.entries(wellnessTrainings).map(([k, label]) => (
                 <span key={k} className="text-[11px] font-body px-3 py-1 bg-cream/5 border border-cream/10 text-cream/70">
-                  {label}: {wellnessRegs.filter((r) => r.training === k).length}
+                  {label}: {wellnessRegs.filter((r) => (r.trainings ?? []).includes(k)).length}
                 </span>
               ))}
               <span className="text-[11px] font-body px-3 py-1 bg-cream/5 border border-cream/10 text-cream/70">
@@ -841,7 +841,9 @@ const Admin = () => {
                             {wellnessPayLabels[r.payment_status]}{r.amount ? ` ${r.amount} ₽` : ""}
                           </span>
                           <p className="font-body text-sm text-cream font-medium">{r.full_name}{r.age ? `, ${r.age}` : ""}</p>
-                          {r.training && <span className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-cream/10 text-cream/60">{wellnessTrainings[r.training] ?? r.training}</span>}
+                          {(r.trainings ?? []).map((t) => (
+                            <span key={t} className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-cream/10 text-cream/60">{wellnessTrainings[t] ?? t}</span>
+                          ))}
                         </div>
                         <p className="text-cream/40 text-xs font-body">
                           {r.email} · {r.phone}{r.telegram ? ` · @${r.telegram}` : ""}

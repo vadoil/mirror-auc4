@@ -54,7 +54,9 @@ const CheckRow = ({
 
 const WellnessRegistration = () => {
   const [form, setForm] = useState({ full_name: "", telegram: "", email: "", age: "", phone: "", website: "" });
-  const [training, setTraining] = useState<string | null>(null);
+  const [trainings, setTrainings] = useState<string[]>([]);
+  const toggleTraining = (id: string) =>
+    setTrainings((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]));
   const [consentPd, setConsentPd] = useState(false);
   const [consentAds, setConsentAds] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -137,7 +139,7 @@ const WellnessRegistration = () => {
       const { ok, data } = await callApi({
         ...form,
         age: form.age ? Number(form.age) : undefined,
-        training,
+        trainings,
         consent_pd: consentPd,
         consent_ads: consentAds,
         utm: Object.fromEntries(
@@ -242,15 +244,15 @@ const WellnessRegistration = () => {
         <input className={inputCls} type="number" inputMode="numeric" min={14} max={100} placeholder="Возраст" value={form.age} onChange={set("age")} />
       </div>
 
-      <p className="font-body text-xs uppercase tracking-[0.2em] text-primary mt-8 mb-4">Я иду на одну из тренировок</p>
+      <p className="font-body text-xs uppercase tracking-[0.2em] text-primary mt-8 mb-4">Я иду на тренировки</p>
       <div className="grid sm:grid-cols-3 gap-3 mb-3">
         {TRAININGS.map((t, i) => {
-          const active = training === t.id;
+          const active = trainings.includes(t.id);
           return (
             <button
               type="button"
               key={t.id}
-              onClick={() => setTraining(active ? null : t.id)}
+              onClick={() => toggleTraining(t.id)}
               aria-pressed={active}
               className={`text-left rounded-lg border p-4 transition-all ${
                 active ? "border-primary bg-primary/10" : "border-border bg-background hover:border-primary/40"
@@ -259,7 +261,7 @@ const WellnessRegistration = () => {
               <div className="flex items-center justify-between mb-2">
                 <span className="font-numbers text-sm text-primary">{i + 1}</span>
                 <span
-                  className={`w-4 h-4 rounded-full border flex items-center justify-center ${
+                  className={`w-4 h-4 rounded border flex items-center justify-center ${
                     active ? "border-primary bg-primary" : "border-border"
                   }`}
                 >
@@ -272,7 +274,7 @@ const WellnessRegistration = () => {
           );
         })}
       </div>
-      <p className="font-body text-xs text-muted-foreground/70 mb-8">Необязательно. Нажмите ещё раз, чтобы снять выбор.</p>
+      <p className="font-body text-xs text-muted-foreground/70 mb-8">Можно выбрать одну, две или все три — или ни одной. Нажмите ещё раз, чтобы снять выбор.</p>
 
       <div className="space-y-3 mb-8">
         <CheckRow checked={consentPd} onChange={setConsentPd}>

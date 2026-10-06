@@ -4,11 +4,11 @@ import { Shell, Hero, Paragraph, Ticket, Actions, ProgramTeaser, SignOff } from 
 
 interface Props {
   name?: string
-  training?: string | null
+  trainings?: string[] | null
   kind?: 'week' | 'day'
 }
 
-const WellnessReminderEmail = ({ name, training, kind = 'week' }: Props) => {
+const WellnessReminderEmail = ({ name, trainings, kind = 'week' }: Props) => {
   const isDay = kind === 'day'
   return (
     <Shell preview={isDay ? 'Завтра — велнес-девичник «Отражение»' : 'Через неделю — велнес-девичник «Отражение»'}>
@@ -22,7 +22,7 @@ const WellnessReminderEmail = ({ name, training, kind = 'week' }: Props) => {
           ? 'Завтра велнес-девичник «Отражение». Возьмите удобную одежду, если записались на тренировку, и приходите чуть заранее — так вы успеете всё посмотреть.'
           : 'Напоминаем: 25 октября велнес-девичник «Отражение» — лекции врачей, тренировки, beauty-девайсы и практики. Сохраните дату в календаре.'}
       </Paragraph>
-      <Ticket name={name} training={training} />
+      <Ticket name={name} trainings={trainings} />
       <Actions />
       {!isDay && <ProgramTeaser />}
       <SignOff>{isDay ? 'До встречи завтра!' : 'Скоро увидимся!'}</SignOff>
@@ -35,5 +35,5 @@ export const template = {
   subject: (d: Record<string, any>) =>
     d.kind === 'day' ? 'Завтра — велнес-девичник «Отражение» ✦' : 'Через неделю — велнес-девичник «Отражение» ✦',
   displayName: 'Велнес-девичник: напоминание',
-  previewData: { name: 'Мария', training: 'abs', kind: 'day' },
+  previewData: { name: 'Мария', trainings: ['libido', 'bowls'], kind: 'day' },
 } satisfies TemplateEntry

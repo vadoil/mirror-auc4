@@ -55,7 +55,9 @@ Deno.serve(async (req) => {
   const telegram = str(body.telegram, 64).replace(/^https?:\/\/t\.me\//i, '').replace(/^@/, '') || null
   const ageNum = Number(body.age)
   const age = Number.isInteger(ageNum) && ageNum >= 14 && ageNum <= 100 ? ageNum : null
-  const training = typeof body.training === 'string' && TRAININGS[body.training] ? body.training : null
+  // можно выбрать несколько тренировок; старый формат с одним полем training тоже принимаем
+  const rawTrainings = Array.isArray(body.trainings) ? body.trainings : body.training ? [body.training] : []
+  const trainings = [...new Set(rawTrainings.filter((t: unknown): t is string => typeof t === 'string' && !!TRAININGS[t]))]
   const consent_pd = body.consent_pd === true
   const consent_ads = body.consent_ads === true
 
@@ -66,7 +68,7 @@ Deno.serve(async (req) => {
   if (!consent_pd) return json({ error: 'Нужно согласие на обработку персональных данных' }, 400)
 
   const fields = {
-    full_name, email, phone, telegram, age, training, consent_pd, consent_ads,
+    full_name, email, phone, telegram, age, trainings, consent_pd, consent_ads,
     utm: typeof body.utm === 'object' && body.utm ? body.utm : null,
   }
 

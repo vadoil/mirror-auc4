@@ -27,7 +27,7 @@ export async function confirmWellnessPayment(
     .update({ payment_status: 'paid', paid_at: new Date().toISOString(), amount: payment.amount, transaction_id: payment.transactionId })
     .eq('id', registrationId)
     .eq('payment_status', 'pending')
-    .select('id, full_name, email, phone, telegram, age, training, consent_ads, paid_at')
+    .select('id, full_name, email, phone, telegram, age, trainings, consent_ads, paid_at')
     .maybeSingle()
   if (!row) return { ok: true, already: true }
 
@@ -40,7 +40,7 @@ export async function confirmWellnessPayment(
 
   try {
     await sendTemplate('wellness-registration', row.email, {
-      name: row.full_name.split(/\s+/)[0], training: row.training, position, amount: payment.amount,
+      name: row.full_name.split(/\s+/)[0], trainings: row.trainings, position, amount: payment.amount,
     })
     await supabase.from('wellness_registrations').update({ confirmation_sent_at: new Date().toISOString() }).eq('id', row.id)
   } catch (e) {
@@ -53,7 +53,7 @@ export async function confirmWellnessPayment(
     `👤 <b>${escapeHtml(row.full_name)}</b>${row.age ? `, ${row.age}` : ''}\n` +
     `📞 ${escapeHtml(row.phone)}\n✉️ ${escapeHtml(row.email)}\n` +
     (row.telegram ? `💬 @${escapeHtml(row.telegram)}\n` : '') +
-    (row.training ? `\n🏃‍♀️ ${escapeHtml(TRAININGS[row.training])}` : '') +
+    ((row.trainings ?? []) as string[]).map((t) => `\n🏃‍♀️ ${escapeHtml(TRAININGS[t] ?? t)}`).join('') +
     (row.consent_ads ? `\n📨 согласна на рассылку` : '') +
     `\n\n💳 CloudPayments #${escapeHtml(payment.transactionId)}`,
   )

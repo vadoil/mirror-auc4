@@ -19,7 +19,7 @@ Deno.serve(async (req) => {
   const supabase = createClient(Deno.env.get('SUPABASE_URL')!, serviceKey)
   const { data: rows, error } = await supabase
     .from('wellness_registrations')
-    .select('id, full_name, email, training')
+    .select('id, full_name, email, trainings')
     .is(column, null)
     .in('payment_status', ['paid', 'free'])
     .order('created_at')
@@ -31,7 +31,7 @@ Deno.serve(async (req) => {
   const failed: string[] = []
   for (const r of rows) {
     try {
-      await sendTemplate('wellness-reminder', r.email, { name: r.full_name.split(/\s+/)[0], training: r.training, kind })
+      await sendTemplate('wellness-reminder', r.email, { name: r.full_name.split(/\s+/)[0], trainings: r.trainings, kind })
       await supabase.from('wellness_registrations').update({ [column]: new Date().toISOString() }).eq('id', r.id)
       sent++
     } catch (e) {
