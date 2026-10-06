@@ -9,7 +9,7 @@ export const WELLNESS_EVENT = {
 }
 
 export const TRAININGS: Record<string, string> = {
-  libido: 'Либидо-фитнес с Марго',
-  abs: 'Плоский живот с Георгием',
+  libido: 'Либидо-фитнес с Маргаритой Дмитриевой',
+  abs: 'Плоский живот с Георгием Какуновым',
   bowls: 'Медитация с поющими чашами',
 }

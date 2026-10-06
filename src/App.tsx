@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import ScrollToTop from "./components/ScrollToTop";
 import UtmTracker from "./components/UtmTracker";
+import FundraisingWidget from "./components/FundraisingWidget";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -40,6 +41,7 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <UtmTracker />
+          <FundraisingWidget />
           <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Index />} />

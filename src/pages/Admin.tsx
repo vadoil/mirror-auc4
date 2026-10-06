@@ -89,8 +89,8 @@ type WellnessRegistration = {
 const wellnessPayLabels: Record<string, string> = { paid: "оплачено", free: "бесплатно", pending: "не оплачено" };
 
 const wellnessTrainings: Record<string, string> = {
-  libido: "Либидо-фитнес (Марго)",
-  abs: "Плоский живот (Георгий)",
+  libido: "Либидо-фитнес (Маргарита Дмитриева)",
+  abs: "Плоский живот (Георгий Какунов)",
   bowls: "Поющие чаши",
 };
 

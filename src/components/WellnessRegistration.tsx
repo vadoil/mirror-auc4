@@ -5,8 +5,8 @@ import { Check, Loader2 } from "lucide-react";
 import { CLOUDPAYMENTS_PUBLIC_ID, loadCloudPaymentsWidget } from "@/lib/cloudpayments";
 
 export const TRAININGS = [
-  { id: "libido", title: "Либидо-фитнес", coach: "с Марго" },
-  { id: "abs", title: "Плоский живот", coach: "с Георгием" },
+  { id: "libido", title: "Либидо-фитнес", coach: "с Маргаритой Дмитриевой" },
+  { id: "abs", title: "Плоский живот", coach: "с Георгием Какуновым" },
   { id: "bowls", title: "Медитация", coach: "с поющими чашами" },
 ] as const;
 
