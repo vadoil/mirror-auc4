@@ -41,6 +41,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WellnessRegistration from "@/components/WellnessRegistration";
 import VenueCarousel from "@/components/VenueCarousel";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import heroImg from "@/assets/wellness/wellness-hero.webp";
 import lectureImg from "@/assets/wellness/wellness-lecture.webp";
 import stilllifeImg from "@/assets/wellness/stilllife.webp";
@@ -159,7 +160,7 @@ const experts: Expert[] = [
   },
 ];
 
-const brands = ["Абрау-Дюрсо", "Natura Siberica", "Smartlife", "Vita Strada", "DEEP", "refeel", "Сбер Здоровье"];
+const brands = ["Абрау-Дюрсо", "Natura Siberica", "Smartlife", "Vita Strada", "DEEP", "refeel", "Сбер Здоровье"]; // «Сбер Здоровье» — на всю ширину
 const brandCategories = [
   { icon: Shirt, label: "Бренд белья" },
   { icon: Moon, label: "Шёлковые пижамы" },
@@ -249,9 +250,43 @@ const IconCircle = ({ icon: Icon, size = "md" }: { icon: typeof Heart; size?: "s
 
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
+const ExpertDetails = ({ e }: { e: Expert }) => (
+  <>
+    <p className="font-body text-sm text-foreground mb-1">{e.regalia}</p>
+    {e.org && <p className="font-body text-sm text-foreground/80">{e.org}</p>}
+    <span className="w-8 h-px bg-primary my-4" />
+    {e.text && <p className="font-body text-sm text-muted-foreground leading-relaxed">{e.text}</p>}
+    {e.membership && (
+      <>
+        <p className="font-body text-xs font-medium text-foreground mb-2">Действующий член:</p>
+        <ul className="space-y-1.5">
+          {e.membership.map((m) => (
+            <li key={m} className="flex items-start gap-2 font-body text-xs text-muted-foreground leading-snug">
+              <span className="w-1 h-1 rounded-full bg-primary mt-1.5 shrink-0" />
+              {m}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+    {e.features && (
+      <div className="grid grid-cols-3 gap-2 mt-5">
+        {e.features.map((f) => (
+          <div key={f.label} className="flex flex-col items-center text-center gap-1.5">
+            <IconCircle icon={f.icon} size="sm" />
+            <span className="font-body text-[10px] leading-tight text-muted-foreground">{f.label}</span>
+          </div>
+        ))}
+      </div>
+    )}
+    {e.slogan && <p className="font-display italic text-primary text-lg leading-snug mt-auto pt-5">{e.slogan}</p>}
+  </>
+);
+
 const Wellness = () => {
   // ключ перезапускает анимацию «отражения» заголовка
   const [mirrorKey, setMirrorKey] = useState(0);
+  const [openExpert, setOpenExpert] = useState<Expert | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
@@ -438,55 +473,69 @@ const Wellness = () => {
               <SectionLabel>Спикеры и тренеры</SectionLabel>
               <TwoLineTitle first="Знакомим" second="с экспертами." />
             </motion.div>
-            <div className="grid md:grid-cols-2 gap-5 md:gap-6 mb-20 md:mb-28">
+            <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5 md:gap-6 mb-20 md:mb-28">
               {experts.map((e) => (
-                <motion.article
-                  key={e.surname}
-                  {...fadeUp}
-                  className="grid grid-cols-[1fr_0.85fr] sm:grid-cols-[1.15fr_0.85fr] gap-4 md:gap-6 bg-card border border-border rounded-2xl p-5 md:p-7"
-                >
-                  <div className="min-w-0 flex flex-col">
-                    <span className="self-start font-body text-[10px] uppercase tracking-[0.2em] text-primary bg-primary/10 rounded-full px-3 py-1 mb-4">Спикер</span>
-                    <h3 className="font-display text-3xl md:text-4xl text-foreground leading-[1] mb-3">
-                      {e.name}
-                      <br />
-                      <span className="italic text-primary">{e.surname}</span>
-                    </h3>
-                    <p className="font-body text-sm text-foreground mb-1">{e.regalia}</p>
-                    {e.org && <p className="font-body text-sm text-foreground/80">{e.org}</p>}
-                    <span className="w-8 h-px bg-primary my-4" />
-                    {e.text && <p className="font-body text-xs md:text-sm text-muted-foreground leading-relaxed">{e.text}</p>}
-                    {e.membership && (
-                      <>
-                        <p className="font-body text-xs font-medium text-foreground mb-2">Действующий член:</p>
-                        <ul className="space-y-1.5">
-                          {e.membership.map((m) => (
-                            <li key={m} className="flex items-start gap-2 font-body text-xs text-muted-foreground leading-snug">
-                              <span className="w-1 h-1 rounded-full bg-primary mt-1.5 shrink-0" />
-                              {m}
-                            </li>
-                          ))}
-                        </ul>
-                      </>
-                    )}
-                    {e.features && (
-                      <div className="grid grid-cols-3 gap-2 mt-5">
-                        {e.features.map((f) => (
-                          <div key={f.label} className="flex flex-col items-center text-center gap-1.5">
-                            <IconCircle icon={f.icon} size="sm" />
-                            <span className="font-body text-[10px] leading-tight text-muted-foreground">{f.label}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {e.slogan && <p className="font-display italic text-primary text-lg leading-snug mt-auto pt-5">{e.slogan}</p>}
-                  </div>
-                  <div className="rounded-2xl overflow-hidden bg-muted/40 min-h-[260px]">
-                    <img src={e.photo} alt={`${e.name} ${e.surname}`} loading="lazy" className="w-full h-full object-cover object-top" />
-                  </div>
-                </motion.article>
+                <motion.div key={e.surname} {...fadeUp}>
+                  {/* Телефон: плитка 2×2, описание — по нажатию */}
+                  <button type="button" onClick={() => setOpenExpert(e)} className="sm:hidden block w-full text-left">
+                    <span className="relative block aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
+                      <img src={e.photo} alt={`${e.name} ${e.surname}`} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top" />
+                      <span className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-transparent to-transparent" />
+                      <span className="absolute left-3 right-3 bottom-3">
+                        <span className="inline-block font-body text-[9px] uppercase tracking-[0.18em] text-primary-foreground bg-primary rounded-full px-2 py-0.5 mb-1.5">Спикер</span>
+                        <span className="block font-display text-2xl text-cream leading-[1]">
+                          {e.name}
+                          <br />
+                          <span className="italic text-[#FFB4AC]">{e.surname}</span>
+                        </span>
+                      </span>
+                    </span>
+                    <span className="block font-body text-xs text-foreground/80 leading-snug mt-2 line-clamp-2">{e.regalia}</span>
+                    <span className="block font-body text-[10px] uppercase tracking-[0.15em] text-primary mt-1">Подробнее →</span>
+                  </button>
+
+                  {/* Планшет и компьютер: текст слева, фото справа */}
+                  <article className="hidden sm:grid sm:grid-cols-[1.15fr_0.85fr] gap-6 h-full bg-card border border-border rounded-2xl p-7">
+                    <div className="min-w-0 flex flex-col">
+                      <span className="self-start font-body text-[10px] uppercase tracking-[0.2em] text-primary bg-primary/10 rounded-full px-3 py-1 mb-4">Спикер</span>
+                      <h3 className="font-display text-3xl md:text-4xl text-foreground leading-[1] mb-3">
+                        {e.name}
+                        <br />
+                        <span className="italic text-primary">{e.surname}</span>
+                      </h3>
+                      <ExpertDetails e={e} />
+                    </div>
+                    <div className="rounded-2xl overflow-hidden bg-muted/40 min-h-[260px]">
+                      <img src={e.photo} alt={`${e.name} ${e.surname}`} loading="lazy" className="w-full h-full object-cover object-top" />
+                    </div>
+                  </article>
+                </motion.div>
               ))}
             </div>
+
+            <Dialog open={!!openExpert} onOpenChange={(o) => !o && setOpenExpert(null)}>
+              <DialogContent className="max-w-md w-[calc(100%-2rem)] max-h-[88vh] overflow-y-auto p-0 gap-0 rounded-2xl">
+                {openExpert && (
+                  <>
+                    <div className="relative aspect-[4/5]">
+                      <img src={openExpert.photo} alt={`${openExpert.name} ${openExpert.surname}`} className="absolute inset-0 w-full h-full object-cover object-top" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-transparent to-transparent" />
+                      <div className="absolute left-5 bottom-5">
+                        <span className="inline-block font-body text-[10px] uppercase tracking-[0.2em] text-primary-foreground bg-primary rounded-full px-3 py-1 mb-3">Спикер</span>
+                        <DialogTitle className="font-display text-4xl font-normal text-cream leading-[1]">
+                          {openExpert.name}
+                          <br />
+                          <span className="italic text-[#FFB4AC]">{openExpert.surname}</span>
+                        </DialogTitle>
+                      </div>
+                    </div>
+                    <div className="flex flex-col p-5">
+                      <ExpertDetails e={openExpert} />
+                    </div>
+                  </>
+                )}
+              </DialogContent>
+            </Dialog>
           </div>
 
           {/* Бренды */}
@@ -504,16 +553,28 @@ const Wellness = () => {
                 </p>
               </motion.div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
-                {brands.map((b, i) => (
-                  <motion.div
-                    key={b}
-                    {...fadeUp}
-                    transition={{ duration: 0.4, delay: 0.04 * i }}
-                    className="aspect-[3/2] bg-card border border-border rounded-xl flex items-center justify-center text-center px-3 hover:border-primary/40 transition-colors"
-                  >
-                    <span className="font-display text-lg md:text-xl text-foreground tracking-wide">{b}</span>
-                  </motion.div>
-                ))}
+                {brands.map((b, i) =>
+                  b === "Сбер Здоровье" ? (
+                    <motion.div
+                      key={b}
+                      {...fadeUp}
+                      transition={{ duration: 0.4, delay: 0.04 * i }}
+                      className="col-span-full rounded-xl flex items-center justify-center gap-3 py-6 md:py-7 text-white"
+                      style={{ background: "linear-gradient(90deg, #21A038 0%, #1DA0C9 100%)" }}
+                    >
+                      <span className="font-body font-semibold text-xl md:text-2xl tracking-wide">СберЗдоровье</span>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key={b}
+                      {...fadeUp}
+                      transition={{ duration: 0.4, delay: 0.04 * i }}
+                      className="aspect-[3/2] bg-card border border-border rounded-xl flex items-center justify-center text-center px-3 hover:border-primary/40 transition-colors"
+                    >
+                      <span className="font-display text-lg md:text-xl text-foreground tracking-wide">{b}</span>
+                    </motion.div>
+                  ),
+                )}
               </div>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
                 {brandCategories.map((c) => (
@@ -615,14 +676,14 @@ const Wellness = () => {
               25 октября 2026
             </span>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 md:gap-x-8">
             {experience.map((e, i) => (
-              <motion.div key={e.title} {...fadeUp} transition={{ duration: 0.5, delay: 0.05 * i }} className="flex items-start gap-4">
+              <motion.div key={e.title} {...fadeUp} transition={{ duration: 0.5, delay: 0.05 * i }} className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
                 <IconCircle icon={e.icon} />
                 <div>
                   <p className="font-numbers text-xs text-primary mb-1">{num(i)}</p>
-                  <h3 className="font-display text-xl text-foreground leading-tight">{e.title}</h3>
-                  <p className="font-body text-sm text-muted-foreground">{e.text}</p>
+                  <h3 className="font-display text-lg md:text-xl text-foreground leading-tight">{e.title}</h3>
+                  <p className="font-body text-xs md:text-sm text-muted-foreground">{e.text}</p>
                 </div>
               </motion.div>
             ))}
@@ -637,7 +698,7 @@ const Wellness = () => {
             <SectionLabel>Зоны девичника</SectionLabel>
             <TwoLineTitle first="Восемь" second="направлений заботы." />
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
             {zones.map((z, i) => (
               <motion.article
                 key={z.title}
@@ -647,16 +708,16 @@ const Wellness = () => {
               >
                 <div className="relative aspect-square overflow-hidden">
                   <img src={z.img} alt={z.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <span className="absolute top-3 left-3 font-numbers text-sm text-primary bg-background/90 backdrop-blur rounded-full w-10 h-10 flex items-center justify-center">
+                  <span className="absolute top-2 left-2 md:top-3 md:left-3 font-numbers text-xs md:text-sm text-primary bg-background/90 backdrop-blur rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
                     {num(i)}
                   </span>
                 </div>
-                <div className="p-5">
+                <div className="p-3 md:p-5">
                   <div className="flex items-start gap-3 mb-2">
-                    <z.icon className="w-4 h-4 text-primary mt-1 shrink-0" />
-                    <h3 className="font-display text-lg text-foreground leading-tight">{z.title}</h3>
+                    <z.icon className="hidden md:block w-4 h-4 text-primary mt-1 shrink-0" />
+                    <h3 className="font-display text-base md:text-lg text-foreground leading-tight">{z.title}</h3>
                   </div>
-                  <p className="font-body text-sm text-muted-foreground leading-relaxed">{z.text}</p>
+                  <p className="font-body text-xs md:text-sm text-muted-foreground leading-relaxed">{z.text}</p>
                 </div>
               </motion.article>
             ))}
@@ -734,7 +795,7 @@ const Wellness = () => {
                 rel="noopener noreferrer"
                 title={pt.name}
                 {...fadeUp}
-                className="group aspect-[3/2] bg-background border border-border rounded-xl flex flex-col items-center justify-center text-center p-5 hover:border-primary/40 transition-colors"
+                className="group aspect-[3/2] bg-background border border-border rounded-xl flex flex-col items-center justify-center text-center p-3 md:p-5 overflow-hidden hover:border-primary/40 transition-colors"
               >
                 <div className="flex-1 w-full flex items-center justify-center">
                   <img src={pt.logo} alt={pt.name} loading="lazy" className={`${pt.logoClass} w-auto max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity`} />
@@ -747,11 +808,11 @@ const Wellness = () => {
               target="_blank"
               rel="noopener noreferrer"
               {...fadeUp}
-              className="aspect-[3/2] border border-dashed border-primary/40 bg-primary/5 rounded-xl flex flex-col items-center justify-center text-center p-4 hover:bg-primary/10 transition-colors"
+              className="aspect-[3/2] border border-dashed border-primary/40 bg-primary/5 rounded-xl flex flex-col items-center justify-center text-center p-3 md:p-4 overflow-hidden hover:bg-primary/10 transition-colors"
             >
-              <Store className="w-6 h-6 text-primary mb-2" />
-              <p className="font-display text-xl text-primary">Стать партнёром</p>
-              <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">Напишите организаторам</p>
+              <Store className="w-5 h-5 md:w-6 md:h-6 text-primary mb-1.5 md:mb-2" />
+              <p className="font-display text-base md:text-xl text-primary leading-tight">Стать партнёром</p>
+              <p className="font-body text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.2em] text-muted-foreground mt-1 leading-tight">Напишите организаторам</p>
             </motion.a>
           </div>
         </div>

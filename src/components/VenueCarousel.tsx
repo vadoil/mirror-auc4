@@ -42,7 +42,7 @@ const VenueCarousel = () => {
       onMouseLeave={() => setPaused(false)}
     >
       {/* Пункты: активный подсвечен, клик переключает фото */}
-      <ul className="order-2 lg:order-1 grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-1">
+      <ul className="order-2 lg:order-1 grid grid-cols-3 lg:grid-cols-1 gap-2 lg:gap-1">
         {spots.map((s, i) => {
           const on = i === active;
           return (
@@ -51,7 +51,7 @@ const VenueCarousel = () => {
                 type="button"
                 onClick={() => go(i)}
                 aria-current={on}
-                className={`relative w-full text-left flex items-center gap-3 lg:gap-4 rounded-xl px-3 py-3 lg:px-4 lg:py-4 transition-colors ${
+                className={`relative w-full h-full flex flex-col items-center text-center gap-2 lg:flex-row lg:text-left lg:gap-4 rounded-xl px-2 py-3 lg:px-4 lg:py-4 transition-colors ${
                   on ? "bg-primary/10" : "hover:bg-muted/60"
                 }`}
               >
@@ -63,7 +63,7 @@ const VenueCarousel = () => {
                   <s.icon className="w-4 h-4 lg:w-5 lg:h-5" />
                 </span>
                 <span className="min-w-0">
-                  <span className={`block font-display text-base lg:text-xl leading-tight transition-colors ${on ? "text-foreground" : "text-foreground/70"}`}>
+                  <span className={`block font-display text-sm lg:text-xl leading-tight transition-colors ${on ? "text-foreground" : "text-foreground/70"}`}>
                     {s.title}
                   </span>
                   <span className="hidden lg:block font-body text-xs text-muted-foreground mt-0.5">{s.text}</span>
