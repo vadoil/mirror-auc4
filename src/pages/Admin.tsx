@@ -143,6 +143,19 @@ const downloadStylistCsv = (rows: StylistRegistration[]) => {
   URL.revokeObjectURL(a.href);
 };
 
+// Короткие ссылки otrazis.ru (редиректы в .htaccess на Beget) → UTM-метки
+const SHORT_LINKS = [
+  { path: "lena", who: "Лена Голова", source: "lena_golova", campaign: "devichnik_2510" },
+  { path: "voluminous", who: "Voluminous", source: "voluminous", campaign: "devichnik_2510" },
+  { path: "otrazis", who: "Мы + Гиза", source: "organizers", campaign: "devichnik_2510" },
+  { path: "kakunin", who: "Какунин", source: "kakunin", campaign: "devichnik_2510" },
+  { path: "nenaprasno", who: "Фонд «Не напрасно»", source: "nenaprasno", campaign: "devichnik_2510" },
+  { path: "mestobyt", who: "Место быть", source: "mestobyt", campaign: "devichnik_2510" },
+  { path: "reklama", who: "Реклама", source: "ads", campaign: "devichnik_2510" },
+  { path: "muradyan", who: "Мурадян", source: "muradyan", campaign: "devichnik_2510" },
+  { path: "igristoe", who: "Игристое 24.10", source: "lena_golova", campaign: "igristoe_2410" },
+];
+
 type UtmVisit = {
   id: string;
   utm_source: string | null;
@@ -170,7 +183,7 @@ const getImageUrl = (url: string | null) => {
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState<"lots" | "bids" | "lot_requests" | "forum" | "wellness" | "stylist" | "requests" | "utm">("lots");
+  const [tab, setTab] = useState<"lots" | "bids" | "lot_requests" | "forum" | "wellness" | "stylist" | "links" | "requests" | "utm">("lots");
   const [lots, setLots] = useState<Lot[]>([]);
   const [bids, setBids] = useState<Bid[]>([]);
   const [requests, setRequests] = useState<TicketRequest[]>([]);
@@ -195,6 +208,11 @@ const Admin = () => {
     if (tab === "forum") fetchForumRegs();
     if (tab === "wellness") fetchWellnessRegs();
     if (tab === "stylist") fetchStylistRegs();
+    if (tab === "links") {
+      fetchUtmVisits();
+      fetchWellnessRegs();
+      fetchStylistRegs();
+    }
     if (tab === "utm") fetchUtmVisits();
   }, [tab]);
 
@@ -483,6 +501,7 @@ const Admin = () => {
     { key: "forum" as const, label: "Форум" },
     { key: "wellness" as const, label: "Девичник" },
     { key: "stylist" as const, label: "Игристое" },
+    { key: "links" as const, label: "Ссылки" },
     { key: "requests" as const, label: "Билеты" },
     { key: "utm" as const, label: "UTM" },
   ];
@@ -948,6 +967,72 @@ const Admin = () => {
                 </div>
               ))}
               {stylistRegs.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Пока нет записей</p>}
+            </div>
+          </div>
+        )}
+
+        {tab === "links" && (
+          <div>
+            <div className="flex items-center justify-between gap-4 flex-wrap mb-2">
+              <h2 className="font-display text-2xl uppercase">Короткие ссылки otrazis.ru</h2>
+              <button
+                onClick={() => {
+                  fetchUtmVisits();
+                  fetchWellnessRegs();
+                  fetchStylistRegs();
+                }}
+                className="text-xs uppercase tracking-wider font-body px-4 py-2 border border-cream/20 hover:border-primary"
+              >
+                Обновить
+              </button>
+            </div>
+            <p className="text-cream/40 text-xs font-body mb-6">
+              Переходы — уникальные заходы по ссылке (повторный заход в той же вкладке не считается). Анкеты и оплаты — регистрации на девичник с этой меткой.
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm font-body">
+                <thead>
+                  <tr className="text-left text-cream/40 text-[10px] uppercase tracking-wider border-b border-cream/10">
+                    <th className="py-2 pr-4">Ссылка</th>
+                    <th className="py-2 pr-4">Кто</th>
+                    <th className="py-2 pr-4 text-right">Переходы</th>
+                    <th className="py-2 pr-4 text-right">Анкеты</th>
+                    <th className="py-2 pr-4 text-right">Оплаты</th>
+                    <th className="py-2 pr-4 text-right">Игристое</th>
+                    <th className="py-2 text-right">Конверсия</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {SHORT_LINKS.map((l) => {
+                    const visits = utmVisits.filter((v) => v.utm_source === l.source && v.utm_campaign === l.campaign).length;
+                    const regs = wellnessRegs.filter((r) => r.utm?.utm_source === l.source && (r.utm?.utm_campaign ?? l.campaign) === l.campaign);
+                    const paid = regs.filter((r) => r.payment_status !== "pending").length;
+                    const stylist = l.campaign === "igristoe_2410" ? stylistRegs.filter((r) => r.source === l.source).length : null;
+                    const conv = visits ? Math.round((paid / visits) * 100) : 0;
+                    return (
+                      <tr key={l.path} className="border-b border-cream/5">
+                        <td className="py-2 pr-4 text-primary whitespace-nowrap">otrazis.ru/{l.path}</td>
+                        <td className="py-2 pr-4 text-cream">{l.who}</td>
+                        <td className="py-2 pr-4 text-right text-cream font-medium">{visits}</td>
+                        <td className="py-2 pr-4 text-right text-cream/70">{regs.length}</td>
+                        <td className="py-2 pr-4 text-right text-cream/70">{paid}</td>
+                        <td className="py-2 pr-4 text-right text-cream/70">{stylist ?? "—"}</td>
+                        <td className="py-2 text-right text-cream/50">{visits ? `${conv}%` : "—"}</td>
+                      </tr>
+                    );
+                  })}
+                  <tr className="text-cream/50">
+                    <td className="py-2 pr-4" colSpan={2}>
+                      Без короткой ссылки
+                    </td>
+                    <td className="py-2 pr-4 text-right">—</td>
+                    <td className="py-2 pr-4 text-right">{wellnessRegs.filter((r) => !r.utm?.utm_source).length}</td>
+                    <td className="py-2 pr-4 text-right">{wellnessRegs.filter((r) => !r.utm?.utm_source && r.payment_status !== "pending").length}</td>
+                    <td className="py-2 pr-4 text-right">{stylistRegs.filter((r) => !r.source || r.source === "site").length}</td>
+                    <td className="py-2 text-right">—</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         )}
