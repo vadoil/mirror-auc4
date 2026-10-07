@@ -59,7 +59,19 @@ export const Shell = ({ preview, children }: { preview: string; children: React.
   </html>
 )
 
-export const Hero = ({ kicker, title, accent }: { kicker: string; title: string; accent: string }) => (
+export const Hero = ({
+  kicker,
+  title,
+  accent,
+  dateLine = 'Москва · 25 октября 2026',
+  image = `${IMG}/wellness-hero.jpg`,
+}: {
+  kicker: string
+  title: string
+  accent: string
+  dateLine?: string
+  image?: string
+}) => (
   <>
     <tr>
       <td style={{ padding: '28px 36px 0' }}>
@@ -68,7 +80,7 @@ export const Hero = ({ kicker, title, accent }: { kicker: string; title: string;
             <tr>
               <td style={{ fontFamily: SERIF, fontSize: 18, letterSpacing: 4, color: INK }}>ОТРАЖЕНИЕ</td>
               <td align="right" style={{ fontFamily: SANS, fontSize: 10, letterSpacing: 2, color: RED, textTransform: 'uppercase' }}>
-                {'Москва · 25 октября 2026'}
+                {dateLine}
               </td>
             </tr>
           </tbody>
@@ -77,7 +89,7 @@ export const Hero = ({ kicker, title, accent }: { kicker: string; title: string;
     </tr>
     <tr>
       <td style={{ padding: '20px 20px 0' }}>
-        <img src={`${IMG}/wellness-hero.jpg`} width={560} alt="Велнес-девичник «Отражение»" style={{ display: 'block', width: '100%', maxWidth: 560, height: 'auto', borderRadius: 16, border: 0 }} />
+        <img src={image} width={560} alt="" style={{ display: 'block', width: '100%', maxWidth: 560, height: 'auto', borderRadius: 16, border: 0 }} />
       </td>
     </tr>
     <tr>
@@ -160,7 +172,7 @@ export const Ticket = ({ name, position, trainings, amount }: { name?: string; p
   )
 }
 
-const Button = ({ href, children, primary }: { href: string; children: React.ReactNode; primary?: boolean }) => (
+export const Button = ({ href, children, primary }: { href: string; children: React.ReactNode; primary?: boolean }) => (
   <a
     href={href}
     style={{

@@ -41,6 +41,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WellnessRegistration from "@/components/WellnessRegistration";
 import VenueCarousel from "@/components/VenueCarousel";
+import IgristoeSignup from "@/components/IgristoeSignup";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import heroImg from "@/assets/wellness/wellness-hero.webp";
 import lectureImg from "@/assets/wellness/wellness-lecture.webp";
@@ -63,6 +64,7 @@ import zone8 from "@/assets/wellness/zones/zone-8.webp";
 import nenaprasnoLogo from "@/assets/sponsors/nenaprasno.png";
 import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
 import actcomLogo from "@/assets/sponsors/actcom.svg";
+import voluminousLogo from "@/assets/sponsors/voluminous.svg";
 import sberHealthLogo from "@/assets/brands/sberhealth.svg";
 import naturaSibericaLogo from "@/assets/brands/natura-siberica.png";
 import refeelLogo from "@/assets/brands/refeel.png";
@@ -99,7 +101,7 @@ const lectures = [
 const otherFormats = [
   { icon: Dumbbell, title: "Тренировки", note: "Либидо-фитнес, сильное тело, медитация с поющими чашами", href: "#experts" },
   { icon: ShoppingBag, title: "Экспо", note: "Бренды и сервисы заботы о себе", href: "#brands" },
-  { icon: Wine, title: "Игристое со стилистом", note: "24 октября, накануне девичника", href: "#october-24" },
+  { icon: Wine, title: "Игристое со стилистом", note: "24 октября, 14:00–19:00 · Voluminous", href: "#october-24" },
   { icon: Mic, title: "Public talk", note: "«Героини нового велнеса»", href: undefined },
 ];
 
@@ -229,6 +231,12 @@ const partners = [
   { name: "Баланс-холл «Место быть»", role: "Площадка", logo: mestoBytLogo, url: "https://mestobe.ru/", logoClass: "h-16 md:h-20" },
   { name: "Актуальные коммуникации", role: "Стратегический партнёр", logo: actcomLogo, url: "https://act-com.ru/", logoClass: "h-9 md:h-11" },
 ];
+
+const IGRISTOE = {
+  stylist: "Лена Голова",
+  stylistUrl: "https://www.instagram.com/lena_golova",
+  address: "Москва, Армянский пер., 1/8с1",
+};
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -648,51 +656,64 @@ const Wellness = () => {
         </div>
       </section>
 
-      {/* 24 октября: игристое и стилист */}
+      {/* 24 октября: игристое со стилистом (Voluminous, Лена Голова) */}
       <section id="october-24" className="section-padding pb-20 md:pb-28 scroll-mt-20">
-        <motion.div
-          {...fadeUp}
-          className="max-w-7xl mx-auto relative overflow-hidden rounded-3xl bg-warm-black text-cream grid lg:grid-cols-[1.2fr_1fr]"
-        >
-          <div className="relative z-10 p-8 md:p-12 lg:p-14">
-            <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="font-body text-[10px] uppercase tracking-[0.25em] bg-primary text-primary-foreground rounded-full px-3 py-1">24 октября</span>
-              <span className="font-body text-[10px] uppercase tracking-[0.25em] text-cream/50">накануне девичника</span>
+        <motion.div {...fadeUp} className="max-w-7xl mx-auto overflow-hidden rounded-3xl bg-warm-black text-cream">
+          <div className="grid lg:grid-cols-[1.15fr_1fr]">
+            <div className="relative z-10 p-7 md:p-12 lg:p-14">
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <span className="font-body text-[10px] uppercase tracking-[0.25em] bg-primary text-primary-foreground rounded-full px-3 py-1">24 октября · 14:00–19:00</span>
+                <span className="font-body text-[10px] uppercase tracking-[0.25em] text-cream/50">накануне девичника · вход свободный</span>
+              </div>
+              <h2 className="font-display text-4xl md:text-6xl font-light leading-[1] mb-4">
+                Игристое
+                <br />
+                <span className="italic text-primary">со стилистом.</span>
+              </h2>
+              <div className="flex items-center gap-3 mb-6">
+                <img src={voluminousLogo} alt="Voluminous" className="h-10 md:h-12 -my-2 w-auto brightness-0 invert" />
+                <span className="font-body text-sm text-cream/60">× стилист</span>
+                <a href={IGRISTOE.stylistUrl} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-cream hover:text-primary transition-colors">
+                  {IGRISTOE.stylist}*
+                </a>
+              </div>
+              <p className="font-display text-xl md:text-2xl text-cream/90 leading-snug mb-4">
+                Обновляем гардероб к осенне-зимнему сезону. Никогда ещё шопинг не был таким приятным — и главное, полезным!
+              </p>
+              <p className="font-body text-sm md:text-base text-cream/70 leading-relaxed mb-6">
+                С любовью к вам, вместе с брендом Voluminous и стилистом Леной Головой мы создали благотворительное событие. Известный
+                стилист и команда бренда помогут выбрать обновки и стилизовать любимую вещь, которая давно в гардеробе и которую очень
+                хочется носить. Приятная компания и много-много дофамина вам обеспечены!
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  "Часть средств пойдёт в фонд «Не напрасно» — единственный фонд в России, который занимается системной профилактикой рака",
+                  "Соседнее здание с площадкой девичника",
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-3 font-body text-sm text-cream/75">
+                    <Heart className="w-4 h-4 text-primary shrink-0 mt-0.5" /> {t}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={`https://yandex.ru/maps/?text=${encodeURIComponent(IGRISTOE.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-body text-sm text-cream hover:text-primary transition-colors"
+              >
+                <MapPin className="w-4 h-4 text-primary" /> Voluminous · {IGRISTOE.address}
+              </a>
             </div>
-            <h2 className="font-display text-4xl md:text-6xl font-light leading-[1] mb-6">
-              Игристое
-              <br />
-              <span className="italic text-primary">и стилист.</span>
-            </h2>
-            <p className="font-display text-xl md:text-2xl text-cream/90 leading-snug mb-6">
-              Смени гардероб и помоги фонду помощи по борьбе с онкологией.
-            </p>
-            <ul className="space-y-3 mb-8">
-              {["Деньги идут на благотворительные цели", "Борьба с онкологией в РФ"].map((t) => (
-                <li key={t} className="flex items-center gap-3 font-body text-sm md:text-base text-cream/75">
-                  <Heart className="w-4 h-4 text-primary shrink-0" /> {t}
-                </li>
-              ))}
-            </ul>
-            <a
-              href={`https://t.me/${organizers[1].handle}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-xs uppercase tracking-[0.18em] font-body hover:opacity-90 transition-opacity"
-            >
-              Узнать подробности <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            <div className="relative min-h-[280px] lg:min-h-full">
+              <img src={wardrobeImg} alt="Игристое и гардероб" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-warm-black via-warm-black/20 to-transparent" />
+            </div>
           </div>
-          <div className="relative min-h-[260px] lg:min-h-full">
-            <img src={wardrobeImg} alt="Вешалка с одеждой и игристое" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-warm-black via-warm-black/30 to-transparent lg:via-warm-black/10" />
-            <div className="absolute right-6 bottom-6 flex gap-3">
-              {[Wine, Shirt, Gift].map((I, i) => (
-                <span key={i} className="w-11 h-11 rounded-full bg-cream/15 backdrop-blur text-cream flex items-center justify-center">
-                  <I className="w-5 h-5" />
-                </span>
-              ))}
-            </div>
+          {/* Запись */}
+          <div className="border-t border-cream/10 bg-cream/[0.04] p-7 md:p-10 lg:px-14">
+            <p className="font-body text-[10px] uppercase tracking-[0.25em] text-primary mb-4">Запись · бесплатно</p>
+            <IgristoeSignup />
+            <p className="font-body text-[10px] text-cream/35 mt-6">* Instagram принадлежит компании Meta, признанной экстремистской и запрещённой в России.</p>
           </div>
         </motion.div>
       </section>

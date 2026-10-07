@@ -116,6 +116,31 @@ const downloadWellnessCsv = (rows: WellnessRegistration[]) => {
   URL.revokeObjectURL(a.href);
 };
 
+type StylistRegistration = {
+  id: string;
+  created_at: string;
+  full_name: string;
+  phone: string;
+  email: string;
+  consent_ads: boolean;
+  source: string | null;
+  confirmation_sent_at: string | null;
+};
+
+const downloadStylistCsv = (rows: StylistRegistration[]) => {
+  const head = ["№", "Дата", "Имя", "Телефон", "Почта", "Реклама", "Источник"];
+  const lines = [...rows].reverse().map((r, i) => [
+    i + 1, new Date(r.created_at).toLocaleString("ru-RU"), r.full_name, r.phone, r.email, r.consent_ads ? "да" : "нет", r.source ?? "",
+  ]);
+  const csv = [head, ...lines].map((l) => l.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\r\n");
+  const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `igristoe-zapisi-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
 type UtmVisit = {
   id: string;
   utm_source: string | null;
@@ -143,13 +168,14 @@ const getImageUrl = (url: string | null) => {
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState<"lots" | "bids" | "lot_requests" | "forum" | "wellness" | "requests" | "utm">("lots");
+  const [tab, setTab] = useState<"lots" | "bids" | "lot_requests" | "forum" | "wellness" | "stylist" | "requests" | "utm">("lots");
   const [lots, setLots] = useState<Lot[]>([]);
   const [bids, setBids] = useState<Bid[]>([]);
   const [requests, setRequests] = useState<TicketRequest[]>([]);
   const [lotReservations, setLotReservations] = useState<LotReservation[]>([]);
   const [forumRegs, setForumRegs] = useState<ForumRegistration[]>([]);
   const [wellnessRegs, setWellnessRegs] = useState<WellnessRegistration[]>([]);
+  const [stylistRegs, setStylistRegs] = useState<StylistRegistration[]>([]);
   const [utmVisits, setUtmVisits] = useState<UtmVisit[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingLot, setEditingLot] = useState<Partial<Lot> | null>(null);
@@ -166,6 +192,7 @@ const Admin = () => {
     if (tab === "lot_requests") fetchLotReservations();
     if (tab === "forum") fetchForumRegs();
     if (tab === "wellness") fetchWellnessRegs();
+    if (tab === "stylist") fetchStylistRegs();
     if (tab === "utm") fetchUtmVisits();
   }, [tab]);
 
@@ -186,6 +213,11 @@ const Admin = () => {
   const fetchWellnessRegs = async () => {
     const { data } = await supabase.from("wellness_registrations" as any).select("*").order("created_at", { ascending: false });
     if (data) setWellnessRegs(data as any);
+  };
+
+  const fetchStylistRegs = async () => {
+    const { data } = await supabase.from("stylist_registrations" as never).select("*").order("created_at", { ascending: false });
+    if (data) setStylistRegs(data as StylistRegistration[]);
   };
 
   const fetchUtmVisits = async () => {
@@ -448,6 +480,7 @@ const Admin = () => {
     { key: "lot_requests" as const, label: "Заявки на лоты" },
     { key: "forum" as const, label: "Форум" },
     { key: "wellness" as const, label: "Девичник" },
+    { key: "stylist" as const, label: "Игристое" },
     { key: "requests" as const, label: "Билеты" },
     { key: "utm" as const, label: "UTM" },
   ];
@@ -857,6 +890,43 @@ const Admin = () => {
                 );
               })}
               {wellnessRegs.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Пока нет регистраций</p>}
+            </div>
+          </div>
+        )}
+
+        {tab === "stylist" && (
+          <div>
+            <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
+              <h2 className="font-display text-2xl uppercase">Игристое 24.10 · {stylistRegs.length}</h2>
+              <button
+                onClick={() => downloadStylistCsv(stylistRegs)}
+                disabled={!stylistRegs.length}
+                className="text-xs uppercase tracking-wider font-body px-4 py-2 border border-cream/20 hover:border-primary disabled:opacity-40"
+              >
+                Скачать CSV
+              </button>
+            </div>
+            <div className="space-y-2">
+              {stylistRegs.map((r, i) => (
+                <div key={r.id} className="bg-cream/5 border border-cream/10 p-4 flex items-start justify-between gap-4 flex-wrap">
+                  <div className="min-w-0">
+                    <p className="font-body text-sm text-cream font-medium">
+                      <span className="text-cream/40 mr-2">№{stylistRegs.length - i}</span>
+                      {r.full_name}
+                    </p>
+                    <p className="text-cream/40 text-xs font-body">
+                      {r.email} · {r.phone}
+                      {r.consent_ads ? " · реклама ✓" : ""}
+                      {r.source && r.source !== "site" ? ` · ${r.source}` : ""}
+                      {!r.confirmation_sent_at ? " · письмо не ушло" : ""}
+                    </p>
+                  </div>
+                  <p className="text-cream/30 text-xs font-body whitespace-nowrap">
+                    {new Date(r.created_at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                  </p>
+                </div>
+              ))}
+              {stylistRegs.length === 0 && <p className="text-cream/30 text-sm font-body text-center py-8">Пока нет записей</p>}
             </div>
           </div>
         )}
