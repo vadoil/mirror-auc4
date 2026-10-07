@@ -1,6 +1,7 @@
 // Запись на «Игристое со стилистом» (24.10, Voluminous). Бесплатно.
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { sendTemplate, notifyOrganizers, escapeHtml } from '../_shared/wellness-mailer.ts'
+import { sourceLabel } from '../_shared/utm-labels.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -54,7 +55,7 @@ Deno.serve(async (req) => {
     `━━━━━━━━━━━━━━━━━━\n\n` +
     `👤 <b>${escapeHtml(full_name)}</b>\n📞 ${escapeHtml(phone)}\n✉️ ${escapeHtml(email)}` +
     (consent_ads ? `\n📨 согласна на рассылку` : '') +
-    (source !== 'site' ? `\n🔗 ${escapeHtml(source)}` : ''),
+    `\n\n🔗 От: ${escapeHtml(sourceLabel(source))}`,
   )
   return json({ ok: true })
 })

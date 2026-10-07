@@ -2,6 +2,7 @@
 import type { SupabaseClient } from 'npm:@supabase/supabase-js@2'
 import { sendTemplate, notifyOrganizers, escapeHtml } from './wellness-mailer.ts'
 import { TRAININGS } from './transactional-email-templates/wellness-event.ts'
+import { sourceLabel } from './utm-labels.ts'
 
 export const WELLNESS_PRICE = 440
 // InvoiceId в CloudPayments: «wellness-<uuid регистрации>»
@@ -27,7 +28,7 @@ export async function confirmWellnessPayment(
     .update({ payment_status: 'paid', paid_at: new Date().toISOString(), amount: payment.amount, transaction_id: payment.transactionId })
     .eq('id', registrationId)
     .eq('payment_status', 'pending')
-    .select('id, full_name, email, phone, telegram, age, trainings, consent_ads, paid_at')
+    .select('id, full_name, email, phone, telegram, age, trainings, consent_ads, paid_at, utm')
     .maybeSingle()
   if (!row) return { ok: true, already: true }
 
@@ -55,7 +56,8 @@ export async function confirmWellnessPayment(
     (row.telegram ? `💬 @${escapeHtml(row.telegram)}\n` : '') +
     ((row.trainings ?? []) as string[]).map((t) => `\n🏃‍♀️ ${escapeHtml(TRAININGS[t] ?? t)}`).join('') +
     (row.consent_ads ? `\n📨 согласна на рассылку` : '') +
-    `\n\n💳 CloudPayments #${escapeHtml(payment.transactionId)}`,
+    `\n\n🔗 От: ${escapeHtml(sourceLabel((row.utm as { utm_source?: string } | null)?.utm_source))}` +
+    `\n💳 CloudPayments #${escapeHtml(payment.transactionId)}`,
   )
   return { ok: true, position }
 }
