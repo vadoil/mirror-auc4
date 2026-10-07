@@ -46,7 +46,8 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import heroImg from "@/assets/wellness/wellness-hero.webp";
 import lectureImg from "@/assets/wellness/wellness-lecture.webp";
 import stilllifeImg from "@/assets/wellness/stilllife.webp";
-import wardrobeImg from "@/assets/wellness/wardrobe-evening.webp";
+import igristoeDesktop from "@/assets/wellness/igristoe-desktop.webp";
+import igristoeMobile from "@/assets/wellness/igristoe-mobile.webp";
 import victoriaPhoto from "@/assets/wellness/people/victoria.webp";
 import annaPhoto from "@/assets/wellness/people/anna.webp";
 import margaritaPhoto from "@/assets/wellness/people/margarita.webp";
@@ -659,8 +660,13 @@ const Wellness = () => {
       {/* 24 октября: игристое со стилистом (Voluminous, Лена Голова) */}
       <section id="october-24" className="section-padding pb-20 md:pb-28 scroll-mt-20">
         <motion.div {...fadeUp} className="max-w-7xl mx-auto overflow-hidden rounded-3xl bg-warm-black text-cream">
-          <div className="grid lg:grid-cols-[1.15fr_1fr]">
-            <div className="relative z-10 p-7 md:p-12 lg:p-14">
+          {/* Фото: широкое на компьютере, вертикальное на телефоне */}
+          <picture>
+            <source media="(min-width: 768px)" srcSet={igristoeDesktop} />
+            <img src={igristoeMobile} alt="Стилист и гостья с бокалом игристого" loading="lazy" className="block w-full aspect-[2/3] md:aspect-[2/1] object-cover" />
+          </picture>
+          <div className="grid lg:grid-cols-2 gap-x-14 gap-y-8 p-7 md:p-12 lg:p-14">
+            <div>
               <div className="flex flex-wrap items-center gap-3 mb-6">
                 <span className="font-body text-[10px] uppercase tracking-[0.25em] bg-primary text-primary-foreground rounded-full px-3 py-1">24 октября · 14:00–19:00</span>
                 <span className="font-body text-[10px] uppercase tracking-[0.25em] text-cream/50">накануне девичника · вход свободный</span>
@@ -670,16 +676,18 @@ const Wellness = () => {
                 <br />
                 <span className="italic text-primary">со стилистом.</span>
               </h2>
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-6">
                 <img src={voluminousLogo} alt="Voluminous" className="h-10 md:h-12 -my-2 w-auto brightness-0 invert" />
-                <span className="font-body text-sm text-cream/60">× стилист</span>
-                <a href={IGRISTOE.stylistUrl} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-cream hover:text-primary transition-colors">
+                <span className="font-body text-sm text-cream/60 whitespace-nowrap">× стилист</span>
+                <a href={IGRISTOE.stylistUrl} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-cream whitespace-nowrap hover:text-primary transition-colors">
                   {IGRISTOE.stylist}*
                 </a>
               </div>
-              <p className="font-display text-xl md:text-2xl text-cream/90 leading-snug mb-4">
+              <p className="font-display text-xl md:text-2xl text-cream/90 leading-snug">
                 Обновляем гардероб к осенне-зимнему сезону. Никогда ещё шопинг не был таким приятным — и главное, полезным!
               </p>
+            </div>
+            <div className="lg:pt-14">
               <p className="font-body text-sm md:text-base text-cream/70 leading-relaxed mb-6">
                 С любовью к вам, вместе с брендом Voluminous и стилистом Леной Головой мы создали благотворительное событие. Известный
                 стилист и команда бренда помогут выбрать обновки и стилизовать любимую вещь, которая давно в гардеробе и которую очень
@@ -703,10 +711,6 @@ const Wellness = () => {
               >
                 <MapPin className="w-4 h-4 text-primary" /> Voluminous · {IGRISTOE.address}
               </a>
-            </div>
-            <div className="relative min-h-[280px] lg:min-h-full">
-              <img src={wardrobeImg} alt="Игристое и гардероб" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-warm-black via-warm-black/20 to-transparent" />
             </div>
           </div>
           {/* Запись */}
