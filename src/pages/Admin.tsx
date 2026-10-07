@@ -82,6 +82,7 @@ type WellnessRegistration = {
   consent_ads: boolean;
   confirmation_sent_at: string | null;
   payment_status: "pending" | "paid" | "free";
+  utm: { utm_source?: string; utm_campaign?: string } | null;
   amount: number | null;
   paid_at: string | null;
 };
@@ -95,12 +96,13 @@ const wellnessTrainings: Record<string, string> = {
 };
 
 const downloadWellnessCsv = (rows: WellnessRegistration[]) => {
-  const head = ["№", "Оплата", "Сумма", "Дата", "Имя и фамилия", "Почта", "Телефон", "Telegram", "Возраст", "Тренировка", "Реклама"];
+  const head = ["№", "Оплата", "Сумма", "Источник", "Дата", "Имя и фамилия", "Почта", "Телефон", "Telegram", "Возраст", "Тренировка", "Реклама"];
   const ordered = [...rows].reverse();
   const lines = ordered.map((r, i) => [
     i + 1,
     wellnessPayLabels[r.payment_status] ?? r.payment_status,
     r.amount ?? "",
+    r.utm?.utm_source ?? "",
     new Date(r.created_at).toLocaleString("ru-RU"),
     r.full_name, r.email, r.phone, r.telegram ? `@${r.telegram}` : "", r.age ?? "",
     (r.trainings ?? []).map((t) => wellnessTrainings[t] ?? t).join(", "), r.consent_ads ? "да" : "нет",
@@ -857,6 +859,24 @@ const Admin = () => {
                 Согласны на рекламу: {wellnessRegs.filter((r) => r.consent_ads).length}
               </span>
             </div>
+            {/* Источники (UTM): анкеты / оплаты */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {Object.entries(
+                wellnessRegs.reduce<Record<string, { all: number; paid: number }>>((acc, r) => {
+                  const k = r.utm?.utm_source || "без метки";
+                  acc[k] ??= { all: 0, paid: 0 };
+                  acc[k].all++;
+                  if (r.payment_status !== "pending") acc[k].paid++;
+                  return acc;
+                }, {}),
+              )
+                .sort((a, b) => b[1].paid - a[1].paid)
+                .map(([src, c]) => (
+                  <span key={src} className="text-[11px] font-body px-3 py-1 bg-primary/10 border border-primary/30 text-cream/80">
+                    {src}: {c.paid} оплат · {c.all} анкет
+                  </span>
+                ))}
+            </div>
             <div className="space-y-2">
               {wellnessRegs.map((r) => {
                 const confirmed = wellnessRegs
@@ -882,6 +902,7 @@ const Admin = () => {
                           {r.email} · {r.phone}{r.telegram ? ` · @${r.telegram}` : ""}
                           {r.consent_ads ? " · реклама ✓" : ""}
                           {!r.confirmation_sent_at ? " · письмо не ушло" : ""}
+                          {r.utm?.utm_source ? ` · источник: ${r.utm.utm_source}` : ""}
                         </p>
                       </div>
                       <p className="text-cream/30 text-xs font-body whitespace-nowrap">{new Date(r.created_at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</p>

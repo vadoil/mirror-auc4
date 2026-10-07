@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { rememberUtm, utmFromSearch } from "@/lib/utm";
 
 /**
  * Логирует заход с UTM-метками в таблицу utm_visits.
@@ -15,6 +16,8 @@ const UtmTracker = () => {
     const utm_source = params.get("utm_source");
     const utm_medium = params.get("utm_medium");
     const utm_campaign = params.get("utm_campaign");
+
+    rememberUtm(utmFromSearch(location.search));
 
     if (!utm_source && !utm_medium && !utm_campaign) {
       console.log("[utm] no utm params, skip");

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Check, Loader2 } from "lucide-react";
 import { CLOUDPAYMENTS_PUBLIC_ID, loadCloudPaymentsWidget } from "@/lib/cloudpayments";
+import { currentUtm } from "@/lib/utm";
 
 export const TRAININGS = [
   { id: "libido", title: "Либидо-фитнес", coach: "с Маргаритой Дмитриевой" },
@@ -142,9 +143,7 @@ const WellnessRegistration = () => {
         trainings,
         consent_pd: consentPd,
         consent_ads: consentAds,
-        utm: Object.fromEntries(
-          [...new URLSearchParams(window.location.search)].filter(([k]) => k.startsWith("utm_")),
-        ),
+        utm: currentUtm(),
       });
       if (!ok) {
         setError(data.error || "Не удалось отправить регистрацию. Попробуйте ещё раз.");

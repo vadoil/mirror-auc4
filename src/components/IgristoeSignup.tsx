@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, Loader2 } from "lucide-react";
+import { currentUtm } from "@/lib/utm";
 
 // Запись на «Игристое со стилистом» (24.10) — бесплатно, письмо-приглашение приходит сразу.
 const FUNCTION_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/igristoe-register`;
@@ -49,7 +50,7 @@ const IgristoeSignup = () => {
           ...form,
           consent_pd: consentPd,
           consent_ads: consentAds,
-          source: new URLSearchParams(window.location.search).get("utm_source") || "site",
+          source: currentUtm().utm_source || "site",
         }),
       });
       const data = await res.json().catch(() => ({}));

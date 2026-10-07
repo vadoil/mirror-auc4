@@ -99,9 +99,12 @@ const lectures = [
   },
 ];
 
+// Блок «Красивые бренды» скрыт, пока не подписаны договоры с брендами. Вернуть — поставить true.
+const SHOW_BRANDS = false;
+
 const otherFormats = [
   { icon: Dumbbell, title: "Тренировки", note: "Либидо-фитнес, сильное тело, медитация с поющими чашами", href: "#experts" },
-  { icon: ShoppingBag, title: "Экспо", note: "Бренды и сервисы заботы о себе", href: "#brands" },
+  { icon: ShoppingBag, title: "Экспо", note: "Бренды и сервисы заботы о себе", href: SHOW_BRANDS ? "#brands" : undefined },
   { icon: Wine, title: "Игристое со стилистом", note: "24 октября, 14:00–19:00 · Voluminous", href: "#october-24" },
   { icon: Mic, title: "Public talk", note: "«Героини нового велнеса»", href: undefined },
 ];
@@ -512,7 +515,7 @@ const Wellness = () => {
               <SectionLabel>Спикеры и тренеры</SectionLabel>
               <TwoLineTitle first="Знакомим" second="с экспертами." />
             </motion.div>
-            <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5 md:gap-6 mb-20 md:mb-28">
+            <div className={`grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5 md:gap-6 ${SHOW_BRANDS ? "mb-20 md:mb-28" : ""}`}>
               {experts.map((e) => (
                 <motion.div key={e.surname} {...fadeUp}>
                   {/* Телефон: плитка 2×2, описание — по нажатию */}
@@ -578,6 +581,7 @@ const Wellness = () => {
           </div>
 
           {/* Бренды */}
+          {SHOW_BRANDS && (
           <div id="brands" className="scroll-mt-20 grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-12 items-stretch">
             <div>
               <motion.div {...fadeUp} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
@@ -631,6 +635,7 @@ const Wellness = () => {
               <img src={stilllifeImg} alt="Бьюти-продукты, игристое и шёлк" loading="lazy" className="w-full h-full object-cover" />
             </motion.div>
           </div>
+          )}
         </div>
       </section>
 
