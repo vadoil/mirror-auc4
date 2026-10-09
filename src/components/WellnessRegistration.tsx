@@ -14,7 +14,8 @@ export const TRAININGS = [
 const FUNCTION_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/wellness-register`;
 const ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 export const WELLNESS_PRICE = 440;
-const PAY_DESCRIPTION = "Участие в велнес-девичнике «Отражение», 25.10.2026";
+// Благотворительный взнос: чек (54-ФЗ) не формируем, в назначении — куда идут средства
+const PAY_DESCRIPTION = "Велнес-девичник «Отражение», 25.10 — средства будут направлены в поддержку фонда «Не напрасно»";
 
 const callApi = async (body: Record<string, unknown>) => {
   const res = await fetch(FUNCTION_URL, {
@@ -101,24 +102,6 @@ const WellnessRegistration = () => {
         receiptEmail: form.email,
         userInfo: { fullName: form.full_name, email: form.email, phone: form.phone },
         metadata: { wellness_registration_id: id },
-        // онлайн-чек (54-ФЗ): услуга, полный расчёт, без НДС
-        receipt: {
-          items: [
-            {
-              label: PAY_DESCRIPTION,
-              price: WELLNESS_PRICE,
-              quantity: 1,
-              amount: WELLNESS_PRICE,
-              vat: null,
-              method: 4,
-              object: 4,
-              measurementUnit: "шт",
-            },
-          ],
-          email: form.email,
-          phone: form.phone,
-          amounts: { electronic: WELLNESS_PRICE, advancePayment: 0, credit: 0, provision: 0 },
-        },
         retryPayment: true,
       });
     } catch (e) {
@@ -222,7 +205,7 @@ const WellnessRegistration = () => {
               </p>
             )}
             <p className="font-body text-sm md:text-base text-muted-foreground max-w-lg mx-auto">
-              Подтверждение отправили на {form.email}, чек пришлёт CloudPayments. Напомним о девичнике за неделю и накануне. До встречи 25 октября!
+              Подтверждение отправили на {form.email}. Средства будут направлены в поддержку фонда «Не напрасно». Напомним о девичнике за неделю и накануне. До встречи 25 октября!
             </p>
           </>
         )}
@@ -290,7 +273,7 @@ const WellnessRegistration = () => {
 
       <p className="font-body text-xs text-muted-foreground/80 mb-6">
         Участие — {WELLNESS_PRICE} ₽. После анкеты откроется защищённая форма оплаты CloudPayments, данные карты
-        не хранятся на сайте. Электронный чек придёт на почту.
+        не хранятся на сайте. Средства будут направлены в поддержку фонда «Не напрасно».
       </p>
 
       {error && <p className="font-body text-sm text-destructive mb-4">{error}</p>}

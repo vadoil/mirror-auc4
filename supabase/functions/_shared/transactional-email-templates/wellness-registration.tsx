@@ -21,7 +21,7 @@ const WellnessRegistrationEmail = ({ name, trainings, position, amount }: Props)
     <ProgramTeaser />
     <Gallery />
     <Paragraph>
-      {'Мы напомним о девичнике за неделю и накануне. Электронный чек об оплате CloudPayments пришлёт отдельным письмом.'}
+      {'Мы напомним о девичнике за неделю и накануне. Ваш взнос будет направлен в поддержку фонда «Не напрасно» — спасибо, что вы с нами!'}
     </Paragraph>
     <SignOff>{'До встречи 25 октября!'}</SignOff>
   </Shell>
