@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 
-import aboutVenue from "@/assets/about-spb-vertical.webp";
+import mansionImg from "@/assets/spb2911/mansion-caryatid.webp";
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -21,7 +21,7 @@ const AboutSection = () => {
             >
               <div className="w-8 h-px bg-primary" />
               <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-                О проекте
+                Следующий вечер · 29 ноября
               </p>
             </motion.div>
 
@@ -32,31 +32,34 @@ const AboutSection = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="min-w-0"
               >
-                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[0.9] text-foreground mb-8">
-                  Благо
+                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[0.95] text-foreground mb-8">
+                  Вечер
                   <br />
-                  <span className="italic text-primary">творительные</span>
+                  <span className="italic text-primary">в историческом</span>
                   <br />
-                  аукционы
+                  особняке
                 </h2>
                 <div className="w-24 h-px bg-primary mb-8" />
 
-
-
-
                 <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary font-body mb-4">
-                  Забота о здоровье · Долголетие · Нейрогастрономия
+                  Санкт-Петербург · 29 ноября, воскресенье · в поддержку фонда «Не напрасно»
                 </p>
 
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
-                  В столице мы сфокусируемся на повестке в сфере здоровья, поговорим о долголетии и нейрогастрономии, продегустируем Blends от Inspiro – б/а напитки, продлевающие молодость мозга, проведём вечер в компании искромётного Александра Цыпкина и сможем сделать вклад в спасение от онкозаболеваний.
+                  Этой осенью мы приглашаем вас в Петербург — в город, где умеют превращать вечер в событие: с парадной лестницей, музыкой
+                  и разговорами, которые не хочется заканчивать. Новое «Отражение добра» пройдёт в историческом особняке.
                 </p>
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
-                  Мы верим, что забота о себе и забота о других – не противоположности, а отражение друг друга. Поэтому перед началом аукциона мы организуем для вас открытую лекцию о современных возможностях поддержать свой организм и баланс внутри.
+                  У дверей вас встретят дама или кавалер и проводят в зал. Вас ждут музыка, вечерние туалеты, фуршет и шампанское, а затем —
+                  аукцион современного искусства, который проведут Александр Цыпкин и Юрий Омельченко.
                 </p>
-                <p className="editorial-body text-muted-foreground max-w-lg">
-                  «Отражение добра» – это аукцион, где каждый лот несёт смысл. Уникальные оздоровительные программы, ретриты, эксклюзивный опыт, а все деньги, вырученные с продаж билетов и аукциона, направляются в поддержку фонда «Не напрасно».
+                <p className="editorial-body text-muted-foreground mb-8 max-w-lg">
+                  В каталоге — работы Андрея Бартенева, Константина Чайкина, Яниса Чамалиди и Dimsona, изделия Liza Borzaya и Vintage Dream,
+                  фарфор «Сказ по краю». Средства от продажи лотов будут направлены фонду «Не напрасно».
                 </p>
+                <Link to="/peterburg" className="btn-outline inline-flex items-center justify-center">
+                  Подробнее о вечере
+                </Link>
               </motion.div>
 
               <motion.div
@@ -65,22 +68,17 @@ const AboutSection = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="relative"
               >
-                <Link to="/archive/spb" className="block group">
+                <Link to="/peterburg" className="block group">
                   <div className="aspect-[4/5] overflow-hidden relative rounded-2xl">
-                    <img src={aboutVenue} alt="Санкт-Петербург - аукцион 2026" loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out" width={1024} height={1280} />
-                    <div className="absolute inset-0 bg-warm-black/40" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-warm-black/85 via-warm-black/15 to-transparent" />
+                    <img src={mansionImg} alt="Интерьер петербургского особняка" loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out" width={900} height={1249} />
+                    <div className="absolute inset-0 bg-warm-black/30" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-warm-black/90 via-warm-black/20 to-transparent" />
                     <div className="text-center p-8 relative z-10 flex flex-col items-center justify-end h-full pb-12">
-                      <p className="font-body text-cream/60 text-[10px] uppercase tracking-[0.35em] mb-4">Питер 2026 · состоялся</p>
-                      <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-2">Санкт-</p>
-                      <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-5">Петербург</p>
+                      <p className="font-body text-cream/70 text-[10px] uppercase tracking-[0.35em] mb-4">29 ноября · Санкт-Петербург</p>
+                      <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-2">Исторический</p>
+                      <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-5">особняк</p>
                       <div className="w-12 h-px bg-primary mx-auto mb-4" />
-                      <p className="font-body text-cream text-sm max-w-xs mx-auto mb-1">
-                        13 августа 2026
-                      </p>
-                      <p className="font-body text-cream/70 text-xs max-w-xs mx-auto mb-5">
-                        Центр «Зрение» · пр. Добролюбова, 20к1
-                      </p>
+                      <p className="font-body text-cream text-sm max-w-xs mx-auto mb-5">Благотворительный вечер «Отражение добра»</p>
                       <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-cream border border-cream/30 px-4 py-2 group-hover:border-primary group-hover:text-primary transition-colors">
                         Подробнее о вечере
                       </span>
@@ -91,6 +89,7 @@ const AboutSection = () => {
                     <p className="text-[10px] uppercase tracking-[0.2em] font-body mt-1.5">на благо</p>
                   </div>
                 </Link>
+                <p className="font-body text-[10px] text-muted-foreground/60 mt-2">Фото для настроения: особняк Белосельских-Белозерских · Александровы АГ, CC BY-SA 4.0</p>
               </motion.div>
             </div>
           </div>
@@ -106,7 +105,7 @@ const AboutSection = () => {
           >
             {Array.from({ length: 8 }).map((_, i) => (
               <span key={i} className="font-display text-lg md:text-xl text-primary-foreground/80 font-light italic tracking-wide">
-                Благотворительность · Забота о здоровье · Осознанность · Ретриты · Здоровье · Баланс · Добро ·&nbsp;
+                Благотворительность · Исторический особняк · Современное искусство · Петербург · Забота · Добро ·&nbsp;
               </span>
             ))}
           </motion.div>

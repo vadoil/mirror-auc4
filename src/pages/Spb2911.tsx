@@ -4,8 +4,9 @@ import { ArrowRight, Calendar, Crown, DoorOpen, Gavel, GlassWater, Heart, MapPin
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
-import heroImg from "@/assets/upcoming-spb-hero.webp";
-import tsipkinPhoto from "@/assets/tsipkin.webp";
+import heroImg from "@/assets/spb2911/mansion-hall.webp";
+import stairImg from "@/assets/spb2911/mansion-stair.webp";
+import hostsPhoto from "@/assets/gallery/event/event-01.webp";
 import bartenevPhoto from "@/assets/artist-2-bartenev.webp";
 import dimsonWork from "@/assets/abrosimov-work-1.jpg";
 import chaykinImg from "@/assets/spb2911/chaykin.webp";
@@ -27,15 +28,11 @@ const auctioneers = [
     name: "Александр",
     surname: "Цыпкин",
     text: "Писатель, сценарист и продюсер. Его торги — это всегда юмор, энергия и непредсказуемость.",
-    photo: tsipkinPhoto as string | undefined,
-    initials: "АЦ",
   },
   {
     name: "Юрий",
     surname: "Омельченко",
     text: "Арт-эксперт и галерист, сооснователь Omelchenko Gallery, автор проекта «ARTПатруль». Провёл несколько благотворительных аукционов современного искусства.",
-    photo: undefined,
-    initials: "ЮО",
   },
 ];
 
@@ -102,7 +99,7 @@ const Spb2911 = () => {
 
       {/* Hero */}
       <section className="relative min-h-[100svh] flex items-end overflow-hidden bg-warm-black">
-        <img src={heroImg} alt="Санкт-Петербург, разведённые мосты" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={heroImg} alt="Парадный зал петербургского особняка" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/50 to-warm-black/20" />
         <div className="relative z-10 w-full section-padding pb-16 md:pb-24 pt-32">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-7xl mx-auto text-cream">
@@ -131,6 +128,7 @@ const Spb2911 = () => {
             </div>
           </motion.div>
         </div>
+        <p className="absolute right-4 bottom-3 z-10 font-body text-[9px] text-cream/40">Фото для настроения: особняк Белосельских-Белозерских · Александровы АГ, CC BY-SA 4.0</p>
       </section>
 
       {/* О вечере — вводный текст */}
@@ -141,9 +139,14 @@ const Spb2911 = () => {
             <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-foreground leading-[1]">
               Вечер
               <br />
-              <span className="italic text-primary">в духе петербургского бала.</span>
+              <span className="italic text-primary">в историческом особняке.</span>
             </h2>
-            <p className="font-body text-xs uppercase tracking-[0.25em] text-muted-foreground mt-8">Дресс-код: вечерний</p>
+            <p className="font-body text-xs uppercase tracking-[0.25em] text-muted-foreground mt-8 mb-8">Дресс-код: вечерний</p>
+            <div className="aspect-[3/2] rounded-2xl overflow-hidden">
+              <img src={stairImg} alt="Парадная лестница особняка" loading="lazy" className="w-full h-full object-cover" />
+            </div>
+            <p className="font-display italic text-lg text-primary mt-4 leading-snug">Парадная лестница, лепнина, свет люстр — и вечер, который становится событием.</p>
+            <p className="font-body text-[10px] text-muted-foreground/60 mt-2">Фото для настроения · Александровы АГ, CC BY-SA 4.0</p>
           </motion.div>
           <motion.div {...fadeUp} className="space-y-5 font-body text-base md:text-lg text-muted-foreground leading-relaxed">
             <p className="text-foreground first-letter:font-display first-letter:text-6xl first-letter:float-left first-letter:mr-3 first-letter:leading-[0.85] first-letter:text-primary">
@@ -208,29 +211,27 @@ const Spb2911 = () => {
               <span className="italic text-primary">и остроумно.</span>
             </h2>
           </motion.div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {auctioneers.map((a) => (
-              <motion.div key={a.surname} {...fadeUp} className="grid grid-cols-[0.85fr_1.15fr] gap-5 md:gap-7 items-center border border-cream/10 rounded-2xl p-5 md:p-7">
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-cream/5 flex items-center justify-center">
-                  {a.photo ? (
-                    <img src={a.photo} alt={`${a.name} ${a.surname}`} loading="lazy" className="w-full h-full object-cover object-top" />
-                  ) : (
-                    <span className="font-display text-5xl text-primary/70">{a.initials}</span>
-                  )}
-                </div>
-                <div>
+          <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-6 lg:gap-10 items-stretch">
+            <motion.figure {...fadeUp} className="relative rounded-2xl overflow-hidden min-h-[420px]">
+              <img src={hostsPhoto} alt="Александр Цыпкин и Юрий Омельченко" loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top" />
+              <div className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-transparent to-transparent" />
+              <figcaption className="absolute left-5 bottom-5 font-body text-xs uppercase tracking-[0.2em] text-cream/80">
+                Александр Цыпкин и Юрий Омельченко
+              </figcaption>
+            </motion.figure>
+            <div className="grid gap-6">
+              {auctioneers.map((a) => (
+                <motion.div key={a.surname} {...fadeUp} className="border border-cream/10 rounded-2xl p-6 md:p-8 flex flex-col justify-center">
                   <span className="inline-flex items-center gap-1.5 font-body text-[10px] uppercase tracking-[0.2em] text-primary mb-3">
                     <Mic className="w-3.5 h-3.5" /> Аукционист
                   </span>
                   <h3 className="font-display text-3xl md:text-4xl leading-[1] mb-4">
-                    {a.name}
-                    <br />
-                    <span className="italic text-primary">{a.surname}</span>
+                    {a.name} <span className="italic text-primary">{a.surname}</span>
                   </h3>
                   <p className="font-body text-sm text-cream/65 leading-relaxed">{a.text}</p>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
