@@ -9,6 +9,7 @@ import logoOtrazhenieLight from "@/assets/logo-otrazhenie-light.png";
 
 const navItems = [
   { label: "Велнес-девичник", href: "/wellness" },
+  { label: "Петербург 29.11", href: "/peterburg" },
   { label: "Архив", href: "/archive" },
   { label: "Лоты", href: "/lots" },
   { label: "Форум", href: "/forum" },

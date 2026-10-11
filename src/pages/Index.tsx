@@ -15,6 +15,7 @@ import OrganizersSection from "@/components/OrganizersSection";
 
 import SponsorsSection from "@/components/SponsorsSection";
 import WellnessTeaserBanner from "@/components/WellnessTeaserBanner";
+import SpbAuctionBanner from "@/components/SpbAuctionBanner";
 import DressCodeSection from "@/components/DressCodeSection";
 import ForumBannerFooter from "@/components/ForumBannerFooter";
 import ContactsSection from "@/components/ContactsSection";
@@ -28,6 +29,7 @@ const Index = () => {
       <div className="relative z-10">
         <AboutSection />
         <WellnessTeaserBanner />
+        <SpbAuctionBanner />
         <ProjectStorySection />
         <AuctionResultsSection />
         <PrizesSection />

@@ -29,6 +29,7 @@ const Upcoming = lazy(() => import("./pages/Upcoming"));
 const Archive = lazy(() => import("./pages/Archive"));
 const ArchiveMoscow = lazy(() => import("./pages/ArchiveMoscow"));
 const Wellness = lazy(() => import("./pages/Wellness"));
+const Spb2911 = lazy(() => import("./pages/Spb2911"));
 
 const queryClient = new QueryClient();
 
@@ -61,6 +62,7 @@ const App = () => (
             <Route path="/partners" element={<Partners />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/wellness" element={<Wellness />} />
+            <Route path="/peterburg" element={<Spb2911 />} />
             <Route path="/archive" element={<Archive />} />
             <Route path="/archive/spb" element={<Upcoming />} />
             <Route path="/archive/moscow" element={<ArchiveMoscow />} />
