@@ -48,7 +48,8 @@ export const Shell = ({ preview, children }: { preview: string; children: React.
               <p style={{ fontFamily: SANS, fontSize: 11, color: MUTED, lineHeight: 1.6, margin: '20px 0 0', maxWidth: 520 }}>
                 {'В поддержку «Розового октября» — месяца профилактики рака груди. Фонд «Не напрасно»: просвещение, профилактика рака и подготовка врачей-онкологов.'}
                 <br />
-                {'Вопросы? Просто ответьте на это письмо · '}
+                <a href='https://t.me/+Uz1ZL3pNLszM2My' style={{ color: RED, fontWeight: 600 }}>{'Наш Telegram-канал'}</a>
+                {' · Вопросы? Просто ответьте на это письмо · '}
                 <a href={SITE} style={{ color: MUTED }}>отразись.рф</a>
               </p>
             </td>

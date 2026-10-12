@@ -103,7 +103,7 @@ const lectures = [
 const SHOW_BRANDS = false;
 
 const otherFormats = [
-  { icon: Dumbbell, title: "Тренировки", note: "Либидо-фитнес, сильное тело, медитация с поющими чашами", href: "#experts" },
+  { icon: Dumbbell, title: "Тренировки", note: "Либидо-фитнес, растяжка и здоровая спина, медитация с поющими чашами", href: "#experts" },
   { icon: ShoppingBag, title: "Экспо", note: "Бренды и сервисы заботы о себе", href: SHOW_BRANDS ? "#brands" : undefined },
   { icon: Wine, title: "Игристое со стилистом", note: "24 октября, 14:00–19:00 · Voluminous", href: "#october-24" },
   { icon: Mic, title: "Public talk", note: "«Героини нового велнеса»", href: undefined },
@@ -119,6 +119,7 @@ type Expert = {
   features?: { icon: typeof Heart; label: string }[];
   slogan?: string;
   photo: string;
+  badge?: string; // «Спикер» по умолчанию
 };
 
 const experts: Expert[] = [
@@ -143,6 +144,7 @@ const experts: Expert[] = [
   },
   {
     name: "Маргарита",
+    badge: "Тренер",
     surname: "Дмитриева",
     regalia: "Врач, сексолог, тренер по либидо фитнес",
     text: "Помогает женщинам лучше понимать своё тело, восстанавливать желание и чувствовать себя уверенно и гармонично.",
@@ -156,6 +158,7 @@ const experts: Expert[] = [
   },
   {
     name: "Георгий",
+    badge: "Тренер",
     surname: "Какунин",
     regalia: "Фитнес-тренер",
     text: "Помогает выстроить сильное и здоровое тело без жёстких диет и лишнего стресса. За осознанный подход к тренировкам, который поддерживает здоровье, энергию и уверенность в себе.",
@@ -164,7 +167,7 @@ const experts: Expert[] = [
       { icon: Zap, label: "Энергия каждый день" },
       { icon: Scale, label: "Баланс без крайностей" },
     ],
-    slogan: "Сильное тело — спокойная и счастливая ты.",
+    slogan: "Растяжка и здоровая спина — спокойная и счастливая ты.",
     photo: georgyPhoto,
   },
 ];
@@ -524,7 +527,7 @@ const Wellness = () => {
                       <img src={e.photo} alt={`${e.name} ${e.surname}`} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top" />
                       <span className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-transparent to-transparent" />
                       <span className="absolute left-3 right-3 bottom-3">
-                        <span className="inline-block font-body text-[9px] uppercase tracking-[0.18em] text-primary-foreground bg-primary rounded-full px-2 py-0.5 mb-1.5">Спикер</span>
+                        <span className="inline-block font-body text-[9px] uppercase tracking-[0.18em] text-primary-foreground bg-primary rounded-full px-2 py-0.5 mb-1.5">{e.badge ?? "Спикер"}</span>
                         <span className="block font-display text-2xl text-cream leading-[1]">
                           {e.name}
                           <br />
@@ -539,7 +542,7 @@ const Wellness = () => {
                   {/* Планшет и компьютер: текст слева, фото справа */}
                   <article className="hidden sm:grid sm:grid-cols-[1.15fr_0.85fr] gap-6 h-full bg-card border border-border rounded-2xl p-7">
                     <div className="min-w-0 flex flex-col">
-                      <span className="self-start font-body text-[10px] uppercase tracking-[0.2em] text-primary bg-primary/10 rounded-full px-3 py-1 mb-4">Спикер</span>
+                      <span className="self-start font-body text-[10px] uppercase tracking-[0.2em] text-primary bg-primary/10 rounded-full px-3 py-1 mb-4">{e.badge ?? "Спикер"}</span>
                       <h3 className="font-display text-3xl md:text-4xl text-foreground leading-[1] mb-3">
                         {e.name}
                         <br />
@@ -563,7 +566,7 @@ const Wellness = () => {
                       <img src={openExpert.photo} alt={`${openExpert.name} ${openExpert.surname}`} className="block w-full h-auto" />
                       <div className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-transparent to-transparent" />
                       <div className="absolute left-5 bottom-5">
-                        <span className="inline-block font-body text-[10px] uppercase tracking-[0.2em] text-primary-foreground bg-primary rounded-full px-3 py-1 mb-3">Спикер</span>
+                        <span className="inline-block font-body text-[10px] uppercase tracking-[0.2em] text-primary-foreground bg-primary rounded-full px-3 py-1 mb-3">{openExpert.badge ?? "Спикер"}</span>
                         <DialogTitle className="font-display text-4xl font-normal text-cream leading-[1]">
                           {openExpert.name}
                           <br />
@@ -913,6 +916,9 @@ const Wellness = () => {
           </div>
           <motion.div {...fadeUp} className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-border pt-8">
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-body text-sm text-muted-foreground">
+              <a href="https://t.me/+Uz1ZL3pNLszM2My" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
+                <Send className="w-4 h-4" /> Наш Telegram-канал
+              </a>
               <span>Наши проекты:</span>
               <Link to="/" className="hover:text-primary transition-colors">Отражение добра — отразись.рф</Link>
               <a href="/docs/aktkom-portfolio-2026.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">

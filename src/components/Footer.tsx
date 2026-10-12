@@ -42,6 +42,7 @@ const Footer = () => {
             <div>
               <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em] mb-4">Навигация</p>
               <div className="space-y-2">
+                <Link to="/about" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">О проекте</Link>
                 <Link to="/lots" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Каталог лотов</Link>
                 <Link to="/how-it-works" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Как участвовать</Link>
                 <Link to="/venue" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Место проведения</Link>
@@ -79,6 +80,10 @@ const Footer = () => {
             <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em]">Стратегические партнёры</p>
             <a href="/docs/aktkom-portfolio-2026.pdf" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-primary/60 hover:text-primary transition-colors">
               АктКом — портфолио
+            </a>
+          <span className="hidden sm:inline text-cream/20">·</span>
+            <a href="https://t.me/+Uz1ZL3pNLszM2My" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-primary/80 hover:text-primary transition-colors">
+              Наш Telegram-канал
             </a>
           </div>
 

@@ -33,7 +33,8 @@ export const EmailLayout = ({ preview, children }: { preview: string; children: 
             Средства направляются в фонд «Не напрасно» на помощь людям с онкологическими заболеваниями.
           </Text>
           <Text style={footerText}>
-            Вопросы? Просто ответьте на это письмо.{' '}
+            <Link href='https://t.me/+Uz1ZL3pNLszM2My' style={{ color: RED, fontWeight: 600 }}>Наш Telegram-канал</Link>
+            {' · '}Вопросы? Просто ответьте на это письмо.{' '}
             <Link href={SITE_URL} style={{ color: MUTED, textDecoration: 'underline' }}>отразись.рф</Link>
           </Text>
         </Section>

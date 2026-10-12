@@ -8,6 +8,7 @@ const LABELS: Record<string, { who: string; link: string }> = {
   mestobyt: { who: '«Место быть»', link: 'otrazis.ru/mestobyt' },
   ads: { who: 'реклама', link: 'otrazis.ru/reklama' },
   muradyan: { who: 'Мурадян', link: 'otrazis.ru/muradyan' },
+  borisova: { who: 'Анна Борисова', link: 'otrazis.ru/borisova' },
 }
 
 /** «Лена Голова (otrazis.ru/lena)», неизвестная метка — как есть, без метки — «сайт напрямую» */

@@ -153,6 +153,7 @@ const SHORT_LINKS = [
   { path: "mestobyt", who: "Место быть", source: "mestobyt", campaign: "devichnik_2510" },
   { path: "reklama", who: "Реклама", source: "ads", campaign: "devichnik_2510" },
   { path: "muradyan", who: "Мурадян", source: "muradyan", campaign: "devichnik_2510" },
+  { path: "borisova", who: "Анна Борисова (гастроэнтеролог)", source: "borisova", campaign: "devichnik_2510" },
   { path: "igristoe", who: "Игристое 24.10", source: "lena_golova", campaign: "igristoe_2410" },
 ];
 

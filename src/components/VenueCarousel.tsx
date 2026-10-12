@@ -12,7 +12,7 @@ import cafeImg from "@/assets/wellness/venue/cafe.webp";
 const spots: { icon: typeof LayoutGrid; title: string; text: string; img: string; pos?: string }[] = [
   { icon: LayoutGrid, title: "Пространство", text: "3 000 м² для отдыха и восстановления", img: spaceImg },
   { icon: Presentation, title: "Лекторий", text: "Выступления врачей и public talk", img: lectoriumImg },
-  { icon: Dumbbell, title: "Тренировки", text: "Либидо-фитнес и сильное тело", img: fitnessImg, pos: "50% 15%" },
+  { icon: Dumbbell, title: "Тренировки", text: "Либидо-фитнес, растяжка и здоровая спина", img: fitnessImg, pos: "50% 15%" },
   { icon: Waves, title: "Практики", text: "Саунд-медитация с поющими чашами", img: soundImg, pos: "50% 75%" },
   { icon: ShoppingBag, title: "Бьюти-шоппинг", text: "Бренды, beauty-девайсы и экспо", img: marketImg },
   { icon: Coffee, title: "Фудспот и кофе", text: "Кофе, протеиновые шейки, healthy-бар", img: cafeImg },
