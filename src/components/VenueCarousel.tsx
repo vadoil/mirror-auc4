@@ -38,7 +38,7 @@ const VenueCarousel = () => {
       onMouseLeave={() => setPaused(false)}
     >
       {/* Пункты: активный подсвечен, клик переключает фото */}
-      <ul className="order-2 lg:order-1 grid grid-cols-2 sm:grid-cols-4 lg:flex lg:flex-col lg:justify-between gap-2 lg:gap-2">
+      <ul className="order-2 lg:order-1 grid grid-cols-2 sm:grid-cols-4 lg:flex lg:flex-col lg:justify-center gap-2 lg:gap-3">
         {spots.map((s, i) => {
           const on = i === active;
           return (
@@ -82,7 +82,7 @@ const VenueCarousel = () => {
 
       {/* Фото */}
       <div
-        className="order-1 lg:order-2 relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-square rounded-2xl overflow-hidden bg-muted"
+        className="order-1 lg:order-2 relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[400px] rounded-2xl overflow-hidden bg-muted"
         onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
         onTouchEnd={(e) => {
           if (touchX.current === null) return;
