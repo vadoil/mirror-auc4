@@ -233,7 +233,7 @@ const WellnessRegistration = () => {
           </>
         )}
         <a
-          href="https://t.me/+Uz1ZL3pNLszM2My"
+          href="https://t.me/Uz1ZL3pNLszM2My"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-8 inline-flex items-center gap-2 border border-primary/40 text-primary rounded-full px-6 py-3 text-xs uppercase tracking-[0.18em] font-body hover:bg-primary/10 transition-colors"

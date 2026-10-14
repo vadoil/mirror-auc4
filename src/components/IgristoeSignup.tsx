@@ -81,7 +81,7 @@ const IgristoeSignup = () => {
             : `Приглашение отправили на ${form.email}. Ждём вас 24 октября с 14:00 до 19:00.`}
         </p>
         <a
-          href="https://t.me/+Uz1ZL3pNLszM2My"
+          href="https://t.me/Uz1ZL3pNLszM2My"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-6 inline-flex items-center gap-2 border border-cream/30 text-cream rounded-full px-6 py-3 text-xs uppercase tracking-[0.18em] font-body hover:border-primary hover:text-primary transition-colors"

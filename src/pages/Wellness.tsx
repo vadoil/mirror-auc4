@@ -811,7 +811,7 @@ const Wellness = () => {
           </div>
           <motion.div {...fadeUp} className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-border pt-8">
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-body text-sm text-muted-foreground">
-              <a href="https://t.me/+Uz1ZL3pNLszM2My" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
+              <a href="https://t.me/Uz1ZL3pNLszM2My" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
                 <Send className="w-4 h-4" /> Наш Telegram-канал
               </a>
               <span>Наши проекты:</span>

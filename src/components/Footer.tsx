@@ -84,7 +84,7 @@ const Footer = () => {
               АктКом — портфолио
             </a>
           <span className="hidden sm:inline text-cream/20">·</span>
-            <a href="https://t.me/+Uz1ZL3pNLszM2My" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-primary/80 hover:text-primary transition-colors">
+            <a href="https://t.me/Uz1ZL3pNLszM2My" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-primary/80 hover:text-primary transition-colors">
               Наш Telegram-канал
             </a>
           </div>
