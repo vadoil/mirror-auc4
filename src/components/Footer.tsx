@@ -98,6 +98,9 @@ const Footer = () => {
                 <Link to="/privacy" className="font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">
                   Обработка персональных данных
                 </Link>
+                <Link to="/requisites" className="font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">
+                  Реквизиты и оплата
+                </Link>
                 <Link to="/oferta" className="font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">
                   Договор о пожертвовании
                 </Link>

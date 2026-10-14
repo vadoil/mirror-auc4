@@ -357,6 +357,18 @@ const Wellness = () => {
             <p className="font-display text-3xl md:text-4xl text-foreground leading-tight mb-2">Новая роскошь —</p>
             <p className="font-display text-3xl md:text-4xl italic text-primary leading-tight mb-6">забота о себе.</p>
             <p className="font-body text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Красота · лонгевити · велбинг</p>
+            {/* Расписание дня — сразу в первом экране */}
+            <div className="grid grid-cols-2 gap-2 max-w-md mb-4">
+              {[
+                ["12:00–14:00", "Лекции врачей"],
+                ["14:30–16:30", "Тренировки"],
+              ].map(([time, what]) => (
+                <div key={time} className="rounded-xl bg-primary/10 border border-primary/20 px-4 py-3">
+                  <p className="font-numbers text-lg text-primary leading-none mb-1">{time}</p>
+                  <p className="font-body text-xs text-foreground">{what}</p>
+                </div>
+              ))}
+            </div>
             <p className="font-body text-sm text-foreground mb-10">Участие — 440 ₽, по регистрации.</p>
             <div className="flex flex-wrap gap-3">
               <a
