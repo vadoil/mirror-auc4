@@ -327,9 +327,10 @@ const Wellness = () => {
               {[
                 ["12:00–14:00", "Лекции врачей"],
                 ["14:30–16:30", "Тренировки"],
-                ["12:00–19:00", "Трихоскопия, тренер по укладке, уход за волосами"],
-              ].map(([time, what], i) => (
-                <div key={time} className={`rounded-xl bg-primary/10 border border-primary/20 px-4 py-3 ${i === 2 ? "col-span-2" : ""}`}>
+                ["17:00–19:00", "Диджей-сет, тусовка, общение"],
+                ["12:00–19:00", "Уход за волосами: трихоскопия, укладка"],
+              ].map(([time, what]) => (
+                <div key={time} className="rounded-xl bg-primary/10 border border-primary/20 px-4 py-3">
                   <p className="font-numbers text-lg text-primary leading-none mb-1">{time}</p>
                   <p className="font-body text-xs text-foreground">{what}</p>
                 </div>
@@ -442,13 +443,14 @@ const Wellness = () => {
           </motion.div>
 
           {/* Тайминг дня */}
-          <motion.div {...fadeUp} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-14">
+          <motion.div {...fadeUp} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-14">
             {[
               { time: "12:00–14:00", title: "Лекции", text: "Выступления врачей в лектории" },
               { time: "14:30–16:30", title: "Тренировки", text: "Либидо-фитнес, растяжка и здоровая спина" },
+              { time: "17:00–19:00", title: "Диджей-сет", text: "Тусовка и общение" },
               { time: "12:00–19:00", title: "Уход за волосами", text: "Анализ кожи головы (трихоскопия), тренер по укладке, рекомендации по уходу" },
             ].map((t) => (
-              <div key={t.time} className="flex items-center gap-5 bg-primary/5 border border-primary/20 rounded-2xl px-6 py-5">
+              <div key={t.time} className="flex flex-col gap-2 bg-primary/5 border border-primary/20 rounded-2xl px-6 py-5">
                 <span className="font-numbers text-2xl md:text-3xl text-primary whitespace-nowrap">{t.time}</span>
                 <span>
                   <span className="block font-display text-xl text-foreground leading-tight">{t.title}</span>

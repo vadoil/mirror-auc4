@@ -39,7 +39,7 @@ const WellnessTeaserBanner = () => {
               </h3>
               <div className="flex flex-wrap gap-x-6 gap-y-2 font-body text-sm text-cream/80">
                 <span className="inline-flex items-center gap-2">
-                  <Calendar className="w-3.5 h-3.5 text-primary" /> 25 октября 2026 · лекции 12:00–14:00 · тренировки 14:30–16:30
+                  <Calendar className="w-3.5 h-3.5 text-primary" /> 25 октября 2026 · лекции 12:00 · тренировки 14:30 · диджей-сет 17:00
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <MapPin className="w-3.5 h-3.5 text-primary" /> Москва · баланс-холл «Место быть»
