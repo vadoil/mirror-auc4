@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { FUND_DONATE_URL } from "@/lib/donate";
 import { AnimatePresence, animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { Heart, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -139,12 +140,14 @@ const FundraisingWidget = () => {
               />
             </div>
             <p className="font-body text-[11px] text-muted-foreground mb-4">Осталось собрать {formatMln(left)}</p>
-            <Link
-              to="/archive/spb#donation"
+            <a
+              href={FUND_DONATE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full rounded-full bg-primary text-primary-foreground py-2.5 text-xs uppercase tracking-[0.18em] font-body hover:opacity-90 transition-opacity"
             >
               <Heart className="w-3.5 h-3.5" /> Помочь фонду
-            </Link>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

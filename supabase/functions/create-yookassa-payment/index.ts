@@ -1,12 +1,11 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { createYookassaPayment, yookassaEnabled } from "../_shared/yookassa.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const SHOP_ID = Deno.env.get("YOOKASSA_SHOP_ID")!;
-const SECRET_KEY = Deno.env.get("YOOKASSA_SECRET_KEY")!;
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
@@ -53,44 +52,18 @@ Deno.serve(async (req) => {
       });
     }
 
-    const idempotenceKey = crypto.randomUUID();
-    const auth = btoa(`${SHOP_ID}:${SECRET_KEY}`);
-
-    const ykPayload = {
-      amount: { value: amount.toFixed(2), currency: "RUB" },
-      capture: true,
-      confirmation: { type: "redirect", return_url: returnUrl },
-      description,
-      metadata: { ticket_request_id: ticketRequestId },
-      receipt: {
-        customer: { email },
-        items: [
-          {
-            description: description.slice(0, 128),
-            quantity: "1.00",
-            amount: { value: amount.toFixed(2), currency: "RUB" },
-            vat_code: 1,
-            payment_subject: "service",
-            payment_mode: "full_prepayment",
-          },
-        ],
-      },
-    };
-
-    const ykResp = await fetch("https://api.yookassa.ru/v3/payments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Idempotence-Key": idempotenceKey,
-        Authorization: `Basic ${auth}`,
-      },
-      body: JSON.stringify(ykPayload),
-    });
-
-    const ykData = await ykResp.json();
-    if (!ykResp.ok) {
-      console.error("YooKassa error:", ykData);
-      return new Response(JSON.stringify({ error: "YooKassa error", details: ykData }), {
+    if (!yookassaEnabled()) {
+      return new Response(JSON.stringify({ error: "ЮKassa не подключена" }), {
+        status: 503,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    let ykData;
+    try {
+      ykData = await createYookassaPayment({ amount, description, returnUrl, metadata: { ticket_request_id: ticketRequestId }, email });
+    } catch (e) {
+      console.error("YooKassa error:", e);
+      return new Response(JSON.stringify({ error: "YooKassa error" }), {
         status: 502,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });

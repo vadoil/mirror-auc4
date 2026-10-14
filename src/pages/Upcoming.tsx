@@ -4,6 +4,7 @@ import { Calendar, MapPin, Clock, Eye, Palette, Utensils, MessageCircle, HeartHa
 import { useRef } from "react";
 import { toast } from "sonner";
 import Header from "@/components/Header";
+import { FUND_DONATE_URL } from "@/lib/donate";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -742,44 +743,16 @@ const Upcoming = () => {
                     людям с онкологическими заболеваниями.
                   </p>
 
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    {[1000, 3000, 5000, 10000].map((v) => (
-                      <button
-                        key={v}
-                        onClick={() => setDonateInput(String(v))}
-                        className={`px-5 py-2.5 rounded border font-numbers text-base transition-colors ${
-                          donateInput === String(v)
-                            ? "border-primary bg-primary/10 text-primary"
-                            : "border-border text-foreground hover:border-primary/40"
-                        }`}
-                      >
-                        {v.toLocaleString("ru-RU")} ₽
-                      </button>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap gap-3 items-stretch max-w-md">
-                    <div className="flex items-center gap-2 flex-1 min-w-[180px] border border-border rounded px-4 bg-background">
-                      <input
-                        type="number"
-                        min={10}
-                        step={100}
-                        value={donateInput}
-                        onChange={(e) => setDonateInput(e.target.value)}
-                        placeholder="Своя сумма"
-                        className="flex-1 bg-transparent py-3 text-base font-numbers text-foreground placeholder:text-muted-foreground focus:outline-none"
-                      />
-                      <span className="font-body text-sm text-muted-foreground">₽</span>
-                    </div>
-                    <button
-                      onClick={openDonate}
-                      className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
-                    >
-                      <HeartHandshake className="w-4 h-4" /> Поддержать фонд
-                    </button>
-                  </div>
+                  <a
+                    href={FUND_DONATE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+                  >
+                    <HeartHandshake className="w-4 h-4" /> Поддержать фонд
+                  </a>
                   <p className="font-body text-xs text-muted-foreground/80 mt-4">
-                    Минимальная сумма - 10 ₽. Оплата - через защищённый шлюз CloudPayments.
+                    Пожертвование на любую сумму — на сайте фонда «Не напрасно».
                   </p>
                 </div>
 

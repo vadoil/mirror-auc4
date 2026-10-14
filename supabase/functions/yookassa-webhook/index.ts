@@ -1,4 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { getYookassaPayment, yookassaEnabled } from "../_shared/yookassa.ts";
+import { confirmWellnessPayment } from "../_shared/wellness-payment.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -32,8 +34,8 @@ Deno.serve(async (req) => {
     const payload = await req.json();
     console.log("[yookassa-webhook] event:", payload.event, "id:", payload.object?.id);
 
-    const event = payload.event as string;
-    const obj = payload.object;
+    let event = payload.event as string;
+    let obj = payload.object;
     if (!obj?.id) {
       return new Response(JSON.stringify({ ok: false, error: "no object" }), {
         status: 400,
@@ -41,7 +43,33 @@ Deno.serve(async (req) => {
       });
     }
 
+    // У ЮKassa нет подписи уведомлений — статус берём из её API, телу запроса не доверяем
+    if (!yookassaEnabled()) {
+      return new Response(JSON.stringify({ ok: false, error: "yookassa disabled" }), { status: 503, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+    try {
+      obj = await getYookassaPayment(obj.id);
+      event = obj.status === "succeeded" ? "payment.succeeded" : obj.status === "canceled" ? "payment.canceled" : event;
+    } catch (e) {
+      console.error("[yookassa-webhook] verify failed:", e);
+      return new Response(JSON.stringify({ ok: false }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+
     const supabase = createClient(SUPABASE_URL, SERVICE_KEY);
+
+    // Велнес-девичник: отдельная ветка, заявки на билеты не трогаем
+    const wellnessId = obj.metadata?.wellness_registration_id as string | undefined;
+    if (wellnessId) {
+      await supabase.from("payments").upsert(
+        { ticket_request_id: null, yookassa_payment_id: obj.id, amount: Number(obj.amount?.value ?? 0), provider: "yookassa", status: obj.status, metadata: obj },
+        { onConflict: "yookassa_payment_id" },
+      );
+      if (event === "payment.succeeded") {
+        const res = await confirmWellnessPayment(supabase, wellnessId, { amount: Number(obj.amount?.value ?? 0), transactionId: obj.id });
+        console.log("[yookassa-webhook] wellness", wellnessId, res);
+      }
+      return new Response(JSON.stringify({ ok: true }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
 
     const ticketRequestId = obj.metadata?.ticket_request_id as string | undefined;
 

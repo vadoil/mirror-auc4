@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import CloudPaymentsForm from "./CloudPaymentsForm";
+import YooKassaPaymentForm from "./YooKassaPaymentForm";
+import { getPaymentProvider, type PaymentProvider } from "@/lib/payments";
 
 interface TicketRequestModalProps {
   isOpen: boolean;
@@ -16,6 +18,10 @@ interface TicketRequestModalProps {
 
 const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: TicketRequestModalProps) => {
   const [loading, setLoading] = useState(false);
+  const [provider, setProvider] = useState<PaymentProvider>("cloudpayments");
+  useEffect(() => {
+    if (isOpen) getPaymentProvider().then(setProvider);
+  }, [isOpen]);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "", promo: "" });
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
@@ -211,13 +217,23 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
                 </button>
               </div>
             ) : showPayment ? (
-              <CloudPaymentsForm
-                ticketRequestId={submittedRequestId}
-                name={submittedName}
-                email={submittedEmail}
-                ticketType={ticketType}
-                amount={parsedAmount}
-              />
+              provider === "yookassa" ? (
+                <YooKassaPaymentForm
+                  ticketRequestId={submittedRequestId}
+                  name={submittedName}
+                  email={submittedEmail}
+                  ticketType={ticketType}
+                  amount={parsedAmount}
+                />
+              ) : (
+                <CloudPaymentsForm
+                  ticketRequestId={submittedRequestId}
+                  name={submittedName}
+                  email={submittedEmail}
+                  ticketType={ticketType}
+                  amount={parsedAmount}
+                />
+              )
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input

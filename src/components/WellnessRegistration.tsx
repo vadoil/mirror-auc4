@@ -1,9 +1,10 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Check, Loader2 } from "lucide-react";
 import { CLOUDPAYMENTS_PUBLIC_ID, loadCloudPaymentsWidget } from "@/lib/cloudpayments";
 import { currentUtm } from "@/lib/utm";
+import { createWellnessYookassaPayment, getPaymentProvider } from "@/lib/payments";
 
 export const TRAININGS = [
   { id: "libido", title: "Либидо-фитнес", coach: "с Маргаритой Дмитриевой" },
@@ -71,7 +72,18 @@ const WellnessRegistration = () => {
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  // Ждём подтверждение от CloudPayments: уведомление приходит на сервер через несколько секунд
+  // Возврат со страницы оплаты ЮKassa: /wellness?payment=<id регистрации>
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("payment");
+    if (id && /^[0-9a-f-]{36}$/i.test(id)) {
+      setPendingId(id);
+      waitForPayment(id);
+      window.history.replaceState(null, "", window.location.pathname + window.location.hash);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Ждём подтверждение оплаты: уведомление приходит на сервер через несколько секунд
   const waitForPayment = async (id: string) => {
     setStage("checking");
     for (let i = 0; i < 10; i++) {
@@ -88,6 +100,18 @@ const WellnessRegistration = () => {
   const openPayment = async (id: string) => {
     setError(null);
     setStage("paying");
+    // ЮKassa: переходим на её страницу оплаты, после оплаты она вернёт на /wellness?payment=<id>
+    if ((await getPaymentProvider()) === "yookassa") {
+      const r = await createWellnessYookassaPayment(id);
+      if (r.alreadyPaid) return waitForPayment(id);
+      if (r.confirmationUrl) {
+        window.location.href = r.confirmationUrl;
+        return;
+      }
+      setError(r.error || "Не удалось открыть оплату. Попробуйте ещё раз.");
+      setStage("unpaid");
+      return;
+    }
     try {
       await loadCloudPaymentsWidget();
       const widget = new window.cp.CloudPayments({ language: "ru-RU" });

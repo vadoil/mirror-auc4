@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { PAYMENT_REQUISITES } from "@/lib/requisites";
+import { FUND_DONATE_URL } from "@/lib/donate";
 import triiLogo from "@/assets/sponsors/triii-logo.png";
 import logoOtrazhenie from "@/assets/logo-otrazhenie-light.png";
 
@@ -24,10 +25,10 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <Link to="/archive/spb#donation" className="btn-primary inline-flex flex-col items-center gap-0.5 text-center">
+          <a href={FUND_DONATE_URL} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex flex-col items-center gap-0.5 text-center">
             <span className="text-xs tracking-[0.25em] opacity-90">Поддержать фонд</span>
             <span className="text-[11px] tracking-[0.2em] font-normal opacity-80">Сделать пожертвование</span>
-          </Link>
+          </a>
         </div>
       </div>
 
