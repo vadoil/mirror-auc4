@@ -71,16 +71,16 @@ const Header = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}
       >
-        <div className="section-padding flex items-center justify-between">
+        <div className="px-5 xl:px-8 2xl:px-12 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 shrink-0">
             <img
               src={useDarkText ? logoOtrazhenie : logoOtrazhenieLight}
-              alt="Отражение - благотворительный аукцион"
+              alt="Отражение - благотворительное событие"
               className="h-10 md:h-12 w-auto shrink-0 transition-all duration-300"
             />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-4 2xl:gap-8">
+          <nav className="hidden min-[1400px]:flex items-center gap-1 xl:gap-3 2xl:gap-5">
             {/* Home icon – always visible */}
             <Link
               to="/"
@@ -91,8 +91,8 @@ const Header = () => {
             </Link>
 
             <Link
-              to="/#about"
-              onClick={(e) => handleAnchorClick(e, "/#about")}
+              to="/about"
+              aria-current={location.pathname === "/about" ? "page" : undefined}
               className={`${textColor} text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] font-body font-light ${textHover} transition-colors duration-300 whitespace-nowrap`}
             >
               О проекте
@@ -136,7 +136,9 @@ const Header = () => {
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`lg:hidden ${mobileIcon}`}
+            aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
+            aria-expanded={menuOpen}
+            className={`min-[1400px]:hidden ${mobileIcon}`}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -148,13 +150,13 @@ const Header = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-background backdrop-blur-xl border-t border-border"
+              className="min-[1400px]:hidden bg-background backdrop-blur-xl border-t border-border"
             >
               <nav className="flex flex-col items-center py-8 gap-6">
                 <Link to="/" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light flex items-center gap-2">
                   <Home className="w-4 h-4" /> Главная
                 </Link>
-                <Link to="/#about" onClick={(e) => { handleAnchorClick(e, "/#about"); setMenuOpen(false); }} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
+                <Link to="/about" onClick={() => setMenuOpen(false)} aria-current={location.pathname === "/about" ? "page" : undefined} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">
                   О проекте
                 </Link>
                 {navItems.map((item) => (

@@ -67,7 +67,7 @@ const HeroSection = () => {
                 transition={{ duration: 1.2, delay: 0.5 }}
               >
                 <p className="font-body text-cream/40 text-xs md:text-sm uppercase tracking-[0.3em] mb-4">
-                  Благотворительный аукцион
+                  Благотворительное событие
                 </p>
                 <h1 className="font-display text-cream text-5xl sm:text-6xl md:text-[7rem] lg:text-[9rem] font-normal uppercase tracking-[-0.02em] leading-[0.85]">
                   Отра
@@ -84,7 +84,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.8, delay: 1.0 }}
                 className="font-body text-cream/60 text-lg md:text-xl lg:text-2xl font-light mt-6 max-w-lg"
               >
-                Первый в России аукцион заботы о здоровье. Уникальные лоты. Средства идут в фонд «Не напрасно».
+                Первое в России благотворительное событие заботы о здоровье. Уникальные лоты. Средства идут в фонд «Не напрасно».
               </motion.p>
             </div>
 
@@ -123,7 +123,7 @@ const HeroSection = () => {
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link to="/#results" className="btn-primary text-center">
-                  Итоги аукциона
+                  Итоги благотворительного события
                 </Link>
                 <Link to="/gallery" className="btn-outline-light text-center">
                   Галерея вечера

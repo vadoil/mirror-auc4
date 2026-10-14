@@ -1,3 +1,4 @@
+import { requisiteRows } from "@/lib/requisites";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Send, Phone, HeartHandshake, MapPinned, Wand2, Sparkles } from "lucide-react";
@@ -58,6 +59,24 @@ const ContactsSection = () => {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          id="requisites"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="max-w-3xl mx-auto mb-16 bg-card border border-border rounded-lg p-6 md:p-8 scroll-mt-24"
+        >
+          <p className="text-[10px] uppercase tracking-[0.3em] text-primary font-body mb-5 text-center">Платёжные реквизиты</p>
+          <dl className="grid sm:grid-cols-[auto_1fr] gap-x-6 gap-y-2 font-body text-sm">
+            {requisiteRows.map(([k, v]) => (
+              <div key={k} className="contents">
+                <dt className="text-muted-foreground">{k}</dt>
+                <dd className="text-foreground break-all sm:break-normal">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

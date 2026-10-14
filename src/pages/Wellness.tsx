@@ -103,7 +103,7 @@ const lectures = [
 const SHOW_BRANDS = false;
 
 const otherFormats = [
-  { icon: Dumbbell, title: "Тренировки", note: "Либидо-фитнес, растяжка и здоровая спина, медитация с поющими чашами", href: "#experts" },
+  { icon: Dumbbell, title: "Тренировки", note: "14:30–16:30 · либидо-фитнес, растяжка и здоровая спина, медитация с поющими чашами", href: "#experts" },
   { icon: ShoppingBag, title: "Экспо", note: "Бренды и сервисы заботы о себе", href: SHOW_BRANDS ? "#brands" : undefined },
   { icon: Wine, title: "Игристое со стилистом", note: "24 октября, 14:00–19:00 · Voluminous", href: "#october-24" },
   { icon: Mic, title: "Public talk", note: "«Героини нового велнеса»", href: undefined },
@@ -325,7 +325,7 @@ const Wellness = () => {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6 text-xs text-primary font-body uppercase tracking-[0.2em]">
-              <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> 25 октября 2026</span>
+              <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> 25 октября 2026 · 12:00–16:30</span>
               <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> Москва</span>
             </div>
             <p className="font-body text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">Велнес-девичник для женщин</p>
@@ -463,10 +463,26 @@ const Wellness = () => {
             <TwoLineTitle first="Программа девичника" second="+ участники." />
           </motion.div>
 
+          {/* Тайминг дня */}
+          <motion.div {...fadeUp} className="grid sm:grid-cols-2 gap-3 mb-14">
+            {[
+              { time: "12:00–14:00", title: "Лекции", text: "Выступления врачей в лектории" },
+              { time: "14:30–16:30", title: "Тренировки", text: "Либидо-фитнес, растяжка и здоровая спина, медитация" },
+            ].map((t) => (
+              <div key={t.time} className="flex items-center gap-5 bg-primary/5 border border-primary/20 rounded-2xl px-6 py-5">
+                <span className="font-numbers text-2xl md:text-3xl text-primary whitespace-nowrap">{t.time}</span>
+                <span>
+                  <span className="block font-display text-xl text-foreground leading-tight">{t.title}</span>
+                  <span className="block font-body text-sm text-muted-foreground">{t.text}</span>
+                </span>
+              </div>
+            ))}
+          </motion.div>
+
           <div className="grid lg:grid-cols-[1.6fr_1fr] gap-10 lg:gap-16 mb-20 md:mb-28">
             {/* Лекторий */}
             <div>
-              <p className="font-body text-xs uppercase tracking-[0.3em] text-primary mb-4">Лекторий · выступления врачей</p>
+              <p className="font-body text-xs uppercase tracking-[0.3em] text-primary mb-4">Лекторий · 12:00–14:00 · выступления врачей</p>
               <div className="divide-y divide-border border-y border-border">
                 {lectures.map((l, i) => (
                   <motion.div key={l.topic} {...fadeUp} transition={{ duration: 0.5, delay: 0.06 * i }} className="flex gap-5 md:gap-8 py-6 md:py-8">
@@ -739,7 +755,7 @@ const Wellness = () => {
               <TwoLineTitle first="Один день." second="Полностью для себя." />
             </div>
             <span className="self-start md:self-auto font-body text-[10px] uppercase tracking-[0.25em] text-primary bg-primary/10 rounded-full px-4 py-1.5">
-              25 октября 2026
+              25 октября 2026 · 12:00–16:30
             </span>
           </motion.div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 md:gap-x-8">

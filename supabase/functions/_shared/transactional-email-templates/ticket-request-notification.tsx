@@ -17,7 +17,7 @@ function getFormLabel(ticketType?: string): string {
   if (t === 'Узнать о форуме') return '📋 Запрос о форуме'
   if (t === 'Участие в форуме') return '🎤 Заявка на форум'
   if (t.includes('Питер') || t.includes('СПб')) return '🏛 Питер — запрос деталей'
-  return '🎟 Регистрация на аукцион'
+  return '🎟 Регистрация на благотворительное событие'
 }
 
 interface TicketRequestNotificationProps {
@@ -41,7 +41,7 @@ const TicketRequestNotificationEmail = ({ name, email, phone, ticketType, messag
           {/* Header bar */}
           <Section style={headerBar}>
             <Text style={headerTitle}>ОТРАЖЕНИЕ ДОБРА</Text>
-            <Text style={headerSubtitle}>Благотворительный аукцион · 26 апреля 2026</Text>
+            <Text style={headerSubtitle}>Благотворительное событие · 26 апреля 2026</Text>
           </Section>
 
           <Section style={contentStyle}>
@@ -91,7 +91,7 @@ const TicketRequestNotificationEmail = ({ name, email, phone, ticketType, messag
           </Section>
 
           <Section style={footer}>
-            <Text style={footerText}>{SITE_NAME} · Благотворительный аукцион в пользу фонда «Не напрасно»</Text>
+            <Text style={footerText}>{SITE_NAME} · Благотворительное событие в пользу фонда «Не напрасно»</Text>
           </Section>
         </Container>
       </Body>
@@ -110,7 +110,7 @@ export const template = {
     name: 'Мария Иванова',
     email: 'maria@example.com',
     phone: '+7 999 123-45-67',
-    ticketType: 'Участник аукциона',
+    ticketType: 'Участник благотворительного события',
     message: 'Хочу на тренировку «Либидо фитнес» 18.04',
     promoCode: 'MIRROR2025',
   },

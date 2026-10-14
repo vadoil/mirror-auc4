@@ -23,7 +23,7 @@ export const EmailLayout = ({ preview, children }: { preview: string; children: 
           <Text style={wordmark}>
             ОТРАЖЕНИЕ <span style={{ color: RED, fontStyle: 'italic' }}>ДОБРА</span>
           </Text>
-          <Text style={kicker}>Благотворительный аукцион</Text>
+          <Text style={kicker}>Благотворительное событие</Text>
         </Section>
 
         <Section style={content}>{children}</Section>

@@ -210,7 +210,7 @@ const Upcoming = () => {
                 </div>
 
                 <h1 className="font-display text-3xl md:text-5xl lg:text-6xl text-white uppercase tracking-tight leading-[1.02] mb-6 drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
-                  Аукцион завершён, <span className="italic">добрые дела остаются</span>
+                  Благотворительное событие завершено, <span className="italic">добрые дела остаются</span>
                 </h1>
 
                 <p className="font-body text-white/85 text-sm md:text-base max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] mb-4">
@@ -449,7 +449,7 @@ const Upcoming = () => {
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-6 h-px bg-primary" />
                 <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-body">
-                  02 - Художники аукциона
+                  02 - Художники благотворительного события
                 </p>
               </div>
               <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-foreground leading-[0.95]">
@@ -737,7 +737,7 @@ const Upcoming = () => {
                     Помощь людям с <span className="italic text-primary">онкозаболеваниями</span>
                   </h2>
                   <p className="font-body text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-                    Аукцион завершён, но добрые дела остаются. Поддержать программы фонда
+                    Благотворительное событие завершено, но добрые дела остаются. Поддержать программы фонда
                     «Не напрасно» можно любой суммой: собранные средства направляются на помощь
                     людям с онкологическими заболеваниями.
                   </p>
@@ -832,7 +832,7 @@ const Upcoming = () => {
           {galleryIdx !== null && (
             <div className="relative">
               <DialogTitle className="sr-only">{eveningGallery[galleryIdx].caption}</DialogTitle>
-              <DialogDescription className="sr-only">Фото с вечера аукциона, {galleryIdx + 1} из {eveningGallery.length}</DialogDescription>
+              <DialogDescription className="sr-only">Фото с вечера благотворительного события, {galleryIdx + 1} из {eveningGallery.length}</DialogDescription>
               <img
                 src={eveningGallery[galleryIdx].src}
                 alt={eveningGallery[galleryIdx].caption}

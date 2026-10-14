@@ -5,13 +5,15 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TicketRequestModal from "@/components/TicketRequestModal";
 import heroImg from "@/assets/spb2911/mansion-hall.webp";
-import stairImg from "@/assets/spb2911/mansion-stair.webp";
+import stairImg from "@/assets/spb2911/mansion-stair-wide.webp";
 import hostsPhoto from "@/assets/gallery/event/event-01.webp";
 import bartenevPhoto from "@/assets/artist-2-bartenev.webp";
 import dimsonWork from "@/assets/abrosimov-work-1.jpg";
-import chaykinImg from "@/assets/spb2911/chaykin.webp";
+import chaykinImg from "@/assets/spb2911/chaykin-tools.jpg";
 import chamalidiImg from "@/assets/spb2911/chamalidi.webp";
-import skazImg from "@/assets/spb2911/skaz.webp";
+import skazImg from "@/assets/spb2911/skaz-white.png";
+import borzayaReference from "@/assets/spb2911/liza-borzaya.jpeg";
+import vintageReference from "@/assets/spb2911/vintage-dream-reference.jpg";
 
 // Благотворительный вечер «Отражение добра», Санкт-Петербург, 29 ноября 2026.
 // Картинки участников — для понимания «о ком речь»; 1 ноября заменим фото конкретных лотов.
@@ -20,7 +22,7 @@ const program = [
   { icon: DoorOpen, title: "Встреча у дверей", text: "Дама или кавалер встретят вас и проводят в зал." },
   { icon: GlassWater, title: "Сбор гостей", text: "Приветственный фуршет и шампанское." },
   { icon: Music, title: "Музыка и танцы", text: "Вечерние туалеты, музыка и короткие уроки танцев от распорядителя." },
-  { icon: Gavel, title: "Аукцион", text: "Торги за работы современных художников и авторские изделия." },
+  { icon: Gavel, title: "Торги", text: "Торги за работы современных художников и авторские изделия." },
 ];
 
 const auctioneers = [
@@ -32,23 +34,23 @@ const auctioneers = [
   {
     name: "Юрий",
     surname: "Омельченко",
-    text: "Арт-эксперт и галерист, сооснователь Omelchenko Gallery, автор проекта «ARTПатруль». Провёл несколько благотворительных аукционов современного искусства.",
+    text: "Арт-эксперт и галерист, сооснователь Omelchenko Gallery, автор проекта «ARTПатруль». Провёл несколько благотворительных торгов современным искусством.",
   },
 ];
 
-type Lot = { name: string; role: string; img?: string; pos?: string };
+type Lot = { name: string; role: string; img?: string; pos?: string; reference?: boolean; contain?: boolean; source?: string; imageAlt?: string };
 
 const artists: Lot[] = [
   { name: "Андрей Бартенев", role: "художник, сценограф, перформер", img: bartenevPhoto, pos: "50% 20%" },
-  { name: "Константин Чайкин", role: "часовщик, изобретатель и художник", img: chaykinImg, pos: "50% 30%" },
+  { name: "Константин Чайкин", role: "часовщик, изобретатель и художник", img: chaykinImg, pos: "50% 20%", imageAlt: "Константин Чайкин за рабочим столом с часовым механизмом и инструментами" },
   { name: "Янис Чамалиди", role: "художник-модельер, модный дом Ianis Chamalidy", img: chamalidiImg, pos: "50% 20%" },
   { name: "Dimson", role: "Дмитрий Абросимов, флуоресцентная живопись", img: dimsonWork },
 ];
 
 const brands: Lot[] = [
-  { name: "Liza Borzaya", role: "ювелирный дом" },
-  { name: "Vintage Dream", role: "галерея винтажных украшений" },
-  { name: "«Сказ по краю»", role: "фарфоровые вазы", img: skazImg },
+  { name: "Liza Borzaya", role: "ювелирный дом", img: borzayaReference, reference: true, source: "https://www.lizaborzaya.com/en/collections/new/koltso-love-v-zheltom-zolote-s-rozovoy-lentoy/", imageAlt: "Кольцо Love — пример украшения Liza Borzaya, не объявленный лот" },
+  { name: "Vintage Dream", role: "галерея винтажных украшений", img: vintageReference, reference: true, source: "https://vintagedream.ru/shop/broch-reja/", imageAlt: "Винтажная брошь Reja — пример из галереи Vintage Dream, не объявленный лот" },
+  { name: "«Сказ по краю»", role: "фарфоровые вазы", img: skazImg, contain: true, imageAlt: "Три фарфоровые вазы «Сказ по краю» на белом фоне" },
 ];
 
 const fadeUp = {
@@ -65,15 +67,15 @@ const SectionLabel = ({ children, light }: { children: React.ReactNode; light?: 
   </div>
 );
 
-const LotCard = ({ lot, i }: { lot: Lot; i: number }) => (
+const LotCard = ({ lot, i, square = false }: { lot: Lot; i: number; square?: boolean }) => (
   <motion.article {...fadeUp} transition={{ duration: 0.5, delay: 0.05 * (i % 4) }} className="group">
-    <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-warm-black mb-3">
+    <div className={`relative ${square ? "aspect-square" : "aspect-[3/4]"} rounded-2xl overflow-hidden bg-warm-black mb-3`}>
       {lot.img ? (
         <img
           src={lot.img}
-          alt={lot.name}
+          alt={lot.imageAlt ?? lot.name}
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${square ? "object-cover bg-white" : (lot.reference || lot.contain) ? "object-contain bg-white p-3 md:p-6" : "object-cover"}`}
           style={{ objectPosition: lot.pos ?? "50% 50%" }}
         />
       ) : (
@@ -86,6 +88,7 @@ const LotCard = ({ lot, i }: { lot: Lot; i: number }) => (
     </div>
     <h3 className="font-display text-lg md:text-xl text-foreground leading-tight">{lot.name}</h3>
     <p className="font-body text-xs md:text-sm text-muted-foreground">{lot.role}</p>
+    {lot.reference && <p className="font-body text-[10px] md:text-xs text-muted-foreground mt-2 leading-relaxed">Пример изделия · лот в каталоге 1 ноября<br /><a href={lot.source} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-primary">Фото с сайта {lot.name}</a></p>}
   </motion.article>
 );
 
@@ -146,7 +149,7 @@ const Spb2911 = () => {
               <img src={stairImg} alt="Парадная лестница особняка" loading="lazy" className="w-full h-full object-cover" />
             </div>
             <p className="font-display italic text-lg text-primary mt-4 leading-snug">Парадная лестница, лепнина, свет люстр — и вечер, который становится событием.</p>
-            <p className="font-body text-[10px] text-muted-foreground/60 mt-2">Фото для настроения · Александровы АГ, CC BY-SA 4.0</p>
+            <p className="font-body text-[10px] text-muted-foreground/60 mt-2">Образ атмосферы вечера</p>
           </motion.div>
           <motion.div {...fadeUp} className="space-y-5 font-body text-base md:text-lg text-muted-foreground leading-relaxed">
             <p className="text-foreground first-letter:font-display first-letter:text-6xl first-letter:float-left first-letter:mr-3 first-letter:leading-[0.85] first-letter:text-primary">
@@ -159,7 +162,7 @@ const Spb2911 = () => {
               от распорядителя бала. Уметь танцевать необязательно, достаточно согласиться на первый шаг.
             </p>
             <p>
-              Затем начнётся аукцион современного искусства. Его проведут Александр Цыпкин и Юрий Омельченко, а значит, торги будут
+              Затем начнутся благотворительные торги современным искусством. Их проведут Александр Цыпкин и Юрий Омельченко, а значит, торги будут
               азартными и остроумными.
             </p>
             <p>
@@ -200,11 +203,11 @@ const Spb2911 = () => {
         </div>
       </section>
 
-      {/* Аукционисты */}
+      {/* Ведущие */}
       <section className="bg-warm-black text-cream py-20 md:py-28 section-padding">
         <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp} className="mb-12">
-            <SectionLabel light>Аукцион проведут</SectionLabel>
+            <SectionLabel light>Вечер ведут</SectionLabel>
             <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight leading-[1]">
               Азартно
               <br />
@@ -223,7 +226,7 @@ const Spb2911 = () => {
               {auctioneers.map((a) => (
                 <motion.div key={a.surname} {...fadeUp} className="border border-cream/10 rounded-2xl p-6 md:p-8 flex flex-col justify-center">
                   <span className="inline-flex items-center gap-1.5 font-body text-[10px] uppercase tracking-[0.2em] text-primary mb-3">
-                    <Mic className="w-3.5 h-3.5" /> Аукционист
+                    <Mic className="w-3.5 h-3.5" /> Ведущий
                   </span>
                   <h3 className="font-display text-3xl md:text-4xl leading-[1] mb-4">
                     {a.name} <span className="italic text-primary">{a.surname}</span>
@@ -241,7 +244,7 @@ const Spb2911 = () => {
         <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
             <div>
-              <SectionLabel>В каталоге аукциона</SectionLabel>
+              <SectionLabel>В каталоге благотворительного события</SectionLabel>
               <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-foreground leading-[1]">
                 Современное искусство
                 <br />
@@ -263,7 +266,7 @@ const Spb2911 = () => {
           <p className="font-body text-xs uppercase tracking-[0.3em] text-primary mb-5">Бренды и изделия</p>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {brands.map((b, i) => (
-              <LotCard key={b.name} lot={b} i={i} />
+              <LotCard key={b.name} lot={b} i={i} square />
             ))}
           </div>
           <p className="font-body text-xs text-muted-foreground/70 mt-8">

@@ -11,10 +11,10 @@ import gunderinaPhoto from "@/assets/speaker-gunderina.webp";
 import evnichPhoto from "@/assets/speaker-evnich.webp";
 
 const program = [
-  { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
+  { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками благотворительного события и пространством «Место быть»", highlight: false },
   { time: "16:00", title: "Открытая лекция", desc: "Ключевые подходы к долголетию и активному долголетию", highlight: true, speakers: true },
-  { time: "16:45", title: "Кофе-брейк", desc: "Перерыв, общение, подготовка к аукциону", highlight: false },
-  { time: "17:00", title: "Аукцион", desc: "Торги – оздоровительные программы, ретриты, эксклюзивный опыт", highlight: true },
+  { time: "16:45", title: "Кофе-брейк", desc: "Перерыв, общение, подготовка к торгам", highlight: false },
+  { time: "17:00", title: "Торги", desc: "Торги – оздоровительные программы, ретриты, эксклюзивный опыт", highlight: true },
 ];
 
 const moderatorsData = [
@@ -231,7 +231,7 @@ const Program = () => {
               Программа <span className="italic text-primary">вечера</span>
             </h1>
             <p className="font-body text-lg text-muted-foreground max-w-2xl">
-              Благотворительный аукцион «Отражение добра» в баланс-холле «Место быть»
+              Благотворительное событие «Отражение добра» в баланс-холле «Место быть»
             </p>
           </motion.div>
 
@@ -282,7 +282,7 @@ const Program = () => {
             className="text-center py-10 mb-16 border border-border rounded-lg bg-primary/5"
           >
             <p className="font-display text-2xl md:text-3xl font-light text-foreground mb-3">
-              Хотите быть <span className="italic text-primary">на аукционе?</span>
+              Хотите быть <span className="italic text-primary">на благотворительном событии?</span>
             </p>
             <p className="font-body text-sm text-muted-foreground mb-6 max-w-md mx-auto">
               Зарегистрируйтесь сейчас - взнос 15 000 ₽ вычитается из стоимости выигранного лота
@@ -345,7 +345,7 @@ const Program = () => {
               Готовы присоединиться?
             </h2>
             <p className="font-body text-muted-foreground mb-8 max-w-md mx-auto">
-              Зарегистрируйтесь на аукцион и станьте частью вечера, который меняет жизни.
+              Зарегистрируйтесь на благотворительное событие и станьте частью вечера, который меняет жизни.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/lots" className="btn-outline">

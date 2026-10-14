@@ -2,7 +2,8 @@
 // пока пусто, в письмах строка со временем просто не выводится.
 export const WELLNESS_EVENT = {
   dateLabel: '25 октября 2026, воскресенье',
-  timeLabel: '',
+  timeLabel: '12:00–16:30',
+  schedule: 'лекции 12:00–14:00 · тренировки 14:30–16:30',
   place: 'Баланс-холл «Место быть»',
   address: 'Москва, ул. Мясницкая, 24/7, стр. 1',
   pageUrl: 'https://xn--80aodvkjc9f.xn--p1ai/wellness',

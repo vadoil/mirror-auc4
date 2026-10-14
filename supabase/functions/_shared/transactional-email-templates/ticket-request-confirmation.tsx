@@ -47,7 +47,7 @@ function getContent(ticketType?: string) {
     subject: 'Заявка принята — Отражение добра',
     preview: 'Мы получили вашу заявку',
     heading: hi('спасибо за заявку!'),
-    body: 'Мы получили вашу заявку на участие в аукционе «Отражение добра». Организатор свяжется с вами и расскажет о ближайших событиях.',
+    body: 'Мы получили вашу заявку на участие в благотворительном событии «Отражение добра». Организатор свяжется с вами и расскажет о ближайших событиях.',
     rowLabel: 'Ваша заявка',
     cta: { href: SITE_URL, text: 'На сайт' },
   }
@@ -55,7 +55,7 @@ function getContent(ticketType?: string) {
 
 const TicketRequestConfirmationEmail = ({ name, ticketType, promoCode }: Props) => {
   const c = getContent(ticketType)
-  const rows = [{ label: c.rowLabel, value: ticketType || 'Участие в аукционе' }]
+  const rows = [{ label: c.rowLabel, value: ticketType || 'Участие в благотворительном событии' }]
   if (promoCode) rows.push({ label: 'Промокод', value: `${promoCode} — участие без оплаты` })
   return (
     <EmailLayout preview={c.preview}>
@@ -72,5 +72,5 @@ export const template = {
   component: TicketRequestConfirmationEmail,
   subject: (data: Record<string, any>) => getContent(data.ticketType).subject,
   displayName: 'Подтверждение заявки (клиенту)',
-  previewData: { name: 'Мария', ticketType: 'Участник аукциона', promoCode: 'ДРУГ' },
+  previewData: { name: 'Мария', ticketType: 'Участник благотворительного события', promoCode: 'ДРУГ' },
 } satisfies TemplateEntry

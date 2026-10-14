@@ -20,7 +20,7 @@ const calendarUrl = () => {
   const q = new URLSearchParams({
     action: 'TEMPLATE',
     text: 'Велнес-девичник «Отражение»',
-    dates: '20261025/20261026',
+    dates: '20261025T090000Z/20261025T133000Z', // 12:00–16:30 МСК
     details: `Программа: ${WELLNESS_EVENT.pageUrl}`,
     location: `${WELLNESS_EVENT.place}, ${WELLNESS_EVENT.address}`,
   })
@@ -116,6 +116,7 @@ export const Paragraph = ({ children }: { children: React.ReactNode }) => (
 export const Ticket = ({ name, position, trainings, amount }: { name?: string; position?: number; trainings?: string[] | null; amount?: number }) => {
   const rows: [string, string][] = [
     ['Дата', WELLNESS_EVENT.timeLabel ? `${WELLNESS_EVENT.dateLabel}, ${WELLNESS_EVENT.timeLabel}` : WELLNESS_EVENT.dateLabel],
+    ['Расписание', WELLNESS_EVENT.schedule],
     ['Место', WELLNESS_EVENT.place],
     ['Адрес', WELLNESS_EVENT.address],
   ]

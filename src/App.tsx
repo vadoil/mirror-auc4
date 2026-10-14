@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
 import Index from "./pages/Index";
+const About = lazy(() => import("./pages/About"));
 const Lots = lazy(() => import("./pages/Lots"));
 const LotDetail = lazy(() => import("./pages/LotDetail"));
 const HowItWorks = lazy(() => import("./pages/HowItWorks"));
@@ -46,6 +47,7 @@ const App = () => (
           <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
             <Route path="/lots" element={<Lots />} />
             <Route path="/lots/:id" element={<LotDetail />} />
             <Route path="/how-it-works" element={<HowItWorks />} />

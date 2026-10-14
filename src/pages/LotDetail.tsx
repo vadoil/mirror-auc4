@@ -127,8 +127,8 @@ const LotDetail = () => {
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Image */}
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <div className="aspect-square relative overflow-hidden bg-muted/30 border border-border rounded-lg">
+            <motion.div className="lg:sticky lg:top-28 lg:self-start" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
+              <div className="aspect-square lg:max-w-[calc(100svh-8rem)] lg:mx-auto relative overflow-hidden bg-muted/30 border border-border rounded-lg">
                 {imgUrl ? (
                   <img src={imgUrl} alt={lot.title} className="absolute inset-0 w-full h-full object-cover" />
                 ) : (

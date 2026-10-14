@@ -64,7 +64,7 @@ const VenuePreviewSection = () => {
               </div>
               <div className="flex items-center gap-4">
                 <Clock className="w-4 h-4 text-primary flex-shrink-0" />
-                <p className="font-body text-sm text-foreground">Сбор гостей: 15:00 · Public Talk: 16:00 · Аукцион: 17:00</p>
+                <p className="font-body text-sm text-foreground">Сбор гостей: 15:00 · Public Talk: 16:00 · Торги: 17:00</p>
               </div>
             </div>
 

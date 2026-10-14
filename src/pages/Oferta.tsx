@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import { requisiteRows } from "@/lib/requisites";
 import Footer from "@/components/Footer";
 
 const Oferta = () => {
@@ -120,6 +121,17 @@ const Oferta = () => {
                 </li>
                 <li>К Договору применяется право РФ.</li>
               </ol>
+            </section>
+
+            <section id="requisites" className="border-t border-cream/10 pt-8 mt-10">
+              <h2 className="font-display text-lg text-cream mb-4">Реквизиты для оплаты</h2>
+              <div className="space-y-1 text-cream/50">
+                {requisiteRows.map(([k, v]) => (
+                  <p key={k}>
+                    {k}: <span className="text-cream/70">{v}</span>
+                  </p>
+                ))}
+              </div>
             </section>
 
             <section className="border-t border-cream/10 pt-8 mt-10">

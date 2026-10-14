@@ -46,7 +46,7 @@ function buildText(event: string, data: Record<string, unknown>): string {
     }
     case "new_bid": {
       return (
-        `<b>🔨 Новая ставка на аукционе</b>\n\n` +
+        `<b>🔨 Новая ставка на благотворительном событии</b>\n\n` +
         fmt("Лот", data.lot_title) +
         fmt("Сумма", `${data.amount} ₽`) +
         fmt("Имя", data.bidder_name) +

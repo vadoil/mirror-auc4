@@ -22,7 +22,7 @@ const timeline = [
   { time: "15:00", title: "Сбор гостей", text: "Дегустация б/а напитков Inspiro, знакомство с участниками и пространством «Место быть»." },
   { time: "16:00", title: "Открытая лекция", text: "Врачи и эксперты рассказали о ключевых подходах к долголетию и заботе о своём организме." },
   { time: "16:45", title: "Кофе-брейк", text: "Общение, фотозона и знакомство с лотами перед торгами." },
-  { time: "17:00", title: "Аукцион", text: "Торги за оздоровительные программы, ретриты, произведения и эксклюзивный опыт." },
+  { time: "17:00", title: "Торги", text: "Торги за оздоровительные программы, ретриты, произведения и эксклюзивный опыт." },
 ];
 
 const people = [
@@ -34,10 +34,10 @@ const people = [
 
 const galleryPreview = [
   { src: event02, alt: "Гости вечера «Отражение добра»" },
-  { src: event10, alt: "Спикеры на сцене аукциона" },
+  { src: event10, alt: "Спикеры на сцене благотворительного события" },
   { src: event09, alt: "Лоты - фарфоровые башни «Свод по крупицам»" },
   { src: event13, alt: "Бар Inspiro Blends" },
-  { src: event11, alt: "Зал перед началом аукциона" },
+  { src: event11, alt: "Зал перед началом благотворительного события" },
   { src: event17, alt: "Гостьи с табличкой №1" },
 ];
 
@@ -64,7 +64,7 @@ const ArchiveMoscow = () => {
       <section className="relative min-h-[70svh] md:min-h-[85svh] flex items-end overflow-hidden">
         <picture>
           <source media="(min-width: 768px)" srcSet={event10} />
-          <img src={heroPhoto} alt="Александр Цыпкин и гости аукциона «Отражение добра»" className="absolute inset-0 w-full h-full object-cover md:object-[center_35%]" />
+          <img src={heroPhoto} alt="Александр Цыпкин и гости благотворительного события «Отражение добра»" className="absolute inset-0 w-full h-full object-cover md:object-[center_35%]" />
         </picture>
         <div className="absolute inset-0 bg-gradient-to-t from-warm-black/90 via-warm-black/40 to-warm-black/10" />
         <div className="relative z-10 section-padding pb-16 md:pb-24 pt-28 w-full">
@@ -85,7 +85,7 @@ const ArchiveMoscow = () => {
               Забота о себе — <span className="italic text-primary">отражение</span> заботы о других
             </h1>
             <p className="font-body text-cream/70 text-base md:text-lg max-w-2xl">
-              Благотворительный аукцион «Отражение добра» в Москве: вечер о здоровье, долголетии
+              Благотворительное событие «Отражение добра» в Москве: вечер о здоровье, долголетии
               и нейрогастрономии в поддержку фонда «Не напрасно».
             </p>
           </motion.div>
@@ -212,7 +212,7 @@ const ArchiveMoscow = () => {
           </div>
           <div className="flex flex-col gap-3">
             <Link to="/lots" className="bg-primary text-primary-foreground px-6 py-4 rounded inline-flex items-center justify-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity">
-              Лоты аукциона <ArrowRight className="w-3.5 h-3.5" />
+              Лоты благотворительного события <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <Link to="/program" className="btn-outline inline-flex items-center justify-center gap-2 text-sm">
               Программа вечера <ArrowRight className="w-3.5 h-3.5" />
@@ -225,7 +225,7 @@ const ArchiveMoscow = () => {
       <section className="bg-card/50 py-20 md:py-28 section-padding">
         <div className="max-w-6xl mx-auto grid md:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16 items-center">
           <motion.div {...fadeUp} className="aspect-[4/5] overflow-hidden rounded-2xl max-w-sm md:max-w-none mx-auto w-full">
-            <img src={reviewPhoto} alt="Олег Наумов, гость аукциона" loading="lazy" className="w-full h-full object-cover" />
+            <img src={reviewPhoto} alt="Олег Наумов, гость благотворительного события" loading="lazy" className="w-full h-full object-cover" />
           </motion.div>
           <motion.div {...fadeUp}>
             <SectionLabel>Отзывы гостей</SectionLabel>

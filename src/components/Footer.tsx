@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PAYMENT_REQUISITES } from "@/lib/requisites";
 import triiLogo from "@/assets/sponsors/triii-logo.png";
 import logoOtrazhenie from "@/assets/logo-otrazhenie-light.png";
 
@@ -19,7 +20,7 @@ const Footer = () => {
                 добрые дела <span className="italic text-primary">остаются</span>
               </h3>
               <p className="font-body text-sm text-cream/40">
-                Аукцион 13 августа 2026 · Санкт-Петербург · Центр «Зрение» · состоялся
+                Благотворительный вечер 13 августа 2026 · Санкт-Петербург · Центр «Зрение» · состоялся
               </p>
             </div>
           </div>
@@ -36,7 +37,7 @@ const Footer = () => {
             <div>
               <p className="font-display text-lg text-cream/50 tracking-[0.15em] uppercase mb-4">Отражение добра</p>
               <p className="font-body text-xs text-cream/30 leading-relaxed">
-                Благотворительный аукцион. Деньги, вырученные с продаж билетов и аукциона, направляются в поддержку фонда «Не напрасно».
+                Благотворительное событие. Деньги, вырученные с продажи билетов и лотов, направляются в поддержку фонда «Не напрасно».
               </p>
             </div>
             <div>
@@ -90,7 +91,7 @@ const Footer = () => {
           <div className="pt-8 border-t border-cream/10 space-y-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="font-body text-xs text-cream/30">
-                © 2026 «Отражение добра». Все права защищены. Благотворительный аукцион.
+                © 2026 «Отражение добра». Все права защищены. Благотворительное событие.
               </p>
               <div className="flex items-center gap-4">
                 <Link to="/privacy" className="font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">
@@ -103,11 +104,14 @@ const Footer = () => {
               </div>
             </div>
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-cream/20">
-              <p className="font-body text-[10px]">
+              <p className="font-body text-[10px] text-center md:text-left">
+                Получатель платежей: {PAYMENT_REQUISITES.shortName} · ИНН {PAYMENT_REQUISITES.inn} · р/с {PAYMENT_REQUISITES.account} ·{" "}
+                {PAYMENT_REQUISITES.bank} · БИК {PAYMENT_REQUISITES.bik} · к/с {PAYMENT_REQUISITES.corrAccount}
+                <br />
                 Благотворительный фонд «Не напрасно» · ИНН 7839018474 · ОГРН 1107800001870
               </p>
               <p className="font-body text-[10px]">
-                Выручка от билетов и аукциона направляется в фонд «Не напрасно».
+                Выручка от билетов и лотов направляется в фонд «Не напрасно».
               </p>
             </div>
           </div>

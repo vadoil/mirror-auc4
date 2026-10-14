@@ -73,7 +73,7 @@ const LotsPreviewSection = () => {
               <div className="w-8 h-px bg-primary" />
             </div>
             <h2 className="font-display text-5xl md:text-7xl font-normal uppercase tracking-tight text-foreground leading-[0.9] mb-6">
-              Лоты <span className="text-primary italic">аукциона</span>
+              Лоты <span className="text-primary italic">благотворительного события</span>
             </h2>
             <p className="font-body text-sm text-muted-foreground max-w-2xl leading-relaxed">
               Развитие и вдохновение, биохакинг и велнесс, искусство, хобби, ретриты -{" "}

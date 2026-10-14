@@ -151,7 +151,7 @@ const ProjectStorySection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <h3 className="font-display text-2xl md:text-3xl text-foreground uppercase tracking-tight mb-8 text-center">
-            Благотворительные аукционы
+            Благотворительные события
           </h3>
 
           {/* City tabs */}
@@ -175,7 +175,7 @@ const ProjectStorySection = () => {
                     animate={{ opacity: [0.6, 1, 0.6], color: ["hsl(var(--muted-foreground))", "hsl(var(--primary))", "hsl(var(--muted-foreground))"] }}
                     transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    13 августа 2026
+                    29 ноября 2026
                   </motion.span>
                 </p>
               </div>
@@ -233,11 +233,11 @@ const ProjectStorySection = () => {
                 </p>
 
                 <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-4">
-                  Мы верим, что забота о себе и забота о других – не противоположности, а отражение друг друга. Поэтому перед началом аукциона мы организуем для вас открытую лекцию о современных возможностях поддержать свой организм и баланс внутри.
+                  Мы верим, что забота о себе и забота о других – не противоположности, а отражение друг друга. Поэтому перед началом благотворительного события мы организуем для вас открытую лекцию о современных возможностях поддержать свой организм и баланс внутри.
                 </p>
 
                 <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
-                  «Отражение добра» – это аукцион, где каждый лот несёт смысл. Уникальные оздоровительные программы, ретриты, эксклюзивный опыт, а все деньги, вырученные с продаж билетов и аукциона, направляются в поддержку фонда «Не напрасно».
+                  «Отражение добра» – это благотворительное событие, где каждый лот несёт смысл. Уникальные оздоровительные программы, ретриты, эксклюзивный опыт, а все деньги, вырученные с продажи билетов и лотов, направляются в поддержку фонда «Не напрасно».
                 </p>
 
                 <div className="flex flex-wrap gap-3">
@@ -245,7 +245,7 @@ const ProjectStorySection = () => {
                     to="/program"
                     className="btn-outline inline-flex items-center gap-2 text-sm"
                   >
-                    Программа аукциона <ArrowRight className="w-3.5 h-3.5" />
+                    Программа благотворительного события <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                   <Link
                     to="/lots"
@@ -272,27 +272,26 @@ const ProjectStorySection = () => {
                 </div>
 
                 <h4 className="font-display text-xl md:text-2xl text-foreground leading-tight mb-3">
-                  Искусство видеть <span className="italic">главное</span>
+                  Вечер <span className="italic">в историческом особняке</span>
                 </h4>
                 <p className="font-body text-sm text-primary uppercase tracking-[0.15em] mb-4">
-                  13 августа 2026 · Центр «Зрение», Санкт-Петербург
+                  29 ноября 2026 · Исторический особняк, Санкт-Петербург
                 </p>
 
                 <p className="font-body text-sm md:text-base text-foreground leading-relaxed mb-3">
-                  Благотворительный вечер в поддержку фонда «Не напрасно» в центре современной
-                  офтальмологии «Зрение». Разговор с онкологом Владиславом Евсеевым, аукцион работ
-                  Алексея Сергиенко, Андрея Бартенева и Дмитрия Абросимова, экспресс-диагностика зрения
-                  и лёгкие гастрономические сеты.
+                  Благотворительный вечер «Отражение добра» в поддержку фонда «Не напрасно».
+                  Музыка, вечерние туалеты, приветственный фуршет и шампанское, а затем —
+                  благотворительные торги современным искусством. Их проведут Александр Цыпкин и Юрий Омельченко.
                 </p>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed mb-6">
-                  Стоимость билета — 7 000 ₽. Вся выручка направляется на помощь людям
-                  с онкологическими заболеваниями.
+                  Полный каталог лотов появится 1 ноября. Средства от продажи лотов
+                  будут направлены фонду «Не напрасно».
                 </p>
 
                 {/* CTA to Upcoming page */}
                 <div className="flex flex-wrap gap-3 mt-2 mb-8">
                   <Link
-                    to="/archive/spb"
+                    to="/peterburg"
                     className="bg-primary text-primary-foreground px-6 py-3 rounded inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
                   >
                     Подробнее о вечере в Петербурге <ArrowRight className="w-3.5 h-3.5" />

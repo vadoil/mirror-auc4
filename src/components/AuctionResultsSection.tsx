@@ -83,7 +83,7 @@ const AuctionResultsSection = () => {
           <div className="flex items-center gap-3 justify-center mb-6">
             <div className="w-8 h-px bg-primary" />
             <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-              Итоги аукциона
+              Итоги благотворительного события
             </p>
             <div className="w-8 h-px bg-primary" />
           </div>
@@ -91,7 +91,7 @@ const AuctionResultsSection = () => {
             26 апреля <span className="italic text-primary">2026</span>
           </h2>
           <p className="font-body text-sm md:text-base text-muted-foreground max-w-2xl mx-auto mt-5">
-            Благодаря всем гостям и партнёрам аукцион «Отражение добра» стал событием - и реальной поддержкой для фонда «Не напрасно».
+            Благодаря всем гостям и партнёрам вечер «Отражение добра» стал событием - и реальной поддержкой для фонда «Не напрасно».
           </p>
         </motion.div>
 
@@ -133,7 +133,7 @@ const AuctionResultsSection = () => {
               Обращение к победителям торгов
             </h4>
             <p className="font-body text-sm text-foreground/80 leading-relaxed">
-              Дорогие друзья! Просим победителей аукциона завершить оплату приобретённых лотов - каждый рубль идёт на добрые дела фонда «Не напрасно». Мы ценим каждого из вас и всегда рады видеть на наших мероприятиях, но просим беречь взаимное доверие: без него благотворительность просто невозможна.
+              Дорогие друзья! Просим победителей благотворительного события завершить оплату приобретённых лотов - каждый рубль идёт на добрые дела фонда «Не напрасно». Мы ценим каждого из вас и всегда рады видеть на наших мероприятиях, но просим беречь взаимное доверие: без него благотворительность просто невозможна.
             </p>
           </div>
         </motion.div>

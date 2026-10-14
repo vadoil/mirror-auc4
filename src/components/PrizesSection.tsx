@@ -44,7 +44,7 @@ const PrizesSection = () => {
             Разыграно <span className="italic text-primary">партнёрами</span>
           </h2>
           <p className="font-body text-sm text-muted-foreground max-w-xl mx-auto mt-4">
-            Победители определены генератором случайных чисел среди номеров, зарегистрированных на аукцион.
+            Победители определены генератором случайных чисел среди номеров, зарегистрированных на благотворительное событие.
           </p>
         </motion.div>
 

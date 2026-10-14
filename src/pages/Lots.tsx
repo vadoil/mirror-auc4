@@ -242,7 +242,7 @@ const Lots = () => {
               )}
             </div>
           ) : (
-            <p className="font-body text-xs text-muted-foreground">Лот не был продан на аукционе</p>
+            <p className="font-body text-xs text-muted-foreground">Лот не был продан на благотворительном событии</p>
           )}
         </div>
       </motion.div>
@@ -261,10 +261,10 @@ const Lots = () => {
             className="mb-10"
           >
             <h1 className="font-display text-5xl md:text-7xl text-foreground uppercase tracking-tight leading-[0.9] mb-4">
-              Лоты <span className="text-primary italic">аукциона</span>
+              Лоты <span className="text-primary italic">благотворительного события</span>
             </h1>
             <p className="font-body text-muted-foreground text-base max-w-2xl">
-              Средства от аукциона идут в фонд «Не напрасно» (часть средств получают художники - авторы лотов).
+              Средства от продажи лотов идут в фонд «Не напрасно» (часть средств получают художники - авторы лотов).
             </p>
             <button
               type="button"
@@ -306,7 +306,7 @@ const Lots = () => {
                   className="relative font-display text-sm md:text-base uppercase tracking-[0.18em] px-6 py-4 rounded-none bg-transparent text-muted-foreground border-b-2 border-transparent transition-all duration-300 hover:text-foreground data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:border-foreground data-[state=active]:shadow-none"
                 >
                   <span className="flex items-center gap-2.5">
-                    Аукцион 26 апреля
+                    Благотворительное событие 26 апреля
                     <span className="font-numbers text-[10px] tracking-normal bg-muted text-muted-foreground px-2 py-0.5 rounded-full">
                       {archivedLots.length}
                     </span>
@@ -388,7 +388,7 @@ const Lots = () => {
                       Обращение к победителям торгов
                     </h4>
                     <p className="font-body text-sm text-foreground/80 leading-relaxed">
-                      Дорогие друзья! Просим победителей аукциона завершить оплату приобретённых лотов - каждый рубль идёт на добрые дела фонда «Не напрасно». Мы ценим каждого из вас и всегда рады видеть на наших мероприятиях, но просим беречь взаимное доверие: без него благотворительность просто невозможна.
+                      Дорогие друзья! Просим победителей благотворительного события завершить оплату приобретённых лотов - каждый рубль идёт на добрые дела фонда «Не напрасно». Мы ценим каждого из вас и всегда рады видеть на наших мероприятиях, но просим беречь взаимное доверие: без него благотворительность просто невозможна.
                     </p>
                   </div>
                 </div>

@@ -2,10 +2,10 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const program = [
-  { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками аукциона и пространством «Место быть»", highlight: false },
+  { time: "15:00", title: "Сбор гостей", desc: "Дегустация, знакомство с участниками благотворительного события и пространством «Место быть»", highlight: false },
   { time: "16:00", title: "Открытая лекция", desc: "Тема будет объявлена", highlight: true, speakers: true },
-  { time: "16:45", title: "Кофе-брейк", desc: "Перерыв, общение, подготовка к аукциону", highlight: false },
-  { time: "17:00", title: "Аукцион", desc: "Торги – оздоровительные программы, ретриты, эксклюзивный опыт", highlight: true },
+  { time: "16:45", title: "Кофе-брейк", desc: "Перерыв, общение, подготовка к торгам", highlight: false },
+  { time: "17:00", title: "Торги", desc: "Торги – оздоровительные программы, ретриты, эксклюзивный опыт", highlight: true },
 ];
 
 const moderators = [

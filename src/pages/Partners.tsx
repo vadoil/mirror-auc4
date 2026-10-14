@@ -33,7 +33,7 @@ const partners: Partner[] = [
     name: "Balance Hall «Место быть»",
     category: "Площадка",
     description:
-      "Камерное артистическое пространство в самом центре Москвы - Мясницкая 24/7. Главная сцена аукциона «Отражение добра».",
+      "Камерное артистическое пространство в самом центре Москвы - Мясницкая 24/7. Главная сцена благотворительного события «Отражение добра».",
     logo: logoMesto,
   },
   {
@@ -68,7 +68,7 @@ const partners: Partner[] = [
     name: "Voluminous",
     category: "Beauty",
     description:
-      "Бьюти-партнёр вечера. Эстетическая поддержка и подарочный фонд для гостей аукциона.",
+      "Бьюти-партнёр вечера. Эстетическая поддержка и подарочный фонд для гостей благотворительного события.",
     logo: logoVol,
   },
   {
@@ -82,7 +82,7 @@ const partners: Partner[] = [
     name: "Клиника «Будь Здоров»",
     category: "Партнёр подарочного фонда",
     description:
-      "Сертификаты на медицинские услуги - главные подарки розыгрыша среди номеров, зарегистрированных на аукцион.",
+      "Сертификаты на медицинские услуги - главные подарки розыгрыша среди номеров, зарегистрированных на благотворительное событие.",
   },
 ];
 
@@ -118,7 +118,7 @@ const Partners = () => {
                 <div className="w-8 h-px bg-primary" />
               </div>
               <h1 className="font-display text-5xl md:text-7xl text-foreground uppercase tracking-tight leading-[0.9] mb-6">
-                Партнёры <span className="text-primary italic">аукциона</span>
+                Партнёры <span className="text-primary italic">благотворительного события</span>
               </h1>
               <p className="font-body text-base text-muted-foreground max-w-2xl mx-auto">
                 Те, благодаря кому «Отражение добра» становится событием. Лучшие бренды и институции,
@@ -155,7 +155,7 @@ const Partners = () => {
               </h2>
               <p className="font-body text-sm md:text-base text-muted-foreground max-w-xl">
                 Винный дом, чьё имя стало синонимом тонкого вкуса и редкости. Гастрономическая часть
-                аукциона создана вместе с командой «Лев и Единорог».
+                благотворительного события создана вместе с командой «Лев и Единорог».
               </p>
             </div>
           </motion.div>
@@ -199,7 +199,7 @@ const Partners = () => {
             className="text-center mt-16"
           >
             <p className="font-body text-sm text-muted-foreground mb-4">
-              Хотите присоединиться к партнёрам аукциона?
+              Хотите присоединиться к партнёрам благотворительного события?
             </p>
             <Link to="/#contacts" className="btn-primary inline-flex items-center gap-2">
               Стать партнёром <ArrowRight className="w-4 h-4" />
