@@ -5,6 +5,8 @@ import { TRAININGS } from './transactional-email-templates/wellness-event.ts'
 import { sourceLabel } from './utm-labels.ts'
 
 export const WELLNESS_PRICE = 440
+// конец «Игристого со стилистом» — 24.10, 19:00 МСК
+const IGRISTOE_ENDS_AT = Date.parse('2026-10-24T16:00:00Z')
 // InvoiceId в CloudPayments: «wellness-<uuid регистрации>»
 export const WELLNESS_INVOICE_PREFIX = 'wellness-'
 
@@ -46,6 +48,22 @@ export async function confirmWellnessPayment(
     await supabase.from('wellness_registrations').update({ confirmation_sent_at: new Date().toISOString() }).eq('id', row.id)
   } catch (e) {
     console.error('[wellness-payment] email failed', e)
+  }
+
+  // следом — приглашение на «Игристое со стилистом» (24.10), если она ещё не записана и событие не прошло
+  if (Date.now() < IGRISTOE_ENDS_AT) {
+    try {
+      const { count: onIgristoe } = await supabase
+        .from('stylist_registrations')
+        .select('id', { count: 'exact', head: true })
+        .ilike('email', row.email)
+      if (!onIgristoe) {
+        await sendTemplate('igristoe', row.email, { name: row.full_name.split(/\s+/)[0], kind: 'invite' })
+        await supabase.from('wellness_registrations').update({ igristoe_invite_sent_at: new Date().toISOString() }).eq('id', row.id)
+      }
+    } catch (e) {
+      console.error('[wellness-payment] igristoe invite failed', e)
+    }
   }
 
   await notifyOrganizers(
