@@ -1,11 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Coffee, Dumbbell, LayoutGrid, MapPin, Presentation, ShoppingBag, Waves } from "lucide-react";
+import { ChevronLeft, ChevronRight, Coffee, Dumbbell, LayoutGrid, MapPin, Presentation } from "lucide-react";
 import spaceImg from "@/assets/wellness/venue/space.webp";
 import lectoriumImg from "@/assets/wellness/venue/lectorium.webp";
 import fitnessImg from "@/assets/wellness/venue/fitness.webp";
-import soundImg from "@/assets/wellness/venue/sound.webp";
-import marketImg from "@/assets/wellness/venue/market.webp";
 import cafeImg from "@/assets/wellness/venue/cafe.webp";
 
 // Фото — с сайта площадки mestobe.ru; pos — точка кадрирования, чтобы в квадрате было видно лицо
@@ -13,8 +11,6 @@ const spots: { icon: typeof LayoutGrid; title: string; text: string; img: string
   { icon: LayoutGrid, title: "Пространство", text: "3 000 м² для отдыха и восстановления", img: spaceImg },
   { icon: Presentation, title: "Лекторий", text: "Выступления врачей и public talk", img: lectoriumImg },
   { icon: Dumbbell, title: "Тренировки", text: "Либидо-фитнес, растяжка и здоровая спина", img: fitnessImg, pos: "50% 15%" },
-  { icon: Waves, title: "Практики", text: "Саунд-медитация с поющими чашами", img: soundImg, pos: "50% 75%" },
-  { icon: ShoppingBag, title: "Бьюти-шоппинг", text: "Бренды, beauty-девайсы и экспо", img: marketImg },
   { icon: Coffee, title: "Фудспот и кофе", text: "Кофе, протеиновые шейки, healthy-бар", img: cafeImg },
 ];
 
@@ -42,7 +38,7 @@ const VenueCarousel = () => {
       onMouseLeave={() => setPaused(false)}
     >
       {/* Пункты: активный подсвечен, клик переключает фото */}
-      <ul className="order-2 lg:order-1 grid grid-cols-3 lg:flex lg:flex-col lg:justify-between gap-2 lg:gap-2">
+      <ul className="order-2 lg:order-1 grid grid-cols-2 sm:grid-cols-4 lg:flex lg:flex-col lg:justify-between gap-2 lg:gap-2">
         {spots.map((s, i) => {
           const on = i === active;
           return (

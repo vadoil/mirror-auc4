@@ -91,8 +91,7 @@ const wellnessPayLabels: Record<string, string> = { paid: "оплачено", fr
 
 const wellnessTrainings: Record<string, string> = {
   libido: "Либидо-фитнес (Маргарита Дмитриева)",
-  abs: "Плоский живот (Георгий Какунин)",
-  bowls: "Поющие чаши",
+  abs: "Растяжка и здоровая спина (Георгий Какунин)",
 };
 
 const downloadWellnessCsv = (rows: WellnessRegistration[]) => {

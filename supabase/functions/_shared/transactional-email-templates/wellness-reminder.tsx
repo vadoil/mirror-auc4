@@ -20,7 +20,7 @@ const WellnessReminderEmail = ({ name, trainings, kind = 'week' }: Props) => {
       <Paragraph>
         {isDay
           ? 'Завтра велнес-девичник «Отражение». Возьмите удобную одежду, если записались на тренировку, и приходите чуть заранее — так вы успеете всё посмотреть.'
-          : 'Напоминаем: 25 октября велнес-девичник «Отражение» — лекции врачей, тренировки, beauty-девайсы и практики. Сохраните дату в календаре.'}
+          : 'Напоминаем: 25 октября велнес-девичник «Отражение» — лекции врачей, тренировки и уход за волосами. Сохраните дату в календаре.'}
       </Paragraph>
       <Ticket name={name} trainings={trainings} />
       <Actions />
@@ -35,5 +35,5 @@ export const template = {
   subject: (d: Record<string, any>) =>
     d.kind === 'day' ? 'Завтра — велнес-девичник «Отражение» ✦' : 'Через неделю — велнес-девичник «Отражение» ✦',
   displayName: 'Велнес-девичник: напоминание',
-  previewData: { name: 'Мария', trainings: ['libido', 'bowls'], kind: 'day' },
+  previewData: { name: 'Мария', trainings: ['libido', 'abs'], kind: 'day' },
 } satisfies TemplateEntry

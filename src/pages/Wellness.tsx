@@ -7,35 +7,26 @@ import {
   Baby,
   Calendar,
   Camera,
-  CupSoda,
   Dumbbell,
   Flower2,
-  Gift,
   HandHeart,
   Heart,
-  HeartPulse,
+  Scissors,
   Send,
   Leaf,
   MapPin,
-  Megaphone,
   Mic,
   Moon,
-  Package,
   Phone,
-  Pill,
   Play,
   Plus,
   Ribbon,
-  ScanFace,
-  Scale,
   Shirt,
   ShoppingBag,
   Sparkles,
-  Store,
   Users,
   Wind,
   Wine,
-  Zap,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -54,14 +45,6 @@ import margaritaPhoto from "@/assets/wellness/people/margarita.webp";
 import georgyPhoto from "@/assets/wellness/people/georgy.webp";
 import alexandraPhoto from "@/assets/wellness/people/alexandra-bw.webp";
 import gisellePhoto from "@/assets/wellness/people/giselle-bw.webp";
-import zone1 from "@/assets/wellness/zones/zone-1.webp";
-import zone2 from "@/assets/wellness/zones/zone-2.webp";
-import zone3 from "@/assets/wellness/zones/zone-3.webp";
-import zone4 from "@/assets/wellness/zones/zone-4.webp";
-import zone5 from "@/assets/wellness/zones/zone-5.webp";
-import zone6 from "@/assets/wellness/zones/zone-6.webp";
-import zone7 from "@/assets/wellness/zones/zone-7.webp";
-import zone8 from "@/assets/wellness/zones/zone-8.webp";
 import nenaprasnoLogo from "@/assets/sponsors/nenaprasno.png";
 import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
 import actcomLogo from "@/assets/sponsors/actcom.svg";
@@ -75,7 +58,7 @@ import refeelLogo from "@/assets/brands/refeel.png";
 const experience = [
   { icon: Mic, title: "Public talk", text: "с лидерами мнений" },
   { icon: Users, title: "Консультации", text: "с врачом" },
-  { icon: Sparkles, title: "Beauty-девайсы", text: "для сна, энергии и красоты" },
+  { icon: Scissors, title: "Уход за волосами", text: "трихоскопия и тренер по укладке" },
   { icon: Flower2, title: "Практики", text: "для спокойной нервной системы" },
   { icon: HandHeart, title: "Женское комьюнити", text: "тёплое общение и поддержка" },
   { icon: Camera, title: "Красивый контент", text: "атмосфера, которую хочется сохранить" },
@@ -103,10 +86,10 @@ const lectures = [
 const SHOW_BRANDS = false;
 
 const otherFormats = [
-  { icon: Dumbbell, title: "Тренировки", note: "14:30–16:30 · либидо-фитнес, растяжка и здоровая спина, медитация с поющими чашами", href: "#experts" },
+  { icon: Dumbbell, title: "Тренировки", note: "14:30–16:30 · либидо-фитнес, растяжка и здоровая спина", href: "#experts" },
   { icon: ShoppingBag, title: "Экспо", note: "Бренды и сервисы заботы о себе", href: SHOW_BRANDS ? "#brands" : undefined },
   { icon: Wine, title: "Игристое со стилистом", note: "24 октября, 14:00–19:00 · Voluminous", href: "#october-24" },
-  { icon: Mic, title: "Public talk", note: "«Героини нового велнеса»", href: undefined },
+  { icon: Scissors, title: "Уход за волосами", note: "12:00–19:00 · трихоскопия, тренер по укладке, рекомендации", href: "#program" },
 ];
 
 type Expert = {
@@ -160,12 +143,12 @@ const experts: Expert[] = [
     name: "Георгий",
     badge: "Тренер",
     surname: "Какунин",
-    regalia: "Фитнес-тренер",
-    text: "Помогает выстроить сильное и здоровое тело без жёстких диет и лишнего стресса. За осознанный подход к тренировкам, который поддерживает здоровье, энергию и уверенность в себе.",
+    regalia: "Фитнес-тренер · растяжка и здоровая спина",
+    text: "Помогает вернуть телу гибкость и подвижность, разгрузить спину и снять напряжение — мягко, без жёстких нагрузок и лишнего стресса.",
     features: [
-      { icon: Dumbbell, label: "Сила и здоровье" },
-      { icon: Zap, label: "Энергия каждый день" },
-      { icon: Scale, label: "Баланс без крайностей" },
+      { icon: Activity, label: "Гибкость и подвижность" },
+      { icon: Leaf, label: "Здоровая спина" },
+      { icon: Wind, label: "Лёгкость в теле" },
     ],
     slogan: "Растяжка и здоровая спина — спокойная и счастливая ты.",
     photo: georgyPhoto,
@@ -192,25 +175,7 @@ const brandCategories = [
   { icon: Plus, label: "и другие" },
 ];
 
-const zones = [
-  { icon: Sparkles, title: "Бьюти-девайсы и уход", text: "Домашние гаджеты: LED, микротоки, гуаша, лимфодренаж", img: zone1 },
-  { icon: ScanFace, title: "Диагностика кожи, волос и тела", text: "Анализаторы, трихоскопия, состав тела, биовозраст", img: zone2 },
-  { icon: HeartPulse, title: "Лонгевити- и превентивные клиники", text: "Чек-апы и персональные рекомендации", img: zone3 },
-  { icon: Pill, title: "Нутрицевтика и функциональные продукты", text: "Добавки, адаптогены, коллаген — бережно и без хайпа", img: zone4 },
-  { icon: CupSoda, title: "Функциональные напитки и еда", text: "Матча, комбуча, коллаген-шоты, healthy-бар", img: zone5 },
-  { icon: Leaf, title: "Практики и восстановление", text: "Дыхание, саунд, велбинг, рекавери-зона", img: zone6 },
-  { icon: Ribbon, title: "Женское здоровье и профилактика", text: "Маммология и профильный фонд — смысловой партнёр", img: zone7 },
-  { icon: Users, title: "Медиа и комьюнити", text: "Женские медиа и wellness-сообщества", img: zone8 },
-];
 
-const partnerBenefits = [
-  { icon: Package, title: "Продукт в руках", text: "Тест-драйв, сэмплинг и демо прямо в своей зоне" },
-  { icon: ShoppingBag, title: "Продажи в день", text: "Продажи в своей зоне, промокоды и бонусы гостьям" },
-  { icon: Users, title: "Новые контакты", text: "База тёплых клиенток и пострассылка после события" },
-  { icon: Camera, title: "Живой контент", text: "Фото, видео и съёмки для ваших соцсетей" },
-  { icon: Mic, title: "Сцена и боксы", text: "Упоминания, участие в talk и сэмплы в welcome-боксах" },
-  { icon: Heart, title: "Смысл и имидж", text: "Бренд рядом с «Розовым октябрём» и заботой о женщинах" },
-];
 
 const organizers = [
   {
@@ -325,7 +290,7 @@ const Wellness = () => {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6 text-xs text-primary font-body uppercase tracking-[0.2em]">
-              <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> 25 октября 2026 · 12:00–16:30</span>
+              <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> 25 октября 2026 · 12:00–19:00</span>
               <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> Москва</span>
             </div>
             <p className="font-body text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">Велнес-девичник для женщин</p>
@@ -362,8 +327,9 @@ const Wellness = () => {
               {[
                 ["12:00–14:00", "Лекции врачей"],
                 ["14:30–16:30", "Тренировки"],
-              ].map(([time, what]) => (
-                <div key={time} className="rounded-xl bg-primary/10 border border-primary/20 px-4 py-3">
+                ["12:00–19:00", "Трихоскопия, тренер по укладке, уход за волосами"],
+              ].map(([time, what], i) => (
+                <div key={time} className={`rounded-xl bg-primary/10 border border-primary/20 px-4 py-3 ${i === 2 ? "col-span-2" : ""}`}>
                   <p className="font-numbers text-lg text-primary leading-none mb-1">{time}</p>
                   <p className="font-body text-xs text-foreground">{what}</p>
                 </div>
@@ -476,10 +442,11 @@ const Wellness = () => {
           </motion.div>
 
           {/* Тайминг дня */}
-          <motion.div {...fadeUp} className="grid sm:grid-cols-2 gap-3 mb-14">
+          <motion.div {...fadeUp} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-14">
             {[
               { time: "12:00–14:00", title: "Лекции", text: "Выступления врачей в лектории" },
-              { time: "14:30–16:30", title: "Тренировки", text: "Либидо-фитнес, растяжка и здоровая спина, медитация" },
+              { time: "14:30–16:30", title: "Тренировки", text: "Либидо-фитнес, растяжка и здоровая спина" },
+              { time: "12:00–19:00", title: "Уход за волосами", text: "Анализ кожи головы (трихоскопия), тренер по укладке, рекомендации по уходу" },
             ].map((t) => (
               <div key={t.time} className="flex items-center gap-5 bg-primary/5 border border-primary/20 rounded-2xl px-6 py-5">
                 <span className="font-numbers text-2xl md:text-3xl text-primary whitespace-nowrap">{t.time}</span>
@@ -767,7 +734,7 @@ const Wellness = () => {
               <TwoLineTitle first="Один день." second="Полностью для себя." />
             </div>
             <span className="self-start md:self-auto font-body text-[10px] uppercase tracking-[0.25em] text-primary bg-primary/10 rounded-full px-4 py-1.5">
-              25 октября 2026 · 12:00–16:30
+              25 октября 2026 · 12:00–19:00
             </span>
           </motion.div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 md:gap-x-8">
@@ -785,102 +752,11 @@ const Wellness = () => {
         </div>
       </section>
 
-      {/* Восемь направлений заботы */}
-      <section className="py-20 md:py-28 section-padding">
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeUp} className="mb-12">
-            <SectionLabel>Зоны девичника</SectionLabel>
-            <TwoLineTitle first="Восемь" second="направлений заботы." />
-          </motion.div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
-            {zones.map((z, i) => (
-              <motion.article
-                key={z.title}
-                {...fadeUp}
-                transition={{ duration: 0.5, delay: 0.05 * (i % 4) }}
-                className="group bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-500"
-              >
-                <div className="relative aspect-square overflow-hidden">
-                  <img src={z.img} alt={z.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <span className="absolute top-2 left-2 md:top-3 md:left-3 font-numbers text-xs md:text-sm text-primary bg-background/90 backdrop-blur rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                    {num(i)}
-                  </span>
-                </div>
-                <div className="p-3 md:p-5">
-                  <div className="flex items-start gap-3 mb-2">
-                    <z.icon className="hidden md:block w-4 h-4 text-primary mt-1 shrink-0" />
-                    <h3 className="font-display text-base md:text-lg text-foreground leading-tight">{z.title}</h3>
-                  </div>
-                  <p className="font-body text-xs md:text-sm text-muted-foreground leading-relaxed">{z.text}</p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Партнёрам */}
-      <section id="partners" className="bg-card/50 py-20 md:py-28 section-padding scroll-mt-16">
+      <section id="partners" className="bg-card/50 py-14 md:py-20 section-padding scroll-mt-16">
         <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeUp} className="mb-8">
-            <SectionLabel>Предложение для партнёров</SectionLabel>
-            <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-foreground leading-[1] mb-4">
-              Станьте частью <span className="italic text-primary">«Отражения».</span>
-            </h2>
-            <p className="font-body text-base text-muted-foreground max-w-2xl">
-              Приглашаем близкие по духу бренды разместить свою зону на площадке — и вместе сделать доброе дело.
-            </p>
-          </motion.div>
-
-          <motion.div {...fadeUp} className="bg-primary/10 border border-primary/20 rounded-2xl px-6 py-5 mb-10">
-            <p className="font-body text-[10px] uppercase tracking-[0.25em] text-primary mb-1">Больше, чем просто участие</p>
-            <p className="font-body text-base text-foreground">Участвуя, вы поддерживаете профилактику рака груди и заботу о женщинах.</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <motion.div {...fadeUp} className="flex items-start gap-4">
-              <IconCircle icon={Users} />
-              <div>
-                <p className="font-body text-[10px] uppercase tracking-[0.25em] text-primary mb-1">Аудитория</p>
-                <p className="font-display text-2xl text-foreground">Женщины 25–45 · &lt; 500 гостей</p>
-                <p className="font-body text-sm text-muted-foreground">доход средний и выше</p>
-              </div>
-            </motion.div>
-            <motion.div {...fadeUp} className="flex items-start gap-4">
-              <IconCircle icon={Megaphone} />
-              <div>
-                <p className="font-body text-[10px] uppercase tracking-[0.25em] text-primary mb-1">Медиаохват</p>
-                <p className="font-numbers text-3xl md:text-4xl text-primary leading-none mb-1">335 000 – 750 000</p>
-                <p className="font-body text-sm text-muted-foreground">совокупная аудитория соцсетей и СМИ, которые расскажут о событии</p>
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12">
-            {partnerBenefits.map((b, i) => (
-              <motion.div key={b.title} {...fadeUp} transition={{ duration: 0.4, delay: 0.04 * i }}>
-                <IconCircle icon={b.icon} size="sm" />
-                <h3 className="font-body text-sm font-medium text-foreground mt-3 mb-1">{b.title}</h3>
-                <p className="font-body text-xs text-muted-foreground leading-relaxed">{b.text}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div {...fadeUp} className="flex flex-col md:flex-row md:items-center justify-between gap-5 border-y border-border py-6 mb-14">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-              <span className="font-body text-[10px] uppercase tracking-[0.25em] text-primary">Формат участия</span>
-              <span className="font-body text-base text-foreground">Зона партнёра на площадке</span>
-            </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-              <a href={`https://t.me/${organizers[1].handle}`} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-muted-foreground hover:text-primary transition-colors">
-                Гизела Тольц · @{organizers[1].handle} · {organizers[1].phoneLabel}
-              </a>
-              <span className="self-start sm:self-auto font-numbers text-2xl text-primary-foreground bg-primary rounded-full px-6 py-2">50 000 ₽</span>
-            </div>
-          </motion.div>
-
           <p className="font-body text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">Вместе с нами</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {partners.map((pt) => (
               <motion.a
                 key={pt.name}
@@ -897,17 +773,6 @@ const Wellness = () => {
                 <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-3">{pt.role}</p>
               </motion.a>
             ))}
-            <motion.a
-              href={`https://t.me/${organizers[1].handle}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              {...fadeUp}
-              className="aspect-[3/2] border border-dashed border-primary/40 bg-primary/5 rounded-xl flex flex-col items-center justify-center text-center p-3 md:p-4 overflow-hidden hover:bg-primary/10 transition-colors"
-            >
-              <Store className="w-5 h-5 md:w-6 md:h-6 text-primary mb-1.5 md:mb-2" />
-              <p className="font-display text-base md:text-xl text-primary leading-tight">Стать партнёром</p>
-              <p className="font-body text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.2em] text-muted-foreground mt-1 leading-tight">Напишите организаторам</p>
-            </motion.a>
           </div>
         </div>
       </section>

@@ -8,8 +8,7 @@ import { createWellnessYookassaPayment, getPaymentProvider } from "@/lib/payment
 
 export const TRAININGS = [
   { id: "libido", title: "Либидо-фитнес", coach: "с Маргаритой Дмитриевой" },
-  { id: "abs", title: "Плоский живот", coach: "с Георгием Какуниным" },
-  { id: "bowls", title: "Медитация", coach: "с поющими чашами" },
+  { id: "abs", title: "Растяжка и здоровая спина", coach: "с Георгием Какуниным" },
 ] as const;
 
 const FUNCTION_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/wellness-register`;
@@ -259,7 +258,7 @@ const WellnessRegistration = () => {
       </div>
 
       <p className="font-body text-xs uppercase tracking-[0.2em] text-primary mt-8 mb-4">Я иду на тренировки</p>
-      <div className="grid sm:grid-cols-3 gap-3 mb-3">
+      <div className="grid sm:grid-cols-2 gap-3 mb-3">
         {TRAININGS.map((t, i) => {
           const active = trainings.includes(t.id);
           return (
@@ -288,7 +287,7 @@ const WellnessRegistration = () => {
           );
         })}
       </div>
-      <p className="font-body text-xs text-muted-foreground/70 mb-8">Можно выбрать одну, две или все три — или ни одной. Нажмите ещё раз, чтобы снять выбор.</p>
+      <p className="font-body text-xs text-muted-foreground/70 mb-8">Можно выбрать одну или обе — или ни одной. Нажмите ещё раз, чтобы снять выбор.</p>
 
       <div className="space-y-3 mb-8">
         <CheckRow checked={consentPd} onChange={setConsentPd}>

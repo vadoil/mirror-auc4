@@ -20,7 +20,7 @@ const calendarUrl = () => {
   const q = new URLSearchParams({
     action: 'TEMPLATE',
     text: 'Велнес-девичник «Отражение»',
-    dates: '20261025T090000Z/20261025T133000Z', // 12:00–16:30 МСК
+    dates: '20261025T090000Z/20261025T160000Z', // 12:00–19:00 МСК
     details: `Программа: ${WELLNESS_EVENT.pageUrl}`,
     location: `${WELLNESS_EVENT.place}, ${WELLNESS_EVENT.address}`,
   })
@@ -227,27 +227,6 @@ export const ProgramTeaser = () => (
           ))}
         </tbody>
       </table>
-    </td>
-  </tr>
-)
-
-export const Gallery = () => (
-  <tr>
-    <td style={{ padding: '28px 30px 0' }}>
-      <table role="presentation" width="100%" cellPadding={0} cellSpacing={0}>
-        <tbody>
-          <tr>
-            {['zone-1', 'zone-5', 'zone-6', 'zone-7'].map((z) => (
-              <td key={z} width="25%" style={{ padding: '0 6px' }}>
-                <img src={`${IMG}/${z}.jpg`} width={124} alt="" style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 12, border: 0 }} />
-              </td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
-      <p style={{ fontFamily: SANS, fontSize: 12, color: MUTED, textAlign: 'center', margin: '12px 0 0' }}>
-        {'Бьюти-девайсы · healthy-бар · практики · женское здоровье — и ещё четыре зоны заботы'}
-      </p>
     </td>
   </tr>
 )
