@@ -328,7 +328,7 @@ const Wellness = () => {
             </div>
             <p className="font-display text-3xl md:text-4xl text-foreground leading-tight mb-2">Новая роскошь —</p>
             <p className="font-display text-3xl md:text-4xl italic text-primary leading-tight mb-6">забота о себе.</p>
-            <p className="font-body text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Красота · лонгевити · велбинг</p>
+            <p className="font-body text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Красота, долголетие и благополучие</p>
             {/* Расписание дня — сразу в первом экране */}
             <div className="grid grid-cols-2 gap-2 max-w-md mb-4">
               {[

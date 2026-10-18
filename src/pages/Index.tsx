@@ -25,10 +25,10 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full relative">
       <Header />
+      <WellnessTeaserBanner />
       <HeroSection />
       <div className="relative z-10">
         <AboutSection />
-        <WellnessTeaserBanner />
         <SpbAuctionBanner />
         <ProjectStorySection />
         <AuctionResultsSection />
