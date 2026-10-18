@@ -45,6 +45,7 @@ import margaritaPhoto from "@/assets/wellness/people/margarita.webp";
 import georgyPhoto from "@/assets/wellness/people/georgy.webp";
 import alexandraPhoto from "@/assets/wellness/people/alexandra-bw.webp";
 import gisellePhoto from "@/assets/wellness/people/giselle-bw.webp";
+import gintovPhoto from "@/assets/wellness/people/gintov.webp";
 import nenaprasnoLogo from "@/assets/sponsors/nenaprasno.png";
 import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
 import actcomLogo from "@/assets/sponsors/actcom.svg";
@@ -78,7 +79,7 @@ const lectures = [
   {
     topic: "Чек-ап",
     text: "Что всё-таки проверять, чтобы быть спокойной?",
-    speaker: "Спикер уточняется",
+    speaker: "Татьяна Гвинтовкина · врач-гастроэнтеролог, руководитель чекап-центра",
   },
 ];
 
@@ -202,6 +203,12 @@ const partners = [
   { name: "Фонд «Не напрасно»", role: "Смысловой партнёр", logo: nenaprasnoLogo, url: "https://nenaprasno.ru/", logoClass: "h-10 md:h-12" },
   { name: "Баланс-холл «Место быть»", role: "Площадка", logo: mestoBytLogo, url: "https://mestobe.ru/", logoClass: "h-16 md:h-20" },
   { name: "Актуальные коммуникации", role: "Стратегический партнёр", logo: actcomLogo, url: "https://act-com.ru/", logoClass: "h-9 md:h-11" },
+  { name: "Клиника Фомина", role: "Рекомендует врач", url: "https://fominaclinic.ru" },
+  { name: "Inspiro", role: "Велнес-площадка", url: "https://inspiro-moscow.ru" },
+  { name: "Kydralesalon", role: "Уход за волосами", url: "https://kydralesalon.ru" },
+  { name: "vipavenue", role: "Фитнес-студия", url: "https://vipavenue.ru" },
+  { name: "Voluminous", role: "Стиль и одежда", url: "https://voluminous.ru" },
+  { name: "Клиника Будь здоров!", role: "Медицинская поддержка", url: "https://bezhdorog-russia.ru" },
 ];
 
 const IGRISTOE = {
@@ -758,7 +765,7 @@ const Wellness = () => {
       <section id="partners" className="bg-card/50 py-14 md:py-20 section-padding scroll-mt-16">
         <div className="max-w-7xl mx-auto">
           <p className="font-body text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">Вместе с нами</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {partners.map((pt) => (
               <motion.a
                 key={pt.name}
@@ -770,12 +777,17 @@ const Wellness = () => {
                 className="group aspect-[3/2] bg-background border border-border rounded-xl flex flex-col items-center justify-center text-center p-3 md:p-5 overflow-hidden hover:border-primary/40 transition-colors"
               >
                 <div className="flex-1 w-full flex items-center justify-center">
-                  <img src={pt.logo} alt={pt.name} loading="lazy" className={`${pt.logoClass} w-auto max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity`} />
+                  {pt.logo ? (
+                    <img src={pt.logo} alt={pt.name} loading="lazy" className={`${pt.logoClass} w-auto max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity`} />
+                  ) : (
+                    <span className="font-display text-xl md:text-2xl text-foreground group-hover:text-primary transition-colors">{pt.name}</span>
+                  )}
                 </div>
                 <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-3">{pt.role}</p>
               </motion.a>
             ))}
           </div>
+
         </div>
       </section>
 
