@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
+// import HeroSection from "@/components/HeroSection"; // скрыт временно — сверху баннер девичника
 import AboutSection from "@/components/AboutSection";
 
 import ProjectStorySection from "@/components/ProjectStorySection";
@@ -25,8 +25,8 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full relative">
       <Header />
+      {/* Hero скрыт временно: сверху — баннер девичника */}
       <WellnessTeaserBanner />
-      <HeroSection />
       <div className="relative z-10">
         <AboutSection />
         <SpbAuctionBanner />
