@@ -7,7 +7,7 @@ const WellnessTeaserBanner = () => {
   return (
     <section className="relative bg-warm-black">
         <Link
-          to="/wellness"
+          to="/"
           className="group relative flex items-end min-h-[100svh] overflow-hidden"
         >
           <div className="absolute inset-0">

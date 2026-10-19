@@ -72,7 +72,7 @@ const Header = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}
       >
         <div className="px-5 xl:px-8 2xl:px-12 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 shrink-0">
+          <Link to="/home" className="flex items-center gap-3 shrink-0">
             <img
               src={useDarkText ? logoOtrazhenie : logoOtrazhenieLight}
               alt="Отражение - благотворительное событие"
@@ -83,7 +83,7 @@ const Header = () => {
           <nav className="hidden min-[1400px]:flex items-center gap-1 xl:gap-3 2xl:gap-5">
             {/* Home icon – always visible */}
             <Link
-              to="/"
+              to="/home"
               className={`${textColor} ${textHover} transition-colors duration-300`}
               title="Главная"
             >
@@ -153,7 +153,7 @@ const Header = () => {
               className="min-[1400px]:hidden bg-background backdrop-blur-xl border-t border-border"
             >
               <nav className="flex flex-col items-center py-8 gap-6">
-                <Link to="/" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light flex items-center gap-2">
+                <Link to="/home" onClick={() => setMenuOpen(false)} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light flex items-center gap-2">
                   <Home className="w-4 h-4" /> Главная
                 </Link>
                 <Link to="/about" onClick={() => setMenuOpen(false)} aria-current={location.pathname === "/about" ? "page" : undefined} className="text-foreground/80 text-sm uppercase tracking-[0.2em] font-body font-light">

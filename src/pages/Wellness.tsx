@@ -48,7 +48,6 @@ import gisellePhoto from "@/assets/wellness/people/giselle-bw.webp";
 import gintovPhoto from "@/assets/wellness/people/gintov.webp";
 import nenaprasnoLogo from "@/assets/sponsors/nenaprasno.png";
 import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
-import actcomLogo from "@/assets/sponsors/actcom.svg";
 import voluminousLogo from "@/assets/sponsors/voluminous.svg";
 import sberHealthLogo from "@/assets/brands/sberhealth.svg";
 import naturaSibericaLogo from "@/assets/brands/natura-siberica.png";
@@ -82,6 +81,7 @@ const lectures = [
     speaker: "Татьяна Гвинтовкина · врач-гастроэнтеролог, руководитель чекап-центра",
   },
 ];
+// «03 — Чек-ап» скрыт по просьбе организаторов (лекция остаётся в данных, но не выводится)
 
 // Блок «Красивые бренды» скрыт, пока не подписаны договоры с брендами. Вернуть — поставить true.
 const SHOW_BRANDS = false;
@@ -202,7 +202,6 @@ const organizers = [
 const partners = [
   { name: "Фонд «Не напрасно»", role: "Смысловой партнёр", logo: nenaprasnoLogo, url: "https://nenaprasno.ru/", logoClass: "h-10 md:h-12" },
   { name: "Баланс-холл «Место быть»", role: "Площадка", logo: mestoBytLogo, url: "https://mestobe.ru/", logoClass: "h-16 md:h-20" },
-  { name: "Актуальные коммуникации", role: "Стратегический партнёр", logo: actcomLogo, url: "https://act-com.ru/", logoClass: "h-9 md:h-11" },
   { name: "Клиника Фомина", role: "Рекомендует врач", url: "https://fominaclinic.ru" },
   { name: "Inspiro", role: "Велнес-площадка", url: "https://inspiro-moscow.ru" },
   { name: "Kydralesalon", role: "Уход за волосами", url: "https://kydralesalon.ru" },
@@ -472,7 +471,7 @@ const Wellness = () => {
             <div>
               <p className="font-body text-xs uppercase tracking-[0.3em] text-primary mb-4">Лекторий · 12:00–14:00 · выступления врачей</p>
               <div className="divide-y divide-border border-y border-border">
-                {lectures.map((l, i) => (
+                {lectures.filter((l) => l.topic !== "Чек-ап").map((l, i) => (
                   <motion.div key={l.topic} {...fadeUp} transition={{ duration: 0.5, delay: 0.06 * i }} className="flex gap-5 md:gap-8 py-6 md:py-8">
                     <span className="font-numbers text-3xl md:text-4xl text-primary leading-none w-12 shrink-0">{num(i)}</span>
                     <div>
@@ -827,7 +826,7 @@ const Wellness = () => {
                 <Send className="w-4 h-4" /> Наш Telegram-канал
               </a>
               <span>Наши проекты:</span>
-              <Link to="/" className="hover:text-primary transition-colors">Отражение добра — отразись.рф</Link>
+              <Link to="/home" className="hover:text-primary transition-colors">Отражение добра — отразись.рф</Link>
               <a href="/docs/aktkom-portfolio-2026.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 АктКом — портфолио
               </a>

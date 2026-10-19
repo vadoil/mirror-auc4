@@ -45,6 +45,8 @@ const Footer = () => {
               <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em] mb-4">Навигация</p>
               <div className="space-y-2">
                 <Link to="/about" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">О проекте</Link>
+                <Link to="/" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Девичник 25 октября</Link>
+                <Link to="/home" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Главная</Link>
                 <Link to="/lots" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Каталог лотов</Link>
                 <Link to="/how-it-works" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Как участвовать</Link>
                 <Link to="/venue" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Место проведения</Link>

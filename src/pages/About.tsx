@@ -162,7 +162,7 @@ export default function About() {
         <section className="ap-next ap-wrap" aria-labelledby="next-title">
           <div className="ap-section-top"><div><p className="ap-kicker">Продолжение следует</p><h2 id="next-title">Встретимся снова</h2></div><p className="ap-copy">Новые поводы быть вместе<br />и поддержать доброе дело.</p></div>
           <div className="ap-next-grid">
-            <Link to="/wellness" className="ap-next-event"><p className="ap-city">Москва · 25 октября 2026</p><h3>Велнес-девичник</h3><p>Встреча о заботе о себе в поддержку «Розового октября».</p><span className="ap-text-link">О событии <ArrowRight size={17} aria-hidden="true" /></span></Link>
+            <Link to="/home" className="ap-next-event"><p className="ap-city">Москва · 25 октября 2026</p><h3>Велнес-девичник</h3><p>Встреча о заботе о себе в поддержку «Розового октября».</p><span className="ap-text-link">О событии <ArrowRight size={17} aria-hidden="true" /></span></Link>
             <Link to="/peterburg" className="ap-next-event ap-next-featured"><p className="ap-city">Петербург · 29 ноября 2026</p><h3>Вечер в историческом особняке</h3><p>Современное искусство и благотворительное событие с Александром Цыпкиным и Юрием Омельченко.</p><span className="ap-text-link">О вечере <ArrowRight size={17} aria-hidden="true" /></span></Link>
           </div>
         </section>

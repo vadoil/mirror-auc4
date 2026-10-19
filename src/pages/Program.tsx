@@ -211,7 +211,7 @@ const Program = () => {
       <Header />
       <div className="pt-28 pb-20 section-padding">
         <div className="max-w-5xl mx-auto" ref={ref}>
-          <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground text-xs font-body uppercase tracking-[0.2em] hover:text-foreground transition-colors mb-12">
+          <Link to="/home" className="inline-flex items-center gap-2 text-muted-foreground text-xs font-body uppercase tracking-[0.2em] hover:text-foreground transition-colors mb-12">
             <ArrowLeft className="w-4 h-4" /> На главную
           </Link>
 
