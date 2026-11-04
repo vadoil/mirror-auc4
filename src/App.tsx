@@ -47,7 +47,7 @@ const App = () => (
           <FundraisingWidget />
           <Suspense fallback={null}>
           <Routes>
-            <Route path="/" element={<Wellness />} />
+            <Route path="/" element={<Index />} />
             <Route path="/home" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/lots" element={<Lots />} />
@@ -65,7 +65,7 @@ const App = () => (
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/forum" element={<Forum />} />
-            <Route path="/wellness" element={<Navigate to="/" replace />} />
+            <Route path="/wellness" element={<Wellness />} />
             <Route path="/peterburg" element={<Spb2911 />} />
             <Route path="/requisites" element={<Requisites />} />
             <Route path="/archive" element={<Archive />} />

@@ -1,3 +1,4 @@
+import { getTrainingPlaces } from '../_shared/wellness-training.ts'
 // Напоминания гостьям девичника. Вызывается cron-ом с сервера:
 //   POST {"kind":"week"|"day","dryRun"?:true}, Authorization: Bearer <SERVICE_ROLE_KEY>
 // Повторный вызов безопасен: кому уже отправлено, тому не шлём.
@@ -31,7 +32,8 @@ Deno.serve(async (req) => {
   const failed: string[] = []
   for (const r of rows) {
     try {
-      await sendTemplate('wellness-reminder', r.email, { name: r.full_name.split(/\s+/)[0], trainings: r.trainings, kind })
+      const trainingPlaces = await getTrainingPlaces(supabase, r.id)
+      await sendTemplate('wellness-reminder', r.email, { name: r.full_name.split(/\s+/)[0], trainings: r.trainings, trainingPlaces, kind })
       await supabase.from('wellness_registrations').update({ [column]: new Date().toISOString() }).eq('id', r.id)
       sent++
     } catch (e) {

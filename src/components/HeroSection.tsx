@@ -1,54 +1,14 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.webp";
 
-const HERO_VIDEO_URL = "/__l5e/assets-v1/bbea364f-09e2-4f9f-84fa-32e5d7e08eae/hero-bg.mp4";
-
-const CountdownUnit = ({ value, label, urgent }: { value: number; label: string; urgent?: boolean }) => (
-  <div className="text-center">
-    <div
-      className={`font-numbers text-4xl sm:text-5xl md:text-6xl font-normal leading-none uppercase ${
-        urgent ? "text-primary animate-pulse" : "text-cream"
-      }`}
-    >
-      {String(value).padStart(2, "0")}
-    </div>
-    <div
-      className={`text-[10px] uppercase tracking-[0.3em] font-body mt-2 ${
-        urgent ? "text-primary/80" : "text-cream/40"
-      }`}
-    >
-      {label}
-    </div>
-  </div>
-);
+// The original overlay video was hosted only on the lost server. Keep the bundled hero photo.
 
 const HeroSection = () => {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
-  useEffect(() => {
-    const target = new Date("2026-04-26T12:00:00Z").getTime();
-    const tick = () => {
-      const now = Date.now();
-      const diff = Math.max(0, target - now);
-      setTimeLeft({
-        days: Math.floor(diff / 86400000),
-        hours: Math.floor((diff % 86400000) / 3600000),
-        minutes: Math.floor((diff % 3600000) / 60000),
-        seconds: Math.floor((diff % 60000) / 1000),
-      });
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <section className="relative min-h-[80svh] md:min-h-[100svh] flex flex-col justify-end overflow-hidden">
       <div className="absolute inset-0 bg-warm-black">
         <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-60" width={1920} height={1080} />
-        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen" src={HERO_VIDEO_URL} />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-gold/3" />
         <div className="absolute inset-0 bg-gradient-to-t from-warm-black via-warm-black/50 to-warm-black/20" />
       </div>
@@ -94,36 +54,22 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 1.3 }}
               className="flex flex-col gap-8 lg:items-end"
             >
-              {timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0 ? (
-                <div className="lg:text-right">
-                  <p className="font-body text-cream/40 text-[10px] md:text-xs uppercase tracking-[0.3em] mb-3">
-                    26 апреля 2026
-                  </p>
-                  <div className="font-display text-2xl sm:text-3xl md:text-4xl text-cream font-light leading-tight">
-                    Вечер прошёл - <br className="hidden sm:block" />
-                    <span className="italic text-primary">добро продолжается</span>
-                  </div>
-                  <p className="font-body text-cream/50 text-sm md:text-base mt-3 max-w-sm lg:ml-auto">
-                    Онлайн-торги по части лотов ещё открыты
-                  </p>
+              <div className="lg:text-right">
+                <p className="font-body text-cream/60 text-xs md:text-sm uppercase tracking-[0.2em] mb-3">
+                  29 ноября 2026 · Санкт-Петербург
+                </p>
+                <div className="font-display text-2xl sm:text-3xl md:text-4xl text-cream font-light leading-tight">
+                  Благотворительный<br />
+                  <span className="italic text-primary">аукцион</span>
                 </div>
-              ) : (
-                <div className="flex gap-6 md:gap-8">
-                  <CountdownUnit value={timeLeft.days} label="дней" urgent={timeLeft.days <= 1} />
-                  <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
-                  <CountdownUnit value={timeLeft.hours} label="часов" />
-                  <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start">:</span>
-                  <CountdownUnit value={timeLeft.minutes} label="минут" />
-                  <span className="font-numbers text-4xl md:text-5xl text-cream/20 self-start hidden sm:block">:</span>
-                  <div className="hidden sm:block">
-                    <CountdownUnit value={timeLeft.seconds} label="секунд" />
-                  </div>
-                </div>
-              )}
+                <p className="font-body text-cream/60 text-sm md:text-base mt-3 max-w-sm lg:ml-auto">
+                  Вечер в историческом особняке в поддержку фонда «Не напрасно» и Высшей школы онкологии
+                </p>
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Link to="/#results" className="btn-primary text-center">
-                  Итоги благотворительного события
+                <Link to="/peterburg" className="btn-primary text-center">
+                  Аукцион 29 ноября
                 </Link>
                 <Link to="/gallery" className="btn-outline-light text-center">
                   Галерея вечера

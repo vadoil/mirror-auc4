@@ -79,6 +79,7 @@ type WellnessRegistration = {
   age: number | null;
   phone: string;
   trainings: string[];
+  trainingPlaces?: { training: string; status: "confirmed" | "waitlisted"; queue_position: number | null }[];
   consent_ads: boolean;
   confirmation_sent_at: string | null;
   payment_status: "pending" | "paid" | "free";
@@ -104,7 +105,7 @@ const downloadWellnessCsv = (rows: WellnessRegistration[]) => {
     r.utm?.utm_source ?? "",
     new Date(r.created_at).toLocaleString("ru-RU"),
     r.full_name, r.email, r.phone, r.telegram ? `@${r.telegram}` : "", r.age ?? "",
-    (r.trainings ?? []).map((t) => wellnessTrainings[t] ?? t).join(", "), r.consent_ads ? "да" : "нет",
+    (r.trainings ?? []).map((t) => `${wellnessTrainings[t] ?? t}${r.trainingPlaces?.find((p) => p.training === t)?.status === "waitlisted" ? " · в очереди" : ""}`).join(", "), r.consent_ads ? "да" : "нет",
   ]);
   const csv = [head, ...lines]
     .map((l) => l.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";"))
@@ -232,7 +233,11 @@ const Admin = () => {
 
   const fetchWellnessRegs = async () => {
     const { data } = await supabase.from("wellness_registrations" as any).select("*").order("created_at", { ascending: false });
-    if (data) setWellnessRegs(data as any);
+    if (data) {
+      const { data: places, error } = await supabase.from("wellness_training_places" as any).select("registration_id,training,status,queue_position");
+      if (error) toast.error("Не удалось загрузить очередь тренировок");
+      setWellnessRegs(data.map((row: any) => ({ ...row, trainingPlaces: error ? undefined : (places ?? []).filter((place: any) => place.registration_id === row.id) })) as WellnessRegistration[]);
+    }
   };
 
   const fetchStylistRegs = async () => {
@@ -871,7 +876,7 @@ const Admin = () => {
             <div className="flex flex-wrap gap-2 mb-6">
               {Object.entries(wellnessTrainings).map(([k, label]) => (
                 <span key={k} className="text-[11px] font-body px-3 py-1 bg-cream/5 border border-cream/10 text-cream/70">
-                  {label}: {wellnessRegs.filter((r) => (r.trainings ?? []).includes(k)).length}
+                  {label}: {wellnessRegs.flatMap((r) => r.trainingPlaces ?? []).filter((p) => p.training === k && p.status === "confirmed").length} мест · {wellnessRegs.flatMap((r) => r.trainingPlaces ?? []).filter((p) => p.training === k && p.status === "waitlisted").length} в очереди
                 </span>
               ))}
               <span className="text-[11px] font-body px-3 py-1 bg-cream/5 border border-cream/10 text-cream/70">
@@ -914,7 +919,7 @@ const Admin = () => {
                           </span>
                           <p className="font-body text-sm text-cream font-medium">{r.full_name}{r.age ? `, ${r.age}` : ""}</p>
                           {(r.trainings ?? []).map((t) => (
-                            <span key={t} className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-cream/10 text-cream/60">{wellnessTrainings[t] ?? t}</span>
+                            <span key={t} className="text-[10px] uppercase tracking-wider font-body px-2 py-0.5 bg-cream/10 text-cream/60">{wellnessTrainings[t] ?? t}{r.trainingPlaces?.find((p) => p.training === t)?.status === "waitlisted" ? ` · в очереди №${r.trainingPlaces.find((p) => p.training === t)?.queue_position}` : r.trainingPlaces?.find((p) => p.training === t)?.status === "confirmed" ? " · место подтверждено" : ""}</span>
                           ))}
                         </div>
                         <p className="text-cream/40 text-xs font-body">

@@ -36,10 +36,17 @@ jobs:
       - name: Prepare production env
         run: cp deploy/.env.vps .env.production
 
+      - name: Test
+        run: npm test
+
+      - name: Typecheck
+        run: npx tsc --noEmit -p tsconfig.app.json
+
       - name: Build
         run: npm run build
 
       - name: Setup SSH
+        if: ${{ vars.DEPLOY_ENABLED == 'true' }}
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
@@ -47,6 +54,7 @@ jobs:
           ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
 
       - name: Deploy via rsync
+        if: ${{ vars.DEPLOY_ENABLED == 'true' }}
         run: |
           rsync -az --delete \
             --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
@@ -55,5 +63,5 @@ jobs:
             "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/"
 
       - name: Cleanup SSH key
-        if: always()
+        if: always() && vars.DEPLOY_ENABLED == 'true'
         run: rm -f ~/.ssh/id_ed25519

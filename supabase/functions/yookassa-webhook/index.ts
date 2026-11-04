@@ -1,3 +1,4 @@
+import { verifiedPaymentEvent } from '../_shared/yookassa-event.ts';
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { getYookassaPayment, yookassaEnabled } from "../_shared/yookassa.ts";
 import { confirmWellnessPayment } from "../_shared/wellness-payment.ts";
@@ -34,7 +35,7 @@ Deno.serve(async (req) => {
     const payload = await req.json();
     console.log("[yookassa-webhook] event:", payload.event, "id:", payload.object?.id);
 
-    let event = payload.event as string;
+    let event: string | null = null;
     let obj = payload.object;
     if (!obj?.id) {
       return new Response(JSON.stringify({ ok: false, error: "no object" }), {
@@ -49,7 +50,7 @@ Deno.serve(async (req) => {
     }
     try {
       obj = await getYookassaPayment(obj.id);
-      event = obj.status === "succeeded" ? "payment.succeeded" : obj.status === "canceled" ? "payment.canceled" : event;
+      event = verifiedPaymentEvent(obj);
     } catch (e) {
       console.error("[yookassa-webhook] verify failed:", e);
       return new Response(JSON.stringify({ ok: false }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
@@ -60,10 +61,11 @@ Deno.serve(async (req) => {
     // Велнес-девичник: отдельная ветка, заявки на билеты не трогаем
     const wellnessId = obj.metadata?.wellness_registration_id as string | undefined;
     if (wellnessId) {
-      await supabase.from("payments").upsert(
+      const { error: paymentWriteError } = await supabase.from("payments").upsert(
         { ticket_request_id: null, yookassa_payment_id: obj.id, amount: Number(obj.amount?.value ?? 0), provider: "yookassa", status: obj.status, metadata: obj },
         { onConflict: "yookassa_payment_id" },
       );
+      if (paymentWriteError) throw new Error(`payment write: ${paymentWriteError.code}`);
       if (event === "payment.succeeded") {
         const res = await confirmWellnessPayment(supabase, wellnessId, { amount: Number(obj.amount?.value ?? 0), transactionId: obj.id });
         console.log("[yookassa-webhook] wellness", wellnessId, res);
@@ -177,9 +179,9 @@ Deno.serve(async (req) => {
     });
   } catch (e) {
     console.error("[yookassa-webhook] error:", e);
-    // Return 200 to avoid YooKassa retries on parse errors; log for debugging
+    // Allow the provider to retry transient processing failures.
     return new Response(JSON.stringify({ ok: false, error: String(e) }), {
-      status: 200,
+      status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }

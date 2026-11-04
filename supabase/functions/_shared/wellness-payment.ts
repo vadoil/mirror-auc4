@@ -2,6 +2,7 @@
 import type { SupabaseClient } from 'npm:@supabase/supabase-js@2'
 import { sendTemplate, notifyOrganizers, escapeHtml } from './wellness-mailer.ts'
 import { TRAININGS } from './transactional-email-templates/wellness-event.ts'
+import { getTrainingPlaces, trainingStatusLabel } from './wellness-training.ts'
 import { sourceLabel } from './utm-labels.ts'
 
 export const WELLNESS_PRICE = 440
@@ -19,19 +20,20 @@ export async function confirmWellnessPayment(
   registrationId: string,
   payment: { amount: number; transactionId: string },
 ) {
-  if (payment.amount < WELLNESS_PRICE) {
+  if (!Number.isFinite(payment.amount) || payment.amount < WELLNESS_PRICE) {
     console.error('[wellness-payment] сумма меньше цены', registrationId, payment.amount)
     return { ok: false, reason: 'amount' }
   }
 
   // атомарно: переводим в paid только из pending — второе уведомление сюда не пройдёт
-  const { data: row } = await supabase
+  const { data: row, error: paymentError } = await supabase
     .from('wellness_registrations')
     .update({ payment_status: 'paid', paid_at: new Date().toISOString(), amount: payment.amount, transaction_id: payment.transactionId })
     .eq('id', registrationId)
     .eq('payment_status', 'pending')
     .select('id, full_name, email, phone, telegram, age, trainings, consent_ads, paid_at, utm')
     .maybeSingle()
+  if (paymentError) throw new Error(`payment update: ${paymentError.code}`)
   if (!row) return { ok: true, already: true }
 
   const { count } = await supabase
@@ -41,9 +43,10 @@ export async function confirmWellnessPayment(
     .lte('paid_at', row.paid_at)
   const position = count ?? undefined
 
+  const trainingPlaces = await getTrainingPlaces(supabase, registrationId)
   try {
     await sendTemplate('wellness-registration', row.email, {
-      name: row.full_name.split(/\s+/)[0], trainings: row.trainings, position, amount: payment.amount,
+      name: row.full_name.split(/\s+/)[0], trainings: row.trainings, trainingPlaces, position, amount: payment.amount,
     })
     await supabase.from('wellness_registrations').update({ confirmation_sent_at: new Date().toISOString() }).eq('id', row.id)
   } catch (e) {
@@ -72,10 +75,10 @@ export async function confirmWellnessPayment(
     `👤 <b>${escapeHtml(row.full_name)}</b>${row.age ? `, ${row.age}` : ''}\n` +
     `📞 ${escapeHtml(row.phone)}\n✉️ ${escapeHtml(row.email)}\n` +
     (row.telegram ? `💬 @${escapeHtml(row.telegram)}\n` : '') +
-    ((row.trainings ?? []) as string[]).map((t) => `\n🏃‍♀️ ${escapeHtml(TRAININGS[t] ?? t)}`).join('') +
+    ((row.trainings ?? []) as string[]).map((t) => `\n🏃‍♀️ ${escapeHtml(TRAININGS[t] ?? t)} · ${escapeHtml(trainingStatusLabel(trainingPlaces.find((p) => p.training === t)))}`).join('') +
     (row.consent_ads ? `\n📨 согласна на рассылку` : '') +
     `\n\n🔗 От: ${escapeHtml(sourceLabel((row.utm as { utm_source?: string } | null)?.utm_source))}` +
-    `\n💳 CloudPayments #${escapeHtml(payment.transactionId)}`,
+    `\n💳 ${/^[0-9a-f]{8}-/i.test(payment.transactionId) ? 'ЮKassa' : 'CloudPayments'} #${escapeHtml(payment.transactionId)}`,
   )
   return { ok: true, position }
 }

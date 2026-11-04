@@ -9,14 +9,8 @@ const VAT_CODE = Number(Deno.env.get('YOOKASSA_VAT_CODE') ?? '1')
 export const yookassaEnabled = () => Boolean(SHOP_ID && SECRET_KEY)
 const authHeader = () => `Basic ${btoa(`${SHOP_ID}:${SECRET_KEY}`)}`
 
-export type YookassaPayment = {
-  id: string
-  status: 'pending' | 'waiting_for_capture' | 'succeeded' | 'canceled'
-  paid: boolean
-  amount: { value: string; currency: string }
-  metadata?: Record<string, string>
-  confirmation?: { confirmation_url?: string }
-}
+import type { YookassaPayment } from './yookassa-types.ts'
+export type { YookassaPayment } from './yookassa-types.ts'
 
 export async function createYookassaPayment(p: {
   amount: number

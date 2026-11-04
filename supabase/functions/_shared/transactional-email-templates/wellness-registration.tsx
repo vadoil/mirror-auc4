@@ -1,3 +1,4 @@
+import type { TrainingPlace } from '../wellness-training.ts'
 import * as React from 'npm:react@18.3.1'
 import type { TemplateEntry } from './registry.ts'
 import { Shell, Hero, Paragraph, Ticket, Actions, ProgramTeaser, SignOff } from './wellness-shell.tsx'
@@ -5,18 +6,19 @@ import { Shell, Hero, Paragraph, Ticket, Actions, ProgramTeaser, SignOff } from 
 interface Props {
   name?: string
   trainings?: string[] | null
+  trainingPlaces?: TrainingPlace[]
   position?: number
   amount?: number
 }
 
 // Приглашение после оплаты регистрации
-const WellnessRegistrationEmail = ({ name, trainings, position, amount }: Props) => (
+const WellnessRegistrationEmail = ({ name, trainings, trainingPlaces, position, amount }: Props) => (
   <Shell preview="Вы в списке гостей велнес-девичника «Отражение» — 25 октября, Москва">
     <Hero kicker="Велнес-девичник для женщин" title={name ? `${name}, вы в списке` : 'Вы в списке'} accent="гостей «Отражения»." />
     <Paragraph>
       {'Спасибо за регистрацию! 25 октября — день, полностью посвящённый заботе о себе: лекции врачей, тренировки, уход за волосами, healthy-бар и тёплое женское комьюнити.'}
     </Paragraph>
-    <Ticket name={name} position={position} trainings={trainings} amount={amount} />
+    <Ticket name={name} position={position} trainings={trainings} trainingPlaces={trainingPlaces} amount={amount} />
     <Actions />
     <ProgramTeaser />
     <Paragraph>

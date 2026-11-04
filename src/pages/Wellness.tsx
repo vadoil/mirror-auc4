@@ -8,10 +8,14 @@ import {
   Calendar,
   Camera,
   Dumbbell,
+  GraduationCap,
   Flower2,
   HandHeart,
   Heart,
   Scissors,
+  Stethoscope,
+  Salad,
+  ShieldCheck,
   Send,
   Leaf,
   MapPin,
@@ -33,25 +37,29 @@ import Footer from "@/components/Footer";
 import WellnessRegistration from "@/components/WellnessRegistration";
 import VenueCarousel from "@/components/VenueCarousel";
 import IgristoeSignup from "@/components/IgristoeSignup";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import heroImg from "@/assets/wellness/wellness-hero.webp";
 import lectureImg from "@/assets/wellness/wellness-lecture.webp";
 import stilllifeImg from "@/assets/wellness/stilllife.webp";
 import igristoeDesktop from "@/assets/wellness/igristoe-desktop.webp";
 import igristoeMobile from "@/assets/wellness/igristoe-mobile.webp";
-import victoriaPhoto from "@/assets/wellness/people/victoria.webp";
-import annaPhoto from "@/assets/wellness/people/anna.webp";
-import margaritaPhoto from "@/assets/wellness/people/margarita.webp";
-import georgyPhoto from "@/assets/wellness/people/georgy.webp";
+import victoriaPhoto from "@/assets/wellness/people/victoria-cutout-v2.webp";
+import annaPhoto from "@/assets/wellness/people/anna-cutout-v2.webp";
+import georgyPhoto from "@/assets/wellness/people/georgy-cutout-v2.webp";
+import margaritaPhoto from "@/assets/wellness/people/margarita-cutout-v2.webp";
 import alexandraPhoto from "@/assets/wellness/people/alexandra-bw.webp";
 import gisellePhoto from "@/assets/wellness/people/giselle-bw.webp";
-import gintovPhoto from "@/assets/wellness/people/gintov.webp";
+import gintovPhoto from "@/assets/wellness/people/tatiana-cutout-v2.webp";
+import juliaPhoto from "@/assets/wellness/people/julia-fedorova.jpg";
+import anastasiaPhoto from "@/assets/wellness/people/anastasia-cutout-v2.webp";
 import nenaprasnoLogo from "@/assets/sponsors/nenaprasno.png";
 import mestoBytLogo from "@/assets/sponsors/mesto-byt.svg";
 import voluminousLogo from "@/assets/sponsors/voluminous.svg";
 import sberHealthLogo from "@/assets/brands/sberhealth.svg";
 import naturaSibericaLogo from "@/assets/brands/natura-siberica.png";
 import refeelLogo from "@/assets/brands/refeel.png";
+import fominaLogo from "@/assets/wellness/partners/klinika-fomina.svg";
+import vipavenueLogo from "@/assets/wellness/partners/vipavenue.svg";
+import voluminousPartnerLogo from "@/assets/wellness/partners/voluminous.svg";
 
 // Тексты — из презентации «Отражение_25_октября_программа_и_участники_v2».
 
@@ -66,7 +74,7 @@ const experience = [
 
 const lectures = [
   {
-    topic: "Маммология / пластическая хирургия",
+    topic: "«Я в безопасности»: рак груди, мифы и достоверная диагностика.",
     text: "Диагностика и профилактика.",
     speaker: "Виктория Мортада · маммолог, хирург-онколог",
   },
@@ -81,7 +89,6 @@ const lectures = [
     speaker: "Татьяна Гвинтовкина · врач-гастроэнтеролог, руководитель чекап-центра",
   },
 ];
-// «03 — Чек-ап» скрыт по просьбе организаторов (лекция остаётся в данных, но не выводится)
 
 // Блок «Красивые бренды» скрыт, пока не подписаны договоры с брендами. Вернуть — поставить true.
 const SHOW_BRANDS = false;
@@ -100,9 +107,13 @@ type Expert = {
   org?: string;
   text?: string;
   membership?: string[];
+  fullName?: string;
+  credentials?: string[];
   features?: { icon: typeof Heart; label: string }[];
   slogan?: string;
+  stats?: { value: string; label: string }[];
   photo: string;
+  photoStyle?: React.CSSProperties;
   badge?: string; // «Спикер» по умолчанию
 };
 
@@ -113,7 +124,13 @@ const experts: Expert[] = [
     regalia: "Онколог, пластический хирург, к. м. н.",
     org: "НМИЦ онкологии им. Н. Н. Петрова.",
     text: "Ведущий молодой врач в лечении рака груди и победитель научного конкурса Moscow Breast Meeting. Специализация — онкологическая, реконструктивная и эстетическая хирургия молочной железы.",
+    features: [
+      { icon: Ribbon, label: "Здоровье груди" },
+      { icon: Stethoscope, label: "Онкология" },
+      { icon: HandHeart, label: "Реконструктивная хирургия" },
+    ],
     photo: victoriaPhoto,
+    photoStyle: { transform: "translate(-3%, 1%) scale(1.11)", transformOrigin: "50% 0" },
   },
   {
     name: "Анна",
@@ -124,21 +141,49 @@ const experts: Expert[] = [
       "Научного общества по содействию изучения микробиома человека (НСОИМ)",
       "ESNM (European Society of Neurogastroenterology and Motility)",
     ],
+    text: "Расскажет о микробиоте и её влиянии на женское здоровье.",
+    features: [
+      { icon: Stethoscope, label: "Здоровье ЖКТ" },
+      { icon: ShieldCheck, label: "Превентивная медицина" },
+      { icon: Salad, label: "Нутрициология" },
+    ],
     photo: annaPhoto,
+    photoStyle: { transform: "translate(3%, 3.3%) scale(1.16)", transformOrigin: "50% 0" },
   },
   {
-    name: "Маргарита",
-    badge: "Тренер",
-    surname: "Дмитриева",
-    regalia: "Врач, сексолог, тренер по либидо фитнес",
-    text: "Помогает женщинам лучше понимать своё тело, восстанавливать желание и чувствовать себя уверенно и гармонично.",
+    name: "Татьяна",
+    surname: "Гвинтовкина",
+    regalia: "Врач-гастроэнтеролог, диетолог, руководитель чекап-центра",
+    org: "Клиника «Будь Здоров», чекап-центр на Сущевском Валу.",
+    text: "Диагностирует и лечит заболевания органов пищеварения. Подбирает индивидуальное питание с учётом здоровья и образа жизни, опираясь на принципы доказательной медицины.",
+    stats: [{ value: "17 лет", label: "врачебного стажа" }],
+    features: [
+      { icon: Stethoscope, label: "Диагностика ЖКТ" },
+      { icon: Salad, label: "Индивидуальное питание" },
+      { icon: ShieldCheck, label: "Доказательный подход" },
+    ],
+    photo: gintovPhoto,
+    photoStyle: { transform: "translate(1%, 2.5%) scale(1.16)", transformOrigin: "50% 0" },
+  },
+  {
+    name: "Анастасия",
+    surname: "Маркова",
+    fullName: "Маркова Анастасия Александровна",
+    regalia: "Врач акушер-гинеколог, онколог-маммолог, врач ультразвуковой диагностики и специалист по лактации",
+    credentials: [
+      "Вице-президент РАГВ",
+      "Член медицинского совета АКЕВ",
+      "Национальный эксперт ВОЗ по ИБДР",
+      "Член ELACTA (RuLacta)",
+      "Национальный эксперт и преподаватель курса ВОЗ/ЮНИСЕФ по грудному вскармливанию",
+    ],
     features: [
       { icon: Heart, label: "Женское здоровье" },
-      { icon: Flower2, label: "Осознанность и принятие" },
-      { icon: Sparkles, label: "Уверенность и энергия" },
+      { icon: Ribbon, label: "Здоровье груди" },
+      { icon: Baby, label: "Грудное вскармливание" },
     ],
-    slogan: "Забота о себе — это всегда красиво.",
-    photo: margaritaPhoto,
+    photo: anastasiaPhoto,
+    photoStyle: { transform: "translate(-7%, 2.7%) scale(1.02)", transformOrigin: "50% 0" },
   },
   {
     name: "Георгий",
@@ -153,6 +198,21 @@ const experts: Expert[] = [
     ],
     slogan: "Растяжка и здоровая спина — спокойная и счастливая ты.",
     photo: georgyPhoto,
+    photoStyle: { transform: "translate(5%, 4%) scale(1.35)", transformOrigin: "50% 0" },
+  },
+  {
+    name: "Маргарита",
+    surname: "Дмитриева",
+    badge: "Тренер",
+    regalia: "Врач-сексолог и тренер",
+    text: "Проведёт тренировку женского здоровья и тазового дна. Занятие посвящено работе с мышцами тазового дна, вниманию к собственному телу и осознанному движению.",
+    features: [
+      { icon: Heart, label: "Женское здоровье" },
+      { icon: Activity, label: "Мышцы тазового дна" },
+      { icon: Flower2, label: "Внимание к телу" },
+    ],
+    photo: margaritaPhoto,
+    photoStyle: { transform: "translate(0%, 2.8%) scale(1)", transformOrigin: "50% 0" },
   },
 ];
 
@@ -199,14 +259,14 @@ const organizers = [
   },
 ];
 
-const partners = [
-  { name: "Фонд «Не напрасно»", role: "Смысловой партнёр", logo: nenaprasnoLogo, url: "https://nenaprasno.ru/", logoClass: "h-10 md:h-12" },
-  { name: "Баланс-холл «Место быть»", role: "Площадка", logo: mestoBytLogo, url: "https://mestobe.ru/", logoClass: "h-16 md:h-20" },
-  { name: "Клиника Фомина", role: "Рекомендует врач", url: "https://fominaclinic.ru" },
+const partners: { name: string; role: string; logo?: string; url?: string; logoClass?: string; hidden?: boolean }[] = [
+  { name: "Фонд «Не напрасно»", role: "Смысловой партнёр", logo: nenaprasnoLogo, url: "https://nenaprasno.ru/" },
+  { name: "Баланс-холл «Место быть»", role: "Площадка", logo: mestoBytLogo, url: "https://mestobe.ru/" },
+  { name: "Клиника Фомина", role: "Рекомендует врач", logo: fominaLogo, url: "https://fominaclinic.ru" },
   { name: "Inspiro", role: "Велнес-площадка", url: "https://inspiro-moscow.ru" },
-  { name: "Kydralesalon", role: "Уход за волосами", url: "https://kydralesalon.ru" },
-  { name: "vipavenue", role: "Фитнес-студия", url: "https://vipavenue.ru" },
-  { name: "Voluminous", role: "Стиль и одежда", url: "https://voluminous.ru" },
+  { name: "Pompeal", role: "Партнёр" },
+  { name: "vipavenue", role: "Фитнес-студия", logo: vipavenueLogo, url: "https://vipavenue.ru" },
+  { name: "Voluminous", role: "Стиль и одежда", logo: voluminousPartnerLogo, url: "https://voluminous.ru" },
   { name: "Клиника Будь здоров!", role: "Медицинская поддержка", url: "https://bezhdorog-russia.ru" },
 ];
 
@@ -249,15 +309,42 @@ const IconCircle = ({ icon: Icon, size = "md" }: { icon: typeof Heart; size?: "s
 
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
+const ExpertFeatures = ({ e }: { e: Expert }) => (
+  <ul className="grid grid-cols-3 gap-3 border-t border-border pt-5" aria-label="Направления работы">
+    {e.features?.map(({ icon: Icon, label }) => (
+      <li key={label} className="min-w-0 flex flex-col items-center gap-2 text-center">
+        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <Icon aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.5} />
+        </span>
+        <span className="font-body text-xs leading-snug text-foreground/80">{label}</span>
+      </li>
+    ))}
+  </ul>
+);
+
+const ExpertPortrait = ({ e }: { e: Expert }) => (
+  <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-[#EAE5DC]">
+    <img src={e.photo} style={e.photoStyle} alt={`${e.name} ${e.surname}`} loading="lazy" width={1122} height={1402} className="absolute inset-0 h-full w-full object-contain object-bottom" />
+  </div>
+);
+
 const ExpertDetails = ({ e }: { e: Expert }) => (
   <>
-    <p className="font-body text-sm text-foreground mb-1">{e.regalia}</p>
-    {e.org && <p className="font-body text-sm text-foreground/80">{e.org}</p>}
-    <span className="w-8 h-px bg-primary my-4" />
+    <span className="block w-8 h-px bg-primary my-4" />
+    {e.stats && (
+      <dl className="flex flex-wrap gap-x-6 gap-y-3 mb-5">
+        {e.stats.map((stat) => (
+          <div key={stat.label} className="border-l-2 border-primary pl-3">
+            <dt className="font-body text-xs text-muted-foreground">{stat.label}</dt>
+            <dd className="font-numbers text-3xl text-primary leading-tight">{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
     {e.text && <p className="font-body text-sm text-muted-foreground leading-relaxed">{e.text}</p>}
     {e.membership && (
       <>
-        <p className="font-body text-xs font-medium text-foreground mb-2">Действующий член:</p>
+        <p className="font-body text-xs font-medium text-foreground mb-2 mt-4">Действующий член:</p>
         <ul className="space-y-1.5">
           {e.membership.map((m) => (
             <li key={m} className="flex items-start gap-2 font-body text-xs text-muted-foreground leading-snug">
@@ -268,15 +355,15 @@ const ExpertDetails = ({ e }: { e: Expert }) => (
         </ul>
       </>
     )}
-    {e.features && (
-      <div className="grid grid-cols-3 gap-2 mt-5">
-        {e.features.map((f) => (
-          <div key={f.label} className="flex flex-col items-center text-center gap-1.5">
-            <IconCircle icon={f.icon} size="sm" />
-            <span className="font-body text-[10px] leading-tight text-muted-foreground">{f.label}</span>
-          </div>
+    {e.credentials && (
+      <ul className="space-y-2 mt-4">
+        {e.credentials.map((credential) => (
+          <li key={credential} className="flex items-start gap-2 font-body text-xs text-muted-foreground leading-relaxed">
+            <span aria-hidden="true" className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0" />
+            {credential}
+          </li>
         ))}
-      </div>
+      </ul>
     )}
     {e.slogan && <p className="font-display italic text-primary text-lg leading-snug mt-auto pt-5">{e.slogan}</p>}
   </>
@@ -285,7 +372,6 @@ const ExpertDetails = ({ e }: { e: Expert }) => (
 const Wellness = () => {
   // ключ перезапускает анимацию «отражения» заголовка
   const [mirrorKey, setMirrorKey] = useState(0);
-  const [openExpert, setOpenExpert] = useState<Expert | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
@@ -307,7 +393,7 @@ const Wellness = () => {
                 animate={{ rotateY: 0, opacity: 1, filter: "blur(0px)" }}
                 transition={{ duration: 1.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 style={{ transformPerspective: 900 }}
-                className="font-display text-6xl md:text-8xl text-foreground tracking-tight leading-[0.9] origin-center"
+                className="font-display text-[clamp(2rem,9vw,3.75rem)] sm:text-6xl md:text-8xl text-foreground tracking-tight leading-[0.9] origin-center"
               >
                 Отражение
               </motion.h1>
@@ -471,7 +557,7 @@ const Wellness = () => {
             <div>
               <p className="font-body text-xs uppercase tracking-[0.3em] text-primary mb-4">Лекторий · 12:00–14:00 · выступления врачей</p>
               <div className="divide-y divide-border border-y border-border">
-                {lectures.filter((l) => l.topic !== "Чек-ап").map((l, i) => (
+                {lectures.map((l, i) => (
                   <motion.div key={l.topic} {...fadeUp} transition={{ duration: 0.5, delay: 0.06 * i }} className="flex gap-5 md:gap-8 py-6 md:py-8">
                     <span className="font-numbers text-3xl md:text-4xl text-primary leading-none w-12 shrink-0">{num(i)}</span>
                     <div>
@@ -515,75 +601,76 @@ const Wellness = () => {
             </div>
           </div>
 
+          {/* Модератор девичника */}
+          <motion.article
+            id="moderator"
+            {...fadeUp}
+            aria-labelledby="moderator-name"
+            className="grid md:grid-cols-[1fr_1.25fr] overflow-hidden rounded-2xl border border-border bg-card mb-14 md:mb-20 scroll-mt-24"
+          >
+            <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+              <div className="flex items-center gap-2 text-primary mb-5">
+                <Mic className="w-4 h-4" aria-hidden="true" />
+                <p className="font-body text-[10px] md:text-xs uppercase tracking-[0.2em]">Модератор девичника</p>
+              </div>
+              <h3 id="moderator-name" className="font-display text-4xl lg:text-5xl leading-[1.05] text-foreground mb-7">
+                Юлия<br /><span className="italic text-primary">Федорова</span>
+              </h3>
+              <ul className="space-y-4 font-body text-sm text-foreground/85 leading-relaxed">
+                <li className="flex items-start gap-3">
+                  <Stethoscope className="w-5 h-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                  <span>Врач-стоматолог</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <GraduationCap className="w-5 h-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                  <span>Соискатель учёной степени кандидата медицинских наук</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Play className="w-5 h-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                  <span>Автор YouTube-проекта о здоровье <span className="font-medium text-foreground">«ЮляПилюля»</span></span>
+                </li>
+              </ul>
+            </div>
+            <div className="relative aspect-[3/2] md:aspect-auto order-first md:order-last bg-background">
+              <img
+                src={juliaPhoto}
+                alt="Юлия Федорова — модератор велнес-девичника"
+                loading="lazy"
+                width={1280}
+                height={853}
+                className="absolute inset-0 w-full h-full object-cover object-[40%_35%]"
+              />
+            </div>
+          </motion.article>
+
           {/* Эксперты */}
           <div id="experts" className="scroll-mt-20">
             <motion.div {...fadeUp} className="mb-10">
               <SectionLabel>Спикеры и тренеры</SectionLabel>
               <TwoLineTitle first="Знакомим" second="с экспертами." />
             </motion.div>
-            <div className={`grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5 md:gap-6 ${SHOW_BRANDS ? "mb-20 md:mb-28" : ""}`}>
+            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6 ${SHOW_BRANDS ? "mb-20 md:mb-28" : ""}`}>
               {experts.map((e) => (
-                <motion.div key={e.surname} {...fadeUp}>
-                  {/* Телефон: плитка 2×2, описание — по нажатию */}
-                  <button type="button" onClick={() => setOpenExpert(e)} className="sm:hidden block w-full text-left">
-                    <span className="relative block aspect-[3/5] rounded-2xl overflow-hidden bg-muted">
-                      <img src={e.photo} alt={`${e.name} ${e.surname}`} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top" />
-                      <span className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-transparent to-transparent" />
-                      <span className="absolute left-3 right-3 bottom-3">
-                        <span className="inline-block font-body text-[9px] uppercase tracking-[0.18em] text-primary-foreground bg-primary rounded-full px-2 py-0.5 mb-1.5">{e.badge ?? "Спикер"}</span>
-                        <span className="block font-display text-2xl text-cream leading-[1]">
-                          {e.name}
-                          <br />
-                          <span className="italic text-[#FFB4AC]">{e.surname}</span>
-                        </span>
-                      </span>
-                    </span>
-                    <span className="block font-body text-xs text-foreground/80 leading-snug mt-2 line-clamp-2">{e.regalia}</span>
-                    <span className="block font-body text-[10px] uppercase tracking-[0.15em] text-primary mt-1">Подробнее →</span>
-                  </button>
-
-                  {/* Планшет и компьютер: текст слева, фото справа */}
-                  <article className="hidden sm:grid sm:grid-cols-[1.15fr_0.85fr] gap-6 h-full bg-card border border-border rounded-2xl p-7">
-                    <div className="min-w-0 flex flex-col">
-                      <span className="self-start font-body text-[10px] uppercase tracking-[0.2em] text-primary bg-primary/10 rounded-full px-3 py-1 mb-4">{e.badge ?? "Спикер"}</span>
-                      <h3 className="font-display text-3xl md:text-4xl text-foreground leading-[1] mb-3">
-                        {e.name}
-                        <br />
-                        <span className="italic text-primary">{e.surname}</span>
+                <motion.article key={e.surname} {...fadeUp} className="flex h-full flex-col rounded-2xl border border-border bg-card p-5 sm:p-7">
+                  <div className="grid grid-cols-[1.15fr_0.85fr] items-start gap-4 sm:gap-6">
+                    <div className="min-w-0 pt-1">
+                      <span className="inline-block font-body text-[10px] uppercase tracking-[0.2em] text-primary bg-primary/10 rounded-full px-3 py-1 mb-4">{e.badge ?? "Врач"}</span>
+                      <h3 className="font-display text-[clamp(1.125rem,5.8vw,1.75rem)] sm:text-4xl lg:text-3xl xl:text-4xl text-foreground leading-[1.05] mb-3">
+                        {e.name}<br /><span className="italic text-primary">{e.surname}</span>
                       </h3>
-                      <ExpertDetails e={e} />
+                      {e.fullName && <p className="font-body text-[10px] text-muted-foreground mb-2">{e.fullName}</p>}
+                      <p className="font-body text-xs sm:text-sm text-foreground leading-relaxed">{e.regalia}</p>
+                      {e.org && <p className="font-body text-xs text-muted-foreground mt-3 leading-relaxed">{e.org}</p>}
                     </div>
-                    <div className="rounded-2xl overflow-hidden bg-muted/40 min-h-[260px]">
-                      <img src={e.photo} alt={`${e.name} ${e.surname}`} loading="lazy" className="w-full h-full object-cover object-top" />
-                    </div>
-                  </article>
-                </motion.div>
+                    <ExpertPortrait e={e} />
+                  </div>
+                  <div className="flex flex-col pb-6">
+                    <ExpertDetails e={e} />
+                  </div>
+                  <div className="mt-auto"><ExpertFeatures e={e} /></div>
+                </motion.article>
               ))}
             </div>
-
-            <Dialog open={!!openExpert} onOpenChange={(o) => !o && setOpenExpert(null)}>
-              <DialogContent className="max-w-md w-[calc(100%-2rem)] max-h-[88vh] overflow-y-auto p-0 gap-0 rounded-2xl">
-                {openExpert && (
-                  <>
-                    <div className="relative">
-                      <img src={openExpert.photo} alt={`${openExpert.name} ${openExpert.surname}`} className="block w-full h-auto" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-warm-black/80 via-transparent to-transparent" />
-                      <div className="absolute left-5 bottom-5">
-                        <span className="inline-block font-body text-[10px] uppercase tracking-[0.2em] text-primary-foreground bg-primary rounded-full px-3 py-1 mb-3">{openExpert.badge ?? "Спикер"}</span>
-                        <DialogTitle className="font-display text-4xl font-normal text-cream leading-[1]">
-                          {openExpert.name}
-                          <br />
-                          <span className="italic text-[#FFB4AC]">{openExpert.surname}</span>
-                        </DialogTitle>
-                      </div>
-                    </div>
-                    <div className="flex flex-col p-5">
-                      <ExpertDetails e={openExpert} />
-                    </div>
-                  </>
-                )}
-              </DialogContent>
-            </Dialog>
           </div>
 
           {/* Бренды */}
@@ -764,8 +851,8 @@ const Wellness = () => {
       <section id="partners" className="bg-card/50 py-14 md:py-20 section-padding scroll-mt-16">
         <div className="max-w-7xl mx-auto">
           <p className="font-body text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">Вместе с нами</p>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {partners.map((pt) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {partners.filter((pt) => !pt.hidden).map((pt) => (
               <motion.a
                 key={pt.name}
                 href={pt.url}
@@ -773,16 +860,16 @@ const Wellness = () => {
                 rel="noopener noreferrer"
                 title={pt.name}
                 {...fadeUp}
-                className="group aspect-[3/2] bg-background border border-border rounded-xl flex flex-col items-center justify-center text-center p-3 md:p-5 overflow-hidden hover:border-primary/40 transition-colors"
+                className="group aspect-[4/3] bg-background border border-border rounded-xl flex flex-col items-center justify-center text-center p-3 md:p-4 overflow-hidden hover:border-primary/50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
               >
-                <div className="flex-1 w-full flex items-center justify-center">
+                <div className="relative flex-1 min-h-0 w-full flex items-center justify-center">
                   {pt.logo ? (
-                    <img src={pt.logo} alt={pt.name} loading="lazy" className={`${pt.logoClass} w-auto max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity`} />
+                    <img src={pt.logo} alt={pt.name} loading="lazy" className="absolute inset-0 w-full h-full object-contain" />
                   ) : (
                     <span className="font-display text-xl md:text-2xl text-foreground group-hover:text-primary transition-colors">{pt.name}</span>
                   )}
                 </div>
-                <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-3">{pt.role}</p>
+                <p className="shrink-0 font-body text-[10px] md:text-[11px] uppercase tracking-[0.12em] text-foreground/80 mt-3">{pt.role}</p>
               </motion.a>
             ))}
           </div>
@@ -826,7 +913,7 @@ const Wellness = () => {
                 <Send className="w-4 h-4" /> Наш Telegram-канал
               </a>
               <span>Наши проекты:</span>
-              <Link to="/home" className="hover:text-primary transition-colors">Отражение добра — отразись.рф</Link>
+              <Link to="/" className="hover:text-primary transition-colors">Отражение добра — отразись.рф</Link>
               <a href="/docs/aktkom-portfolio-2026.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 АктКом — портфолио
               </a>

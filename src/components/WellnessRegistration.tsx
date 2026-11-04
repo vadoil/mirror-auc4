@@ -54,6 +54,9 @@ const CheckRow = ({
   </label>
 );
 
+type TrainingPlace = { training: string; status: "confirmed" | "waitlisted"; queue_position: number | null };
+type TrainingAvailability = { training: string; capacity: number | null; remaining: number | null; registration_open: boolean };
+
 const WellnessRegistration = () => {
   const [form, setForm] = useState({ full_name: "", telegram: "", email: "", age: "", phone: "", website: "" });
   const [trainings, setTrainings] = useState<string[]>([]);
@@ -63,10 +66,26 @@ const WellnessRegistration = () => {
   const [consentAds, setConsentAds] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ position?: number; duplicate?: boolean } | null>(null);
+  const [result, setResult] = useState<{ position?: number; duplicate?: boolean; trainingPlaces?: TrainingPlace[] } | null>(null);
   // регистрация создана, но оплата ещё не подтверждена
   const [pendingId, setPendingId] = useState<string | null>(null);
   const [stage, setStage] = useState<"form" | "paying" | "checking" | "unpaid">("form");
+
+  const [availability, setAvailability] = useState<TrainingAvailability[] | null>(null);
+  const refreshAvailability = async () => {
+    try {
+      const { ok, data } = await callApi({ action: "availability" });
+      if (ok) {
+        setAvailability(data.trainings);
+        setTrainings((current) => current.filter((id) => data.trainings.some((t: TrainingAvailability) => t.training === id && t.registration_open)));
+      }
+    } catch { /* Do not promise a place when availability cannot be fetched. */ }
+  };
+  useEffect(() => {
+    refreshAvailability();
+    const timer = window.setInterval(refreshAvailability, 30000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -87,8 +106,8 @@ const WellnessRegistration = () => {
     setStage("checking");
     for (let i = 0; i < 10; i++) {
       const { ok, data } = await callApi({ action: "status", id }).catch(() => ({ ok: false, data: {} as any }));
-      if (ok && data.status !== "pending") {
-        setResult({ position: data.position });
+      if (ok && ["paid", "free"].includes(data.status)) {
+        setResult({ position: data.position, trainingPlaces: data.trainingPlaces });
         return;
       }
       await sleep(2000);
@@ -232,6 +251,16 @@ const WellnessRegistration = () => {
             </p>
           </>
         )}
+        {!!result.trainingPlaces?.length && (
+          <ul className="mt-6 space-y-2 font-body text-sm" aria-label="Запись на тренировки">
+            {result.trainingPlaces.map((p) => (
+              <li key={p.training} className="flex justify-center items-center gap-2">
+                <Check className="w-4 h-4 text-primary" aria-hidden="true" />
+                {TRAININGS.find((t) => t.id === p.training)?.title}: {p.status === "waitlisted" ? `вы в очереди · №${p.queue_position}. Мы с вами свяжемся, если освободится место.` : "место за вами"}
+              </li>
+            ))}
+          </ul>
+        )}
         <a
           href="https://t.me/Uz1ZL3pNLszM2My"
           target="_blank"
@@ -250,25 +279,31 @@ const WellnessRegistration = () => {
       <input type="text" name="website" value={form.website} onChange={set("website")} tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
 
       <div className="grid sm:grid-cols-2 gap-4 mb-4">
-        <input className={`${inputCls} sm:col-span-2`} placeholder="Имя и фамилия*" required maxLength={120} autoComplete="name" value={form.full_name} onChange={set("full_name")} />
-        <input className={inputCls} type="email" placeholder="Почта*" required maxLength={200} autoComplete="email" value={form.email} onChange={set("email")} />
-        <input className={inputCls} type="tel" placeholder="Телефон*" required maxLength={32} autoComplete="tel" value={form.phone} onChange={set("phone")} />
-        <input className={inputCls} placeholder="Ник в Telegram" maxLength={64} value={form.telegram} onChange={set("telegram")} />
-        <input className={inputCls} type="number" inputMode="numeric" min={14} max={100} placeholder="Возраст" value={form.age} onChange={set("age")} />
+        <input className={`${inputCls} sm:col-span-2`} aria-label="Имя и фамилия" placeholder="Имя и фамилия*" required maxLength={120} autoComplete="name" value={form.full_name} onChange={set("full_name")} />
+        <input className={inputCls} type="email" aria-label="Почта" placeholder="Почта*" required maxLength={200} autoComplete="email" value={form.email} onChange={set("email")} />
+        <input className={inputCls} type="tel" aria-label="Телефон" placeholder="Телефон*" required maxLength={32} autoComplete="tel" value={form.phone} onChange={set("phone")} />
+        <input className={inputCls} aria-label="Ник в Telegram" placeholder="Ник в Telegram" maxLength={64} value={form.telegram} onChange={set("telegram")} />
+        <input className={inputCls} type="number" aria-label="Возраст" inputMode="numeric" min={14} max={100} placeholder="Возраст" value={form.age} onChange={set("age")} />
       </div>
 
       <p className="font-body text-xs uppercase tracking-[0.2em] text-primary mt-8 mb-4">Я иду на тренировки</p>
       <div className="grid sm:grid-cols-2 gap-3 mb-3">
         {TRAININGS.map((t, i) => {
-          const active = trainings.includes(t.id);
+          const status = availability?.find((a) => a.training === t.id);
+          const closed = status?.registration_open === false;
+          const disabled = status?.registration_open !== true;
+          const active = !disabled && trainings.includes(t.id);
+          const full = availability?.find((a) => a.training === t.id)?.remaining === 0;
           return (
             <button
               type="button"
               key={t.id}
               onClick={() => toggleTraining(t.id)}
+              disabled={disabled}
               aria-pressed={active}
-              className={`text-left rounded-lg border p-4 transition-all ${
-                active ? "border-primary bg-primary/10" : "border-border bg-background hover:border-primary/40"
+              aria-describedby={`training-status-${t.id}`}
+              className={`text-left rounded-lg border p-4 transition-all disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                disabled ? "border-border bg-muted/30" : active ? "border-primary bg-primary/10" : "border-border bg-background hover:border-primary/40"
               }`}
             >
               <div className="flex items-center justify-between mb-2">
@@ -283,11 +318,16 @@ const WellnessRegistration = () => {
               </div>
               <p className="font-display text-lg text-foreground leading-tight">{t.title}</p>
               <p className="font-body text-xs text-muted-foreground">{t.coach}</p>
+              <p id={`training-status-${t.id}`} className="font-body text-xs text-primary mt-2" aria-live="polite">
+                {disabled ? (closed ? "Запись приостановлена" : "Проверяем статус записи…") : full ? (active ? "✓ Выбран лист ожидания" : "Записаться в лист ожидания") : active ? "✓ Выбрано" : availability?.find((a) => a.training === t.id)?.remaining != null ? `Осталось мест: ${availability.find((a) => a.training === t.id)?.remaining}` : ""}
+              </p>
             </button>
           );
         })}
       </div>
-      <p className="font-body text-xs text-muted-foreground/70 mb-8">Можно выбрать одну или обе — или ни одной. Нажмите ещё раз, чтобы снять выбор.</p>
+      <p className="font-body text-xs text-muted-foreground/70 mb-8">{availability?.length && availability.every((t) => !t.registration_open)
+        ? "Запись на обе тренировки и в лист ожидания приостановлена. Уже оформленные заявки сохранены. Регистрация на девичник открыта."
+        : "Можно выбрать одну или обе тренировки. Если мест нет, после оплаты добавим вас в лист ожидания и свяжемся, когда место освободится. А на девичнике и без тренировок — много интересного!"}</p>
 
       <div className="space-y-3 mb-8">
         <CheckRow checked={consentPd} onChange={setConsentPd}>
@@ -303,11 +343,11 @@ const WellnessRegistration = () => {
       </div>
 
       <p className="font-body text-xs text-muted-foreground/80 mb-6">
-        Участие — {WELLNESS_PRICE} ₽. После анкеты откроется защищённая форма оплаты CloudPayments, данные карты
+        Участие — {WELLNESS_PRICE} ₽. После анкеты откроется защищённая форма оплаты, данные карты
         не хранятся на сайте. Средства будут направлены в поддержку фонда «Не напрасно».
       </p>
 
-      {error && <p className="font-body text-sm text-destructive mb-4">{error}</p>}
+      {error && <p role="alert" className="font-body text-sm text-destructive mb-4">{error}</p>}
 
       <button
         type="submit"

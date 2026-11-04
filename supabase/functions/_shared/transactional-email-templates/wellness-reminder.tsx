@@ -1,3 +1,4 @@
+import type { TrainingPlace } from '../wellness-training.ts'
 import * as React from 'npm:react@18.3.1'
 import type { TemplateEntry } from './registry.ts'
 import { Shell, Hero, Paragraph, Ticket, Actions, ProgramTeaser, SignOff } from './wellness-shell.tsx'
@@ -5,10 +6,11 @@ import { Shell, Hero, Paragraph, Ticket, Actions, ProgramTeaser, SignOff } from 
 interface Props {
   name?: string
   trainings?: string[] | null
+  trainingPlaces?: TrainingPlace[]
   kind?: 'week' | 'day'
 }
 
-const WellnessReminderEmail = ({ name, trainings, kind = 'week' }: Props) => {
+const WellnessReminderEmail = ({ name, trainings, trainingPlaces, kind = 'week' }: Props) => {
   const isDay = kind === 'day'
   return (
     <Shell preview={isDay ? 'Завтра — велнес-девичник «Отражение»' : 'Через неделю — велнес-девичник «Отражение»'}>
@@ -22,7 +24,7 @@ const WellnessReminderEmail = ({ name, trainings, kind = 'week' }: Props) => {
           ? 'Завтра велнес-девичник «Отражение». Возьмите удобную одежду, если записались на тренировку, и приходите чуть заранее — так вы успеете всё посмотреть.'
           : 'Напоминаем: 25 октября велнес-девичник «Отражение» — лекции врачей, тренировки и уход за волосами. Сохраните дату в календаре.'}
       </Paragraph>
-      <Ticket name={name} trainings={trainings} />
+      <Ticket name={name} trainings={trainings} trainingPlaces={trainingPlaces} />
       <Actions />
       {!isDay && <ProgramTeaser />}
       <SignOff>{isDay ? 'До встречи завтра!' : 'Скоро увидимся!'}</SignOff>

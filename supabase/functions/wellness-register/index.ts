@@ -5,6 +5,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { TRAININGS } from '../_shared/transactional-email-templates/wellness-event.ts'
 import { WELLNESS_PRICE } from '../_shared/wellness-payment.ts'
+import { getTrainingPlaces } from '../_shared/wellness-training.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -25,14 +26,25 @@ Deno.serve(async (req) => {
   const body = await req.json().catch(() => ({} as Record<string, unknown>))
   const supabase = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
 
+  if (body.action === 'availability') {
+    const { data, error } = await supabase.rpc('wellness_training_availability')
+    if (error) return json({ error: 'Не удалось проверить места' }, 503)
+    const { data: limits, error: limitsError } = await supabase.from('wellness_training_limits').select('training, registration_open')
+    if (limitsError) return json({ error: 'Не удалось проверить запись на тренировки' }, 503)
+    return json({ ok: true, trainings: data.map((t: { training: string }) => ({
+      ...t, registration_open: limits?.find((l) => l.training === t.training)?.registration_open === true,
+    })) })
+  }
+
   if (body.action === 'status') {
     const id = str(body.id, 36)
     if (!UUID_RE.test(id)) return json({ error: 'bad id' }, 400)
-    const { data: row } = await supabase
+    const { data: row, error: statusError } = await supabase
       .from('wellness_registrations')
       .select('payment_status, paid_at')
       .eq('id', id)
       .maybeSingle()
+    if (statusError) return json({ error: 'Не удалось проверить оплату' }, 503)
     if (!row) return json({ error: 'not found' }, 404)
     let position: number | undefined
     if (row.payment_status === 'paid') {
@@ -43,7 +55,10 @@ Deno.serve(async (req) => {
         .lte('paid_at', row.paid_at)
       position = count ?? undefined
     }
-    return json({ ok: true, status: row.payment_status, position })
+    try {
+      const trainingPlaces = await getTrainingPlaces(supabase, id)
+      return json({ ok: true, status: row.payment_status, position, trainingPlaces })
+    } catch { return json({ error: 'Не удалось проверить запись на тренировки' }, 503) }
   }
 
   // Ловушка для ботов: скрытое поле, человек его не заполняет
@@ -58,6 +73,15 @@ Deno.serve(async (req) => {
   // можно выбрать несколько тренировок; старый формат с одним полем training тоже принимаем
   const rawTrainings = Array.isArray(body.trainings) ? body.trainings : body.training ? [body.training] : []
   const trainings = [...new Set(rawTrainings.filter((t: unknown): t is string => typeof t === 'string' && !!TRAININGS[t]))]
+  // Pausing new training selections does not change existing places or payment status.
+  if (trainings.length) {
+    const { data: limits, error: limitsError } = await supabase.from('wellness_training_limits')
+      .select('training, registration_open').in('training', trainings)
+    if (limitsError) return json({ error: 'Не удалось проверить запись на тренировки. Попробуйте позже.' }, 503)
+    if (trainings.some((t) => !limits?.some((l) => l.training === t && l.registration_open === true))) {
+      return json({ error: 'Запись на тренировки приостановлена. Можно зарегистрироваться на девичник без тренировок.', code: 'TRAINING_REGISTRATION_PAUSED' }, 409)
+    }
+  }
   const consent_pd = body.consent_pd === true
   const consent_ads = body.consent_ads === true
 

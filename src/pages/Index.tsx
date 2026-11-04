@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-// import HeroSection from "@/components/HeroSection"; // скрыт временно — сверху баннер девичника
+import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 
 import ProjectStorySection from "@/components/ProjectStorySection";
@@ -14,7 +14,6 @@ import ForumBannerSection from "@/components/ForumBannerSection";
 import OrganizersSection from "@/components/OrganizersSection";
 
 import SponsorsSection from "@/components/SponsorsSection";
-import WellnessTeaserBanner from "@/components/WellnessTeaserBanner";
 import SpbAuctionBanner from "@/components/SpbAuctionBanner";
 import DressCodeSection from "@/components/DressCodeSection";
 import ForumBannerFooter from "@/components/ForumBannerFooter";
@@ -25,8 +24,7 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full relative">
       <Header />
-      {/* Hero скрыт временно: сверху — баннер девичника */}
-      <WellnessTeaserBanner />
+      <HeroSection />
       <div className="relative z-10">
         <AboutSection />
         <SpbAuctionBanner />

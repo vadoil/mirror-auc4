@@ -1,3 +1,4 @@
+import { trainingStatusLabel, type TrainingPlace } from '../wellness-training.ts'
 /// <reference types="npm:@types/react@18.3.1" />
 // Оформление писем велнес-девичника: тёплый молочный фон, красный акцент, курсив с засечками —
 // как на странице /wellness и в презентации. Вёрстка таблицами и inline-стилями (почтовые клиенты).
@@ -113,14 +114,14 @@ export const Paragraph = ({ children }: { children: React.ReactNode }) => (
 )
 
 /** «Билет»: перфорация пунктиром, номер гостьи, детали */
-export const Ticket = ({ name, position, trainings, amount }: { name?: string; position?: number; trainings?: string[] | null; amount?: number }) => {
+export const Ticket = ({ name, position, trainings, trainingPlaces, amount }: { name?: string; position?: number; trainings?: string[] | null; trainingPlaces?: TrainingPlace[]; amount?: number }) => {
   const rows: [string, string][] = [
     ['Дата', WELLNESS_EVENT.timeLabel ? `${WELLNESS_EVENT.dateLabel}, ${WELLNESS_EVENT.timeLabel}` : WELLNESS_EVENT.dateLabel],
     ['Расписание', WELLNESS_EVENT.schedule],
     ['Место', WELLNESS_EVENT.place],
     ['Адрес', WELLNESS_EVENT.address],
   ]
-  const picked = (trainings ?? []).filter((t) => TRAININGS[t]).map((t) => TRAININGS[t])
+  const picked = (trainings ?? []).filter((t) => TRAININGS[t]).map((t) => `${TRAININGS[t]} · ${trainingStatusLabel(trainingPlaces?.find((p) => p.training === t))}`)
   if (picked.length) rows.push([picked.length > 1 ? 'Тренировки' : 'Тренировка', picked.join(', ')])
   if (amount) rows.push(['Оплачено', `${amount} ₽`])
   return (
