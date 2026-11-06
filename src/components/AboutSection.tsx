@@ -49,7 +49,7 @@ const AboutSection = () => {
                   и разговорами, которые не хочется заканчивать. Новое «Отражение добра» пройдёт в Телеграфе.
                 </p>
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
-                  У дверей вас встретят дама или кавалер и проводят в зал. Вас ждут музыка, вечерние туалеты, фуршет и шампанское, а затем —
+                  Вас ждут распорядитель бала, танцевальные ассистенты, живая музыка и фуршет, а затем —
                   благотворительные торги современным искусством, которые проведут Александр Цыпкин и Юрий Омельченко.
                 </p>
                 <p className="editorial-body text-muted-foreground mb-8 max-w-lg">
@@ -77,7 +77,7 @@ const AboutSection = () => {
                       <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-2">Телеграф</p>
                       <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-5">Почтамтская, 15</p>
                       <div className="w-12 h-px bg-primary mx-auto mb-4" />
-                      <p className="font-body text-cream text-sm max-w-xs mx-auto mb-5">Благотворительный вечер «Отражение добра»</p>
+                      <p className="font-body text-cream text-sm max-w-xs mx-auto mb-5">Предновогодний бал «Отражение добра»</p>
                       <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-cream border border-cream/30 px-4 py-2 group-hover:border-primary group-hover:text-primary transition-colors">
                         Подробнее о вечере
                       </span>

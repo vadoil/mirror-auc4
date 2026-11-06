@@ -11,7 +11,7 @@ const navItems = [
   { label: "Архив", href: "/archive" },
   { label: "Лоты", href: "/peterburg#catalog" },
   { label: "Галерея", href: "/gallery" },
-  { label: "Приглашение", href: "/#contacts" },
+  { label: "Билеты", href: "/peterburg#tickets" },
   { label: "Партнёры", href: "/peterburg#partners" },
   { label: "Контакты", href: "/#contacts" },
 ];

@@ -59,11 +59,11 @@ const HeroSection = () => {
                   11 декабря 2026 · Санкт-Петербург
                 </p>
                 <div className="font-display text-2xl sm:text-3xl md:text-4xl text-cream font-light leading-tight">
-                  Благотворительный<br />
-                  <span className="italic text-primary">аукцион</span>
+                  Предновогодний<br />
+                  <span className="italic text-primary">бал и аукцион</span>
                 </div>
                 <p className="font-body text-cream/60 text-sm md:text-base mt-3 max-w-sm lg:ml-auto">
-                  Вечер в Телеграфе в поддержку фонда «Не напрасно» и Высшей школы онкологии
+                  Предновогодний бал в Телеграфе в поддержку фонда «Не напрасно» и Высшей школы онкологии
                 </p>
               </div>
 

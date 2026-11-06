@@ -198,7 +198,9 @@ const TicketRequestModal = ({ isOpen, onClose, ticketType, ticketPrice }: Ticket
               </button>
             </div>
 
-            {freeSuccess ? (
+            {ticketPrice ? (
+              <div className="text-cream space-y-5"><p>Билеты на предновогодний бал 11 декабря: на одного — 35 000 ₽, «1+1» — 50 000 ₽.</p><a href="/peterburg#tickets" className="btn-primary block text-center">Выбрать билет</a></div>
+            ) : freeSuccess ? (
               <div className="text-center py-4">
                 <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center">
                   <Check className="text-primary" size={24} />

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Crown, Gavel, GlassWater, Heart, Mic, Music, Phone, Send, Sparkles } from "lucide-react";
+import BallTickets from "@/components/BallTickets";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { AuctionHero, AuctionEducation, AuctionPartners, AuctionTeam } from "@/components/AuctionDecemberSections";
@@ -17,8 +18,8 @@ import vintageReference from "@/assets/spb2911/vintage-dream-reference.jpg";
 
 const program = [
   { icon: GlassWater, title: "Фуршет", text: "Встреча гостей и общение в Телеграфе." },
-  { icon: Music, title: "Живая музыка", text: "Музыкальная программа благотворительного вечера." },
-  { icon: Mic, title: "Артисты", text: "Выступления артистов и праздничная атмосфера." },
+  { icon: Music, title: "Живая музыка", text: "Музыка для танцев и атмосфера предновогоднего бала." },
+  { icon: Mic, title: "Распорядитель бала", text: "Распорядитель бала и танцевальные ассистенты помогут освоиться на паркете." },
   { icon: Gavel, title: "Аукцион", text: "Современное искусство и авторские изделия. Лоты, которые становятся помощью." },
 ];
 
@@ -90,13 +91,14 @@ const LotCard = ({ lot, i, square = false }: { lot: Lot; i: number; square?: boo
 );
 
 const Spb2911 = () => {
-  const open = () => window.location.assign("https://t.me/jiselle_tolts");
+  const open = () => document.getElementById("tickets")?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <div className="auction-page min-h-screen bg-background">
       <Header />
 
       <AuctionHero />
+      <BallTickets />
       <AuctionEducation />
 
       {/* Как пройдёт вечер */}
@@ -214,7 +216,7 @@ const Spb2911 = () => {
               onClick={open}
               className="bg-background text-foreground px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.18em] hover:opacity-90 transition-opacity"
             >
-              Получить приглашение <ArrowRight className="w-4 h-4" />
+              Купить билет <ArrowRight className="w-4 h-4" />
             </button>
             <a href="https://t.me/jiselle_tolts" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-body text-sm text-primary-foreground/85 hover:text-primary-foreground">
               <Send className="w-4 h-4" /> Гизела Тольц · @jiselle_tolts

@@ -15,14 +15,15 @@ export function AuctionHero() {
           <img src={`${base}kommersant.png`} alt="Коммерсантъ" className="w-32 sm:w-44 h-auto" />
         </div>
         <p className="font-body text-sm text-muted-foreground mb-6">Проект «Отражение добра» и «Коммерсант» представляют</p>
-        <h1 className="font-display text-[clamp(1.4rem,6.5vw,2.2rem)] lg:text-[clamp(2rem,3.1vw,3rem)] leading-[1.05] mb-6">Благотворительный вечер</h1>
+        <h1 className="font-display text-[clamp(1.4rem,6.5vw,2.2rem)] lg:text-[clamp(2rem,3.1vw,3rem)] leading-[1.05] mb-6">Предновогодний благотворительный бал</h1>
         <div className="w-16 h-px bg-primary mb-6" />
         <p className="font-body text-lg max-w-md mb-8">В поддержку фонда «Не напрасно» и Высшей школы онкологии</p>
+        <p className="font-body text-muted-foreground mb-6">Распорядитель бала, танцевальные ассистенты и живая музыка.</p>
         <p className="font-numbers text-5xl md:text-6xl text-primary mb-3">11.12.2026</p>
         <p className="font-display text-2xl mb-2">Санкт-Петербург</p>
         <p className="font-body text-muted-foreground flex gap-2 items-start"><MapPin size={19} className="shrink-0 mt-0.5" /> Телеграф · Почтамтская улица, 15</p>
         <div className="flex flex-wrap gap-3 mt-8">
-          <a href={contact} className="btn-primary text-center">Получить приглашение</a>
+          <a href="#tickets" className="btn-primary text-center">Купить билет</a>
           <a href={`${base}guests.pdf`} target="_blank" rel="noopener noreferrer" className="border border-primary px-6 py-4 font-body text-sm hover:bg-primary/5">Буклет вечера · PDF</a>
         </div>
       </div>
@@ -32,7 +33,7 @@ export function AuctionHero() {
         <div className="relative bg-background border border-primary/20 p-5 mt-3 rounded-xl md:-mt-3 md:rounded-none">
           <p className="font-body text-primary text-sm pb-4 border-b border-primary/20">Ведущий вечера — Александр Цыпкин</p>
           <div className="grid grid-cols-2 gap-4 pt-4">
-            {[{Icon: GlassWater, label: "Фуршет"}, {Icon: Music, label: "Живая музыка"}, {Icon: Mic, label: "Артисты"}, {Icon: Gavel, label: "Благотворительный аукцион"}].map(({Icon,label}) => <div key={label} className="flex items-center gap-3 text-xs sm:text-sm font-body"><Icon className="text-primary shrink-0" size={26} /><span>{label}</span></div>)}
+            {[{Icon: GlassWater, label: "Фуршет"}, {Icon: Music, label: "Живая музыка"}, {Icon: Mic, label: "Распорядитель бала"}, {Icon: Gavel, label: "Благотворительный аукцион"}].map(({Icon,label}) => <div key={label} className="flex items-center gap-3 text-xs sm:text-sm font-body"><Icon className="text-primary shrink-0" size={26} /><span>{label}</span></div>)}
           </div>
         </div>
       </div>
@@ -66,8 +67,8 @@ export function AuctionEducation() {
 
 export function AuctionPartners() {
   return <section id="partners" className="section-padding py-16 md:py-24 bg-primary/5 scroll-mt-20"><div className="max-w-7xl mx-auto">
-    <h2 className="font-display text-4xl md:text-5xl max-w-3xl mb-6">Приглашаем вас стать партнёром благотворительного вечера</h2>
-    <p className="font-body text-muted-foreground max-w-2xl mb-10">Спонсорское финансирование — на организацию вечера и благотворительного аукциона 11 декабря в Санкт-Петербурге.</p>
+    <h2 className="font-display text-4xl md:text-5xl max-w-3xl mb-6">Приглашаем вас стать партнёром предновогоднего бала</h2>
+    <p className="font-body text-muted-foreground max-w-2xl mb-10">Спонсорское финансирование — на организацию предновогоднего бала и благотворительного аукциона 11 декабря в Санкт-Петербурге.</p>
     <div className="grid md:grid-cols-3 gap-8 border-y border-primary/20 py-8 mb-8">{[['Генеральный спонсор','1 700 000 ₽'],['Спонсор программы','350 000 ₽'],['Партнёр','150 000 ₽']].map(([label,value])=><div key={label}><p className="font-body text-sm mb-4">{label}</p><p className="font-numbers text-4xl text-primary">{value}</p></div>)}</div>
     <div className="flex flex-wrap gap-5 items-center"><a href={contact} className="btn-primary">Стать партнёром вечера</a><a href={`${base}partners.pdf`} target="_blank" rel="noopener noreferrer" className="font-body underline underline-offset-4">Предложение партнёрам · PDF</a></div>
   </div></section>;

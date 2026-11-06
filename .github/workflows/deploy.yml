@@ -39,6 +39,14 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: PHP payment checks
+        run: |
+          php -l public/api/ball.php
+          php -l public/api/ball-lib.php
+          php -l public/api/ball-admin.php
+          php -l public/setup-ball.php
+          php tests/ball/payments.php
+
       - name: Typecheck
         run: npx tsc --noEmit -p tsconfig.app.json
 

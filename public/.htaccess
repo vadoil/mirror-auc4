@@ -1,5 +1,7 @@
 DirectoryIndex index.html
 RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.xn--80aodvkjc9f\.xn--p1ai$ [NC]
+RewriteRule ^ https://xn--80aodvkjc9f.xn--p1ai%{REQUEST_URI} [R=301,L]
 RewriteRule ^(?:api|functions|rest|auth|storage)(?:/|$) - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
