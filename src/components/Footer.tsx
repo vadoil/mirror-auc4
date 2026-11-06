@@ -21,7 +21,7 @@ const Footer = () => {
                 добрые дела <span className="italic text-primary">остаются</span>
               </h3>
               <p className="font-body text-sm text-cream/40">
-                Благотворительный вечер 13 августа 2026 · Санкт-Петербург · Центр «Зрение» · состоялся
+                11 декабря 2026 · Санкт-Петербург · Телеграф, Почтамтская улица, 15
               </p>
             </div>
           </div>
@@ -38,18 +38,18 @@ const Footer = () => {
             <div>
               <p className="font-display text-lg text-cream/50 tracking-[0.15em] uppercase mb-4">Отражение добра</p>
               <p className="font-body text-xs text-cream/30 leading-relaxed">
-                Благотворительное событие. Деньги, вырученные с продажи билетов и лотов, направляются в поддержку фонда «Не напрасно».
+                Благотворительное событие. Собранные на аукционе средства помогут пройти обучение в Высшей школе онкологии фонда «Не напрасно».
               </p>
             </div>
             <div>
               <p className="font-body text-xs text-cream/50 uppercase tracking-[0.2em] mb-4">Навигация</p>
               <div className="space-y-2">
                 <Link to="/about" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">О проекте</Link>
-                <Link to="/wellness" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Девичник 25 октября</Link>
+                <Link to="/peterburg" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Аукцион 11 декабря</Link>
                 <Link to="/" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Главная</Link>
-                <Link to="/lots" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Каталог лотов</Link>
+                <Link to="/peterburg#catalog" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Каталог лотов</Link>
                 <Link to="/how-it-works" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Как участвовать</Link>
-                <Link to="/venue" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Место проведения</Link>
+                <Link to="/peterburg#venue" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Место проведения</Link>
                 <Link to="/auth" className="block font-body text-xs text-cream/30 hover:text-cream/60 transition-colors">Вход / Регистрация</Link>
               </div>
             </div>
@@ -117,7 +117,7 @@ const Footer = () => {
                 Благотворительный фонд «Не напрасно» · ИНН 7839018474 · ОГРН 1107800001870
               </p>
               <p className="font-body text-[10px]">
-                Выручка от билетов и лотов направляется в фонд «Не напрасно».
+                В поддержку фонда «Не напрасно» и Высшей школы онкологии.
               </p>
             </div>
           </div>

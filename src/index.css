@@ -132,3 +132,16 @@
     text-wrap: balance;
   }
 }
+
+/* Auction brochure typography is bundled so hosting needs no external font service. */
+@font-face { font-family: AuctionDisplay; src: url('/auction-december/fonts/MontserratAlternates-Light.ttf') format('truetype'); font-weight: 300; font-display: swap; }
+@font-face { font-family: AuctionDisplay; src: url('/auction-december/fonts/MontserratAlternates-Regular.ttf') format('truetype'); font-weight: 400 900; font-display: swap; }
+@font-face { font-family: AuctionBody; src: url('/auction-december/fonts/Inter-Regular.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: AuctionNumbers; src: url('/auction-december/fonts/Urbanist-Medium.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+.auction-page .font-display { font-family: AuctionDisplay, sans-serif; font-weight: 300; }
+.auction-page .font-body { font-family: AuctionBody, sans-serif; }
+.auction-page .font-numbers { font-family: AuctionNumbers, sans-serif; }
+.auction-page h1, .auction-page h2, .auction-page h3 { overflow-wrap: anywhere; }
+.auction-page .grid > * { min-width: 0; }
+@media (max-width: 480px) { .auction-page h2 { font-size: 1.8rem; } }
+@media (prefers-reduced-motion: reduce) { .auction-page * { scroll-behavior: auto !important; } }

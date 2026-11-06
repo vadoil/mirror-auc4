@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Calendar, Mic, ArrowRight } from "lucide-react";
-import heroImg from "@/assets/spb2911/mansion-auction-banner-v3.webp";
+const heroImg = "/auction-december/telegraph.png";
 
 const SpbAuctionBanner = () => {
   return (
@@ -13,7 +13,7 @@ const SpbAuctionBanner = () => {
           <div className="relative w-full aspect-video md:aspect-auto md:absolute md:inset-0">
             <img
               src={heroImg}
-              alt="Атмосфера вечера: парадная лестница особняка, картины, фарфоровые вазы, часы и ювелирные украшения"
+              alt="Телеграф, Почтамтская улица, 15"
               width={1672}
               height={941}
               loading="lazy"
@@ -33,20 +33,20 @@ const SpbAuctionBanner = () => {
                   transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                   className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-cream font-body font-medium"
                 >
-                  Благотворительный вечер · 29 ноября · исторический особняк</motion.p>
+                  Благотворительный вечер · 11 декабря · Телеграф</motion.p>
               </div>
               <h3 className="font-display text-4xl md:text-7xl text-cream uppercase tracking-tight leading-[1.05] mb-4">
                 «Отражение добра» <span className="italic text-primary">в Петербурге</span>
               </h3>
               <div className="flex flex-wrap gap-x-6 gap-y-2 font-body text-sm text-cream/80">
                 <span className="inline-flex items-center gap-2">
-                  <Calendar className="w-3.5 h-3.5 text-primary" /> 29 ноября 2026, воскресенье
+                  <Calendar className="w-3.5 h-3.5 text-primary" /> 11 декабря 2026, пятница
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Mic className="w-3.5 h-3.5 text-primary" /> Благотворительное событие ведут Александр Цыпкин и Юрий Омельченко
                 </span>
               </div>
-              <p className="mt-4 font-body text-[10px] tracking-wide text-cream/60">Образ вечера · Полный каталог лотов — 1 ноября</p>
+              <p className="mt-4 font-body text-[10px] tracking-wide text-cream/60">Телеграф · Почтамтская улица, 15</p>
             </div>
             <span className="inline-flex items-center gap-2 self-start md:self-auto shrink-0 bg-primary text-primary-foreground px-5 py-3 rounded text-xs uppercase tracking-[0.2em] group-hover:opacity-90 transition-opacity">
               Подробнее о вечере <ArrowRight className="w-4 h-4" />

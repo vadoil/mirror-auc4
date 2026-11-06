@@ -1,32 +1,25 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Home } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import TicketRequestModal from "./TicketRequestModal";
 import logoOtrazhenie from "@/assets/logo-otrazhenie-final.png";
 import logoOtrazhenieLight from "@/assets/logo-otrazhenie-light.png";
 
 const navItems = [
-  { label: "Велнес-девичник", href: "/wellness" },
-  { label: "Петербург 29.11", href: "/peterburg" },
+  { label: "Петербург 11.12", href: "/peterburg" },
   { label: "Архив", href: "/archive" },
-  { label: "Лоты", href: "/lots" },
-  { label: "Форум", href: "/forum" },
+  { label: "Лоты", href: "/peterburg#catalog" },
   { label: "Галерея", href: "/gallery" },
-  { label: "Как участвовать", href: "/how-it-works" },
-  { label: "Партнёры", href: "/#sponsors" },
+  { label: "Приглашение", href: "/#contacts" },
+  { label: "Партнёры", href: "/#partners" },
   { label: "Контакты", href: "/#contacts" },
 ];
 
 const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [ticketModal, setTicketModal] = useState(false);
   const { user, isAdmin, signOut } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate();
-  const isHome = location.pathname === "/";
 
   const handleAnchorClick = (e: React.MouseEvent, href: string) => {
     if (!href.includes("#")) return;
@@ -42,12 +35,6 @@ const Header = () => {
       setMenuOpen(false);
     }
   };
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
 
   // Keep the light header used on the latest published version.
   const useDarkText = true;
@@ -93,7 +80,7 @@ const Header = () => {
               О проекте
             </Link>
             {navItems.map((item) => {
-              const highlight = item.href === "/wellness";
+              const highlight = item.href === "/peterburg";
               return (
                 <Link
                   key={item.href}
@@ -114,7 +101,7 @@ const Header = () => {
               </Link>
             )}
             <button
-              onClick={() => setTicketModal(true)}
+              onClick={() => window.location.assign("https://t.me/jiselle_tolts")}
               className="ml-1 xl:ml-4 bg-primary text-primary-foreground text-[8px] lg:text-[9px] xl:text-[11px] uppercase tracking-[0.08em] lg:tracking-[0.1em] xl:tracking-[0.2em] px-3 lg:px-4 xl:px-6 py-2 xl:py-2.5 hover:opacity-90 transition-all duration-500 font-body whitespace-nowrap"
             >
               Задать вопрос
@@ -155,7 +142,7 @@ const Header = () => {
                   О проекте
                 </Link>
                 {navItems.map((item) => (
-                  <Link key={item.href} to={item.href} onClick={(e) => { handleAnchorClick(e, item.href); setMenuOpen(false); }} className={`text-sm uppercase tracking-[0.2em] font-body ${item.href === "/wellness" ? "text-primary font-semibold" : "text-foreground/80 font-light"}`}>
+                  <Link key={item.href} to={item.href} onClick={(e) => { handleAnchorClick(e, item.href); setMenuOpen(false); }} className={`text-sm uppercase tracking-[0.2em] font-body ${item.href === "/peterburg" ? "text-primary font-semibold" : "text-foreground/80 font-light"}`}>
                     {item.label}
                   </Link>
                 ))}
@@ -165,7 +152,7 @@ const Header = () => {
                   </Link>
                 )}
                 <button
-                  onClick={() => { setMenuOpen(false); setTicketModal(true); }}
+                  onClick={() => { setMenuOpen(false); window.location.assign("https://t.me/jiselle_tolts"); }}
                   className="mt-4 bg-primary text-primary-foreground text-sm uppercase tracking-[0.2em] px-8 py-3 font-body"
                 >
                   Задать вопрос
@@ -181,13 +168,7 @@ const Header = () => {
         </AnimatePresence>
       </header>
 
-      <TicketRequestModal
-        isOpen={ticketModal}
-        onClose={() => setTicketModal(false)}
-        ticketType="Задать вопрос"
-        ticketPrice=""
-        showTrainingCheckbox={false}
-      />
+
     </>
   );
 };

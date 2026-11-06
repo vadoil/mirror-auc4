@@ -56,20 +56,20 @@ const HeroSection = () => {
             >
               <div className="lg:text-right">
                 <p className="font-body text-cream/60 text-xs md:text-sm uppercase tracking-[0.2em] mb-3">
-                  29 ноября 2026 · Санкт-Петербург
+                  11 декабря 2026 · Санкт-Петербург
                 </p>
                 <div className="font-display text-2xl sm:text-3xl md:text-4xl text-cream font-light leading-tight">
                   Благотворительный<br />
                   <span className="italic text-primary">аукцион</span>
                 </div>
                 <p className="font-body text-cream/60 text-sm md:text-base mt-3 max-w-sm lg:ml-auto">
-                  Вечер в историческом особняке в поддержку фонда «Не напрасно» и Высшей школы онкологии
+                  Вечер в Телеграфе в поддержку фонда «Не напрасно» и Высшей школы онкологии
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link to="/peterburg" className="btn-primary text-center">
-                  Аукцион 29 ноября
+                  Аукцион 11 декабря
                 </Link>
                 <Link to="/gallery" className="btn-outline-light text-center">
                   Галерея вечера

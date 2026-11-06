@@ -21,7 +21,7 @@ const AboutSection = () => {
             >
               <div className="w-8 h-px bg-primary" />
               <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground font-body">
-                Следующий вечер · 29 ноября
+                Следующий вечер · 11 декабря
               </p>
             </motion.div>
 
@@ -42,12 +42,12 @@ const AboutSection = () => {
                 <div className="w-24 h-px bg-primary mb-8" />
 
                 <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary font-body mb-4">
-                  Санкт-Петербург · 29 ноября, воскресенье · в поддержку фонда «Не напрасно»
+                  Санкт-Петербург · 11 декабря, пятница · в поддержку фонда «Не напрасно»
                 </p>
 
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
                   Этой осенью мы приглашаем вас в Петербург — в город, где умеют превращать вечер в событие: с парадной лестницей, музыкой
-                  и разговорами, которые не хочется заканчивать. Новое «Отражение добра» пройдёт в историческом особняке.
+                  и разговорами, которые не хочется заканчивать. Новое «Отражение добра» пройдёт в Телеграфе.
                 </p>
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
                   У дверей вас встретят дама или кавалер и проводят в зал. Вас ждут музыка, вечерние туалеты, фуршет и шампанское, а затем —
@@ -74,7 +74,7 @@ const AboutSection = () => {
                     <div className="absolute inset-0 bg-warm-black/30" />
                     <div className="absolute inset-0 bg-gradient-to-t from-warm-black/90 via-warm-black/20 to-transparent" />
                     <div className="text-center p-8 relative z-10 flex flex-col items-center justify-end h-full pb-12">
-                      <p className="font-body text-cream/70 text-[10px] uppercase tracking-[0.35em] mb-4">29 ноября · Санкт-Петербург</p>
+                      <p className="font-body text-cream/70 text-[10px] uppercase tracking-[0.35em] mb-4">11 декабря · Санкт-Петербург</p>
                       <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-2">Исторический</p>
                       <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-5">особняк</p>
                       <div className="w-12 h-px bg-primary mx-auto mb-4" />

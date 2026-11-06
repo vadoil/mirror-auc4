@@ -175,7 +175,7 @@ const ProjectStorySection = () => {
                     animate={{ opacity: [0.6, 1, 0.6], color: ["hsl(var(--muted-foreground))", "hsl(var(--primary))", "hsl(var(--muted-foreground))"] }}
                     transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    29 ноября 2026
+                    11 декабря 2026
                   </motion.span>
                 </p>
               </div>
@@ -272,10 +272,10 @@ const ProjectStorySection = () => {
                 </div>
 
                 <h4 className="font-display text-xl md:text-2xl text-foreground leading-tight mb-3">
-                  Вечер <span className="italic">в историческом особняке</span>
+                  Вечер <span className="italic">в Телеграфе</span>
                 </h4>
                 <p className="font-body text-sm text-primary uppercase tracking-[0.15em] mb-4">
-                  29 ноября 2026 · Исторический особняк, Санкт-Петербург
+                  11 декабря 2026 · Телеграф, Почтамтская улица, 15, Санкт-Петербург
                 </p>
 
                 <p className="font-body text-sm md:text-base text-foreground leading-relaxed mb-3">
