@@ -32,8 +32,11 @@ try{
   $host=ask('Хост MySQL',$old['db_host']??'localhost');$name=ask('Имя базы',$old['db_name']??'u3713220_otrazis');$user=ask('Пользователь базы',$old['db_user']??'u3713220_otrazis');$pass=ask('Пароль базы (скрыт; пусто — оставить прежний)',$old['db_password']??'',true);
   if(!preg_match('/^[a-zA-Z0-9_.-]+$/D',$host)||!preg_match('/^[a-zA-Z0-9_]+$/D',$name))throw new RuntimeException('Неверное имя хоста или базы.');
   $shop=ask('Shop ID',$old['shop_id']??'1495081');$key=ask('Секретный ключ ЮKassa (скрыт; пусто — оставить прежний)',$old['secret_key']??'',true);
-  $admin=ask('Новый пароль кабинета организатора, минимум 14 символов (скрыт; пусто — оставить прежний)','',true);
-  if(strlen($admin)<14 && (!$old||$admin!==''))throw new RuntimeException('Нужен пароль организатора от 14 символов.');
+  do {
+   $admin=ask('Новый пароль кабинета организатора, минимум 14 символов (скрыт; пусто — оставить прежний)','',true);
+   $adminValid=($admin==='' && !empty($old['admin_hash'])) || mb_strlen($admin)>=14;
+   if(!$adminValid)fwrite(STDOUT,"Пароль слишком короткий. Введите пароль от 14 символов ещё раз; остальные данные вводить повторно не нужно.\n");
+  } while(!$adminValid);
   $test=choose('Тестовый магазин?',['no','yes'],isset($old['test_mode'])&&$old['test_mode']?'yes':'no');
   fwrite(STDOUT,"Чеки: yookassa — передавать чек в подключённую кассу ЮKassa; external — чек формирует ваша отдельная интеграция; notready — пока не настроено.\n");
   $receipt=choose('Способ выдачи чеков',['yookassa','external','notready'],$old['receipt_mode']??'yookassa');
