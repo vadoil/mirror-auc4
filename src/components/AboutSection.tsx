@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 
-import mansionImg from "@/assets/spb2911/mansion-caryatid.webp";
+const mansionImg = "/auction-december/telegraph.png";
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -35,9 +35,8 @@ const AboutSection = () => {
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[0.95] text-foreground mb-8">
                   Вечер
                   <br />
-                  <span className="italic text-primary">в историческом</span>
+                  <span className="italic text-primary">в Телеграфе</span>
                   <br />
-                  особняке
                 </h2>
                 <div className="w-24 h-px bg-primary mb-8" />
 
@@ -46,7 +45,7 @@ const AboutSection = () => {
                 </p>
 
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
-                  Этой осенью мы приглашаем вас в Петербург — в город, где умеют превращать вечер в событие: с парадной лестницей, музыкой
+                  В декабре мы приглашаем вас в Петербург — в город, где умеют превращать вечер в событие: с парадной лестницей, музыкой
                   и разговорами, которые не хочется заканчивать. Новое «Отражение добра» пройдёт в Телеграфе.
                 </p>
                 <p className="editorial-body text-muted-foreground mb-6 max-w-lg">
@@ -70,13 +69,13 @@ const AboutSection = () => {
               >
                 <Link to="/peterburg" className="block group">
                   <div className="aspect-[4/5] overflow-hidden relative rounded-2xl">
-                    <img src={mansionImg} alt="Интерьер петербургского особняка" loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out" width={900} height={1249} />
+                    <img src={mansionImg} alt="Телеграф, Почтамтская улица, 15" loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out" width={900} height={1249} />
                     <div className="absolute inset-0 bg-warm-black/30" />
                     <div className="absolute inset-0 bg-gradient-to-t from-warm-black/90 via-warm-black/20 to-transparent" />
                     <div className="text-center p-8 relative z-10 flex flex-col items-center justify-end h-full pb-12">
                       <p className="font-body text-cream/70 text-[10px] uppercase tracking-[0.35em] mb-4">11 декабря · Санкт-Петербург</p>
-                      <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-2">Исторический</p>
-                      <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-5">особняк</p>
+                      <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-2">Телеграф</p>
+                      <p className="font-display text-4xl md:text-5xl font-light text-cream italic leading-none mb-5">Почтамтская, 15</p>
                       <div className="w-12 h-px bg-primary mx-auto mb-4" />
                       <p className="font-body text-cream text-sm max-w-xs mx-auto mb-5">Благотворительный вечер «Отражение добра»</p>
                       <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-cream border border-cream/30 px-4 py-2 group-hover:border-primary group-hover:text-primary transition-colors">
@@ -89,7 +88,7 @@ const AboutSection = () => {
                     <p className="text-[10px] uppercase tracking-[0.2em] font-body mt-1.5">на благо</p>
                   </div>
                 </Link>
-                <p className="font-body text-[10px] text-muted-foreground/60 mt-2">Фото для настроения: особняк Белосельских-Белозерских · Александровы АГ, CC BY-SA 4.0</p>
+                <p className="font-body text-[10px] text-muted-foreground/60 mt-2">Телеграф · Санкт-Петербург, Почтамтская улица, 15</p>
               </motion.div>
             </div>
           </div>
@@ -105,7 +104,7 @@ const AboutSection = () => {
           >
             {Array.from({ length: 8 }).map((_, i) => (
               <span key={i} className="font-display text-lg md:text-xl text-primary-foreground/80 font-light italic tracking-wide">
-                Благотворительность · Исторический особняк · Современное искусство · Петербург · Забота · Добро ·&nbsp;
+                Благотворительность · Телеграф · Современное искусство · Петербург · Забота · Добро ·&nbsp;
               </span>
             ))}
           </motion.div>

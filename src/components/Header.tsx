@@ -12,7 +12,7 @@ const navItems = [
   { label: "Лоты", href: "/peterburg#catalog" },
   { label: "Галерея", href: "/gallery" },
   { label: "Приглашение", href: "/#contacts" },
-  { label: "Партнёры", href: "/#partners" },
+  { label: "Партнёры", href: "/peterburg#partners" },
   { label: "Контакты", href: "/#contacts" },
 ];
 
