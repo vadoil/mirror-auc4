@@ -27,9 +27,9 @@ export function AuctionHero() {
         </div>
       </div>
       <div className="relative w-full max-w-[400px] mx-auto lg:mr-0">
-        <div className="absolute -inset-2 border border-primary/40 rounded-t-[48%] pointer-events-none" />
-        <img src={`${base}telegraph.png`} alt="Фасад Телеграфа на Почтамтской улице с вывеской ТЕЛЕГРАФ" className="w-full h-auto rounded-t-[48%]" fetchPriority="high" />
-        <div className="relative bg-background border border-primary/20 p-5 -mt-3">
+        <div className="hidden md:block absolute -inset-2 border border-primary/40 rounded-t-[48%] pointer-events-none" />
+        <img src={`${base}telegraph.png`} alt="Фасад Телеграфа на Почтамтской улице с вывеской ТЕЛЕГРАФ" className="w-full aspect-square object-cover object-top rounded-xl md:aspect-auto md:h-auto md:rounded-none md:rounded-t-[48%]" fetchPriority="high" />
+        <div className="relative bg-background border border-primary/20 p-5 mt-3 rounded-xl md:-mt-3 md:rounded-none">
           <p className="font-body text-primary text-sm pb-4 border-b border-primary/20">Ведущий вечера — Александр Цыпкин</p>
           <div className="grid grid-cols-2 gap-4 pt-4">
             {[{Icon: GlassWater, label: "Фуршет"}, {Icon: Music, label: "Живая музыка"}, {Icon: Mic, label: "Артисты"}, {Icon: Gavel, label: "Благотворительный аукцион"}].map(({Icon,label}) => <div key={label} className="flex items-center gap-3 text-xs sm:text-sm font-body"><Icon className="text-primary shrink-0" size={26} /><span>{label}</span></div>)}
