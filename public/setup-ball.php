@@ -7,14 +7,26 @@ $dir=ball_home();if(!is_dir($dir)&&!mkdir($dir,0700,true))throw new RuntimeExcep
 function ask(string $label,string $default='',bool $secret=false):string{
  fwrite(STDOUT,$label.($default!==''&&!$secret?' ['.$default.']':'').': ');
  if($secret)system('stty -echo');
- try{$s=trim((string)fgets(STDIN));}finally{if($secret){system('stty echo');fwrite(STDOUT,"\n");}}
+ try{$line=fgets(STDIN);if($line===false)throw new RuntimeException('Ввод завершён. Запустите настройку повторно.');$s=trim($line);if(!$secret)$s=trim(preg_replace('/[\p{Cf}\p{Z}]/u','',$s));}finally{if($secret){system('stty echo');fwrite(STDOUT,"\n");}}
  return $s===''?$default:$s;
+}
+function choose(string $label,array $options,string $default=''):string{
+ while(true){
+  fwrite(STDOUT,implode(' · ',array_map(fn($i,$v)=>($i+1).' = '.$v,array_keys($options),$options))."\n");
+  $value=strtolower(ask($label,$default));
+  if(ctype_digit($value)&&isset($options[(int)$value-1]))return $options[(int)$value-1];
+  if(in_array($value,$options,true))return $value;
+  fwrite(STDOUT,"Не удалось распознать выбор. Введите номер варианта вручную.\n");
+ }
+}
+function number_choice(string $label,int $min,int $max,string $default=''):int{
+ while(true){$v=ask($label,$default);if(ctype_digit($v)&&(int)$v>=$min&&(int)$v<=$max)return (int)$v;fwrite(STDOUT,"Введите число от $min до $max.\n");}
 }
 function save_config(array $c):void{
  $path=ball_home().'/config.json';$tmp=$path.'.tmp';file_put_contents($tmp,json_encode($c,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR));chmod($tmp,0600);rename($tmp,$path);
 }
 try{
- $action=$argv[1]??'setup';
+ $action=strtolower(trim(preg_replace('/[\p{Cf}\p{Z}]/u','',$argv[1]??'setup')));
  if($action==='setup'){
   $old=is_file($dir.'/config.json')?ball_config():[];
   $host=ask('Хост MySQL',$old['db_host']??'localhost');$name=ask('Имя базы',$old['db_name']??'u3713220_otrazis');$user=ask('Пользователь базы',$old['db_user']??'u3713220_otrazis');$pass=ask('Пароль базы (скрыт; пусто — оставить прежний)',$old['db_password']??'',true);
@@ -22,12 +34,16 @@ try{
   $shop=ask('Shop ID',$old['shop_id']??'1495081');$key=ask('Секретный ключ ЮKassa (скрыт; пусто — оставить прежний)',$old['secret_key']??'',true);
   $admin=ask('Новый пароль кабинета организатора, минимум 14 символов (скрыт; пусто — оставить прежний)','',true);
   if(strlen($admin)<14 && (!$old||$admin!==''))throw new RuntimeException('Нужен пароль организатора от 14 символов.');
-  $test=ask('Тестовый магазин? yes/no',isset($old['test_mode'])&&$old['test_mode']?'yes':'no');
+  $test=choose('Тестовый магазин?',['no','yes'],isset($old['test_mode'])&&$old['test_mode']?'yes':'no');
   fwrite(STDOUT,"Чеки: yookassa — передавать чек в подключённую кассу ЮKassa; external — чек формирует ваша отдельная интеграция; notready — пока не настроено.\n");
-  $receipt=ask('Способ выдачи чеков',$old['receipt_mode']??'notready');if(!in_array($receipt,['yookassa','external','notready'],true))throw new RuntimeException('Неизвестный способ чеков.');
+  $receipt=choose('Способ выдачи чеков',['yookassa','external','notready'],$old['receipt_mode']??'yookassa');
   $vat=0;$tax=0;$paymentMode="";
-  if($receipt==='yookassa'){$vat=(int)ask('Код НДС ЮKassa (по настройкам вашей кассы; 1 — без НДС)');if($vat<1||$vat>12)throw new RuntimeException('Проверьте код НДС.');$tax=(int)ask('Код системы налогообложения (0 — определяется кассой)','0');if($tax<0||$tax>6)throw new RuntimeException('Неверный код СНО.');$paymentMode=ask('Признак расчёта по настройкам кассы: full_prepayment / prepayment / full_payment',$old['payment_mode']??'');if(!in_array($paymentMode,['full_prepayment','prepayment','full_payment'],true))throw new RuntimeException('Уточните признак расчёта для билетов в кассе.');}
-  $confirmed=$receipt!=='notready'&&ask('Выдача чеков для платных билетов настроена и проверена? yes/no','no')==='yes';
+  if($receipt==='yookassa'){
+   $vat=number_choice('Код НДС ЮKassa (по настройкам вашей кассы; 1 — без НДС)',1,12);
+   $tax=number_choice('Код системы налогообложения (0 — определяется кассой)',0,6,'0');
+   $paymentMode=choose('Признак расчёта по настройкам кассы',['full_prepayment','prepayment','full_payment'],$old['payment_mode']??'');
+  }
+  $confirmed=$receipt!=='notready'&&choose('Выдача чеков для платных билетов настроена и проверена?',['no','yes'],'no')==='yes';
   $c=['dsn'=>"mysql:host=$host;dbname=$name;charset=utf8mb4",'db_host'=>$host,'db_name'=>$name,'db_user'=>$user,'db_password'=>$pass,'shop_id'=>$shop,'secret_key'=>$key,'app_key'=>$old['app_key']??bin2hex(random_bytes(32)),'admin_hash'=>$admin!==''?password_hash($admin,PASSWORD_DEFAULT):$old['admin_hash'],'site'=>'https://xn--80aodvkjc9f.xn--p1ai','enabled'=>false,'test_mode'=>$test==='yes','receipt_mode'=>$receipt,'receipt_confirmed'=>$confirmed,'vat_code'=>$vat,'tax_system_code'=>$tax,'payment_mode'=>$paymentMode];
   $db=ball_db($c);ball_schema($db);save_config($c);
   fwrite(STDOUT,"База подключена. Таблицы созданы без удаления существующих данных. Продажи ЗАКРЫТЫ.\nКабинет: ".$c['site']."/api/ball-admin.php\nWebhook: ".$c['site']."/api/ball.php?action=webhook\n");
